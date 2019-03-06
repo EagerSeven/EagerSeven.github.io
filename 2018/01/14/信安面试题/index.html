@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="学习体会,知识点," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="偶然的机会看到了一些信安面试题，记录一下顺便系统的总结与拓展下自己的知识面 1.拿到一个待检测的站，你觉得应该先做什么？​    收集信息，包括但不限于： 1whois， 网站源ip， 旁站， c段， 服务器系统版本， 容器版本， 程序版本， 数据库类型及版本， 二级域名， 防火墙 2.mysql的网站注入，5.0以上和5.0以下有什么区别？​    5.0以下没有information_sche">
+<meta name="keywords" content="学习体会,知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信安面试题">
+<meta property="og:url" content="http://eagerseven.cn/2018/01/14/信安面试题/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="偶然的机会看到了一些信安面试题，记录一下顺便系统的总结与拓展下自己的知识面 1.拿到一个待检测的站，你觉得应该先做什么？​    收集信息，包括但不限于： 1whois， 网站源ip， 旁站， c段， 服务器系统版本， 容器版本， 程序版本， 数据库类型及版本， 二级域名， 防火墙 2.mysql的网站注入，5.0以上和5.0以下有什么区别？​    5.0以下没有information_sche">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信安面试题">
+<meta name="twitter:description" content="偶然的机会看到了一些信安面试题，记录一下顺便系统的总结与拓展下自己的知识面 1.拿到一个待检测的站，你觉得应该先做什么？​    收集信息，包括但不限于： 1whois， 网站源ip， 旁站， c段， 服务器系统版本， 容器版本， 程序版本， 数据库类型及版本， 二级域名， 防火墙 2.mysql的网站注入，5.0以上和5.0以下有什么区别？​    5.0以下没有information_sche">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/01/14/信安面试题/"/>
+
+
+
+
+
+  <title>信安面试题 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/01/14/信安面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信安面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-14T11:46:00+08:00">
+                2018-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,940
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>偶然的机会看到了一些信安面试题，记录一下顺便系统的总结与拓展下自己的知识面</p>
+<h4 id="1-拿到一个待检测的站，你觉得应该先做什么？"><a href="#1-拿到一个待检测的站，你觉得应该先做什么？" class="headerlink" title="1.拿到一个待检测的站，你觉得应该先做什么？"></a>1.拿到一个待检测的站，你觉得应该先做什么？</h4><p>​    收集信息，包括但不限于：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whois， 网站源ip， 旁站， c段， 服务器系统版本， 容器版本， 程序版本， 数据库类型及版本， 二级域名， 防火墙</span><br></pre></td></tr></table></figure>
+<h4 id="2-mysql的网站注入，5-0以上和5-0以下有什么区别？"><a href="#2-mysql的网站注入，5-0以上和5-0以下有什么区别？" class="headerlink" title="2.mysql的网站注入，5.0以上和5.0以下有什么区别？"></a>2.mysql的网站注入，5.0以上和5.0以下有什么区别？</h4><p>​    5.0以下没有information_schema这个系统表，无法列表名，只能爆破</p>
+<p>​    5.0以下是多用户单操作，5.0以上是多用户多操作</p>
+<h4 id="3-在渗透过程中，收集目标站注册人邮箱对我们有什么价值？"><a href="#3-在渗透过程中，收集目标站注册人邮箱对我们有什么价值？" class="headerlink" title="3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？"></a>3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？</h4><p>​    丢社工库里看看有没有泄漏密码，然后尝试用泄漏的密码来进行后台登录</p>
+<p>​    用邮箱做关键词去搜索引擎搜索</p>
+<p>​    利用搜索到的关联信息找出其他邮箱进而得到常用社交账号</p>
+<p>​    社工找出社交账号，里面或许会找出管理员设置密码的习惯</p>
+<p>​    利用已有信息生成专用字典</p>
+<p>​    观察管理员常逛哪些非大众型网站，拿下它你会得到更多好东西</p>
+<h4 id="4-判断出网站的cms对渗透有什么意思？"><a href="#4-判断出网站的cms对渗透有什么意思？" class="headerlink" title="4.判断出网站的cms对渗透有什么意思？"></a>4.判断出网站的cms对渗透有什么意思？</h4><p>​    查找网上已曝光的程序漏洞</p>
+<p>​    如果开源，还能下载相应的源码进行代码审计</p>
+<h4 id="5-一个成熟并且相对安全的cms，渗透是扫目录的意义？"><a href="#5-一个成熟并且相对安全的cms，渗透是扫目录的意义？" class="headerlink" title="5.一个成熟并且相对安全的cms，渗透是扫目录的意义？"></a>5.一个成熟并且相对安全的cms，渗透是扫目录的意义？</h4><p>​    敏感文件，二级目录扫描</p>
+<p>​    站长的误操作比如：网站备份的压缩文件，说明.txt，二级目录可能存放着其他站点</p>
+<h4 id="6-常见的网站服务器容器"><a href="#6-常见的网站服务器容器" class="headerlink" title="6.常见的网站服务器容器"></a>6.常见的网站服务器容器</h4><p>​    iis，apache，nginx，lighttpd，tomcat</p>
+<h4 id="7-mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？"><a href="#7-mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？" class="headerlink" title="7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？"></a>7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？</h4><p>​    root权限以及网站的绝对路径</p>
+<h4 id="8-目前已知哪些版本的容器有解析漏洞，具体举例"><a href="#8-目前已知哪些版本的容器有解析漏洞，具体举例" class="headerlink" title="8.目前已知哪些版本的容器有解析漏洞，具体举例"></a>8.目前已知哪些版本的容器有解析漏洞，具体举例</h4><p>​    <strong>iis 6.0</strong></p>
+<p>​        /xx.asp/xx.jpg “xx.asp”是文件夹名</p>
+<p>​    <strong>iis 7.0/7.5</strong></p>
+<p>​        默认fast-cgi开启，直接在url中图片地址后输入/1.php，会把图片当作php解析</p>
+<p>​    <strong>nginx</strong></p>
+<p>​        版本小于等于0.8.37，利用方法和iis 7.0/7.5一样，fast-cgi关闭情况下也可利用</p>
+<p>​        空字节代码（00截断）：xxx.jpg%00.php</p>
+<p>​    <strong>apache</strong></p>
+<p>​        上传的文件命名为：test.php.x1，apache是从右往左进行判断后缀</p>
+<p>​    <strong>lighttpd</strong></p>
+<p>​        xx.jpg/xx.php</p>
+<h4 id="9-如何手工快速判断目标站是windows还是linux服务器？"><a href="#9-如何手工快速判断目标站是windows还是linux服务器？" class="headerlink" title="9.如何手工快速判断目标站是windows还是linux服务器？"></a>9.如何手工快速判断目标站是windows还是linux服务器？</h4><p>​    url大小写判断</p>
+<h4 id="10-为何一个mysql数据库的站，只有一个80端口开放？"><a href="#10-为何一个mysql数据库的站，只有一个80端口开放？" class="headerlink" title="10.为何一个mysql数据库的站，只有一个80端口开放？"></a>10.为何一个mysql数据库的站，只有一个80端口开放？</h4><p>​    更改的端口，没有扫描出来</p>
+<p>​    站库分离</p>
+<p>​    3306端口不对外开放</p>
+<h4 id="11-3389无法连接的几种情况"><a href="#11-3389无法连接的几种情况" class="headerlink" title="11.3389无法连接的几种情况"></a>11.3389无法连接的几种情况</h4><p>​    没开放3389端口</p>
+<p>​    端口被修改</p>
+<p>​    防护拦截</p>
+<p>​    处于内网（需要进行端口转发）</p>
+<h4 id="12-如何突破注入时字符被转义？"><a href="#12-如何突破注入时字符被转义？" class="headerlink" title="12.如何突破注入时字符被转义？"></a>12.如何突破注入时字符被转义？</h4><p>​    宽字节注入</p>
+<p>​    hex编码绕过</p>
+<h4 id="13-在某后台新闻编辑界面看到编辑器，应该先做什么？"><a href="#13-在某后台新闻编辑界面看到编辑器，应该先做什么？" class="headerlink" title="13.在某后台新闻编辑界面看到编辑器，应该先做什么？"></a>13.在某后台新闻编辑界面看到编辑器，应该先做什么？</h4><p>​    查看编辑器的名称版本，然后搜索公开漏洞</p>
+<h4 id="14-拿到一个webshell发现网站根目录下有-htaccess文件，我们能做什么？"><a href="#14-拿到一个webshell发现网站根目录下有-htaccess文件，我们能做什么？" class="headerlink" title="14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？"></a>14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？</h4><p>​    能做的事情很多，用隐藏网马来举例子：</p>
+<p>​    插入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FilesMatch &quot;xxx.jpg&quot;&gt;SetHandler application/x-httpd-php&lt;/FilesMatch&gt;</span><br></pre></td></tr></table></figure>
+<p>.jpg文件会被解析成.php文件</p>
+<h4 id="15-注入漏洞只能查账户密码？"><a href="#15-注入漏洞只能查账户密码？" class="headerlink" title="15.注入漏洞只能查账户密码？"></a>15.注入漏洞只能查账户密码？</h4><p>​    只要权限广，脱裤脱到老</p>
+<h4 id="16-安全狗会追踪变量，从而发现出是一句话木马么？"><a href="#16-安全狗会追踪变量，从而发现出是一句话木马么？" class="headerlink" title="16.安全狗会追踪变量，从而发现出是一句话木马么？"></a>16.安全狗会追踪变量，从而发现出是一句话木马么？</h4><p>​    是根据特征码，所以很好绕过，所以思路宽，绕狗绕到欢，但这应该不会是一成不变的</p>
+<h4 id="17-access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？"><a href="#17-access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？" class="headerlink" title="17.access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？"></a>17.access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？</h4><p>​    迅雷下载，直接改后缀为.mdb</p>
+<h4 id="18-提权时选择可读写目录，为何尽量不用带空格的目录？"><a href="#18-提权时选择可读写目录，为何尽量不用带空格的目录？" class="headerlink" title="18.提权时选择可读写目录，为何尽量不用带空格的目录？"></a>18.提权时选择可读写目录，为何尽量不用带空格的目录？</h4><p>​    因为exp执行多半需要空格界定参数</p>
+<h4 id="19-某服务器有站点a-b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户"><a href="#19-某服务器有站点a-b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户" class="headerlink" title="19.某服务器有站点a,b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户"></a>19.某服务器有站点a,b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户</h4><p>​    同数据库</p>
+<h4 id="20-注入时可以不使用and或or或xor，直接order-by开始注入么"><a href="#20-注入时可以不使用and或or或xor，直接order-by开始注入么" class="headerlink" title="20.注入时可以不使用and或or或xor，直接order by开始注入么"></a>20.注入时可以不使用and或or或xor，直接order by开始注入么</h4><p>​    and/or/xor，前面的1=1，1=2步骤只是为了判断是否为注入点，如果已经确定是注入点那就可以省去</p>
+<h4 id="21-某个防注入系统，在注入时会提示："><a href="#21-某个防注入系统，在注入时会提示：" class="headerlink" title="21.某个防注入系统，在注入时会提示："></a>21.某个防注入系统，在注入时会提示：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">系统记录到你有非法注入的行为</span><br><span class="line">已记录您的ip：xxx.xxx.xxx.xxx</span><br><span class="line">时间：xxxx.xx.xx</span><br><span class="line">提交页面：xxx.php?id=1</span><br><span class="line">提交内容：and 1=1</span><br></pre></td></tr></table></figure>
+<h4 id="如何利用这个防注入系统get-shell？"><a href="#如何利用这个防注入系统get-shell？" class="headerlink" title="如何利用这个防注入系统get shell？"></a>如何利用这个防注入系统get shell？</h4><p>​    在url里面直接提交一句话，这样网站把你的一句户记录进数据库文件，这个时候可以尝试寻找网站的配置文件，直接上菜刀连接</p>
+<h4 id="22-上传大马后访问乱码时，有哪些解决方法？"><a href="#22-上传大马后访问乱码时，有哪些解决方法？" class="headerlink" title="22.上传大马后访问乱码时，有哪些解决方法？"></a>22.上传大马后访问乱码时，有哪些解决方法？</h4><p>​    浏览器中改编码</p>
+<p>####23.审查上传点的元素有什么意义？</p>
+<p>​    有些网站的上传文件类型的限制在前端实现的     </p>
+<h4 id="24-目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？"><a href="#24-目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？" class="headerlink" title="24.目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？"></a>24.目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？</h4><p>​    先爆破用户名，再利用爆破出的用户名爆破密码</p>
+<p>​    其实有些登陆处也会这样提示</p>
+<p>​    所有和数据库有交互的地方都可能存在注入</p>
+<h4 id="25-目标站发现某txt的下载地址为：http-www-test-down-down-php-file-upwdown-w-txt。你有什么思路？"><a href="#25-目标站发现某txt的下载地址为：http-www-test-down-down-php-file-upwdown-w-txt。你有什么思路？" class="headerlink" title="25.目标站发现某txt的下载地址为：http://www.test.down/down.php?file=/upwdown/w.txt。你有什么思路？"></a>25.目标站发现某txt的下载地址为：<a href="http://www.test.down/down.php?file=/upwdown/w.txt。你有什么思路？" target="_blank" rel="noopener">http://www.test.down/down.php?file=/upwdown/w.txt。你有什么思路？</a></h4><p>​    这就是传说中的下载漏洞，在file=后面尝试输入index.php下载它的首页文件，然后在首页文件里继续查找其他网站的配置文件，可以找出网站的数据库密码和数据库的地址</p>
+<h4 id="26-甲给你一个目标站，并且告诉你根目录下存在-abc-目录，并且此目录下存在编辑器和admin目录，你有什么想法？"><a href="#26-甲给你一个目标站，并且告诉你根目录下存在-abc-目录，并且此目录下存在编辑器和admin目录，你有什么想法？" class="headerlink" title="26.甲给你一个目标站，并且告诉你根目录下存在/abc/目录，并且此目录下存在编辑器和admin目录，你有什么想法？"></a>26.甲给你一个目标站，并且告诉你根目录下存在/abc/目录，并且此目录下存在编辑器和admin目录，你有什么想法？</h4><p>​    直接在网站二级目录/abc/下扫描敏感文件及目录</p>
+<h4 id="27-在有shell的情况下，如何使用xss实现对目标站的长久控制？"><a href="#27-在有shell的情况下，如何使用xss实现对目标站的长久控制？" class="headerlink" title="27.在有shell的情况下，如何使用xss实现对目标站的长久控制？"></a>27.在有shell的情况下，如何使用xss实现对目标站的长久控制？</h4><p>​    后台登录处加一段记录登录账号密码的js，并且判断是否登录成功，如果登录成功就把账号密码记录到一个生僻的路径的文件中，或者直接发到自己的网站文件中（此方法适合有价值并且需要深入控制权限的网络）</p>
+<p>​    在登录后才可以访问的文件中插入xss脚本</p>
+<h4 id="28-后台修改管理员密码出，原密码显示为-。你觉得该怎么样实现读出这个用户的密码？"><a href="#28-后台修改管理员密码出，原密码显示为-。你觉得该怎么样实现读出这个用户的密码？" class="headerlink" title="28.后台修改管理员密码出，原密码显示为*。你觉得该怎么样实现读出这个用户的密码？"></a>28.后台修改管理员密码出，原密码显示为*。你觉得该怎么样实现读出这个用户的密码？</h4><p>​    审查元素，把密码出的password属性改为txt就明文显示了</p>
+<h4 id="29-目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？"><a href="#29-目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？" class="headerlink" title="29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？"></a>29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？</h4><p>​    原因很多，有可能web服务器配置把上传的目录写死了不执行相应脚本，尝试改后缀名绕过</p>
+<h4 id="30-审查元素得知网站所使用的防护软件，你觉得怎样做到的？"><a href="#30-审查元素得知网站所使用的防护软件，你觉得怎样做到的？" class="headerlink" title="30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？"></a>30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？</h4><p>​    在敏感操作被拦截，通过界面信息无法具体判断是什么防护的时候，f12看html体部，比如护卫神就可以在名称那看到<hws>内容<hws></hws></hws></p>
+<h4 id="31-在win2003服务器中建立一个-zhongzi文件夹用意是什么？"><a href="#31-在win2003服务器中建立一个-zhongzi文件夹用意是什么？" class="headerlink" title="31.在win2003服务器中建立一个.zhongzi文件夹用意是什么？"></a>31.在win2003服务器中建立一个.zhongzi文件夹用意是什么？</h4><p>​    隐藏文件夹，为了不让管理员发现你上传的工具</p>
+<hr>
+<p>路还很长，砥砺前行</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/学习体会/" rel="tag"><i class="fa fa-tag"></i> 学习体会</a>
+          
+            <a href="/tags/知识点/" rel="tag"><i class="fa fa-tag"></i> 知识点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/14/msf爆破一句话木马/" rel="next" title="msf爆破一句话木马">
+                <i class="fa fa-chevron-left"></i> msf爆破一句话木马
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/14/XXE的一点拓展/" rel="prev" title="XXE的一点拓展">
+                XXE的一点拓展 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-拿到一个待检测的站，你觉得应该先做什么？"><span class="nav-number">1.</span> <span class="nav-text">1.拿到一个待检测的站，你觉得应该先做什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-mysql的网站注入，5-0以上和5-0以下有什么区别？"><span class="nav-number">2.</span> <span class="nav-text">2.mysql的网站注入，5.0以上和5.0以下有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-在渗透过程中，收集目标站注册人邮箱对我们有什么价值？"><span class="nav-number">3.</span> <span class="nav-text">3.在渗透过程中，收集目标站注册人邮箱对我们有什么价值？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-判断出网站的cms对渗透有什么意思？"><span class="nav-number">4.</span> <span class="nav-text">4.判断出网站的cms对渗透有什么意思？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-一个成熟并且相对安全的cms，渗透是扫目录的意义？"><span class="nav-number">5.</span> <span class="nav-text">5.一个成熟并且相对安全的cms，渗透是扫目录的意义？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-常见的网站服务器容器"><span class="nav-number">6.</span> <span class="nav-text">6.常见的网站服务器容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？"><span class="nav-number">7.</span> <span class="nav-text">7.mysql注入点，用工具对目标站直接写入一句话，需要哪些条件？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-目前已知哪些版本的容器有解析漏洞，具体举例"><span class="nav-number">8.</span> <span class="nav-text">8.目前已知哪些版本的容器有解析漏洞，具体举例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-如何手工快速判断目标站是windows还是linux服务器？"><span class="nav-number">9.</span> <span class="nav-text">9.如何手工快速判断目标站是windows还是linux服务器？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-为何一个mysql数据库的站，只有一个80端口开放？"><span class="nav-number">10.</span> <span class="nav-text">10.为何一个mysql数据库的站，只有一个80端口开放？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-3389无法连接的几种情况"><span class="nav-number">11.</span> <span class="nav-text">11.3389无法连接的几种情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-如何突破注入时字符被转义？"><span class="nav-number">12.</span> <span class="nav-text">12.如何突破注入时字符被转义？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-在某后台新闻编辑界面看到编辑器，应该先做什么？"><span class="nav-number">13.</span> <span class="nav-text">13.在某后台新闻编辑界面看到编辑器，应该先做什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-拿到一个webshell发现网站根目录下有-htaccess文件，我们能做什么？"><span class="nav-number">14.</span> <span class="nav-text">14.拿到一个webshell发现网站根目录下有.htaccess文件，我们能做什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-注入漏洞只能查账户密码？"><span class="nav-number">15.</span> <span class="nav-text">15.注入漏洞只能查账户密码？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-安全狗会追踪变量，从而发现出是一句话木马么？"><span class="nav-number">16.</span> <span class="nav-text">16.安全狗会追踪变量，从而发现出是一句话木马么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？"><span class="nav-number">17.</span> <span class="nav-text">17.access扫出后缀为asp的数据库文件，访问乱码，如何实现到本地利用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-提权时选择可读写目录，为何尽量不用带空格的目录？"><span class="nav-number">18.</span> <span class="nav-text">18.提权时选择可读写目录，为何尽量不用带空格的目录？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19-某服务器有站点a-b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户"><span class="nav-number">19.</span> <span class="nav-text">19.某服务器有站点a,b，为何在a的后台添加test用户，访问b的后台，发现也添加上了test用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20-注入时可以不使用and或or或xor，直接order-by开始注入么"><span class="nav-number">20.</span> <span class="nav-text">20.注入时可以不使用and或or或xor，直接order by开始注入么</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21-某个防注入系统，在注入时会提示："><span class="nav-number">21.</span> <span class="nav-text">21.某个防注入系统，在注入时会提示：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何利用这个防注入系统get-shell？"><span class="nav-number">22.</span> <span class="nav-text">如何利用这个防注入系统get shell？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-上传大马后访问乱码时，有哪些解决方法？"><span class="nav-number">23.</span> <span class="nav-text">22.上传大马后访问乱码时，有哪些解决方法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？"><span class="nav-number">24.</span> <span class="nav-text">24.目标站禁止注册用户，找回密码出随便输入用户名提示：“此用户不存在”，你觉得这里怎么样利用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#25-目标站发现某txt的下载地址为：http-www-test-down-down-php-file-upwdown-w-txt。你有什么思路？"><span class="nav-number">25.</span> <span class="nav-text">25.目标站发现某txt的下载地址为：http://www.test.down/down.php?file=/upwdown/w.txt。你有什么思路？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#26-甲给你一个目标站，并且告诉你根目录下存在-abc-目录，并且此目录下存在编辑器和admin目录，你有什么想法？"><span class="nav-number">26.</span> <span class="nav-text">26.甲给你一个目标站，并且告诉你根目录下存在/abc/目录，并且此目录下存在编辑器和admin目录，你有什么想法？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#27-在有shell的情况下，如何使用xss实现对目标站的长久控制？"><span class="nav-number">27.</span> <span class="nav-text">27.在有shell的情况下，如何使用xss实现对目标站的长久控制？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#28-后台修改管理员密码出，原密码显示为-。你觉得该怎么样实现读出这个用户的密码？"><span class="nav-number">28.</span> <span class="nav-text">28.后台修改管理员密码出，原密码显示为*。你觉得该怎么样实现读出这个用户的密码？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#29-目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？"><span class="nav-number">29.</span> <span class="nav-text">29.目标站无防护，上传图片可以正常访问，上传脚本格式访问则403，什么原因？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#30-审查元素得知网站所使用的防护软件，你觉得怎样做到的？"><span class="nav-number">30.</span> <span class="nav-text">30.审查元素得知网站所使用的防护软件，你觉得怎样做到的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#31-在win2003服务器中建立一个-zhongzi文件夹用意是什么？"><span class="nav-number">31.</span> <span class="nav-text">31.在win2003服务器中建立一个.zhongzi文件夹用意是什么？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

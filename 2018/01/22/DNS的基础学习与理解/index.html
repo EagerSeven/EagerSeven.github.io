@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="协议,服务器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="DNS协议是互联网使用最广泛的协议之一，其作用又解析域名，定位邮件服务器，找到域的域控制器 DNS解析过程：1.DNS服务器向根服务器发送一个查询请求 2.根服务器回应其相应委派的服务器域名和IP地址 3.DNS服务器向这个委派的服务器发起域名解析请求 4.回应下一层委派的服务器域名和IP地址 5.DNS服务器向负责区域的服务器发起查询请求 6.返回所查询域名的IP地址 DNS服务器：主服务器：一">
+<meta name="keywords" content="协议,服务器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNS的基础学习与理解">
+<meta property="og:url" content="http://eagerseven.cn/2018/01/22/DNS的基础学习与理解/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="DNS协议是互联网使用最广泛的协议之一，其作用又解析域名，定位邮件服务器，找到域的域控制器 DNS解析过程：1.DNS服务器向根服务器发送一个查询请求 2.根服务器回应其相应委派的服务器域名和IP地址 3.DNS服务器向这个委派的服务器发起域名解析请求 4.回应下一层委派的服务器域名和IP地址 5.DNS服务器向负责区域的服务器发起查询请求 6.返回所查询域名的IP地址 DNS服务器：主服务器：一">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DNS的基础学习与理解">
+<meta name="twitter:description" content="DNS协议是互联网使用最广泛的协议之一，其作用又解析域名，定位邮件服务器，找到域的域控制器 DNS解析过程：1.DNS服务器向根服务器发送一个查询请求 2.根服务器回应其相应委派的服务器域名和IP地址 3.DNS服务器向这个委派的服务器发起域名解析请求 4.回应下一层委派的服务器域名和IP地址 5.DNS服务器向负责区域的服务器发起查询请求 6.返回所查询域名的IP地址 DNS服务器：主服务器：一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/01/22/DNS的基础学习与理解/"/>
+
+
+
+
+
+  <title>DNS的基础学习与理解 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/01/22/DNS的基础学习与理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DNS的基础学习与理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-22T23:45:00+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,535
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>DNS协议是互联网使用最广泛的协议之一，其作用又解析域名，定位邮件服务器，找到域的域控制器</p>
+<h4 id="DNS解析过程："><a href="#DNS解析过程：" class="headerlink" title="DNS解析过程："></a>DNS解析过程：</h4><p>1.DNS服务器向根服务器发送一个查询请求</p>
+<p>2.根服务器回应其相应委派的服务器域名和IP地址</p>
+<p>3.DNS服务器向这个委派的服务器发起域名解析请求</p>
+<p>4.回应下一层委派的服务器域名和IP地址</p>
+<p>5.DNS服务器向负责区域的服务器发起查询请求</p>
+<p>6.返回所查询域名的IP地址</p>
+<h3 id="DNS服务器："><a href="#DNS服务器：" class="headerlink" title="DNS服务器："></a>DNS服务器：</h3><h4 id="主服务器："><a href="#主服务器：" class="headerlink" title="主服务器："></a>主服务器：</h4><p>一般的解析请求由主服务器负责，</p>
+<h4 id="辅助服务器："><a href="#辅助服务器：" class="headerlink" title="辅助服务器："></a>辅助服务器：</h4><p>辅助服务器的数据是从主服务器复制过来的，其数据是只读的。辅助服务器本身是一种容错设计，当主服务器出现故障或者因负载过重无法响应客户机的解析请求时，辅助服务器会担负起解析域名的责任</p>
+<p>新创建的辅助服务器可能会出现“不是由DNS服务器加载的区域”的错误，这是由于辅助服务器还没与主服务器同步，等几分钟刷新下就好</p>
+<h3 id="DNS区域："><a href="#DNS区域：" class="headerlink" title="DNS区域："></a>DNS区域：</h3><p>主服务器使用的区域时主要区域，辅助服务器使用的区域是辅助区域。区域内的所有记录都存储在区域数据文件中，一般命名为“域名.dns”</p>
+<h4 id="正向区域"><a href="#正向区域" class="headerlink" title="正向区域"></a>正向区域</h4><p>建立正向区域的过程中会选择是否允许动态更新。一般处在内网中的DNS区域会允许动态更新，处于internet就不需要动态更新。</p>
+<p>正向区域创建完毕后只有一个NS记录和SOA记录</p>
+<h4 id="反向区域"><a href="#反向区域" class="headerlink" title="反向区域"></a>反向区域</h4><p>在创建反向主要区域的向导中，会要求输入当前网络号，网络号是IP地址和子网掩码进行与运算后的结果。反向区域的名称也不能随便设置，必须是颠倒的网络号加上in-addr.arpa后缀，例如192.168.2.1的反向区域名称为1.2.168.192.in-addr-arpa。</p>
+<p>反向区域不需要动态更新</p>
+<h4 id="存根区域"><a href="#存根区域" class="headerlink" title="存根区域"></a>存根区域</h4><p>存根区域可以看做是一个特殊的，简化的辅助区域。辅助区域辅助区域里的所有记录，存根区域只复制区域的SOA记录、NS记录及A记录。存根区域只需要知道利用哪个DNS服务器可以对DNS记录进行解析就行，但是含有存根区域的服务器对该区域没有管理权</p>
+<h3 id="DNS记录："><a href="#DNS记录：" class="headerlink" title="DNS记录："></a>DNS记录：</h3><h4 id="完全合格域名："><a href="#完全合格域名：" class="headerlink" title="完全合格域名："></a>完全合格域名：</h4><p>完全合格玉米羹指的是以点结尾的域名，例如eagerseven.cn.。这个点代表了DNS的根，有了这个点，完全合格域名就可以表达为一个绝对路径，例如bbs.xxx.com.可以表示为DNS根下的com子域下xxx.com域中一个名为bbs的主机。如果DNS发现一个域名不是以点结尾的完全合格域名，就会把这个域名加上当前的域名名称作为后缀，让其满足完全合格域名的格式。例如DNS会把bbs处理为bbs.xxx.com.。因此这个点不能省略</p>
+<h4 id="A记录"><a href="#A记录" class="headerlink" title="A记录"></a>A记录</h4><p>A记录也称主机记录，是使用最广泛的DNS记录，其基本作用就是说明一个域名对应的IP是多少。A记录还有一个高级用法，A记录由负载平衡的作用，当有四个web服务器共同负责一个网站时，创建四个主机记录分别描述对应的四个IP，当客户机访问DNS服务器时，四个服务器轮流进行解析，减轻了负载负担。</p>
+<p>当实验验证时，两次ping此域名时，得到的是同一个IP地址，这是因为客户机有DNS缓存机制，使用ipconfig/flushdns命令即可。</p>
+<h4 id="NS记录"><a href="#NS记录" class="headerlink" title="NS记录"></a>NS记录</h4><p>NS记录也叫名称服务器记录，用于说明这个区域有哪些DNS服务器负责解析</p>
+<p>NS记录依赖A记录的解析，因此NS记录创建之前应先创建A记录</p>
+<h4 id="SOA记录"><a href="#SOA记录" class="headerlink" title="SOA记录"></a>SOA记录</h4><p>SOA记录也称为其实授权机构记录，SOA记录说明负责解析的DNS服务器中哪一个是主服务器，以及主服务器和辅助服务器之间的一些关联参数：</p>
+<p><strong>序列号：</strong>序列号反应了DNS服务器数据变化的次数，DNS服务器的数据每更新一次，序列号就自加一。这个参数对管理员意义不大，但是对辅助服务器意义重大，辅助服务器对序列号进行减产，如果主服务器的序列号比自己大，那么就该复制主服务器的数据了</p>
+<p><strong>主服务器：</strong>NS记录和SOA记录的主服务器值默认都不是一个可以解析的完全合格域名，主要是因为这是这台DNS服务器的netbios名称</p>
+<p><strong>负责人：</strong>负责人参数一般为“admin.域名”，其含义为admin@域名，是一个邮箱地址，不直接写成admin@域名的原因是@在DNS中代表当前区域。</p>
+<p><strong>刷新间隔：</strong>指辅助服务器每隔指定时间联系一下主服务器，查看主服务器有无数据更新</p>
+<p><strong>重试间隔：</strong>指如果辅助服务器与主服务器失去了联系，就每隔指定时间联系一下主服务器，在此期间由辅助服务器负责当前区域的域名解析。</p>
+<p><strong>过期时间：</strong>指如果辅助服务器过了指定时间还没联系上主服务器，那么辅助服务器就认为主服务器再也联系不上了，就会清除自己的数据，并拒绝为用户继续提供解析服务。</p>
+<p><strong>TTL：</strong>指记录在DNS缓存中的生存时间</p>
+<h4 id="MX记录"><a href="#MX记录" class="headerlink" title="MX记录"></a>MX记录</h4><p>MX记录也叫邮件交换记录，MX记录用于标示哪台服务器是当前区域的邮件服务器。如果一个区域有多个MX记录，而且优先级不同，那么其他邮件服务器给本服务器发邮件时，会先把邮件发给优先级高的邮件服务器，数字越低优先级越高，最高为0</p>
+<p><strong>MX记录工作流程：</strong>A邮件服务器给B邮件服务器发送一封电子邮件，A的STMP服务器先向DNS服务器发送一个查询请求，请DNS服务器查询B的MX记录，这个A的SMTP服务器就能定义B的SMTP服务器，然后就能发送邮件给B</p>
+<h4 id="Cname记录"><a href="#Cname记录" class="headerlink" title="Cname记录"></a>Cname记录</h4><p>Cname也叫别名记录，可以让一个服务器有多个域名。例如我们可以把服务器命名为mail.xxx.com，再创建一个Cname记录叫ftp.xxx.com。另一方面，当管理员不希望别人知道网站的真实域名时，可以用Cname记录创建网站别名</p>
+<h4 id="SRV记录"><a href="#SRV记录" class="headerlink" title="SRV记录"></a>SRV记录</h4><p>SRV记录是服务器资源记录的缩写，SRV记录是后来才进行定义的，因此老版本的DNS服务器不支持SRV记录。其作用是说明这个服务器能提供什么样的服务。域内的计算机还依赖SRV记录来定位域控制器。</p>
+<h4 id="PTR记录"><a href="#PTR记录" class="headerlink" title="PTR记录"></a>PTR记录</h4><p>PTR记录也被称为指针记录，是A记录的逆向记录，作用是将IP地址解析为域名。PTR记录必须在反向区域中创建。</p>
+<h3 id="DNS后台文件："><a href="#DNS后台文件：" class="headerlink" title="DNS后台文件："></a>DNS后台文件：</h3><h4 id="Boot文件："><a href="#Boot文件：" class="headerlink" title="Boot文件："></a>Boot文件：</h4><p>位置在C:\Windows\System32\DNS目录下，但是去目录下并没有Boot文件，原因是DNS引导信息可以有三种保存途径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.保存在Boot文件</span><br><span class="line">2.保存在注册表</span><br><span class="line">3.保存在Active Rirectory</span><br></pre></td></tr></table></figure>
+<p>系统为了防止用户误删Boot文件，默认以另外两种方式保存。修改DNS服务器引导信息的保存方式就能在目录看到文件</p>
+<p>主服务器中的Boot文件中的Primay代表DNS服务器是主服务器，但不是根域的DNS服务器，cache.dns才能解析根域，cache.dns中记录了13个根服务器的域名和IP地址</p>
+<p>辅助服务器中的Boot文件中的secondary表示是当前区域的辅助服务器，根域的解析也是依靠cache.dns中的13个根服务器</p>
+<p>可以利用Boot文件控制DNS启动时加载的区域数据，也可以使辅助服务器变成主服务器</p>
+<h4 id="Cache-dns"><a href="#Cache-dns" class="headerlink" title="Cache.dns"></a>Cache.dns</h4><p>前面提到Cache.dns中记录了13个根服务器的完全合格域名和IP地址，@是个缩写，代表当前区域（根域）。每个服务器用两条记录描述，NS记录说明谁是根域的DNS服务器，A记录说明这台DNS服务器的IP地址</p>
+<p>大型企业可能自己使用私有根做一个根服务器，这时需要修改Cache.dns</p>
+<h4 id="区域数据文件"><a href="#区域数据文件" class="headerlink" title="区域数据文件"></a>区域数据文件</h4><p>区域数据文件是DNS服务器的核心，保存了区域中的所有DNS记录</p>
+<p>利用DNS区域数据文件完成两项常见任务：空域名解析和泛域名解析</p>
+<p><strong>空域名解析：</strong>就是解析xxx.com，如果想把空域名解析成192.168.2.1，那就在区域数据文件中写入 @ A 192.168.2.1，@代表当前区域，相当于xxx.com</p>
+<p><strong>泛域名解析：</strong>就是把所有以xxx.com结尾但又没出现在DNS区域中的域名进行解析，例如ww.xxx.com。想把泛域名解析成192.168.2.1，就在区域数据文件中写入<em> A 192.168.2.1，</em>是通配符</p>
+<p>区域数据文件还能完成一件伟大的任务——委派<br>我们准备A.xxx.com的解析权委派给DNS服务器ns.A.xxx.com，这台服务器的IP是192.168.2.1，那么在区域数据文件中写入下列两条记录即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A		NS		ns.A.xxx.com.</span><br><span class="line">ns.A	A		192.168.2.1</span><br></pre></td></tr></table></figure>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/协议/" rel="tag"><i class="fa fa-tag"></i> 协议</a>
+          
+            <a href="/tags/服务器/" rel="tag"><i class="fa fa-tag"></i> 服务器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/badusb小玩具/" rel="next" title="badusb小玩具">
+                <i class="fa fa-chevron-left"></i> badusb小玩具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/24/Meterpreter后渗透总结/" rel="prev" title="Meterpreter后渗透总结">
+                Meterpreter后渗透总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS解析过程："><span class="nav-number">1.</span> <span class="nav-text">DNS解析过程：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器："><span class="nav-number"></span> <span class="nav-text">DNS服务器：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主服务器："><span class="nav-number">1.</span> <span class="nav-text">主服务器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#辅助服务器："><span class="nav-number">2.</span> <span class="nav-text">辅助服务器：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS区域："><span class="nav-number"></span> <span class="nav-text">DNS区域：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#正向区域"><span class="nav-number">1.</span> <span class="nav-text">正向区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向区域"><span class="nav-number">2.</span> <span class="nav-text">反向区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存根区域"><span class="nav-number">3.</span> <span class="nav-text">存根区域</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS记录："><span class="nav-number"></span> <span class="nav-text">DNS记录：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完全合格域名："><span class="nav-number">1.</span> <span class="nav-text">完全合格域名：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A记录"><span class="nav-number">2.</span> <span class="nav-text">A记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NS记录"><span class="nav-number">3.</span> <span class="nav-text">NS记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SOA记录"><span class="nav-number">4.</span> <span class="nav-text">SOA记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MX记录"><span class="nav-number">5.</span> <span class="nav-text">MX记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cname记录"><span class="nav-number">6.</span> <span class="nav-text">Cname记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SRV记录"><span class="nav-number">7.</span> <span class="nav-text">SRV记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PTR记录"><span class="nav-number">8.</span> <span class="nav-text">PTR记录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS后台文件："><span class="nav-number"></span> <span class="nav-text">DNS后台文件：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Boot文件："><span class="nav-number">1.</span> <span class="nav-text">Boot文件：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cache-dns"><span class="nav-number">2.</span> <span class="nav-text">Cache.dns</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区域数据文件"><span class="nav-number">3.</span> <span class="nav-text">区域数据文件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

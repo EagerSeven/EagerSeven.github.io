@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="windows,编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="定义：bat文件又称批处理文件，它是将一系列命令按一定的顺序以ascii文本写入一个可执行的文本文件，其拓展名为bat（MS-DOS批处理）或者cmd（Windows NT命令脚本），这些命令统称为批处理命令 执行过程：系统会调用command.com或cmd.exe由前向后一次来自动执行这些命令 例子： 123@echo offecho &amp;quot;Hello World!&amp;quot;pause">
+<meta name="keywords" content="windows,编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BAT脚本入门">
+<meta property="og:url" content="http://eagerseven.cn/2017/11/16/BAT脚本入门/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="定义：bat文件又称批处理文件，它是将一系列命令按一定的顺序以ascii文本写入一个可执行的文本文件，其拓展名为bat（MS-DOS批处理）或者cmd（Windows NT命令脚本），这些命令统称为批处理命令 执行过程：系统会调用command.com或cmd.exe由前向后一次来自动执行这些命令 例子： 123@echo offecho &amp;quot;Hello World!&amp;quot;pause">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BAT脚本入门">
+<meta name="twitter:description" content="定义：bat文件又称批处理文件，它是将一系列命令按一定的顺序以ascii文本写入一个可执行的文本文件，其拓展名为bat（MS-DOS批处理）或者cmd（Windows NT命令脚本），这些命令统称为批处理命令 执行过程：系统会调用command.com或cmd.exe由前向后一次来自动执行这些命令 例子： 123@echo offecho &amp;quot;Hello World!&amp;quot;pause">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2017/11/16/BAT脚本入门/"/>
+
+
+
+
+
+  <title>BAT脚本入门 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2017/11/16/BAT脚本入门/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BAT脚本入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-16T21:47:00+08:00">
+                2017-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  5,955
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>bat文件又称批处理文件，它是将一系列命令按一定的顺序以ascii文本写入一个可执行的文本文件，其拓展名为bat（MS-DOS批处理）或者cmd（Windows NT命令脚本），这些命令统称为批处理命令</p>
+<h4 id="执行过程："><a href="#执行过程：" class="headerlink" title="执行过程："></a>执行过程：</h4><p>系统会调用command.com或cmd.exe由前向后一次来自动执行这些命令</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">echo &quot;Hello World!&quot;</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>就会执行输出Hello World的命名，并且卡住一下，因为有pause</p>
+<p>另一个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">color 1c</span><br><span class="line">date /t&amp;time/t</span><br><span class="line">echo %username%</span><br><span class="line">echo %0</span><br></pre></td></tr></table></figure>
+<p>会分别执行以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">背景色字体颜色变为1c</span><br><span class="line">输出当前时间</span><br><span class="line">输出当前用户</span><br><span class="line">输出文件路径</span><br></pre></td></tr></table></figure>
+<h4 id="BAT、EXE、COM文件比较："><a href="#BAT、EXE、COM文件比较：" class="headerlink" title="BAT、EXE、COM文件比较："></a>BAT、EXE、COM文件比较：</h4><p><strong>共同点：</strong></p>
+<p>这三种格式都是windows下可执行文件</p>
+<p><strong>不同点：</strong></p>
+<p>后缀为.exe的文件称为可执行文件，一半大于64kb，执行效率低，但是功能丰富<br>后缀为.com的文件称为命令文件，最大不超过64kb，执行效率高，功能单一<br>后缀为.bat的文件称为批处理文件，是将若干个后缀为.com或.exe等文件组合在一起，使其依次执行，不必一一输入命令和参数</p>
+<p><strong>优先级：</strong></p>
+<p>.com&gt;.exe&gt;.bat</p>
+<h4 id="BAT内部命令："><a href="#BAT内部命令：" class="headerlink" title="BAT内部命令："></a>BAT内部命令：</h4><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@和echo</td>
+<td>@字符放在命令前将关闭该命令回显，echo是否为打开状态</td>
+</tr>
+<tr>
+<td>::和rem</td>
+<td>注释符。该命令后的内容不被执行，但能回显。</td>
+</tr>
+<tr>
+<td>shift</td>
+<td>更改批处理文件中可替换参数的位置</td>
+</tr>
+<tr>
+<td>set</td>
+<td>设置环境变量或者给变量赋值</td>
+</tr>
+<tr>
+<td>pushd和popd</td>
+<td>切换当前目录</td>
+</tr>
+<tr>
+<td>title</td>
+<td>设置窗口标题</td>
+</tr>
+<tr>
+<td>color</td>
+<td>设置控制台前景和背景颜色</td>
+</tr>
+<tr>
+<td>pause</td>
+<td>暂停</td>
+</tr>
+<tr>
+<td>goto</td>
+<td>跳转，与:配对使用</td>
+</tr>
+<tr>
+<td>if</td>
+<td>条件判断</td>
+</tr>
+<tr>
+<td>for</td>
+<td>循环</td>
+</tr>
+<tr>
+<td>call</td>
+<td>调用（另一个批处理文件或者:label标签）</td>
+</tr>
+<tr>
+<td>errorlevel</td>
+<td>程序返回码，用于判断上条命令是否成功（S:0、F:1）</td>
+</tr>
+<tr>
+<td>choice</td>
+<td>选择。让用户输入一个字符，从而运行不同的命令，不常用。CHOICE /C YNC /M</td>
+</tr>
+<tr>
+<td>IF EXIST</td>
+<td>判断文件是否存在。类似：IF NOT EXIST</td>
+</tr>
+<tr>
+<td>setlocal</td>
+<td>设置环境变量和变量延迟</td>
+</tr>
+<tr>
+<td>endlocal</td>
+<td>与setlocal成对出现，用来对批处理执行过程中的环境变量进行临时修改和操作</td>
+</tr>
+<tr>
+<td>start</td>
+<td>调用外部程序的命令</td>
+</tr>
+<tr>
+<td>date和time</td>
+<td>日期和时间</td>
+</tr>
+</tbody>
+</table>
+<h4 id="BAT特殊符号："><a href="#BAT特殊符号：" class="headerlink" title="BAT特殊符号："></a>BAT特殊符号：</h4><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@</td>
+<td>回显屏蔽，隐藏它后面这一行的命令本身（只能影响当前行）</td>
+</tr>
+<tr>
+<td>%</td>
+<td>批处理变量引导符，标识引用参数（行内注释）</td>
+</tr>
+<tr>
+<td>！</td>
+<td>设置变量延迟时，用来表示变量</td>
+</tr>
+<tr>
+<td>&gt;、&gt;&gt;、&lt;、&lt;&amp;、&gt;&amp;</td>
+<td>重定向符</td>
+</tr>
+<tr>
+<td>&amp;、&amp;&amp;、\</td>
+<td>\</td>
+<td></td>
+<td>组合命令符</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>管道命令符</td>
+</tr>
+<tr>
+<td>“”</td>
+<td>字符串界定符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>转义符</td>
+</tr>
+<tr>
+<td>,</td>
+<td>相当于空格</td>
+</tr>
+<tr>
+<td>;</td>
+<td>当命令相同时，可以将不同目标用;来隔离</td>
+</tr>
+<tr>
+<td>()</td>
+<td>号中可以包括多行命令，这些命令将被看成一个整体，视为一条命令行（左右括号必须成对使用）</td>
+</tr>
+<tr>
+<td>+</td>
+<td>命令文件连接符，如：copy xxx+xxx</td>
+</tr>
+<tr>
+<td>:</td>
+<td>标识标签（标签长度不能超过8个字节）</td>
+</tr>
+<tr>
+<td>/</td>
+<td>参数开关引导符</td>
+</tr>
+<tr>
+<td>*、?</td>
+<td>通配符</td>
+</tr>
+<tr>
+<td>::</td>
+<td>注释符</td>
+</tr>
+<tr>
+<td>=</td>
+<td>赋值符号</td>
+</tr>
+<tr>
+<td>==</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>EQU</td>
+<td>等于（==）</td>
+</tr>
+<tr>
+<td>NEQ</td>
+<td>不等于</td>
+</tr>
+<tr>
+<td>LSS</td>
+<td>小于</td>
+</tr>
+<tr>
+<td>LEQ</td>
+<td>小于或等于</td>
+</tr>
+<tr>
+<td>GTR</td>
+<td>大于</td>
+</tr>
+<tr>
+<td>GEQ</td>
+<td>大于或等于</td>
+</tr>
+</tbody>
+</table>
+<h4 id="BAT系统变量："><a href="#BAT系统变量：" class="headerlink" title="BAT系统变量："></a>BAT系统变量：</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%SystemRoot% %windir%</td>
+<td>C:\WINDOWS</td>
+</tr>
+<tr>
+<td>%ProgramFiles%</td>
+<td>C:\Program Files</td>
+</tr>
+<tr>
+<td>%USERPROFILE%</td>
+<td>C:\Documents and Settings\Administrator</td>
+</tr>
+<tr>
+<td>%ALLUSERSPROFILE%</td>
+<td>C:\Documents and Settings\All Users</td>
+</tr>
+<tr>
+<td>%APPDATA%</td>
+<td>C:\Documents and Settings\Administrator\Application Data</td>
+</tr>
+<tr>
+<td>%ComSpec%</td>
+<td>C:\WINDOWS\system32\cmd.exe</td>
+</tr>
+<tr>
+<td>%OS%</td>
+<td>Windows_NT</td>
+</tr>
+<tr>
+<td>%Path%</td>
+<td>%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem</td>
+</tr>
+<tr>
+<td>%HOMEDRIVE%</td>
+<td>C:</td>
+</tr>
+<tr>
+<td>%HOMEPATH%</td>
+<td>\Documents and Settings\Administrator</td>
+</tr>
+<tr>
+<td>%TEMP% %TMP%</td>
+<td>C:\DOCUME~1\ADMINI~1\LOCALS~1\Temp</td>
+</tr>
+<tr>
+<td>%SystemDrive%</td>
+<td>C:</td>
+</tr>
+<tr>
+<td>%LOGONSERVER%</td>
+<td>\机器名（\hostname）</td>
+</tr>
+<tr>
+<td>%USERNAME%</td>
+<td>Administrator</td>
+</tr>
+<tr>
+<td>%COMPUTERNAME%</td>
+<td>机器名（hostname）</td>
+</tr>
+<tr>
+<td>%CommonProgramFiles%</td>
+<td>C:\Program Files\Common Files</td>
+</tr>
+<tr>
+<td>%USERDOMAIN%</td>
+<td>所属域（机器名）</td>
+</tr>
+<tr>
+<td>%PATHEXT%</td>
+<td>.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH</td>
+</tr>
+</tbody>
+</table>
+<p>在目录里输入set命令，会显示出全部系统变量</p>
+<h4 id="BAT颜色表："><a href="#BAT颜色表：" class="headerlink" title="BAT颜色表："></a>BAT颜色表：</h4><table>
+<thead>
+<tr>
+<th>值</th>
+<th>颜色</th>
+<th>值</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>黑色</td>
+<td>8</td>
+<td>灰色</td>
+</tr>
+<tr>
+<td>1</td>
+<td>蓝色</td>
+<td>9</td>
+<td>浅蓝色</td>
+</tr>
+<tr>
+<td>2</td>
+<td>绿色</td>
+<td>A</td>
+<td>浅绿色</td>
+</tr>
+<tr>
+<td>3</td>
+<td>湖蓝色</td>
+<td>B</td>
+<td>淡浅绿色</td>
+</tr>
+<tr>
+<td>4</td>
+<td>红色</td>
+<td>C</td>
+<td>淡灰色</td>
+</tr>
+<tr>
+<td>5</td>
+<td>紫色</td>
+<td>D</td>
+<td>淡紫色</td>
+</tr>
+<tr>
+<td>6</td>
+<td>黄色</td>
+<td>E</td>
+<td>淡黄色</td>
+</tr>
+<tr>
+<td>7</td>
+<td>白色</td>
+<td>F</td>
+<td>亮白色</td>
+</tr>
+</tbody>
+</table>
+<h4 id="BAT中for命令："><a href="#BAT中for命令：" class="headerlink" title="BAT中for命令："></a>BAT中for命令：</h4><p>基本格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FOR %%variable IN (set) DO command [command-parameters]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%%variable</td>
+<td>指定一个单一字母表示可替换的参数</td>
+</tr>
+<tr>
+<td>(set)</td>
+<td>指定一个或一组文件。可以使用通配符</td>
+</tr>
+<tr>
+<td>command</td>
+<td>指定对每个文件执行的命令</td>
+</tr>
+<tr>
+<td>command-parameters</td>
+<td>为特定命令指定参数或命令行开关</td>
+</tr>
+</tbody>
+</table>
+<p>参数：</p>
+<p>FOR有四个参数：/d /l /r /f</p>
+<p><strong>BAT中FOR /D参数：</strong></p>
+<p>/D 指定与目录名匹配，而不与文件名匹配</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /d %%i in (c:\*) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出C盘根目录下所有文件夹</p>
+<p>另一例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /d %%i in (??????) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出所有目录名</p>
+<p>还有一例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /D %%a in (*e* *i*) do echo %%a</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出名字里包含i或者e的目录</p>
+<p><strong>BAT中FOR /R参数：</strong></p>
+<p>/R 检查以 [drive:]path 为根目录的目录树</p>
+<p>FOR /R [[drive:]path] %%variable IN (set) DO command [command-parameters]</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /r C:\bpms %%i in (*.exe) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出C:\bpms目录里所有.exe结尾的文件</p>
+<p>又一例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /r %%c in (*) do (echo %%c)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出所有东西</p>
+<p><strong>BAT中FOR /L参数：</strong></p>
+<p>/L 表示以增量形式从开始到结束的一个数字序列</p>
+<p>FOR /L %variable IN (start,step,end) DO command [command-parameters]</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /l %%i in (1,1,5) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出1-5</p>
+<p>又一例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /l %%i in (1,1,3) do start calc</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>弹出三次计算器应用</p>
+<p><strong>BAT中FOR /F参数：</strong></p>
+<p>/F 表示迭代及文件解析</p>
+<p>FOR /F [“options”] %variable IN (file-set) DO command [command-parameters]<br>FOR /F [“options”] %variable IN (“string”) DO command [command-parameters]<br>FOR /F [“options”] %variable IN (“command”) DO command [ommand-parameters]</p>
+<table>
+<thead>
+<tr>
+<th>options参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eol=c</td>
+<td>指一个行注释字符的结尾(就一个)</td>
+</tr>
+<tr>
+<td>skip=n</td>
+<td>指在文件开始时忽略的行数。</td>
+</tr>
+<tr>
+<td>delims=xxx</td>
+<td>指分隔符集。这个替换了空格和制表符的默认分隔符集。</td>
+</tr>
+<tr>
+<td>tokens=x,y,m-n</td>
+<td>指每行的哪一个符号被传递到每个迭代的 for 本身。这会导致额外变量名称的分配。m-n格式为一个范围。通过 nth 符号指定 mth。如果符号字符串中的最后一个字符星号，那么额外的变量将在最后一个符号解析之后分配并接受行的保留文本。</td>
+</tr>
+<tr>
+<td>usebackq</td>
+<td>指定新语法已在下类情况中使用:在作为命令执行一个后引号的字符串并且一个单引号字符为文字字符串命令并允许在 file-set中使用双引号扩起文件名称。</td>
+</tr>
+</tbody>
+</table>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem 首先建立临时文件test.txt</span><br><span class="line">echo ;注释行,这是临时文件,用完删除 &gt;test.txt</span><br><span class="line">echo 11段 12段 13段 14段 15段 16段 &gt;&gt;test.txt</span><br><span class="line">echo 21段,22段,23段,24段,25段,26段 &gt;&gt;test.txt</span><br><span class="line">echo ;31段+32段+33段+34段+35段+36段&gt;&gt;test.txt</span><br><span class="line">echo 41段-42段-43段-44段-45段-46段 &gt;&gt;test.txt</span><br><span class="line">FOR /F &quot;eol=; tokens=1,3* delims=,- &quot; %%i in (test.txt) do echo %%i %%j %%k</span><br><span class="line">Pause</span><br><span class="line">Del test.txt</span><br></pre></td></tr></table></figure>
+<p>命令行输出内容（因为分号后面的内容不被输出）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">11段 12段 13段 14段 15段 16段</span><br><span class="line">21段 23段 24段,25段,26段</span><br><span class="line">41段-42段-43段-44段-45段-46段</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>创建的文本内容（去掉代码里的delete语句才能看到）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">;注释行，这是临时文件，用完删除 </span><br><span class="line">11段 12段 13段 14段 15段 16段 </span><br><span class="line">21段,22段,23段,24段,25段,26段 </span><br><span class="line">;31段+32段+33段+34段+35段+36段</span><br><span class="line">41段-42段-43段-44段-45段-46段</span><br></pre></td></tr></table></figure>
+<p>例子二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">FOR /F &quot;eol= delims=&quot; %%i in (test.txt) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">;注释行，这是临时文件，用完删除</span><br><span class="line">11段 12段 13段 14段 15段 16段</span><br><span class="line">21段,22段,23段,24段,25段,26段</span><br><span class="line">31段+32段+33段+34段+35段+36段</span><br><span class="line">41段-42段-43段-44段-45段-46段</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>例子三（注意delims=后面有一个空格）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">FOR /F &quot;eol= delims= &quot; %%i in (test.txt) do echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">;注释行，这是临时文件，用完删除</span><br><span class="line">11段</span><br><span class="line">21段,22段,23段,24段,25段,26段</span><br><span class="line">31段+32段+33段+34段+35段+36段</span><br><span class="line">41段-42段-43段-44段-45段-46段</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>意思是分隔符集为空格</p>
+<p>例子四：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">FOR /F &quot;eol=; tokens=1,2,3 delims=,- &quot; %%i in (test.txt) do echo %%i %%j %%k</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">11段 12段 13段</span><br><span class="line">21段 22段 23段</span><br><span class="line">41段 42段 43段</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>解释下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tokens=1,2,3	是指输出每行第一二三个</span><br><span class="line">delims=,- 		是指只有当分隔符为减号或空格时才遵守上面的输出规则</span><br></pre></td></tr></table></figure>
+<p>例子五：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;tokens=1,2,3 delims=- &quot; %%a in (&apos;date /t&apos;) do (</span><br><span class="line">	echo %%a</span><br><span class="line">	echo %%b</span><br><span class="line">	echo %%c</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">2017/11/15</span><br><span class="line">周三</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>例子六：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">@echo off</span><br><span class="line">for /f &quot;skip=2 tokens=1,2,3 delims= &quot; %%i in (&apos;net user&apos;) do (</span><br><span class="line">	echo %%i</span><br><span class="line">	echo %%j</span><br><span class="line">	echo %%k</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出结果为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Administrator\Desktop&gt;test.bat</span><br><span class="line">----------------------------------------</span><br><span class="line">Administrator</span><br><span class="line">Guest</span><br><span class="line">test</span><br><span class="line">命令成功完成。</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>例子七：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;skip=5 tokens=4&quot; %%a in (&apos;dir&apos;) do echo %%a</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;DIR&gt;</span><br><span class="line">&lt;DIR&gt;</span><br><span class="line">2,709</span><br><span class="line">275,436</span><br><span class="line">117</span><br><span class="line">字节</span><br><span class="line">可用字节</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>和输入命令dir后显示的字节数信息相同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> 驱动器 C 中的卷没有标签。</span><br><span class="line"> 卷的序列号是 C017-6D30</span><br><span class="line"></span><br><span class="line"> C:\Users\Administrator\Desktop\Linux 的目录</span><br><span class="line"></span><br><span class="line">2017/09/09 周六  20:59    &lt;DIR&gt;          .</span><br><span class="line">2017/09/09 周六  20:59    &lt;DIR&gt;          ..</span><br><span class="line">2017/07/26 周三  11:31             2,709 1.txt</span><br><span class="line">2017/09/09 周六  21:00           275,436 Linux Security Coaching.xmind</span><br><span class="line">2017/07/13 周四  21:58               117 linux学习.txt</span><br><span class="line">               3 个文件        278,262 字节</span><br><span class="line">               2 个目录 42,868,559,872 可用字节</span><br></pre></td></tr></table></figure>
+<p><strong>BAT中FOR /F变量拓展：</strong></p>
+<p>%~I        -删除任何引号(“),拓展%I<br>%~fI    -将%I拓展到一个完全合格的路径名<br>%~dI    -仅将%I拓展到一个驱动器号<br>%~pI    -仅将%I拓展到一个路径<br>%~nI    -仅将%I拓展到一个文件名<br>%~xI    -仅将%I拓展到一个文件拓展名<br>%~sI    -拓展的路径只含有短名<br>%~aI    -将%I拓展到文件的文件属性<br>%~tI    -将%I拓展到文件的日期/时间<br>%~zI    -将%I拓展到文件的大小<br>%~$PATH:I    -查找列在路径环境变量的目录,并将%I拓展到找到的第一个完全合格的名称.如果环境变量名未被定义,或者没找到文件,此组合键会拓展到空字符串<br>%~dpI    -仅将%I拓展到一个驱动器号和路径<br>%~nxI    -仅将%I拓展到一个文件名和拓展名<br>%~fsI    -仅将%I拓展到一个带有短名的完整路径名<br>%~dp$PATH:I    -搜索列在路径环境变量的目录,并将%I拓展到找到的第一个驱动器号和路径<br>%~ftzaI    -将%I拓展到类似输出线路的DIR</p>
+<p>说明:%~sI中%~s为语法,I为变量<br>​    %~dpI中%~dp为语法,I为变量</p>
+<p><strong>BAT中FOR /F变量拓展%~I：</strong></p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem 建立临时文件</span><br><span class="line">rem 不成对的引号要加转义字符^</span><br><span class="line">rem 重定向符号前不要留空格</span><br><span class="line">echo ^&quot;1111&gt;temp.txt</span><br><span class="line">echo &quot;2222&quot;&gt;&gt;temp.txt</span><br><span class="line">echo 3333^&quot;&gt;&gt;temp.txt</span><br><span class="line">echo &quot;4444&quot;44&gt;&gt;temp.txt</span><br><span class="line">echo ^&quot;55&quot;55&quot;55&gt;&gt;temp.txt</span><br><span class="line">for /f &quot;delims=&quot; %%i in (temp.txt) do echo %%~i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1111</span><br><span class="line">2222</span><br><span class="line">3333&quot;</span><br><span class="line">4444&quot;44</span><br><span class="line">55&quot;55&quot;55</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p>创建的文本内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;1111</span><br><span class="line">&quot;2222&quot;</span><br><span class="line">3333&quot;</span><br><span class="line">&quot;4444&quot;44</span><br><span class="line">&quot;55&quot;55&quot;55</span><br></pre></td></tr></table></figure>
+<p>规则：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.若字符串首位同时存在引号,则删除首尾的引号;</span><br><span class="line">2.若字符串尾不存在引号,则删除字符串首的引号;</span><br><span class="line">3.如果字符串中间存在引号,或者只在尾部存在引号,则不删除</span><br><span class="line">总结:无头不删除,有头连尾删</span><br></pre></td></tr></table></figure>
+<p><strong>BAT中FOR /F变量拓展%~FI：</strong></p>
+<p>例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b&apos;) do @echo %%i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：打印出所有文件包括文件夹</p>
+<p>例子二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b&apos;) do @echo %%~fi</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：和上面一样，不过会把文件的绝对路径打印出来</p>
+<p><strong>BAT中FOR /F变量拓展%~SI：</strong></p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b&apos;) do @echo %%~si</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：打印出短文件名</p>
+<p>例二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /f &quot;delims=&quot; %%i in (&quot;calc.exe&quot;) do @echo %%~$PATH:i</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出结果，打开计算器</p>
+<p>在PATH变量里指定的路径里搜索calc.exe文件，如果有calc.exe，则会把他所在的绝对路径打印出来，没有就打印一个错误。如果将包裹calc.exe的双引号改为单引号，当搜索是有calc.exe存在时，则会打开这个应用</p>
+<h4 id="BAT字符串处理："><a href="#BAT字符串处理：" class="headerlink" title="BAT字符串处理："></a>BAT字符串处理：</h4><p><strong>1.字符串分割格式:</strong></p>
+<p>%源字符串:~起始值,截取长度%</p>
+<p>说明:<br>1.起始值从0开始<br>2.截取长度可选,如果省略逗号和截取长度值,将会从头截到尾<br>3.截取长度如果是负数,表示截取倒数第几个</p>
+<p>举例：</p>
+<p>“%time%”    显示如:”09:10:23.03”(完整的时间”hh:mm:ss:tt”)<br>“%time:~0,5%”    显示”hh:mm”(即:”11:04”),其中0表示从右向左移位操作的个数,5表示从左向右移位操作的个数<br>“%time:~0,8%” 显示标准时间格式”hh:mm:ss”(即”11:04:23”，前8个字符串)<br>“%time:~3,-3%”显示”mm:ss”(即从第4个开始,截去最后3个的字符串)<br>“%time:~3%”   显示”04:23.03”(即去掉前4个字符串)<br>“%time:~-3%”  显示”.tt”(即最后3个字符串)</p>
+<p><strong>2.字符串替换:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">set a=&quot;abcd1234&quot;</span><br><span class="line">echo %a%	显示：&quot;abcd1234&quot;</span><br><span class="line">set a=%a:1=kk%	替换&quot;1&quot;为&quot;kk&quot;</span><br><span class="line">echo %a%	显示：&quot;abcdkk234&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>3.字符串合并：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set str1=%str1%%str2%	（合并str1和str2）</span><br></pre></td></tr></table></figure>
+<p><strong>4.统计字符串长度：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set testStr=This is a test string</span><br><span class="line">set str=%testStr%</span><br><span class="line">:next1</span><br><span class="line">if not &quot;%str%&quot;==&quot;&quot; (</span><br><span class="line">set /a num+=1</span><br><span class="line">set &quot;str=%str:~1%&quot;</span><br><span class="line">goto next1</span><br><span class="line">)</span><br><span class="line">echo testStr=%testStr%</span><br><span class="line">echo testStr的长度为：%num%</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">testStr=This is a test string</span><br><span class="line">testStr的长度为：21</span><br></pre></td></tr></table></figure>
+<p><strong>5.截取字符串时，需要传递参数：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">echo !args:~%num%,-5!</span><br></pre></td></tr></table></figure>
+<h4 id="BAT简单脚本实例："><a href="#BAT简单脚本实例：" class="headerlink" title="BAT简单脚本实例："></a>BAT简单脚本实例：</h4><p><strong>例一:自定义变量:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set var=MyValue</span><br><span class="line">echo %var%</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyValue</span><br></pre></td></tr></table></figure>
+<p><strong>例二：用户输入变量值：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set /p var=请输入变量的值：</span><br><span class="line">echo %var%</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请输入变量的值：test</span><br><span class="line">test</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p><strong>例三：未设置变量延迟：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set a=4</span><br><span class="line">set a=5 &amp; echo %a%</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4</span><br></pre></td></tr></table></figure>
+<p><strong>例四：设置变量延迟：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal enabledelayedexpansion</span><br><span class="line">set a=4</span><br><span class="line">set a=5 &amp; echo !a!</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5</span><br></pre></td></tr></table></figure>
+<p>什么是延迟环境变量？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">延迟环境变量，顾名思义，延迟读取了环境变量。当我们开启延迟环境变量之后，命令解释器就不再是运行命令前先将环境变量读取出来再执行，而是当我们用到延迟环境变量的时候再去从环境变量中读取出来，这就延迟了环境变量读取的时间。</span><br></pre></td></tr></table></figure>
+<p><strong>例五：读取文件第一行：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set /p str=&lt;%0</span><br><span class="line">echo %str%</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">请按任意键继续. . .</span><br></pre></td></tr></table></figure>
+<p><strong>例六：标签的使用：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set var=0</span><br><span class="line">if %var% neq 1 goto label</span><br><span class="line">echo It&apos;s label</span><br><span class="line">:label</span><br></pre></td></tr></table></figure>
+<p>输出空白，因为neq是等于的意思</p>
+<p><strong>例七：if倒叙循环：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">set var=100</span><br><span class="line">rem Start</span><br><span class="line">:cont</span><br><span class="line">echo 第%var%次循环</span><br><span class="line">set /a var-=1</span><br><span class="line">if %var% gtr 0 goto cont</span><br><span class="line">rem End</span><br><span class="line">echo Done</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>倒叙循环输出一百次，因为gtr是大于的意思</p>
+<p><strong>例八：简单for循环：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">for /l %%i in (1,1,100) do (</span><br><span class="line">	echo %%i</span><br><span class="line">)</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+<p>输出内容，1-100，因为（1,1,100）的意思是从1到100，自加一</p>
+<p><strong>BAT实现ping某IP段并统计存活IP个数：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">pushd %SystemDrive%\</span><br><span class="line">setlocal ENABLEDELAYEDEXPANSION</span><br><span class="line">set online=0</span><br><span class="line">set offline=0</span><br><span class="line">set /a Total=0</span><br><span class="line">set log=ping.txt</span><br><span class="line">for /L %%a in (0,1,255) do (</span><br><span class="line">set temp=0</span><br><span class="line">set ifonline=Offline</span><br><span class="line">set /a Total+=1</span><br><span class="line">set tmpIP=222.18.127.%%a</span><br><span class="line">	for /f &quot;delims=&quot; %%i in (&apos;ping -n 1 -w 100 !tmpIP!&apos;) do (</span><br><span class="line">		for %%x in (%%i) do (</span><br><span class="line">			if %%x == TTL (</span><br><span class="line">				set ifonline=Online</span><br><span class="line">				set /a online+=1</span><br><span class="line">				set temp=1</span><br><span class="line">			)</span><br><span class="line">		)</span><br><span class="line">	)</span><br><span class="line">	if  /i  !temp! EQU 0  (</span><br><span class="line">		@echo !tmpIP!      !ifonline!</span><br><span class="line">	     	@echo !tmpIP!       !ifonline! &gt;&gt; !log!</span><br><span class="line">      )  else (</span><br><span class="line">		echo !tmpIP!  ******  !ifonline!</span><br><span class="line">		echo !tmpIP!  ******  !ifonline! &gt;&gt; !log!	</span><br><span class="line">	)</span><br><span class="line">echo Scan Host :!tmpIP! Completed</span><br><span class="line">)</span><br><span class="line">set /a offline =Total -online</span><br><span class="line">echo Total Computers : !Total! &gt;&gt; !log!</span><br><span class="line">echo Online Computers : !online! &gt;&gt; !log!</span><br><span class="line">echo Offline Computers : !offline! &gt;&gt; !log!</span><br><span class="line">popd</span><br></pre></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Scan Host :222.18.127.107 Completed</span><br><span class="line">222.18.127.108      Offline</span><br><span class="line">Scan Host :222.18.127.108 Completed</span><br><span class="line">222.18.127.109      Offline</span><br><span class="line">Scan Host :222.18.127.109 Completed</span><br><span class="line">222.18.127.110      Offline</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>文本ping.txt内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">222.18.127.0       Offline </span><br><span class="line">222.18.127.1       Offline </span><br><span class="line">222.18.127.2       Offline </span><br><span class="line">222.18.127.3       Offline </span><br><span class="line">222.18.127.4       Offline </span><br><span class="line">222.18.127.5       Offline </span><br><span class="line">222.18.127.6       Offline </span><br><span class="line">222.18.127.7       Offline </span><br><span class="line">222.18.127.8       Offline </span><br><span class="line">222.18.127.9       Offline </span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p><strong>BAT生成特定格式数实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">setlocal ENABLEDELAYEDEXPANSION</span><br><span class="line">if &quot;%1%&quot; NEQ &quot;&quot; (</span><br><span class="line">	set ch=%1%</span><br><span class="line">) else (</span><br><span class="line">	set /p ch Input figures(1-9^):</span><br><span class="line">)</span><br><span class="line">set ten=1</span><br><span class="line">set max_num=9</span><br><span class="line">for /L %%a in (1,1,%ch%) do (</span><br><span class="line">	set /a ten*=10</span><br><span class="line">)</span><br><span class="line">set /a max_num=!ten!-1</span><br><span class="line">title Create number 0~!max_num!</span><br><span class="line">for /L %%i in (0,1,!max_num!) do (</span><br><span class="line">	set tempnum=!ten!%%i</span><br><span class="line">	echo !tempnum:~-%ch%!&gt;&gt;0-!max_num!.txt</span><br><span class="line">)</span><br><span class="line">echo Done!</span><br></pre></td></tr></table></figure>
+<p>这个可以用来生成爆破字典</p>
+<h4 id="WMI命令："><a href="#WMI命令：" class="headerlink" title="WMI命令："></a>WMI命令：</h4><p><strong>概念：</strong> WMIC扩展WMI，提供了从命令接口和批命令脚本执行系统管理的支持。用户可以使用WMI管理本地和远程计算机</p>
+<p><strong>WMIC：</strong> WMI命令行工具</p>
+<p><strong>作用：</strong>    在远程计算机上启动一个进程<br>​        设定一个在特定日期和时间运行的进程<br>​        远程启动计算机<br>​        获得本地或远程计算机的已安装程序列表<br>​        查询本地或远程计算机的windows事件日志</p>
+<p><strong>先决条件：</strong> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">启动WMI服务，开启TCP135端口</span><br><span class="line">本地安全策略的“网络访问:本地账户的共享和安全模式”应设为“经典-本地用户以自己的身份验证”</span><br></pre></td></tr></table></figure>
+<h4 id="WMIC语法："><a href="#WMIC语法：" class="headerlink" title="WMIC语法："></a>WMIC语法：</h4><p><strong>语法1：WMIC别名：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wmic process</span><br><span class="line">wmic service</span><br></pre></td></tr></table></figure>
+<p><strong>语法2：WMIC 别名 where 属性=“属性值”：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wmic process where caption=&quot;calc.exe&quot;</span><br><span class="line">wmic 别名 where 属性=”属性值“ call 方法</span><br><span class="line">wmic process where caption=&quot;calc.exe&quot; call delete</span><br></pre></td></tr></table></figure>
+<p><strong>语法3：WMIC 别名 call 方法 参数：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic process call create calc</span><br></pre></td></tr></table></figure>
+<p><strong>语法4：WMIC /node:远程主机 /user:用户名 /password:密码 语句：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wmic /node:dc /user:admin /password:123456 process</span><br><span class="line">wmic /node:dc /user:admin /password:123456 process where caption=&quot;taskmgr.exe&quot; delete</span><br><span class="line">wmic /node:dc /user:admin /password:123456 process call create clac</span><br></pre></td></tr></table></figure>
+<p>wmic /node:222.18.127.41 /user:Administrator /password:6721 process</p>
+<h4 id="WMIC实例："><a href="#WMIC实例：" class="headerlink" title="WMIC实例："></a>WMIC实例：</h4><p><strong>1.连接到某节点：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wmic /node:&quot;ip&quot; /user:&quot;用户名&quot; /password:&quot;密码&quot;</span><br></pre></td></tr></table></figure>
+<p>自己本地连接直接输入wmic命令即可</p>
+<p><strong>2.硬件管理：</strong></p>
+<p>获取硬盘资料：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DISKDRIVE get deviceid,Caption,size,InterfaceType</span><br></pre></td></tr></table></figure>
+<p>获取分区资料：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LOGICALDISK get name,Description,filesystem,size,freespace</span><br></pre></td></tr></table></figure>
+<p>获取CPU资料:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cpu get name,addresswidth,processorid</span><br></pre></td></tr></table></figure>
+<p>获取主板资料:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BaseBoard get Manufacturer,Product,Version,SerialNumber</span><br></pre></td></tr></table></figure>
+<p>获取内存数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">memlogical get totalphysicalmemory</span><br></pre></td></tr></table></figure>
+<p>获得品牌机的序列号:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">csproduct get IdentifyingNumber</span><br></pre></td></tr></table></figure>
+<p>获取声卡资料:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SOUNDDEV get ProductName</span><br></pre></td></tr></table></figure>
+<p>获取屏幕分辨率:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESKTOPMONITOR where Status=&apos;ok&apos; get ScreenHeight,ScreenWidth</span><br></pre></td></tr></table></figure>
+<p><strong>3.进程管理——process</strong></p>
+<p>列出进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process list brief</span><br></pre></td></tr></table></figure>
+<p>（full显示所有，brief显示摘要，instance显示实例，status显示状态）</p>
+<p>获取进程路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process where name=&quot;cmd.exe&quot; get executablepath</span><br></pre></td></tr></table></figure>
+<p>创建新进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process call create notepad</span><br><span class="line">process call create &quot;c:\windows\system32\cmd.exe&quot;</span><br><span class="line">process call create &quot;shutdown.exe -r -f -t 20&quot;		会重启，小心</span><br></pre></td></tr></table></figure>
+<p>删除指定进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">process where name=&quot;cmd.exe&quot; call terminate</span><br><span class="line">process where processid=&quot;123&quot; delete</span><br><span class="line">process 123 call terminate</span><br></pre></td></tr></table></figure>
+<p>删除可疑进程：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">process where &quot;name=&apos;explorer.exe&apos; and executablepath&lt;&gt;&apos;%systemdrive%\\windows\\explorer.exe&apos;&quot; delete</span><br><span class="line">process where &quot;name=&apos;svchost.exe&apos; and executablepath&lt;&gt;&apos;c:\\windows\\system32\\svchost.exe&apos;&quot; call terminate</span><br></pre></td></tr></table></figure>
+<p><strong>4.账号管理——useraccount</strong></p>
+<p>更改当前用户名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useraccount where &quot;name=&apos;%username%&apos;&quot; call rename newname</span><br><span class="line">useraccount create /?</span><br></pre></td></tr></table></figure>
+<p><strong>5.共享管理——share:</strong></p>
+<p>建立共享：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">share call create &quot;&quot;,&quot;test&quot;,&quot;3&quot;,&quot;TestShareName&quot;,&quot;&quot;,&quot;c:\test&quot;,0</span><br><span class="line">（可使用share call create /? 查看create后的参数类型）</span><br></pre></td></tr></table></figure>
+<p>删除共享：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">share where name=&quot;C$&quot; call delete</span><br><span class="line">share where path=&apos;c:\\test&apos; delete</span><br></pre></td></tr></table></figure>
+<p><strong>6.服务管理——service:</strong></p>
+<p>更改telnet服务自动启动类型[auto|disabled|manual]</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service where name=&quot;tlntsvr&quot; set startmode=&quot;auto&quot;</span><br></pre></td></tr></table></figure>
+<p>运行telnet服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service where name=&quot;tlntsvr&quot; call startservice</span><br></pre></td></tr></table></figure>
+<p>停止ICS服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service where name=&quot;shardaccess&quot; call stopservice</span><br></pre></td></tr></table></figure>
+<p>删除test服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service where name=&quot;test&quot; call delete</span><br></pre></td></tr></table></figure>
+<p><strong>7.目录管理——fsdir：</strong></p>
+<p>列出C盘下名为test的目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsdir where &quot;drive=&apos;c:&apos; and filename=&apos;test&apos;&quot; list</span><br></pre></td></tr></table></figure>
+<p>删除c:\test文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsdir &quot;c:\\test&quot; call delete</span><br></pre></td></tr></table></figure>
+<p>重命名c:\test文件夹为abc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fsdir &quot;c:\\test&quot; rename &quot;c:\abc&quot;</span><br><span class="line">fsdir where (name=&apos;c:\\test&apos;) rename &quot;c:\abc&quot;</span><br></pre></td></tr></table></figure>
+<p>复制文件夹：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsdir where name=&apos;d:\\test&apos; call copy &quot;c:\\test&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>8.任务计划——job：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job call create &quot;notepad.exe&quot;,0,0,true,false,********14800.000000+480</span><br></pre></td></tr></table></figure>
+<p><strong>9.设置ip——nicconfig：</strong></p>
+<p>配置或更新ip地址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nicconfig where index=0 call enablestatic(&quot;192.168.1.5&quot;),(&quot;255.255.255.0&quot;)</span><br></pre></td></tr></table></figure>
+<p>说明：index=0说明是配置网络接口1</p>
+<p>配置网关（默认路由）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nicconfig where index=0 call setgateways(&quot;192.168.1.1&quot;)</span><br></pre></td></tr></table></figure>
+<p><strong>10.计算机系统管理——computersystem</strong></p>
+<p>查看系统启动选项，boot的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">computersystem get systemstartupoptions</span><br></pre></td></tr></table></figure>
+<p>查看工作组/域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">computersystem get domain</span><br></pre></td></tr></table></figure>
+<p>更改计算机名abc为123</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">computersysterm where &quot;name=&apos;abc&apos;&quot; call rename 123</span><br></pre></td></tr></table></figure>
+<p>更改工作组workgroup为MyGroup</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">computersystem where &quot;name=&apos;workgroup&apos;&quot; call joindomainorworkgroup &quot;&quot;,&quot;&quot;,&quot;MyGroup&quot;,1</span><br></pre></td></tr></table></figure>
+<p><strong>文件管理——datafile：</strong></p>
+<p>重命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile &quot;c:\\test.txt&quot; call rename c:\abc.txt</span><br></pre></td></tr></table></figure>
+<p>查找e盘下test目录（不包括子目录）下的cc.cmd文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;e:&apos; and path=&apos;\\test\\&apos; and filename=&apos;cc&apos; and extension=&apos;cmd&apos;&quot; list</span><br></pre></td></tr></table></figure>
+<p>查找e盘下所有目录和子目录下的cc.cmd文件，且文件大小大于1k</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;e:&apos; and filename=&apos;cc&apos; and extension=&apos;cmd&apos; and filesize&gt;&apos;1000&apos;&quot; list</span><br></pre></td></tr></table></figure>
+<p>删除e盘下文件大小大于10M的.cmd文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;e:&apos; and extension=&apos;cmd&apos; and filesize&gt;&apos;10000000&apos;&quot; call delete</span><br></pre></td></tr></table></figure>
+<p>删除e盘下test目录（不包括子目录）下的非.cmd文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;e:&apos; and extension&lt;&gt;&apos;cmd&apos; and path=&apos;test&apos;&quot; call delete</span><br></pre></td></tr></table></figure>
+<p>复制e盘下test目录（不包括子目录）下的cc.cmd文件到e:\，并改名为aa.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;e:&apos; and path=&apos;\\test\\&apos; and filename=&apos;cc&apos; and extension=&apos;cmd&apos;&quot; call copy &quot;e:\aa.bat&quot;</span><br></pre></td></tr></table></figure>
+<p>重命名c:\hello.txt为c:\test.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile &quot;c:\\hello.txt&quot; call rename c:\test.txt</span><br></pre></td></tr></table></figure>
+<p>查找h盘下目录含有test，文件名含有perl，后缀为txt的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datafile where &quot;drive=&apos;h:&apos; and extension=&apos;txt&apos; and path like &apos;%\\test\\%&apos; and filename like &apos;%perl%&apos;&quot; get name</span><br></pre></td></tr></table></figure>
+<h4 id="POWERSHELL："><a href="#POWERSHELL：" class="headerlink" title="POWERSHELL："></a>POWERSHELL：</h4><p><strong>概念：</strong> Powershell是运行在windows机器上实现系统和应用程序管理自动化的命令行脚本环境</p>
+<p><strong>支持平台：</strong> win7及以上。powershell需要.NET环境的支持，同时支持.NET对象</p>
+<p><strong>教程：</strong> <a href="http://www.pstips.net/powershell-online-tutorials/" target="_blank" rel="noopener">http://www.pstips.net/powershell-online-tutorials/</a></p>
+<p><strong>实例：</strong> </p>
+<p>将数据写入文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ac 123.txt abc</span><br></pre></td></tr></table></figure>
+<p>打开123.txt，文件内容为abc</p>
+<p>读取文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat 123.txt</span><br><span class="line">cat 123.txt -t 5	读取前5行</span><br></pre></td></tr></table></figure>
+<p>清屏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cls clear-host</span><br></pre></td></tr></table></figure>
+<p>清空文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clear-content 1.txt</span><br></pre></td></tr></table></figure>
+<p>列举子项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dir c:\</span><br><span class="line">dir hklm:\software</span><br></pre></td></tr></table></figure>
+<p>显示帮助</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help ac</span><br></pre></td></tr></table></figure>
+<p>列进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get-process</span><br></pre></td></tr></table></figure>
+<p>生成随机数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">random -maximum 10 -minimum 5</span><br></pre></td></tr></table></figure>
+<p>列服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get-service</span><br></pre></td></tr></table></figure>
+<p>获取当前路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
+<p>指定等待的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sleep 5</span><br></pre></td></tr></table></figure>
+<p>等待进程结束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wait-process -id 1000</span><br></pre></td></tr></table></figure>
+<p>结束进程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop-process -id 1000</span><br></pre></td></tr></table></figure>
+<p>停止服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop-servie -name server</span><br></pre></td></tr></table></figure>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/windows/" rel="tag"><i class="fa fa-tag"></i> windows</a>
+          
+            <a href="/tags/编程/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/14/实验班小组出题WP/" rel="next" title="实验班小组出题WP">
+                <i class="fa fa-chevron-left"></i> 实验班小组出题WP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/17/常用DOS命令/" rel="prev" title="常用DOS命令">
+                常用DOS命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义："><span class="nav-number">1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行过程："><span class="nav-number">2.</span> <span class="nav-text">执行过程：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT、EXE、COM文件比较："><span class="nav-number">3.</span> <span class="nav-text">BAT、EXE、COM文件比较：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT内部命令："><span class="nav-number">4.</span> <span class="nav-text">BAT内部命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT特殊符号："><span class="nav-number">5.</span> <span class="nav-text">BAT特殊符号：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT系统变量："><span class="nav-number">6.</span> <span class="nav-text">BAT系统变量：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT颜色表："><span class="nav-number">7.</span> <span class="nav-text">BAT颜色表：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT中for命令："><span class="nav-number">8.</span> <span class="nav-text">BAT中for命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT字符串处理："><span class="nav-number">9.</span> <span class="nav-text">BAT字符串处理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BAT简单脚本实例："><span class="nav-number">10.</span> <span class="nav-text">BAT简单脚本实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WMI命令："><span class="nav-number">11.</span> <span class="nav-text">WMI命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WMIC语法："><span class="nav-number">12.</span> <span class="nav-text">WMIC语法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WMIC实例："><span class="nav-number">13.</span> <span class="nav-text">WMIC实例：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#POWERSHELL："><span class="nav-number">14.</span> <span class="nav-text">POWERSHELL：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

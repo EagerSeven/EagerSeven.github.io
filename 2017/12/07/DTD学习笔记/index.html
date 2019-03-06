@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="学习XXE之前，先学习一波DTD才行，不然好多都看不懂，天也不早了，开搞 DTD简介：文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。DTD可被成行的声明于XML文档中，也可作为一个外部引用 内部的DOCTYPE声明： 假如DTD被包含在XML源文件中，它应当通过以下语法包装在一个DOCTYPE声明中： 1&amp;lt;!DOCTYPE 根元素 [元素声明]">
+<meta name="keywords" content="编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DTD学习笔记">
+<meta property="og:url" content="http://eagerseven.cn/2017/12/07/DTD学习笔记/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="学习XXE之前，先学习一波DTD才行，不然好多都看不懂，天也不早了，开搞 DTD简介：文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。DTD可被成行的声明于XML文档中，也可作为一个外部引用 内部的DOCTYPE声明： 假如DTD被包含在XML源文件中，它应当通过以下语法包装在一个DOCTYPE声明中： 1&amp;lt;!DOCTYPE 根元素 [元素声明]">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DTD学习笔记">
+<meta name="twitter:description" content="学习XXE之前，先学习一波DTD才行，不然好多都看不懂，天也不早了，开搞 DTD简介：文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。DTD可被成行的声明于XML文档中，也可作为一个外部引用 内部的DOCTYPE声明： 假如DTD被包含在XML源文件中，它应当通过以下语法包装在一个DOCTYPE声明中： 1&amp;lt;!DOCTYPE 根元素 [元素声明]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2017/12/07/DTD学习笔记/"/>
+
+
+
+
+
+  <title>DTD学习笔记 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2017/12/07/DTD学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">DTD学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-07T10:24:00+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,516
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习XXE之前，先学习一波DTD才行，不然好多都看不懂，天也不早了，开搞</p>
+<h4 id="DTD简介："><a href="#DTD简介：" class="headerlink" title="DTD简介："></a>DTD简介：</h4><p>文档类型定义（DTD）可定义合法的XML文档构建模块。它使用一系列合法的元素来定义文档的结构。DTD可被成行的声明于XML文档中，也可作为一个外部引用</p>
+<p><strong>内部的DOCTYPE声明：</strong></p>
+<p>假如DTD被包含在XML源文件中，它应当通过以下语法包装在一个DOCTYPE声明中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素 [元素声明]&gt;</span><br></pre></td></tr></table></figure>
+<p>带有DTD的XML文档实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE NOTE[								&lt;!--定义此文档是note类型的文档--&gt;</span><br><span class="line">  &lt;!ELEMENT note (to,from,heading,body)&gt;	&lt;!--定义note元素有四个元素：&quot;to,from,heading,body&quot;--&gt;</span><br><span class="line">  &lt;!ELEMENT to 		(#PCDATA)&gt;				&lt;!--定义to元素为&quot;#PCDATA&quot;类型--&gt;</span><br><span class="line">  &lt;!ELEMENT from	(#PCDATA)&gt;				</span><br><span class="line">  &lt;!ELEMENT heading	(#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT body	(#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br><span class="line">&lt;note&gt;</span><br><span class="line">  &lt;to&gt;George&lt;/to&gt;</span><br><span class="line">  &lt;from&gt;John&lt;/from&gt;</span><br><span class="line">  &lt;heading&gt;Reminder&lt;/heading&gt;</span><br><span class="line">  &lt;body&gt;Do not forget the meeting!&lt;/body&gt;</span><br><span class="line">&lt;/note&gt;</span><br></pre></td></tr></table></figure>
+<p>用浏览器打开的内容是：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> <span class="meta">?&gt;</span></span> </span><br><span class="line">  <span class="meta">&lt;!DOCTYPE NOTE (View Source for full doctype...)&gt;</span> </span><br><span class="line">- <span class="tag">&lt;<span class="name">note</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">to</span>&gt;</span>George<span class="tag">&lt;/<span class="name">to</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">from</span>&gt;</span>John<span class="tag">&lt;/<span class="name">from</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">heading</span>&gt;</span>Reminder<span class="tag">&lt;/<span class="name">heading</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>Do not forget the meeting!<span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line">  <span class="tag">&lt;/<span class="name">note</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>右键查看源码的话就是以上的XML文档内容</p>
+<p><strong>外部文档声明：</strong></p>
+<p>假如DTD文档位于XML源文件的外部，那么应通过下面的语法将其封装在一个DOCTYPE定义中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE 根元素 SYSTEM &quot;文件名&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>这个XML文档和上面的XML文档一样的，但是包含了一个外部的DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;</span><br><span class="line">&lt;note&gt;</span><br><span class="line">&lt;to&gt;George&lt;/to&gt;</span><br><span class="line">&lt;from&gt;John&lt;/from&gt;</span><br><span class="line">&lt;heading&gt;Reminder&lt;/heading&gt;</span><br><span class="line">&lt;body&gt;Do not forget the meeting!&lt;/body&gt;</span><br><span class="line">&lt;/note&gt;</span><br></pre></td></tr></table></figure>
+<p>这是XML文档里包含的DTD文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from.heading,body)&gt;</span><br><span class="line">&lt;!ELEMENT to (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT from	(#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT heading (#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT body	(#PCDATA)&gt;</span><br></pre></td></tr></table></figure>
+<p>在浏览器打开效果是一样的，但是如果没有这个note.dtd的话，会有如下报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">系统未找到指定的资源。处理资源 &apos;note.dtd&apos; 时出错。处理资源 &apos;file:///C:/Users/Administrator/Desktop/1.xml&apos; 时出错。第 2 行，位置: 34 </span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE note SYSTEM &quot;note.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="DTD构建模块："><a href="#DTD构建模块：" class="headerlink" title="DTD构建模块："></a>DTD构建模块：</h4><p><strong>XML文档构建模块：</strong></p>
+<p>所有的XML文档（以及HTML文档）均由下列简单的构建模块构成：</p>
+<ul>
+<li>元素</li>
+<li>属性</li>
+<li>实体</li>
+<li>PCDATA</li>
+<li>CDATA</li>
+</ul>
+<p><strong>元素：</strong></p>
+<p>元素是XML以及HTML文档的主要构建模块</p>
+<p>HTML元素的例子是<code>body</code>和<code>table</code>等，XML元素的例子是<code>note</code>和<code>message</code>。元素可包含文本，其他元素或空。空的HTML元素例如<code>hr</code>、<code>br</code>、<code>img</code></p>
+<p>例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span>body text in between<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">message</span>&gt;</span>some message in bettween<span class="tag">&lt;/<span class="name">message</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>属性：</strong></p>
+<p>属性可额外提供有关元素的信息</p>
+<p>属性总是被置于某元素的开始标签中，属性总是以名称-值的形式出现，下面的img元素拥有关于源文件的额外信息：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"test.jpg"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>元素的名称是<code>img</code>，属性的名称是<code>src</code>，属性的值是<code>test.jpg</code>，由于元素本身为空，它被一个<code>“/”</code>闭合</p>
+<p><strong>实体：</strong></p>
+<p>实体是用来定义普通文本的变量，实体引用是对实体的引用</p>
+<p>大多数人都了解这个HTML实体引用：”&amp;nbsp.;“（去掉小数点），这个无拆行空格实体在HTML中被用于在某个文档中插入一个额外的空格，当文档被XML解析时，实体就会被展开</p>
+<p>以下实体在XML中被预定义：</p>
+<table>
+<thead>
+<tr>
+<th>实体引用</th>
+<th>字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&amp;lt.;（去掉小数点，下同）</td>
+<td>&lt;</td>
+</tr>
+<tr>
+<td>&amp;gt.;</td>
+<td>&gt;</td>
+</tr>
+<tr>
+<td>&amp;amp.;</td>
+<td>&amp;</td>
+</tr>
+<tr>
+<td>&amp;quot.;</td>
+<td>“</td>
+</tr>
+<tr>
+<td>&amp;apos.;</td>
+<td>‘</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PCDATA：</strong></p>
+<p>PCDATA的意思是被解析的字符数据，可把字符数据想向为XML元素的开始标签与结束标签之间的文本</p>
+<p>PCDATA是会被解析器解析的文本，这些文本将被解析器检查实体以及标记</p>
+<p>文本中的标签会被当作标记来处理，而实体会被展开。不过，被解析的字符数据不应当包含任何&amp;、&lt;或&gt;等字符，应用<code>&amp;amp;</code>、<code>&amp;lt;</code>、以及<code>&amp;gt;</code>实体来分别替换他们</p>
+<p><strong>CDATA:</strong></p>
+<p>CDATA的意思是字符数据，是不会被解析器解析的文本，在这些文本中的标签不会被当作标记来对待，其中的实体也不会展开。</p>
+<h4 id="DTD-元素："><a href="#DTD-元素：" class="headerlink" title="DTD-元素："></a>DTD-元素：</h4><p>在一个DTD中，元素通过元素声明来声明</p>
+<p><strong>声明一个元素：</strong></p>
+<p>元素声明使用下面的语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 类别&gt;</span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 （元素内容）&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>空元素：</strong></p>
+<p>空元素通过类别关键词EMPTY进行声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 EMPTY&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>只有PCDATA的元素：</strong></p>
+<p>只有PCDATA的元素通过圆括号中的#PCDATA进行声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (#PCDATA)&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>带有任何内容的元素：</strong></p>
+<p>通过类别关键字ANY声明的元素，可包含任何可解析数据的组合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 ANY&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>带有子元素（序列）的元素：</strong></p>
+<p>带有一个或多个子元素的元素通过圆括号中的子元素名进行声明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (子元素名称 1，子元素名称 2，.....)&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from,heading,body)&gt;</span><br></pre></td></tr></table></figure>
+<p>当元素按照由逗号分隔开的序列进行声明时，这些子元素必须按照相同的顺序出现在文档中。在同一个声明中，子元素也必须被声明，同时子元素也可拥有子元素。”note“元素的完整声明是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from,heading,body)&gt;</span><br><span class="line">&lt;!ELEMENT to	(#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT from	(#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT heading	(#PCDATA)&gt;</span><br><span class="line">&lt;!ELEMENT body	(#PCDATA)&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>声明只出现一次的元素：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (子元素名称)&gt;</span><br></pre></td></tr></table></figure>
+<p>声明的子元素必须出现一次，并且必须只在元素名称元素中出现一次</p>
+<p><strong>声明最少出现一次的元素：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (子元素名称+)&gt;</span><br></pre></td></tr></table></figure>
+<p>声明的子元素必须在元素名称元素中出现至少一次</p>
+<p><strong>声明出现零次或多次的元素：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (子元素名称*)&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>声明出现零次或一次的元素：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT 元素名称 (子元素名称?)&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>声明”非…/即…“类型的内容：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (to,from,header,(message|body))&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>声明混合型的内容：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT note (#PCDATA|to|from|header|message)*&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="DTD-属性："><a href="#DTD-属性：" class="headerlink" title="DTD-属性："></a>DTD-属性：</h4><p>在DTD中，属性通过<code>ATTLIST</code>声明进行声明</p>
+<p><strong>声明属性：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 默认值&gt;</span><br></pre></td></tr></table></figure>
+<p>DTD实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST payment type CDATA &quot;check&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>XML实例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;payment type=&quot;check&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>下列是属性类型的选项：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CDATA</td>
+<td>值为字符数据</td>
+</tr>
+<tr>
+<td>(en1\</td>
+<td>en2\</td>
+<td>…)</td>
+<td>此值是枚举列表中的一个值</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>值为唯一的id</td>
+</tr>
+<tr>
+<td>IDREF</td>
+<td>值为另外一个元素的ID</td>
+</tr>
+<tr>
+<td>IDREFS</td>
+<td>值为其他id的列表</td>
+</tr>
+<tr>
+<td>NMTOKEN</td>
+<td>值为合法的XML名称</td>
+</tr>
+<tr>
+<td>NMTOKENS</td>
+<td>值为合法的XML名称的列表</td>
+</tr>
+<tr>
+<td>ENTITY</td>
+<td>值是一个实体</td>
+</tr>
+<tr>
+<td>ENTITYS</td>
+<td>值是一个实体列表</td>
+</tr>
+<tr>
+<td>NOTATION</td>
+<td>值是符号的名称</td>
+</tr>
+<tr>
+<td>xml:</td>
+<td>值是一个预定义的XML值</td>
+</tr>
+</tbody>
+</table>
+<p>默认值参数可使用下列值：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值</td>
+<td>属性的默认值</td>
+</tr>
+<tr>
+<td>#REQUIRED</td>
+<td>属性值是必须的</td>
+</tr>
+<tr>
+<td>#IMPLIED</td>
+<td>属性不是必须的</td>
+</tr>
+<tr>
+<td>#FIXED value</td>
+<td>属性值是固定的</td>
+</tr>
+</tbody>
+</table>
+<p><strong>规定一个默认的属性值：</strong></p>
+<p>DTD:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ELEMENT square EMPTY&gt;</span><br><span class="line">&lt;!ATTLIST square width CDATA &quot;0&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>合法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;square width=&quot;100&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><code>square</code>被定义为带有CDATA类型的”width“属性的空元素，如果宽度没有被设定，其默认值为0</p>
+<p><strong>#IMPLIED：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 #IMPLIED&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST contact fax CDATA #IMPLIED&gt;</span><br></pre></td></tr></table></figure>
+<p>合法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;contact fax=&quot;55-667788&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>合法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;contact /&gt;</span><br></pre></td></tr></table></figure>
+<p>如果不希望强制包含属性，并且没有默认值选项的话，就可以使用#IMPLIED</p>
+<p><strong>#REQUIRED:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 #REQUIRED&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST person number CDATA #REQUIRD&gt;</span><br></pre></td></tr></table></figure>
+<p>合法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;person number=&quot;456&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>非法的XML：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">person</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果没有默认值选项，又系统强制提交属性的话，可以使用#REQUIRED</p>
+<p><strong>#FIXED:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 属性类型 #FIXED &quot;value&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST sender company CDATA #FIXED &quot;microsoft&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>合法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sender company=&quot;microsoft&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p>非法的XML：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;sender company=&quot;CUIT&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>如果希望属性拥有固定的值，而不允许被修改，就可以使用#FIXED</p>
+<p><strong>列举属性值：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST 元素名称 属性名称 (en1|en2|...) 默认值&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ATTLIST payment type (check|cash) &quot;cash&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!payment</span> <span class="attr">type</span>=<span class="string">"check"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>or</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!payment</span> <span class="attr">type</span>=<span class="string">"cash"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果希望属性值为一系列固定的合法值之一，可以使用列举属性值</p>
+<h4 id="DTD-实体："><a href="#DTD-实体：" class="headerlink" title="DTD-实体："></a>DTD-实体：</h4><p>实体是用于等译引用普通文本或特使字符的快捷方式的变量<br>实体引用是对实体的引用<br>实体可在内部或外部进行声明</p>
+<p><strong>一个内部实体声明：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名称 &quot;实体值&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY writer &quot;test&quot;&gt;</span><br><span class="line">&lt;!ENTITY copyright &quot;test&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一个实体由三部分构成：一个&amp;，一个实体名称，一个分号</p>
+<p><strong>一个外部实体声明：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY 实体名称 SYSTEM &quot;URL/URL&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>例子：</p>
+<p>DTD:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!ENTITY writer SYSTEM &quot;url.dtd&quot;&gt;</span><br><span class="line">&lt;!ENTITY copyright SYSTEM &quot;url.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>XML:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">author</span>&gt;</span>&amp;writer;&amp;copyright;<span class="tag">&lt;/<span class="name">author</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>DTD实例:</strong></p>
+<p>电视节目表DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE TVSCHEDULE [</span><br><span class="line">  &lt;!ELEMENT TVSCHEDULE (CHANNEL+)&gt;</span><br><span class="line">  &lt;!ELEMENT CHANNEL (BANNER,DAY+)&gt;</span><br><span class="line">  &lt;!ELEMENT BANNER (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT DAY (DATE,(HOLIDAY|PROGRAMSLOT+)+)&gt;</span><br><span class="line">  &lt;!ELEMENT HOLIDAY (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT DATE (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT PROGRAMSLOT (TIME,TITLE,DESCRITION?)&gt;</span><br><span class="line">  &lt;!ELEMENT TIME (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT TITLE (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT DESCRIPTION (#PCDATA)&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ATTLIST TVSCHEDULE NAME CDATA #REQUIRED&gt;</span><br><span class="line">  &lt;!ATTLIST CHANNEL CHAN CDATA #REQUIRED&gt;</span><br><span class="line">  &lt;!ATTLIST PROGRAMSLOT VTR CDATA #IMPLIED&gt;</span><br><span class="line">  &lt;!ATTLIST TITLE RATING CDATA #IMPLIED&gt;</span><br><span class="line">  &lt;!ATTLIST TITLE LANGUAGE CDATA #IMPLIED&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+<p>报纸文章DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE NEWSPAPER [</span><br><span class="line">  &lt;!ELEMENT NEWPAPER (ARTICLE+)&gt;</span><br><span class="line">  &lt;!ELEMENT ARTICLE (HEADLINE,BYLINE,LEAD,BODY,NOTES)&gt;</span><br><span class="line">  &lt;!ELEMENT HEADLINE (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT BYLINE (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT LEAD (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT BODY (#PCDATA)&gt;</span><br><span class="line">  &lt;!ELEMENT BOTES (#PCDATA)&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ATTLIST ARTICLE AUTHOR CDATA #REQUIRED&gt;</span><br><span class="line">  &lt;!ATTLIST ARTICLE EDITOR CDATA #IMPLIED&gt;</span><br><span class="line">  &lt;!ATTLIST ARTICLE DATE CDATA #IMPLIED&gt;</span><br><span class="line">  &lt;!ATTLIST ARTICLE EDITION CDATA #IMPLIED&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ENTITY NEWSPAPER &quot;TEST1&quot;&gt;</span><br><span class="line">  &lt;!ENTITY PUBLISHER &quot;TEST2&quot;&gt;</span><br><span class="line">  &lt;!ENTITY COPYRIGHT &quot;TEST3&quot;&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+<p>产品目录DTD：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE CATALOG [</span><br><span class="line">  &lt;!ENTITY AUTOR &quot;TEST1&quot;&gt;</span><br><span class="line">  &lt;!ENTITY COMPANY &quot;TEST2&quot;&gt;</span><br><span class="line">  &lt;!RNTITY EMAIL &quot;TEST3&quot;&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT CATALOG (PRIDUCT+)&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT PRODUCT (SPECIFICATIONS+,OPTIONS?,PRICE+,NOTES?)&gt;</span><br><span class="line">  &lt;!ATTLIST PRODUCT </span><br><span class="line">    NAME CDATA #IMPLIED</span><br><span class="line">    CATEGORY (HandTool|Table|Shop-Professional) &quot;HandTool&quot;</span><br><span class="line">    PARTNUM CDATA #IMPLIED</span><br><span class="line">    PLANT (Pittsburgh|Milwaukee|Chicago) &quot;Chicago&quot;</span><br><span class="line">    INVENTRY (InStock|Backordered|Discontinued) &quot;InStock&quot;&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT SPECIFICATIONS (#PCDATA)&gt;</span><br><span class="line">  &lt;!ATTLIST SPECIFICATIONS</span><br><span class="line">    WEIGHT CDATA #IMPLIED</span><br><span class="line">    POWER CDATA #IMPLIED&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT OPTIONS (#PCDATA)&gt;</span><br><span class="line">  &lt;!ATLIST OPTIONS</span><br><span class="line">    FINISH (Metal|Poloshed|Matte) &quot;Matte&quot;</span><br><span class="line">    ADAPTER (Included|Optional|NotApplicable) &quot;Included&quot;</span><br><span class="line">    CASE (HardShell|Soft|NotApplicable) &quot;HardShell&quot;&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT PRICE (#PCDATA)&gt;</span><br><span class="line">  &lt;!ATTLIST PRICE</span><br><span class="line">    MSRP CDATA #IMPLIED</span><br><span class="line">    WHOLESALE CDATA #IMPLIED</span><br><span class="line">    STREET CDATA #IMPLIED</span><br><span class="line">    SHIPPING CDATA #IMPLIED&gt;</span><br><span class="line">    </span><br><span class="line">  &lt;!ELEMENT NOTES (#PCDATA)&gt;</span><br><span class="line">]&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编程/" rel="tag"><i class="fa fa-tag"></i> 编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/17/常用DOS命令/" rel="next" title="常用DOS命令">
+                <i class="fa fa-chevron-left"></i> 常用DOS命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/07/XXE漏洞学习与测试/" rel="prev" title="XXE漏洞学习与测试">
+                XXE漏洞学习与测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD简介："><span class="nav-number">1.</span> <span class="nav-text">DTD简介：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD构建模块："><span class="nav-number">2.</span> <span class="nav-text">DTD构建模块：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD-元素："><span class="nav-number">3.</span> <span class="nav-text">DTD-元素：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD-属性："><span class="nav-number">4.</span> <span class="nav-text">DTD-属性：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DTD-实体："><span class="nav-number">5.</span> <span class="nav-text">DTD-实体：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

